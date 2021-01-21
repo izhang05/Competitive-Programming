@@ -1,0 +1,61 @@
+type: codeforces
+custom_name: G. Omkar and Pies
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task7)
+
+    add_executable(task7 src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4 2 5
+    11000
+    00011
+    1 3
+    3 5
+    4 2
+    3 4
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    5
+    1 3
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    4 3 5
+    11000
+    00011
+    1 3
+    1 5
+    2 4
+    1 5
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: |-
+    3
+    1 4
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1392/problem/G?locale=en
+status: Unchecked

@@ -1,0 +1,51 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(F1__Wise_Men__Easy_Version_)
+
+    add_executable(F1__Wise_Men__Easy_Version_ src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    3
+    011
+    101
+    110
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 0 0 0 6
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    4
+    0101
+    1000
+    0001
+    1010
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 2 2 6 2 2 6 2 2
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1326/problem/F1?locale=en
+status: Unchecked

@@ -1,0 +1,95 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   D. Anti-Sudoku
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are given a correct solution of the sudoku puzzle. If you don't know what is the sudoku, you can read about it <a href="http://tiny.cc/636xmz">here</a>.</p>
+  <p>The picture showing the correct sudoku solution:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/b80d5452b6026b409a6f8a4abae636177ccdfed7.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>Blocks are bordered with bold black color.</p>
+  <p>Your task is to change <span class="tex-font-style-bf">at most</span> $9$ elements of this field (i.e. choose some $1 \le i, j \le 9$ and change the number at the position $(i, j)$ to any other number in range $[1; 9]$) to make it <span class="tex-font-style-bf">anti-sudoku</span>. The <span class="tex-font-style-bf">anti-sudoku</span> is the $9 \times 9$ field, in which:</p>
+  <ul> 
+   <li> Any number in this field is in range $[1; 9]$; </li>
+   <li> each row contains at least two equal elements; </li>
+   <li> each column contains at least two equal elements; </li>
+   <li> each $3 \times 3$ block (you can read what is the block in the link above) contains at least two equal elements. </li>
+  </ul>
+  <p>It is guaranteed that the answer exists.</p>
+  <p>You have to answer $t$ independent test cases.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line of the input contains one integer $t$ ($1 \le t \le 10^4$) — the number of test cases. Then $t$ test cases follow.</p>
+  <p>Each test case consists of $9$ lines, each line consists of $9$ characters from $1$ to $9$ without any whitespaces — the correct solution of the sudoku puzzle.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, print the answer — the initial field with <span class="tex-font-style-bf">at most</span> $9$ changed elements so that the obtained field is <span class="tex-font-style-bf">anti-sudoku</span>. If there are several solutions, you can print any. It is guaranteed that the answer exists.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+1
+154873296
+386592714
+729641835
+863725149
+975314628
+412968357
+631457982
+598236471
+247189563
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+154873396
+336592714
+729645835
+863725145
+979314628
+412958357
+631457992
+998236471
+247789563
+</pre>
+   </div>
+  </div>
+ </div>
+</div>

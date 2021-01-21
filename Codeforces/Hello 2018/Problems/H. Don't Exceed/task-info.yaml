@@ -1,0 +1,58 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(H__Don_t_Exceed)
+
+    add_executable(H__Don_t_Exceed src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 4 1.00 2 3.000000 4.0
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 1
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 1 0.50216
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 342677322
+  learner_created: false
+- name: testData/3/input.txt
+  visible: true
+  text: 2 0.5 1.0
+  learner_created: false
+- name: testData/3/output.txt
+  visible: true
+  text: 623902721
+  learner_created: false
+- name: testData/4/input.txt
+  visible: true
+  text: 6 0.77 1.234567 2.1 1.890 2.9999 3.77
+  learner_created: false
+- name: testData/4/output.txt
+  visible: true
+  text: 859831967
+  learner_created: false
+feedback_link: https://codeforces.com/contest/913/problem/H?locale=en
+status: Unchecked

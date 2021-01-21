@@ -1,0 +1,47 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(C__Cyclic_Permutations)
+
+    add_executable(C__Cyclic_Permutations src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 4
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 16
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 583291
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 135712853
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1391/problem/C?locale=en
+status: Failed
+feedback:
+  message: Test №2 is failed
+  time: Sun, 09 Aug 2020 16:01:40 UTC
+  expected: 135712853
+  actual: 968599583

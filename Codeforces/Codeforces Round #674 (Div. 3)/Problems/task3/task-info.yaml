@@ -1,0 +1,46 @@
+type: codeforces
+custom_name: C. Increase and Copy
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task3)
+
+    add_executable(task3 src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    5
+    1
+    5
+    42
+    1337
+    1000000000
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    0
+    3
+    11
+    72
+    63244
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1426/problem/C?locale=en
+status: Unchecked

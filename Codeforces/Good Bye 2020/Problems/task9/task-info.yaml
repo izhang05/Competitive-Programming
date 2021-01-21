@@ -1,0 +1,104 @@
+type: codeforces
+custom_name: I. The Riddle of the Sphinx
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task9)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    5 3
+
+    yes
+
+    no
+
+    no
+
+    no
+
+    no
+
+    yes
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    5 101
+
+    5 110
+
+    4 100
+
+    3 101
+
+    2 001
+
+    1 000
+
+    0 110
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    4 3
+
+    no
+
+    no
+
+    no
+
+    no
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: |-
+    1 000
+
+    2 000
+
+    3 000
+
+    4 000
+
+    0 000
+  learner_created: false
+- name: testData/3/input.txt
+  visible: true
+  text: 1 1
+  learner_created: false
+- name: testData/3/output.txt
+  visible: true
+  text: 0 0
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1466/problem/I?locale=en
+status: Unchecked

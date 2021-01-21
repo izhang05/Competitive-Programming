@@ -1,0 +1,42 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(E__Alternating_Tree)
+
+    add_executable(E__Alternating_Tree src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 4 -4 1 5 -2 1 2 1 3 1 4
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 40
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 8 -2 6 -4 -4 -9 -3 -7 23 8 2 2 3 1 4 6 5 7 6 4 7 5 8
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 4
+  learner_created: false
+feedback_link: https://codeforces.com/contest/960/problem/E?locale=en
+status: Unchecked

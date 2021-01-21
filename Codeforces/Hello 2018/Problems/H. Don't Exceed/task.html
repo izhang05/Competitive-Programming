@@ -1,0 +1,112 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   H. Don't Exceed
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>4 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You generate real numbers <span class="tex-span"><i>s</i><sub class="lower-index">1</sub>, <i>s</i><sub class="lower-index">2</sub>, ..., <i>s</i><sub class="lower-index"><i>n</i></sub></span> as follows: </p>
+  <ul> 
+   <li> <span class="tex-span"><i>s</i><sub class="lower-index">0</sub> = 0</span>; </li>
+   <li> <span class="tex-span"><i>s</i><sub class="lower-index"><i>i</i></sub> = <i>s</i><sub class="lower-index"><i>i</i> - 1</sub> + <i>t</i><sub class="lower-index"><i>i</i></sub></span>, where <span class="tex-span"><i>t</i><sub class="lower-index"><i>i</i></sub></span> is a real number chosen independently uniformly at random between 0 and 1, inclusive. </li>
+  </ul>
+  <p>You are given real numbers <span class="tex-span"><i>x</i><sub class="lower-index">1</sub>, <i>x</i><sub class="lower-index">2</sub>, ..., <i>x</i><sub class="lower-index"><i>n</i></sub></span>. You are interested in the probability that <span class="tex-span"><i>s</i><sub class="lower-index"><i>i</i></sub> ≤ <i>x</i><sub class="lower-index"><i>i</i></sub></span> is true for all <span class="tex-span"><i>i</i></span> simultaneously.</p>
+  <p>It can be shown that this can be represented as <img align="middle" class="tex-formula" src="https://espresso.codeforces.com/b795551c4ba5b501281e7063ac11feb87c7f234f.png" style="max-width: 100.0%;max-height: 100.0%;">, where <span class="tex-span"><i>P</i></span> and <span class="tex-span"><i>Q</i></span> are coprime integers, and <img align="middle" class="tex-formula" src="https://espresso.codeforces.com/06b2d2761bfb42e45841d5e19be707daeed570d8.png" style="max-width: 100.0%;max-height: 100.0%;">. Print the value of <span class="tex-span"><i>P</i>·<i>Q</i><sup class="upper-index"> - 1</sup></span> modulo <span class="tex-span">998244353</span>.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains integer <span class="tex-span"><i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 30</span>).</p>
+  <p>The next <span class="tex-span"><i>n</i></span> lines contain real numbers <span class="tex-span"><i>x</i><sub class="lower-index">1</sub>, <i>x</i><sub class="lower-index">2</sub>, ..., <i>x</i><sub class="lower-index"><i>n</i></sub></span>, given with at most six digits after the decimal point (<span class="tex-span">0 &lt; <i>x</i><sub class="lower-index"><i>i</i></sub> ≤ <i>n</i></span>).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print a single integer, the answer to the problem.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4<br>1.00<br>2<br>3.000000<br>4.0<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>1<br></pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>1<br>0.50216<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>342677322<br></pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2<br>0.5<br>1.0<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>623902721<br></pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>6<br>0.77<br>1.234567<br>2.1<br>1.890<br>2.9999<br>3.77<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>859831967<br></pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first example, the sought probability is 1 since the sum of <span class="tex-span"><i>i</i></span> real numbers which don't exceed 1 doesn't exceed <span class="tex-span"><i>i</i></span>.</p>
+  <p>In the second example, the probability is <span class="tex-span"><i>x</i><sub class="lower-index">1</sub></span> itself.</p>
+  <p>In the third example, the sought probability is <span class="tex-span">3 / 8</span>.</p>
+ </div>
+</div>

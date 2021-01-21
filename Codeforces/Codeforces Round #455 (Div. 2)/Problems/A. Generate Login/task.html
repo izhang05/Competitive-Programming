@@ -1,0 +1,75 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   A. Generate Login
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>The preferred way to generate user login in Polygon is to concatenate a prefix of the user's first name and a prefix of their last name, in that order. Each prefix must be non-empty, and any of the prefixes can be the full name. Typically there are multiple possible logins for each person.</p> 
+  <p>You are given the first and the last name of a user. Return the alphabetically earliest login they can get (regardless of other potential Polygon users).</p> 
+  <p>As a reminder, a prefix of a string <span class="tex-span"> <i>s</i></span> is its substring which occurs at the beginning of <span class="tex-span"> <i>s</i></span>: "<span class="tex-font-style-tt">a</span>", "<span class="tex-font-style-tt">ab</span>", "<span class="tex-font-style-tt">abc</span>" etc. are prefixes of string "{abcdef}" but "<span class="tex-font-style-tt">b</span>" and '<span class="tex-font-style-tt">bc</span>" are not. A string <span class="tex-span"> <i>a</i></span> is alphabetically earlier than a string <span class="tex-span"> <i>b</i></span>, if <span class="tex-span"> <i>a</i></span> is a prefix of <span class="tex-span"> <i>b</i></span>, or <span class="tex-span"> <i>a</i></span> and <span class="tex-span"> <i>b</i></span> coincide up to some position, and then <span class="tex-span"> <i>a</i></span> has a letter that is alphabetically earlier than the corresponding letter in <span class="tex-span"> <i>b</i></span>: "<span class="tex-font-style-tt">a</span>" and "<span class="tex-font-style-tt">ab</span>" are alphabetically earlier than "<span class="tex-font-style-tt">ac</span>" but "<span class="tex-font-style-tt">b</span>" and "<span class="tex-font-style-tt">ba</span>" are alphabetically later than "<span class="tex-font-style-tt">ac</span>".</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The input consists of a single line containing two space-separated strings: the first and the last names. Each character of each string is a lowercase English letter. The length of each string is between 1 and 10, inclusive. </p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Output a single string&nbsp;— alphabetically earliest possible login formed from these names. The output should be given in lowercase as well.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>harry potter<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>hap<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>tom riddle<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>tomr<br></pre>
+   </div>
+  </div>
+ </div>
+</div>

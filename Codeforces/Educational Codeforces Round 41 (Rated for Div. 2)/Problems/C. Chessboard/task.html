@@ -1,0 +1,75 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   C. Chessboard
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Magnus decided to play a classic chess game. Though what he saw in his locker shocked him! His favourite chessboard got broken into <span class="tex-span">4</span> pieces, each of size <span class="tex-span"> <i>n</i></span> by <span class="tex-span"> <i>n</i></span>, <span class="tex-span"> <i>n</i></span> is <span class="tex-font-style-bf">always odd</span>. And what's even worse, some squares were of wrong color. <span class="tex-span"> <i>j</i></span>-th square of the <span class="tex-span"> <i>i</i></span>-th row of <span class="tex-span"> <i>k</i></span>-th piece of the board has color <span class="tex-span"> <i>a</i> <sub class="lower-index"> <i>k</i>, <i>i</i>, <i>j</i></sub></span>; <span class="tex-span">1</span> being black and <span class="tex-span">0</span> being white. </p> 
+  <p>Now Magnus wants to change color of some squares in such a way that he recolors minimum number of squares and obtained pieces form a valid chessboard. Every square has its color different to each of the neightbouring by side squares in a valid board. Its size should be <span class="tex-span">2<i>n</i></span> by <span class="tex-span">2<i>n</i></span>. You are allowed to move pieces but <span class="tex-font-style-bf">not allowed to rotate or flip them</span>.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains <span class="tex-font-style-bf">odd</span> integer <span class="tex-span"> <i>n</i></span> <span class="tex-span">(1 ≤ <i>n</i> ≤ 100)</span> — the size of all pieces of the board. </p> 
+  <p>Then <span class="tex-span">4</span> segments follow, each describes one piece of the board. Each consists of <span class="tex-span"> <i>n</i></span> lines of <span class="tex-span"> <i>n</i></span> characters; <span class="tex-span"> <i>j</i></span>-th one of <span class="tex-span"> <i>i</i></span>-th line is equal to <span class="tex-font-style-tt">1</span> if the square is black initially and <span class="tex-font-style-tt">0</span> otherwise. Segments are separated by an empty line.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print one number — minimum number of squares Magnus should recolor to be able to obtain a valid chessboard.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>1<br>0<br><br>0<br><br>1<br><br>0<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>1<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>3<br>101<br>010<br>101<br><br>101<br>000<br>101<br><br>010<br>101<br>011<br><br>010<br>101<br>010<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>2<br></pre>
+   </div>
+  </div>
+ </div>
+</div>

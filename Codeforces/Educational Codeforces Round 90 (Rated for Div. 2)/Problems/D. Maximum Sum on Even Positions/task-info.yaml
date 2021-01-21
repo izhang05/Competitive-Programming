@@ -1,0 +1,47 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(D__Maximum_Sum_on_Even_Positions)
+
+    add_executable(D__Maximum_Sum_on_Even_Positions src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4
+    8
+    1 7 3 4 7 6 2 9
+    5
+    1 2 1 2 1
+    10
+    7 8 4 5 7 6 8 9 7 3
+    4
+    3 1 2 1
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    26
+    5
+    37
+    5
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1373/problem/D?locale=en
+status: Unchecked

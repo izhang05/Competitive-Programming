@@ -1,0 +1,77 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   G. Power Substring
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are given <span class="tex-span"><i>n</i></span> positive integers <span class="tex-span"><i>a</i><sub class="lower-index">1</sub>, <i>a</i><sub class="lower-index">2</sub>, ..., <i>a</i><sub class="lower-index"><i>n</i></sub></span>.</p>
+  <p>For every <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> you need to find a positive integer <span class="tex-span"><i>k</i><sub class="lower-index"><i>i</i></sub></span> such that the decimal notation of <span class="tex-span">2<sup class="upper-index"><i>k</i><sub class="lower-index"><i>i</i></sub></sup></span> contains the decimal notation of <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> as a substring among its last <span class="tex-span"><i>min</i>(100, <i>length</i>(2<sup class="upper-index"><i>k</i><sub class="lower-index"><i>i</i></sub></sup>))</span> digits. Here <span class="tex-span"><i>length</i>(<i>m</i>)</span> is the length of the decimal notation of <span class="tex-span"><i>m</i></span>.</p>
+  <p>Note that you don't have to minimize <span class="tex-span"><i>k</i><sub class="lower-index"><i>i</i></sub></span>. The decimal notations in this problem do not contain leading zeros.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains a single integer <span class="tex-span"><i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 2 000</span>)&nbsp;— the number of integers <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span>.</p>
+  <p>Each of the next <span class="tex-span"><i>n</i></span> lines contains a positive integer <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> (<span class="tex-span">1 ≤ <i>a</i><sub class="lower-index"><i>i</i></sub> &lt; 10<sup class="upper-index">11</sup></span>).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print <span class="tex-span"><i>n</i></span> lines. The <span class="tex-span"><i>i</i></span>-th of them should contain a positive integer <span class="tex-span"><i>k</i><sub class="lower-index"><i>i</i></sub></span> such that the last <span class="tex-span"><i>min</i>(100, <i>length</i>(2<sup class="upper-index"><i>k</i><sub class="lower-index"><i>i</i></sub></sup>))</span> digits of <span class="tex-span">2<sup class="upper-index"><i>k</i><sub class="lower-index"><i>i</i></sub></sup></span> contain the decimal notation of <span class="tex-span"><i>a</i><sub class="lower-index"><i>i</i></sub></span> as a substring. Integers <span class="tex-span"><i>k</i><sub class="lower-index"><i>i</i></sub></span> must satisfy <span class="tex-span">1 ≤ <i>k</i><sub class="lower-index"><i>i</i></sub> ≤ 10<sup class="upper-index">50</sup></span>.</p>
+  <p>It can be shown that the answer always exists under the given constraints. If there are multiple answers, print any of them.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2<br>8<br>2<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>3<br>1<br></pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2<br>3<br>4857<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>5<br>20<br></pre>
+   </div>
+  </div>
+ </div>
+</div>

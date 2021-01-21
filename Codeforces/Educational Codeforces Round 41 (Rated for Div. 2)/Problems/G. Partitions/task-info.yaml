@@ -1,0 +1,42 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(G__Partitions)
+
+    add_executable(G__Partitions src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 4 2 2 3 2 3
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 160
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 5 2 1 2 3 4 5
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 645
+  learner_created: false
+feedback_link: https://codeforces.com/contest/961/problem/G?locale=en
+status: Unchecked

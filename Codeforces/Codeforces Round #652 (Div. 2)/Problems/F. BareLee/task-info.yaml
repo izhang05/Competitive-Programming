@@ -1,0 +1,98 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(F__BareLee)
+
+    add_executable(F__BareLee src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    3
+    5 8
+    1 4
+    3 10
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 1 1
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    4
+    1 2
+    2 3
+    3 4
+    4 5
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 0 0
+  learner_created: false
+- name: testData/3/input.txt
+  visible: true
+  text: |-
+    1
+    1 1
+  learner_created: false
+- name: testData/3/output.txt
+  visible: true
+  text: 0 1
+  learner_created: false
+- name: testData/4/input.txt
+  visible: true
+  text: |-
+    2
+    1 9
+    4 5
+  learner_created: false
+- name: testData/4/output.txt
+  visible: true
+  text: 0 0
+  learner_created: false
+- name: testData/5/input.txt
+  visible: true
+  text: |-
+    2
+    1 2
+    2 8
+  learner_created: false
+- name: testData/5/output.txt
+  visible: true
+  text: 1 0
+  learner_created: false
+- name: testData/6/input.txt
+  visible: true
+  text: |-
+    6
+    216986951114298167 235031205335543871
+    148302405431848579 455670351549314242
+    506251128322958430 575521452907339082
+    1 768614336404564650
+    189336074809158272 622104412002885672
+    588320087414024192 662540324268197150
+  learner_created: false
+- name: testData/6/output.txt
+  visible: true
+  text: 1 0
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1369/problem/F?locale=en
+status: Unchecked

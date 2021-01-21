@@ -1,0 +1,51 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(D__Task_On_The_Board)
+
+    add_executable(D__Task_On_The_Board src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4
+    abac
+    3
+    2 1 0
+    abc
+    1
+    0
+    abba
+    3
+    1 0 1
+    ecoosdcefr
+    10
+    38 13 24 14 11 5 3 24 17 0
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    aac
+    b
+    aba
+    codeforces
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1367/problem/D?locale=en
+status: Unchecked

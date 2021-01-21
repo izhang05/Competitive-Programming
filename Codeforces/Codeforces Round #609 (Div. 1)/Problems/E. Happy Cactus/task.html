@@ -1,0 +1,94 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   E. Happy Cactus
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>3 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given a cactus graph, in this graph each edge lies on at most one simple cycle.</p> 
+  <p>It is given as $m$ edges $a_i, b_i$, weight of $i$-th edge is $i$.</p> 
+  <p>Let's call a path in cactus <span class="tex-font-style-bf">increasing</span> if the weights of edges on this path are increasing.</p> 
+  <p>Let's call a pair of vertices $(u,v)$ <span class="tex-font-style-bf">happy</span> if there exists an increasing path that starts in $u$ and ends in $v$.</p> 
+  <p>For each vertex $u$ find the number of other vertices $v$, such that pair $(u,v)$ is happy.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line of input contains two integers $n,m$ ($1 \leq n, m \leq 500\,000$): the number of vertices and edges in the given cactus.</p> 
+  <p>The next $m$ lines contain a description of cactus edges, $i$-th of them contain two integers $a_i, b_i$ ($1 \leq a_i, b_i \leq n, a_i \neq b_i$).</p> 
+  <p>It is guaranteed that there are no multiple edges and the graph is connected.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print $n$ integers, required values for vertices $1,2,\ldots,n$.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3 3
+1 2
+2 3
+3 1
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+2 2 2 
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+5 4
+1 2
+2 3
+3 4
+4 5
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+4 4 3 2 1 
+</pre>
+   </div>
+  </div>
+ </div>
+</div>

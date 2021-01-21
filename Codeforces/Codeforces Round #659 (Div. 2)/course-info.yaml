@@ -1,0 +1,16 @@
+type: codeforces
+title: 'Codeforces Round #659 (Div. 2)'
+language: English
+summary: |-
+  A. Common Prefixes
+  B1. Koa and the Beach (Easy Version)
+  B2. Koa and the Beach (Hard Version)
+  C. String Transformation 1
+  D. GameGame
+  E. String Transformation 2
+  F. Rearrange
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

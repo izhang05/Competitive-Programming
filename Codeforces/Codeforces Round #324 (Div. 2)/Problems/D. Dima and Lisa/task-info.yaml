@@ -1,0 +1,34 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(D__Dima_and_Lisa)
+
+    add_executable(D__Dima_and_Lisa src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 27
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 2 5 11 11
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/584/problem/D?locale=en
+status: Unchecked

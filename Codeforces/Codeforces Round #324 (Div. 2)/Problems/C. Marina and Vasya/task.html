@@ -1,0 +1,76 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   C. Marina and Vasya
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Marina loves strings of the same length and Vasya loves when there is a third string, different from them in exactly <span class="tex-span"> <i>t</i></span> characters. Help Vasya find at least one such string.</p> 
+  <p>More formally, you are given two strings <span class="tex-span"> <i>s</i> <sub class="lower-index">1</sub></span>, <span class="tex-span"> <i>s</i> <sub class="lower-index">2</sub></span> of length <span class="tex-span"> <i>n</i></span> and number <span class="tex-span"> <i>t</i></span>. Let's denote as <span class="tex-span"> <i>f</i>(<i>a</i>, <i>b</i>)</span> the number of characters in which strings <span class="tex-span"> <i>a</i></span> and <span class="tex-span"> <i>b</i></span> are different. Then your task will be to find any string <span class="tex-span"> <i>s</i> <sub class="lower-index">3</sub></span> of length <span class="tex-span"> <i>n</i></span>, such that <span class="tex-span"> <i>f</i>(<i>s</i> <sub class="lower-index">1</sub>, <i>s</i> <sub class="lower-index">3</sub>) = <i>f</i>(<i>s</i> <sub class="lower-index">2</sub>, <i>s</i> <sub class="lower-index">3</sub>) = <i>t</i></span>. If there is no such string, print <span class="tex-span"> - 1</span>.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains two integers <span class="tex-span"> <i>n</i></span> and <span class="tex-span"> <i>t</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 10<sup class="upper-index">5</sup></span>, <span class="tex-span">0 ≤ <i>t</i> ≤ <i>n</i></span>).</p> 
+  <p>The second line contains string <span class="tex-span"> <i>s</i> <sub class="lower-index">1</sub></span> of length <span class="tex-span"> <i>n</i></span>, consisting of lowercase English letters.</p> 
+  <p>The third line contain string <span class="tex-span"> <i>s</i> <sub class="lower-index">2</sub></span> of length <span class="tex-span"> <i>n</i></span>, consisting of lowercase English letters.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print a string of length <span class="tex-span"> <i>n</i></span>, differing from string <span class="tex-span"> <i>s</i> <sub class="lower-index">1</sub></span> and from <span class="tex-span"> <i>s</i> <sub class="lower-index">2</sub></span> in exactly <span class="tex-span"> <i>t</i></span> characters. Your string should consist only from lowercase English letters. If such string doesn't exist, print -1.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>3 2<br>abc<br>xyc<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>ayd</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>1 0<br>c<br>b<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>-1<br></pre>
+   </div>
+  </div>
+ </div>
+</div>

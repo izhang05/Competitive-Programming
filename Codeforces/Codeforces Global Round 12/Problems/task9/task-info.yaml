@@ -1,0 +1,66 @@
+type: codeforces
+custom_name: H1. Multithreading (Easy Version)
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task9)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    8 0
+    bwbb?www
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 1
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    10 0
+    ???ww?wb??
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 436731905
+  learner_created: false
+- name: testData/3/input.txt
+  visible: true
+  text: |-
+    4 0
+    bw?b
+  learner_created: false
+- name: testData/3/output.txt
+  visible: true
+  text: 0
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1450/problem/H1?locale=en
+status: Unchecked

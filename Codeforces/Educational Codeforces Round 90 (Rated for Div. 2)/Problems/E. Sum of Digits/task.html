@@ -1,0 +1,80 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   E. Sum of Digits
+  </div> 
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Let $f(x)$ be the sum of digits of a decimal number $x$.</p> 
+  <p>Find the smallest non-negative integer $x$ such that $f(x) + f(x + 1) + \dots + f(x + k) = n$.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains one integer $t$ ($1 \le t \le 150$) — the number of test cases.</p> 
+  <p>Each test case consists of one line containing two integers $n$ and $k$ ($1 \le n \le 150$, $0 \le k \le 9$). </p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>For each test case, print one integer without leading zeroes. If there is no such $x$ that $f(x) + f(x + 1) + \dots + f(x + k) = n$, print $-1$; otherwise, print the minimum $x$ meeting that constraint.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Example
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+7
+1 0
+1 1
+42 7
+13 7
+99 1
+99 0
+99 2
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+1
+0
+4
+-1
+599998
+99999999999
+7997
+</pre>
+   </div>
+  </div>
+ </div>
+</div>

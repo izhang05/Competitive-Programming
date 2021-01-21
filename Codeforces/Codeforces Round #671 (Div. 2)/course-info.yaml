@@ -1,0 +1,17 @@
+type: codeforces
+title: 'Codeforces Round #671 (Div. 2)'
+language: English
+summary: |-
+  A. Digit Game
+  B. Stairs
+  C. Killjoy
+  D1. Sage's Birthday (easy version)
+  D2. Sage's Birthday (hard version)
+  E. Decryption
+  F. Rain of Fire
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1600533300.000000000
+mode: Study

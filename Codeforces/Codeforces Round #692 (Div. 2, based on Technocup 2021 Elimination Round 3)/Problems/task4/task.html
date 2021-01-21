@@ -1,0 +1,119 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   D. Grime Zoo
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Currently, XXOC's rap is a string consisting of zeroes, ones, and question marks. Unfortunately, haters gonna hate. They will write $x$ angry comments for every occurrence of <span class="tex-font-style-bf">subsequence</span> <span class="tex-font-style-tt">01</span> and $y$ angry comments for every occurrence of <span class="tex-font-style-bf">subsequence</span> <span class="tex-font-style-tt">10</span>. You should replace all the question marks with <span class="tex-font-style-tt">0</span> or <span class="tex-font-style-tt">1</span> in such a way that the number of angry comments would be as small as possible.</p>
+  <p>String $b$ is a subsequence of string $a$, if it can be obtained by removing some characters from $a$. Two occurrences of a subsequence are considered distinct if sets of positions of remaining characters are distinct.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains string $s$&nbsp;— XXOC's rap ($1 \le |s| \leq 10^5$). The second line contains two integers $x$ and $y$&nbsp;— the number of angry comments XXOC will recieve for every occurrence of <span class="tex-font-style-tt">01</span> and <span class="tex-font-style-tt">10</span> accordingly ($0 \leq x, y \leq 10^6$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Output a single integer&nbsp;— the minimum number of angry comments.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>0?1
+2 3
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>4
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>?????
+13 37
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>0
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>?10?
+239 7
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>28
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>01101001
+5 7
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>96
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first example one of the optimum ways to replace is <span class="tex-font-style-tt">001</span>. Then there will be $2$ subsequences <span class="tex-font-style-tt">01</span> and $0$ subsequences <span class="tex-font-style-tt">10</span>. Total number of angry comments will be equal to $2 \cdot 2 + 0 \cdot 3 = 4$.</p>
+  <p>In the second example one of the optimum ways to replace is <span class="tex-font-style-tt">11111</span>. Then there will be $0$ subsequences <span class="tex-font-style-tt">01</span> and $0$ subsequences <span class="tex-font-style-tt">10</span>. Total number of angry comments will be equal to $0 \cdot 13 + 0 \cdot 37 = 0$.</p>
+  <p>In the third example one of the optimum ways to replace is <span class="tex-font-style-tt">1100</span>. Then there will be $0$ subsequences <span class="tex-font-style-tt">01</span> and $4$ subsequences <span class="tex-font-style-tt">10</span>. Total number of angry comments will be equal to $0 \cdot 239 + 4 \cdot 7 = 28$.</p>
+  <p>In the fourth example one of the optimum ways to replace is <span class="tex-font-style-tt">01101001</span>. Then there will be $8$ subsequences <span class="tex-font-style-tt">01</span> and $8$ subsequences <span class="tex-font-style-tt">10</span>. Total number of angry comments will be equal to $8 \cdot 5 + 8 \cdot 7 = 96$.</p>
+ </div>
+</div>

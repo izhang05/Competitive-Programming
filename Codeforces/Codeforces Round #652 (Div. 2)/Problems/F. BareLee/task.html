@@ -1,0 +1,179 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   F. BareLee
+  </div> 
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p> <span class="tex-font-style-it">Lee is used to finish his stories in a stylish way, this time he barely failed it, but Ice Bear came and helped him. Lee is so grateful for it, so he decided to show Ice Bear his new game called "Critic"...</span></p> 
+  <p>The game is a one versus one game. It has $t$ rounds, each round has two integers $s_i$ and $e_i$ (which are determined and are known before the game begins, $s_i$ and $e_i$ may differ from round to round). The integer $s_i$ is written on the board at the beginning of the corresponding round. </p> 
+  <p>The players will take turns. Each player will erase the number on the board (let's say it was $a$) and will choose to write either $2 \cdot a$ or $a + 1$ instead. Whoever writes a number strictly greater than $e_i$ loses that round and the other one wins that round.</p> 
+  <p>Now Lee wants to play "Critic" against Ice Bear, for each round he has chosen the round's $s_i$ and $e_i$ in advance. Lee will start the first round, the loser of each round will start the next round.</p> 
+  <p>The winner of the last round is the winner of the game, and the loser of the last round is the loser of the game.</p> 
+  <p>Determine if Lee can be the winner independent of Ice Bear's moves or not. Also, determine if Lee can be the loser independent of Ice Bear's moves or not.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains the integer $t$ ($1 \le t \le 10^5$)&nbsp;— the number of rounds the game has. </p> 
+  <p>Then $t$ lines follow, each contains two integers $s_i$ and $e_i$ ($1 \le s_i \le e_i \le 10^{18}$)&nbsp;— the $i$-th round's information.</p> 
+  <p>The rounds are played in the same order as given in input, $s_i$ and $e_i$ for all rounds are known to everyone before the game starts.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print two integers.</p> 
+  <p>The first one should be <span class="tex-font-style-tt">1</span> if Lee can be the winner independent of Ice Bear's moves, and <span class="tex-font-style-tt">0</span> otherwise.</p> 
+  <p>The second one should be <span class="tex-font-style-tt">1</span> if Lee can be the loser independent of Ice Bear's moves, and <span class="tex-font-style-tt">0</span> otherwise.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3
+5 8
+1 4
+3 10
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+1 1
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+4
+1 2
+2 3
+3 4
+4 5
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0 0
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+1
+1 1
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0 1
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+2
+1 9
+4 5
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0 0
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+2
+1 2
+2 8
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+1 0
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+6
+216986951114298167 235031205335543871
+148302405431848579 455670351549314242
+506251128322958430 575521452907339082
+1 768614336404564650
+189336074809158272 622104412002885672
+588320087414024192 662540324268197150
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+1 0
+</pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>Remember, whoever writes an integer greater than $e_i$ loses.</p> 
+  <p>In the fifth example, Ice Bear will always win the first round, and Lee will start the second round, you can see that Lee can win the second round independent of Ice Bear's moves, and also Ice Bear can lose the second round independent of Lee's moves.</p>
+ </div>
+</div>

@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.17)
+project(X_NOV20B___November_Challenge_2020_Division_2)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+add_executable(ADADISH "Y 1. ADADISH - Ada and Dishes/ADADISH.cpp")
+set_target_properties(ADADISH PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y 1. ADADISH - Ada and Dishes")
+add_executable(RESTORE "X 2. RESTORE - Restore Sequence/RESTORE.cpp")
+set_target_properties(RESTORE PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 2. RESTORE - Restore Sequence")
+add_executable(FEMA2 "X 3. FEMA2 - Iron, Magnet and Wall/FEMA2.cpp")
+set_target_properties(FEMA2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 3. FEMA2 - Iron, Magnet and Wall")

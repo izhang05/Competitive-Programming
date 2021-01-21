@@ -1,0 +1,96 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   C. Minimum Sum
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Petya has <span class="tex-span"> <i>n</i></span> positive integers <span class="tex-span"> <i>a</i> <sub class="lower-index">1</sub>, <i>a</i> <sub class="lower-index">2</sub>, ..., <i>a</i> <sub class="lower-index"> <i>n</i></sub></span>. </p> 
+  <p>His friend Vasya decided to joke and replaced all digits in Petya's numbers with a letters. He used the lowercase letters of the Latin alphabet from '<span class="tex-font-style-tt">a</span>' to '<span class="tex-font-style-tt">j</span>' and replaced all digits <span class="tex-font-style-tt">0</span> with one letter, all digits <span class="tex-font-style-tt">1</span> with another letter and so on. For any two different digits Vasya used distinct letters from '<span class="tex-font-style-tt">a</span>' to '<span class="tex-font-style-tt">j</span>'.</p> 
+  <p>Your task is to restore Petya's numbers. The restored numbers should be <span class="tex-font-style-bf">positive integers</span> without leading zeros. Since there can be multiple ways to do it, determine the <span class="tex-font-style-bf">minimum</span> possible sum of all Petya's numbers after the restoration. It is guaranteed that before Vasya's joke all Petya's numbers did not have leading zeros.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains a single integer <span class="tex-span"> <i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 1 000</span>) — the number of Petya's numbers.</p> 
+  <p>Each of the following lines contains non-empty string <span class="tex-span"> <i>s</i> <sub class="lower-index"> <i>i</i></sub></span> consisting of lowercase Latin letters from '<span class="tex-font-style-tt">a</span>' to '<span class="tex-font-style-tt">j</span>' — the Petya's numbers after Vasya's joke. The length of each string does not exceed six characters.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Determine the <span class="tex-font-style-bf">minimum</span> sum of all Petya's numbers after the restoration. The restored numbers should be <span class="tex-font-style-bf">positive integers</span> without leading zeros. It is guaranteed that the correct restore (without leading zeros) exists for all given tests.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>3<br>ab<br>de<br>aj<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>47<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>5<br>abcdef<br>ghij<br>bdef<br>accbd<br>g<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>136542<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>3<br>aa<br>jj<br>aa<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>44<br></pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first example, you need to replace the letter '<span class="tex-font-style-tt">a</span>' with the digit <span class="tex-span">1</span>, the letter '<span class="tex-font-style-tt">b</span>' with the digit <span class="tex-span">0</span>, the letter '<span class="tex-font-style-tt">d</span>' with the digit <span class="tex-span">2</span>, the letter '<span class="tex-font-style-tt">e</span>' with the digit <span class="tex-span">3</span>, and the letter '<span class="tex-font-style-tt">j</span>' with the digit <span class="tex-span">4</span>. So after the restoration numbers will look like <span class="tex-span">[10, 23, 14]</span>. The sum of them is equal to <span class="tex-span">47</span>, which is the minimum possible sum of the numbers after the correct restoration.</p> 
+  <p>In the second example the numbers after the restoration can look like: <span class="tex-span">[120468, 3579, 2468, 10024, 3]</span>. </p> 
+  <p>In the second example the numbers after the restoration can look like: <span class="tex-span">[11, 22, 11]</span>. </p>
+ </div>
+</div>

@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(F__Prefix_Sums)
+
+add_executable(F__Prefix_Sums src/main.cpp)

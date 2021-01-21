@@ -1,0 +1,44 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(F__Minimal_Subset_Difference)
+
+    add_executable(F__Minimal_Subset_Difference src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 10 1 100 0 1 100 1 1 100 2 1 100 3 1 100 4 1 100 5 1 100 6 1 100 7 1 100 8
+    1 100 9
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 9 28 44 58 70 80 88 94 98 100
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 10 1 1000 0 1 1000 1 1 1000 2 1 1000 3 1 1000 4 1 1000 5 1 1000 6 1 1000 7
+    1 1000 8 1 1000 9
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 135 380 573 721 830 906 955 983 996 1000
+  learner_created: false
+feedback_link: https://codeforces.com/contest/924/problem/F?locale=en
+status: Unchecked

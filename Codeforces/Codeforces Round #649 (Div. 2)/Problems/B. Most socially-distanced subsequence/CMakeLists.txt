@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(B__Most_socially_distanced_subsequence)
+
+add_executable(B__Most_socially_distanced_subsequence src/main.cpp)

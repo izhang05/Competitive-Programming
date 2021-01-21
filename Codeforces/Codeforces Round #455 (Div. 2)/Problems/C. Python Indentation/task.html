@@ -1,0 +1,88 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   C. Python Indentation
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>In Python, code blocks don't have explicit begin/end or curly braces to mark beginning and end of the block. Instead, code blocks are defined by indentation.</p> 
+  <p>We will consider an extremely simplified subset of Python with only two types of statements.</p> 
+  <p> <span class="tex-font-style-bf">Simple statements</span> are written in a single line, one per line. An example of a simple statement is assignment.</p> 
+  <p> <span class="tex-font-style-bf">For statements</span> are compound statements: they contain one or several other statements. For statement consists of a header written in a separate line which starts with "for" prefix, and loop body. Loop body is a block of statements indented one level further than the header of the loop. Loop body can contain both types of statements. Loop body can't be empty.</p> 
+  <p>You are given a sequence of statements without indentation. Find the number of ways in which the statements can be indented to form a valid Python program.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains a single integer <span class="tex-span"> <i>N</i></span> (<span class="tex-span">1 ≤ <i>N</i> ≤ 5000</span>)&nbsp;— the number of commands in the program. <span class="tex-span"> <i>N</i></span> lines of the program follow, each line describing a single command. Each command is either "f" (denoting "for statement") or "s" ("simple statement"). It is guaranteed that the last line is a simple statement.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Output one line containing an integer - the number of ways the given sequence of statements can be indented modulo <span class="tex-span">10<sup class="upper-index">9</sup> + 7</span>. </p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>4<br>s<br>f<br>f<br>s<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>1<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>4<br>f<br>s<br>f<br>s<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>2<br></pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first test case, there is only one way to indent the program: the second for statement must be part of the body of the first one.</p> 
+  <pre class="verbatim"><br>simple statement<br>for statement<br>    for statement<br>        simple statement<br></pre> 
+  <p>In the second test case, there are two ways to indent the program: the second for statement can either be part of the first one's body or a separate statement following the first one.</p> 
+  <pre class="verbatim"><br>for statement<br>    simple statement<br>    for statement<br>        simple statement<br></pre> 
+  <p>or</p> 
+  <pre class="verbatim"><br>for statement<br>    simple statement<br>for statement<br>    simple statement<br></pre>
+ </div>
+</div>

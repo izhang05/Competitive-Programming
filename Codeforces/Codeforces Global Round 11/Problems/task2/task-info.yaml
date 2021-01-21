@@ -1,0 +1,62 @@
+type: codeforces
+custom_name: B. Chess Cheater
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task2)
+
+    add_executable(task2 src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    8
+    5 2
+    WLWLL
+    6 5
+    LLLWWL
+    7 1
+    LWLWLWL
+    15 5
+    WWWLLLWWWLLLWWW
+    40 7
+    LLWLWLWWWLWLLWLWWWLWLLWLLWLLLLWLLWWWLWWL
+    1 0
+    L
+    1 1
+    L
+    6 1
+    WLLWLW
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    7
+    11
+    6
+    26
+    46
+    0
+    1
+    6
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1427/problem/B?locale=en
+status: Solved
+feedback:
+  time: Sat, 10 Oct 2020 15:35:47 UTC

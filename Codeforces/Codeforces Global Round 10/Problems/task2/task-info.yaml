@@ -1,0 +1,47 @@
+type: codeforces
+custom_name: B. Omkar and Infinity Clock
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task2)
+
+    add_executable(task2 src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    3
+    2 1
+    -199 192
+    5 19
+    5 -1 4 2 0
+    1 2
+    69
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    391 0
+    0 6 1 3 5
+    0
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1392/problem/B?locale=en
+status: Solved
+feedback:
+  time: Fri, 09 Oct 2020 15:01:32 UTC

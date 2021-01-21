@@ -1,0 +1,80 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(D__Trash_Problem)
+
+    add_executable(D__Trash_Problem src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    5 6
+    1 2 6 8 10
+    1 4
+    1 9
+    0 6
+    0 10
+    1 100
+    1 50
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    5
+    7
+    7
+    5
+    4
+    8
+    49
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    5 8
+    5 1 2 4 3
+    0 1
+    0 2
+    0 3
+    0 4
+    0 5
+    1 1000000000
+    1 1
+    1 500000000
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: |-
+    3
+    2
+    1
+    0
+    0
+    0
+    0
+    0
+    499999999
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1418/problem/D?locale=en
+status: Unchecked
+feedback:
+  message: <a href="https://codeforces.com/contest/1418/submit?locale=en">Submit solution</a>
+    (already copied to clipboard)<br>
+  time: Fri, 18 Sep 2020 13:12:27 UTC

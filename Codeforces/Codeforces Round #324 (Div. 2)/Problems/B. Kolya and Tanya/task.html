@@ -1,0 +1,83 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   B. Kolya and Tanya 
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Kolya loves putting gnomes at the circle table and giving them coins, and Tanya loves studying triplets of gnomes, sitting in the vertexes of an equilateral triangle.</p> 
+  <p>More formally, there are <span class="tex-span">3<i>n</i></span> gnomes sitting in a circle. Each gnome can have from <span class="tex-span">1</span> to <span class="tex-span">3</span> coins. Let's number the places in the order they occur in the circle by numbers from <span class="tex-span">0</span> to <span class="tex-span">3<i>n</i> - 1</span>, let the gnome sitting on the <span class="tex-span"> <i>i</i></span>-th place have <span class="tex-span"> <i>a</i> <sub class="lower-index"> <i>i</i></sub></span> coins. If there is an integer <span class="tex-span"> <i>i</i></span> (<span class="tex-span">0 ≤ <i>i</i> &lt; <i>n</i></span>) such that <span class="tex-span"> <i>a</i> <sub class="lower-index"> <i>i</i></sub> + <i>a</i> <sub class="lower-index"> <i>i</i> + <i>n</i></sub> + <i>a</i> <sub class="lower-index"> <i>i</i> + 2<i>n</i></sub> ≠ 6</span>, then Tanya is satisfied. </p> 
+  <p>Count the number of ways to choose <span class="tex-span"> <i>a</i> <sub class="lower-index"> <i>i</i></sub></span> so that Tanya is satisfied. As there can be many ways of distributing coins, print the remainder of this number modulo <span class="tex-span">10<sup class="upper-index">9</sup> + 7</span>. Two ways, <span class="tex-span"> <i>a</i></span> and <span class="tex-span"> <i>b</i></span>, are considered distinct if there is index <span class="tex-span"> <i>i</i></span> (<span class="tex-span">0 ≤ <i>i</i> &lt; 3<i>n</i></span>), such that <span class="tex-span"> <i>a</i> <sub class="lower-index"> <i>i</i></sub> ≠ <i>b</i> <sub class="lower-index"> <i>i</i></sub></span> (that is, some gnome got different number of coins in these two ways).</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>A single line contains number <span class="tex-span"> <i>n</i></span> (<span class="tex-span">1 ≤ <i>n</i> ≤ 10<sup class="upper-index">5</sup></span>) — the number of the gnomes divided by three.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print a single number — the remainder of the number of variants of distributing coins that satisfy Tanya modulo <span class="tex-span">10<sup class="upper-index">9</sup> + 7</span>.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>1<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>20</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>2<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>680</pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p> <span class="tex-span">20</span> ways for <span class="tex-span"> <i>n</i> = 1</span> (gnome with index <span class="tex-span">0</span> sits on the top of the triangle, gnome <span class="tex-span">1</span> on the right vertex, gnome <span class="tex-span">2</span> on the left vertex): <img class="tex-graphics" src="https://espresso.codeforces.com/64df38b85ccb482cf88d02dc52e348e33313f9da.png" style="max-width: 100.0%;max-height: 100.0%;"> </p> 
+  <center> 
+  </center>
+ </div>
+</div>

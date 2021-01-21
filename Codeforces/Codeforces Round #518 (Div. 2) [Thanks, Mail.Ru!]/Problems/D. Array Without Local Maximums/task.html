@@ -1,0 +1,85 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   D. Array Without Local Maximums 
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Ivan unexpectedly saw a present from one of his previous birthdays. It is array of $n$ numbers from $1$ to $200$. Array is old and some numbers are hard to read. Ivan remembers that for all elements at least one of its neighbours ls not less than it, more formally:</p> 
+  <p>$a_{1} \le a_{2}$,</p> 
+  <p>$a_{n} \le a_{n-1}$ and</p> 
+  <p>$a_{i} \le max(a_{i-1}, \,\, a_{i+1})$ for all $i$ from $2$ to $n-1$.</p> 
+  <p>Ivan does not remember the array and asks to find the number of ways to restore it. Restored elements also should be integers from $1$ to $200$. Since the number of ways can be big, print it modulo $998244353$.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>First line of input contains one integer $n$ ($2 \le n \le 10^{5}$)&nbsp;— size of the array.</p> 
+  <p>Second line of input contains $n$ integers $a_{i}$&nbsp;— elements of array. Either $a_{i} = -1$ or $1 \le a_{i} \le 200$. $a_{i} = -1$ means that $i$-th element can't be read.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print number of ways to restore the array modulo $998244353$.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>3<br>1 -1 2<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>1<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>2<br>-1 -1<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>200<br></pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first example, only possible value of $a_{2}$ is $2$.</p> 
+  <p>In the second example, $a_{1} = a_{2}$ so there are $200$ different values because all restored elements should be integers between $1$ and $200$. </p>
+ </div>
+</div>

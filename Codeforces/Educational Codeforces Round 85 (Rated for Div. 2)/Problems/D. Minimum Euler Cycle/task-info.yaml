@@ -1,0 +1,38 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(D__Minimum_Euler_Cycle)
+
+    add_executable(D__Minimum_Euler_Cycle src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    3
+    2 1 3
+    3 3 6
+    99995 9998900031 9998900031
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: "1 2 1 \n1 3 2 3 \n1"
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1334/problem/D?locale=en
+status: Unchecked

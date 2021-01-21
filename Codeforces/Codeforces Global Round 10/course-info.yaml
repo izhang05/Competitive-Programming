@@ -1,0 +1,19 @@
+type: codeforces
+title: Codeforces Global Round 10
+language: English
+summary: |-
+  A. Omkar and Password
+  B. Omkar and Infinity Clock
+  C. Omkar and Waterslide
+  D. Omkar and Bed Wars
+  E. Omkar and Duck
+  F. Omkar and Landslide
+  G. Omkar and Pies
+  H. ZS Shuffles Cards
+  I. Kevin and Grid
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1597599300.000000000
+mode: Study

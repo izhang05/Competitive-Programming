@@ -1,0 +1,90 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   A. Long Beautiful Integer
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>3 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given an integer $x$ of $n$ digits $a_1, a_2, \ldots, a_n$, which make up its decimal notation in order from left to right.</p> 
+  <p>Also, you are given a positive integer $k &lt; n$.</p> 
+  <p>Let's call integer $b_1, b_2, \ldots, b_m$ <span class="tex-font-style-bf">beautiful</span> if $b_i = b_{i+k}$ for each $i$, such that $1 \leq i \leq m - k$.</p> 
+  <p>You need to find the smallest <span class="tex-font-style-bf">beautiful</span> integer $y$, such that $y \geq x$. </p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line of input contains two integers $n, k$ ($2 \leq n \leq 200\,000, 1 \leq k &lt; n$): the number of digits in $x$ and $k$.</p> 
+  <p>The next line of input contains $n$ digits $a_1, a_2, \ldots, a_n$ ($a_1 \neq 0$, $0 \leq a_i \leq 9$): digits of $x$.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>In the first line print one integer $m$: the number of digits in $y$.</p> 
+  <p>In the next line print $m$ digits $b_1, b_2, \ldots, b_m$ ($b_1 \neq 0$, $0 \leq b_i \leq 9$): digits of $y$.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3 2
+353
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+3
+353
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+4 2
+1234
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+4
+1313
+</pre>
+   </div>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.17)
+project(December_Circuits_20)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+#set(GCC_COVERAGE_COMPILE_FLAGS "-Wshadow -Wall -o -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+add_executable(Multiple_occurrences "Y 1. Multiple occurrences/Multiple occurrences.cpp")
+set_target_properties(Multiple_occurrences PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y 1. Multiple occurrences")
+add_executable(The_minimum_cost "Y 2. The minimum cost/The minimum cost.cpp")
+set_target_properties(The_minimum_cost PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y 2. The minimum cost")
+add_executable(Customer_satisfaction "Y 3. Customer satisfaction/Customer satisfaction.cpp")
+set_target_properties(Customer_satisfaction PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y 3. Customer satisfaction")
+add_executable(Number_of_ways "Y 4. Number of ways/Number of ways.cpp")
+set_target_properties(Number_of_ways PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y 4. Number of ways")
+add_executable(A_matrix_and_XOR_operation "X 5. A matrix and XOR operation/A matrix and XOR operation.cpp")
+set_target_properties(A_matrix_and_XOR_operation PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 5. A matrix and XOR operation")

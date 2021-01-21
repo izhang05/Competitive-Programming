@@ -1,0 +1,102 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   B. Multiply by 2, divide by 6
+  </div> 
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given an integer $n$. In one move, you can either multiply $n$ by two or divide $n$ by $6$ (if it is divisible by $6$ without the remainder).</p> 
+  <p>Your task is to find the minimum number of moves needed to obtain $1$ from $n$ or determine if it's imppossible to do that.</p> 
+  <p>You have to answer $t$ independent test cases.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line of the input contains one integer $t$ ($1 \le t \le 2 \cdot 10^4$) — the number of test cases. Then $t$ test cases follow. </p> 
+  <p>The only line of the test case contains one integer $n$ ($1 \le n \le 10^9$).</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>For each test case, print the answer — the minimum number of moves needed to obtain $1$ from $n$ if it's possible to do that or <span class="tex-font-style-tt">-1</span> if it's impossible to obtain $1$ from $n$.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Example
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+7
+1
+2
+3
+12
+12345
+15116544
+387420489
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0
+-1
+2
+-1
+-1
+12
+36
+</pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>Consider the sixth test case of the example. The answer can be obtained by the following sequence of moves:</p> 
+  <ol> 
+   <li> $15116544$; </li> 
+   <li> $2519424$ (divide by $6$); </li> 
+   <li> $419904$ (divide by $6$); </li> 
+   <li> $69984$ (divide by $6$); </li> 
+   <li> $11664$ (divide by $6$); </li> 
+   <li> $23328$ (multiply by $2$); </li> 
+   <li> $3888$ (divide by $6$); </li> 
+   <li> $648$ (divide by $6$); </li> 
+   <li> $108$ (divide by $6$); </li> 
+   <li> $216$ (multiply by $6$); </li> 
+   <li> $36$ (divide by $6$); </li> 
+   <li> $6$ (divide by $6$); </li> 
+   <li> $1$ (divide by $6$). </li>
+  </ol>
+ </div>
+</div>

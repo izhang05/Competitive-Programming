@@ -1,0 +1,43 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(A__Short_Substrings)
+
+    add_executable(A__Short_Substrings src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4
+    abbaac
+    ac
+    bccddaaf
+    zzzzzzzzzz
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    abac
+    ac
+    bcdaf
+    zzzzzz
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1367/problem/A?locale=en
+status: Unchecked

@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.16)
+project(X_JULY20B___July_Challenge_2020_Division_2)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(CHEFSTR1 "Y 1. CHEFSTR1 - Chef and Strings/CHEFSTR1.cpp")
+add_executable(CRDGAME "Y 2. CRDGAME - Chef and Card Game/CRDGAME.cpp")
+add_executable(ADAKING "Y 3. ADAKING - Ada King/ADAKING.cpp")
+add_executable(PTMSSNG "Y 4. PTMSSNG - Missing a Point/PTMSSNG.cpp")
+add_executable(CHFNSWPS "Y 5. CHFNSWPS - Chefina and Swaps/CHFNSWPS.cpp")
+add_executable(DRCHEF "XY 6. DRCHEF - Doctor Chef/DRCHEF.cpp")
+add_executable(DRGNDEN "XY 7. DRGNDEN - Chef and Dragon Dens/DRGNDEN.cpp")
+
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    target_compile_definitions("CHEFSTR1" PUBLIC DEBUG=1)
+    target_compile_definitions("CRDGAME" PUBLIC DEBUG=1)
+    target_compile_definitions("ADAKING" PUBLIC DEBUG=1)
+    target_compile_definitions("PTMSSNG" PUBLIC DEBUG=1)
+    target_compile_definitions("CHFNSWPS" PUBLIC DEBUG=1)
+    target_compile_definitions("DRCHEF" PUBLIC DEBUG=1)
+    target_compile_definitions("DRGNDEN" PUBLIC DEBUG=1)
+endif()

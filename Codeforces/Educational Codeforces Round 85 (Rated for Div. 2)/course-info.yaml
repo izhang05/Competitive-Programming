@@ -1,0 +1,16 @@
+type: codeforces
+title: Educational Codeforces Round 85 (Rated for Div. 2)
+language: English
+summary: |-
+  A. Level Statistics
+  B. Middle Class
+  C. Circle of Monsters
+  D. Minimum Euler Cycle
+  E. Divisor Paths
+  F. Strange Function
+  G. Substring Search
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

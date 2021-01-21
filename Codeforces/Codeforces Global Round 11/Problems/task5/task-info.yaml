@@ -1,0 +1,60 @@
+type: codeforces
+custom_name: E. Xum
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task5)
+
+    add_executable(task5 src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 3
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    5
+    3 + 3
+    3 ^ 6
+    3 + 5
+    3 + 6
+    8 ^ 9
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 123
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: |-
+    10
+    123 + 123
+    123 ^ 246
+    141 + 123
+    246 + 123
+    264 ^ 369
+    121 + 246
+    367 ^ 369
+    30 + 30
+    60 + 60
+    120 ^ 121
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1427/problem/E?locale=en
+status: Unchecked

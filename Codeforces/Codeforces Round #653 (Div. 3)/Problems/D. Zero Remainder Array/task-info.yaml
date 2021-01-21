@@ -1,0 +1,50 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(D__Zero_Remainder_Array)
+
+    add_executable(D__Zero_Remainder_Array src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    5
+    4 3
+    1 2 1 3
+    10 6
+    8 7 1 8 3 7 5 10 8 9
+    5 10
+    20 100 50 20 100500
+    10 25
+    24 24 24 24 24 24 24 24 24 24
+    8 8
+    1 2 3 4 5 6 7 8
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    6
+    18
+    0
+    227
+    8
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1374/problem/D?locale=en
+status: Unchecked

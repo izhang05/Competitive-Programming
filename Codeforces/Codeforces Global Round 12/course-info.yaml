@@ -1,0 +1,20 @@
+type: codeforces
+title: Codeforces Global Round 12
+language: English
+summary: |-
+  A. Avoid Trygub
+  B. Balls of Steel
+  C1. Errich-Tac-Toe (Easy Version)
+  C2. Errich-Tac-Toe (Hard Version)
+  D. Rating Compression
+  E. Capitalism
+  F. The Struggling Contestant
+  G. Communism
+  H1. Multithreading (Easy Version)
+  H2. Multithreading (Hard Version)
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1607276100.000000000
+mode: Study

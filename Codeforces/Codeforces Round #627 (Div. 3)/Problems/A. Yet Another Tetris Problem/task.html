@@ -1,0 +1,100 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   A. Yet Another Tetris Problem
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given some Tetris field consisting of $n$ columns. The initial height of the $i$-th column of the field is $a_i$ blocks. On top of these columns you can place <span class="tex-font-style-bf">only</span> figures of size $2 \times 1$ (i.e. the height of this figure is $2$ blocks and the width of this figure is $1$ block). Note that you <span class="tex-font-style-bf">cannot</span> rotate these figures.</p> 
+  <p>Your task is to say if you can clear the whole field by placing such figures.</p> 
+  <p>More formally, the problem can be described like this:</p> 
+  <p>The following process occurs while <span class="tex-font-style-bf">at least one $a_i$ is greater than $0$</span>:</p> 
+  <ol> 
+   <li> You place one figure $2 \times 1$ (choose some $i$ from $1$ to $n$ and replace $a_i$ with $a_i + 2$); </li> 
+   <li> then, while all $a_i$ are greater than zero, replace each $a_i$ with $a_i - 1$. </li>
+  </ol> 
+  <p>And your task is to determine if it is possible to clear the whole field (i.e. finish the described process), choosing the places for new figures properly.</p> 
+  <p>You have to answer $t$ independent test cases.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line of the input contains one integer $t$ ($1 \le t \le 100$) — the number of test cases.</p> 
+  <p>The next $2t$ lines describe test cases. The first line of the test case contains one integer $n$ ($1 \le n \le 100$) — the number of columns in the Tetris field. The second line of the test case contains $n$ integers $a_1, a_2, \dots, a_n$ ($1 \le a_i \le 100$), where $a_i$ is the initial height of the $i$-th column of the Tetris field.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>For each test case, print the answer — "<span class="tex-font-style-tt">YES</span>" (without quotes) if you can clear the whole Tetris field and "<span class="tex-font-style-tt">NO</span>" otherwise.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Example
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+4
+3
+1 1 3
+4
+1 1 2 1
+2
+11 11
+1
+100
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+YES
+NO
+YES
+YES
+</pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>The first test case of the example field is shown below:</p> 
+  <p> <img class="tex-graphics" src="https://espresso.codeforces.com/c3b3d19786c16dfd52f9729d83217c7154a5852f.png" style="max-width: 100.0%;max-height: 100.0%;"></p> 
+  <p>Gray lines are bounds of the Tetris field. Note that the field has no upper bound.</p> 
+  <p>One of the correct answers is to first place the figure in the first column. Then after the second step of the process, the field becomes $[2, 0, 2]$. Then place the figure in the second column and after the second step of the process, the field becomes $[0, 0, 0]$.</p> 
+  <p>And the second test case of the example field is shown below:</p> 
+  <p> <img class="tex-graphics" src="https://espresso.codeforces.com/9e670fa3eabfebd5ecdfa6085157f1f4ccfe494e.png" style="max-width: 100.0%;max-height: 100.0%;"></p> 
+  <p>It can be shown that you cannot do anything to end the process.</p> 
+  <p>In the third test case of the example, you first place the figure in the second column after the second step of the process, the field becomes $[0, 2]$. Then place the figure in the first column and after the second step of the process, the field becomes $[0, 0]$.</p> 
+  <p>In the fourth test case of the example, place the figure in the first column, then the field becomes $[102]$ after the first step of the process, and then the field becomes $[0]$ after the second step of the process.</p>
+ </div>
+</div>

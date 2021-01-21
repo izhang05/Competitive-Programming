@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(E__Ehab_s_REAL_Number_Theory_Problem)
+
+add_executable(E__Ehab_s_REAL_Number_Theory_Problem src/main.cpp)

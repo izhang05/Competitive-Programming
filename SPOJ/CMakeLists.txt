@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.16)
+project(SPOJ)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+
+
+add_executable(FARIDA "Y FARIDA - Princess Farida/FARIDA.cpp")
+add_executable(EDIST "X EDIST - Edit distance/EDIST.cpp")
+add_executable(COINS "Y COINS - Bytelandian gold coins/COINS.cpp")
+add_executable(TEST "Y TEST - Life, the Universe, and Everything/TEST.cpp")
+add_executable(NICEDAY "X NICEDAY - The day of the competitors/NICEDAY.cpp")
+set_target_properties(NICEDAY PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X NICEDAY - The day of the competitors")
+add_executable(CLOPPAIR "Y CLOPPAIR - Closest Point Pair/CLOPPAIR.cpp")
+set_target_properties(CLOPPAIR PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y CLOPPAIR - Closest Point Pair")
+add_executable(CEPC08B "X CEPC08B - SkyScrapers/CEPC08B.cpp")
+set_target_properties(CEPC08B PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X CEPC08B - SkyScrapers")
+add_executable(INVCNT "Y INVCNT - Inversion Count/INVCNT.cpp")
+set_target_properties(INVCNT PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Y INVCNT - Inversion Count")
+add_executable(KQUERY "X KQUERY - K-query/KQUERY.cpp")
+set_target_properties(KQUERY PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X KQUERY - K-query/")

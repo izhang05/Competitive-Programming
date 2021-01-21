@@ -1,0 +1,96 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(F__Jog_Around_The_Graph)
+
+    add_executable(F__Jog_Around_The_Graph src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    7 8 25
+    1 2 1
+    2 3 10
+    3 4 2
+    1 5 2
+    5 6 7
+    6 4 15
+    5 3 1
+    1 7 3
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 4361
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: |-
+    2 1 5
+    1 2 4
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 60
+  learner_created: false
+- name: testData/3/input.txt
+  visible: true
+  text: |-
+    15 15 23
+    13 10 12
+    11 14 12
+    2 15 5
+    4 10 8
+    10 2 4
+    10 7 5
+    3 10 1
+    5 6 11
+    1 13 8
+    9 15 4
+    4 2 9
+    11 15 1
+    11 12 14
+    10 8 12
+    3 6 11
+  learner_created: false
+- name: testData/3/output.txt
+  visible: true
+  text: 3250
+  learner_created: false
+- name: testData/4/input.txt
+  visible: true
+  text: |-
+    5 10 10000000
+    2 4 798
+    1 5 824
+    5 2 558
+    4 1 288
+    3 4 1890
+    3 1 134
+    2 3 1485
+    4 5 284
+    3 5 1025
+    1 2 649
+  learner_created: false
+- name: testData/4/output.txt
+  visible: true
+  text: 768500592
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1366/problem/F?locale=en
+status: Unchecked

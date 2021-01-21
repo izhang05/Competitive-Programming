@@ -1,0 +1,124 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   E. Ehab's REAL Number Theory Problem
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>3 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given an array $a$ of length $n$ that has a special condition: every element in this array has at most 7 divisors. Find the length of the shortest non-empty subsequence of this array product of whose elements is a perfect square.</p> 
+  <p>A sequence $a$ is a subsequence of an array $b$ if $a$ can be obtained from $b$ by deletion of several (possibly, zero or all) elements.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains an integer $n$ ($1 \le n \le 10^5$)&nbsp;— the length of $a$.</p> 
+  <p>The second line contains $n$ integers $a_1$, $a_2$, $\ldots$, $a_{n}$ ($1 \le a_i \le 10^6$)&nbsp;— the elements of the array $a$.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Output the length of the shortest non-empty subsequence of $a$ product of whose elements is a perfect square. If there are several shortest subsequences, you can find any of them. If there's no such subsequence, print "-1".</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3
+1 4 6
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+1</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+4
+2 3 6 6
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+2</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3
+6 15 10
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+3</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+4
+2 3 5 7
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+-1</pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first sample, you can choose a subsequence $[1]$.</p> 
+  <p>In the second sample, you can choose a subsequence $[6, 6]$.</p> 
+  <p>In the third sample, you can choose a subsequence $[6, 15, 10]$.</p> 
+  <p>In the fourth sample, there is no such subsequence.</p>
+ </div>
+</div>

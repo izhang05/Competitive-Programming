@@ -1,0 +1,56 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(B__Same_Parity_Summands)
+
+    add_executable(B__Same_Parity_Summands src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    8
+    10 3
+    100 4
+    8 7
+    97 2
+    8 8
+    3 10
+    5 3
+    1000000000 9
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    YES
+    4 2 4
+    YES
+    55 5 5 35
+    NO
+    NO
+    YES
+    1 1 1 1 1 1 1 1
+    NO
+    YES
+    3 1 1
+    YES
+    111111110 111111110 111111110 111111110 111111110 111111110 111111110 111111110 111111120
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1352/problem/B?locale=en
+status: Unchecked

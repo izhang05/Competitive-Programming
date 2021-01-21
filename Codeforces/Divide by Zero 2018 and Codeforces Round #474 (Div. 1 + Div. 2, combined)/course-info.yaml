@@ -1,0 +1,17 @@
+type: codeforces
+title: 'Divide by Zero 2018 and Codeforces Round #474 (Div. 1 + Div. 2, combined)'
+language: English
+summary: |-
+  A. Check the string
+  B. Minimize the error
+  C. Subsequence Counting
+  D. Full Binary Tree Queries
+  E. Alternating Tree
+  F. Pathwalks
+  G. Bandit Blues
+  H. Santa's Gift
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

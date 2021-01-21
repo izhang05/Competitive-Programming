@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(A__Captain_Flint_and_Crew_Recruitment)
+
+add_executable(A__Captain_Flint_and_Crew_Recruitment src/main.cpp)

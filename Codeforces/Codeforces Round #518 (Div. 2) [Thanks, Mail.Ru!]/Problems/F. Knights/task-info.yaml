@@ -1,0 +1,42 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(F__Knights)
+
+    add_executable(F__Knights src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 4
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 1 1 3 1 1 5 4 4
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 7
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 2 1 1 2 4 1 5 2 2 6 5 7 6 6
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1068/problem/F?locale=en
+status: Unchecked

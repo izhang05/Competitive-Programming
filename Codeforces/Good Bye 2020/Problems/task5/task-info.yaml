@@ -1,0 +1,69 @@
+type: codeforces
+custom_name: E. Apollo versus Pan
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task5)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    8
+    2
+    1 7
+    3
+    1 2 4
+    4
+    5 5 5 5
+    5
+    6 2 2 1 0
+    1
+    0
+    1
+    1
+    6
+    1 12 123 1234 12345 123456
+    5
+    536870912 536870911 1152921504606846975 1152921504606846974 1152921504606846973
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    128
+    91
+    1600
+    505
+    0
+    1
+    502811676
+    264880351
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1466/problem/E?locale=en
+status: Unchecked

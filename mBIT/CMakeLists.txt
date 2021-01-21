@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.17)
+project(mBIT)
+
+set(CMAKE_CXX_STANDARD 17)
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
+add_executable(Apple_Pie "Fall 2020/Standard/Y A. Apple Pie/Apple Pie.cpp")
+set_target_properties(Apple_Pie PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Fall 2020/Standard/Y A. Apple Pie")
+add_executable(Double_Trouble "Fall 2020/Standard/Y B. Double Trouble/Double Trouble.cpp")
+set_target_properties(Double_Trouble PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Fall 2020/Standard/Y B. Double Trouble")
+add_executable(Explorers "Fall 2020/Standard/Y C. Explorers/Explorers.cpp")
+set_target_properties(Explorers PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Fall 2020/Standard/Y C. Explorers")
+add_executable(Banquet "Fall 2020/Standard/X D. Banquet/Banquet.cpp")
+set_target_properties(Banquet PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Fall 2020/Standard/X D. Banquet")
+add_executable(Climbing_Trees "Fall 2020/Standard/X E. Climbing Trees/Climbing Trees.cpp")
+set_target_properties(Climbing_Trees PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Fall 2020/Standard/X E. Climbing Trees")

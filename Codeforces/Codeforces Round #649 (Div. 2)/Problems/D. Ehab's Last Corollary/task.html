@@ -1,0 +1,157 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   D. Ehab's Last Corollary
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Given a connected undirected graph with $n$ vertices and an integer $k$, you have to either:</p>
+  <ul> 
+   <li> either find an independent set that has <span class="tex-font-style-bf">exactly</span> $\lceil\frac{k}{2}\rceil$ vertices.</li>
+   <li> or find a <span class="tex-font-style-bf">simple</span> cycle of length <span class="tex-font-style-bf">at most</span> $k$. </li>
+  </ul>
+  <p>An independent set is a set of vertices such that no two of them are connected by an edge. A simple cycle is a cycle that doesn't contain any vertex twice. </p>
+  <p>I have a proof that for any input you can always solve at least one of these problems, but it's left as an exercise for the reader.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains three integers $n$, $m$, and $k$ ($3 \le k \le n \le 10^5$, $n-1 \le m \le 2 \cdot 10^5$)&nbsp;— the number of vertices and edges in the graph, and the parameter $k$ from the statement.</p>
+  <p>Each of the next $m$ lines contains two integers $u$ and $v$ ($1 \le u,v \le n$) that mean there's an edge between vertices $u$ and $v$. It's guaranteed that the graph is connected and doesn't contain any self-loops or multiple edges.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>If you choose to solve the first problem, then on the first line print $1$, followed by a line containing $\lceil\frac{k}{2}\rceil$ distinct integers not exceeding $n$, the vertices in the desired independent set.</p>
+  <p>If you, however, choose to solve the second problem, then on the first line print $2$, followed by a line containing one integer, $c$, representing the length of the found cycle, followed by a line containing $c$ distinct integers not exceeding $n$, the vertices in the desired cycle, <span class="tex-font-style-bf">in the order they appear in the cycle</span>.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+4 4 3
+1 2
+2 3
+3 4
+4 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+1
+1 3 </pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+4 5 3
+1 2
+2 3
+3 4
+4 1
+2 4
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+2
+3
+2 3 4 </pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+4 6 3
+1 2
+2 3
+3 4
+4 1
+1 3
+2 4
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+2
+3
+1 2 3 </pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+5 4 5
+1 2
+1 3
+2 4
+2 5
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+1
+1 4 5 </pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first sample:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/30ec0d0b069debf55bfe3aba38c15fe035e200d6.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>Notice that printing the independent set $\{2,4\}$ is also OK, but printing the cycle $1-2-3-4$ isn't, because its length must be at most $3$.</p>
+  <p>In the second sample:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/49b31d8a4b5e8512fbcdd368e5a4a34445a020be.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>Notice that printing the independent set $\{1,3\}$ or printing the cycle $2-1-4$ is also OK.</p>
+  <p>In the third sample:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/45bb98eab0d3defca699e0516b015899cbd2225c.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>In the fourth sample:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/0b423c3ffbcf9f02621ccf7efc14e8c656d80c8b.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+ </div>
+</div>

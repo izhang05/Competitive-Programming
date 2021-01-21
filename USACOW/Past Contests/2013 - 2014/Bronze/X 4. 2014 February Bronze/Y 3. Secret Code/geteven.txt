@@ -1,0 +1,5 @@
+State: current variable, the value of all the variables
+
+Base case: past M
+
+Transition: go to next_cow variable and set value to each possible value

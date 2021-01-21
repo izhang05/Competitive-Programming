@@ -1,0 +1,151 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   E. Rock, Paper, Scissors
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Alice and Bob have decided to play the game "Rock, Paper, Scissors". </p>
+  <p>The game consists of several rounds, each round is independent of each other. In each round, both players show one of the following things at the same time: rock, paper or scissors. If both players showed the same things then the round outcome is a draw. Otherwise, the following rules applied:</p>
+  <ul> 
+   <li> if one player showed rock and the other one showed scissors, then the player who showed rock is considered the winner and the other one is considered the loser; </li>
+   <li> if one player showed scissors and the other one showed paper, then the player who showed scissors is considered the winner and the other one is considered the loser; </li>
+   <li> if one player showed paper and the other one showed rock, then the player who showed paper is considered the winner and the other one is considered the loser. </li>
+  </ul>
+  <p>Alice and Bob decided to play exactly $n$ rounds of the game described above. Alice decided to show rock $a_1$ times, show scissors $a_2$ times and show paper $a_3$ times. Bob decided to show rock $b_1$ times, show scissors $b_2$ times and show paper $b_3$ times. Though, both Alice and Bob <span class="tex-font-style-bf">did not choose</span> the sequence in which they show things. It is guaranteed that $a_1 + a_2 + a_3 = n$ and $b_1 + b_2 + b_3 = n$.</p>
+  <p>Your task is to find two numbers:</p>
+  <ol> 
+   <li> the minimum number of round Alice can win; </li>
+   <li> the maximum number of rounds Alice can win. </li>
+  </ol>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line of the input contains one integer $n$ ($1 \le n \le 10^{9}$) — the number of rounds.</p>
+  <p>The second line of the input contains three integers $a_1, a_2, a_3$ ($0 \le a_i \le n$) — the number of times Alice will show rock, scissors and paper, respectively. It is guaranteed that $a_1 + a_2 + a_3 = n$.</p>
+  <p>The third line of the input contains three integers $b_1, b_2, b_3$ ($0 \le b_j \le n$) — the number of times Bob will show rock, scissors and paper, respectively. It is guaranteed that $b_1 + b_2 + b_3 = n$.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print two integers: the minimum and the maximum number of rounds Alice can win.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2
+0 1 1
+1 1 0
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>0 1
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>15
+5 5 5
+5 5 5
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>0 15
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>3
+0 0 3
+3 0 0
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>3 3
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>686
+479 178 29
+11 145 530
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>22 334
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>319
+10 53 256
+182 103 34
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>119 226
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first example, Alice will not win any rounds if she shows scissors and then paper and Bob shows rock and then scissors. In the best outcome, Alice will win one round if she shows paper and then scissors, and Bob shows rock and then scissors.</p>
+  <p>In the second example, Alice will not win any rounds if Bob shows the same things as Alice each round.</p>
+  <p>In the third example, Alice always shows paper and Bob always shows rock so Alice will win all three rounds anyway.</p>
+ </div>
+</div>

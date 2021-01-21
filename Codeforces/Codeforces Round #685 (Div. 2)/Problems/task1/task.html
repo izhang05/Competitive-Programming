@@ -1,0 +1,94 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   A. Subtract or Divide
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Ridbit starts with an integer $n$.</p>
+  <p>In one move, he can perform one of the following operations: </p>
+  <ul> 
+   <li> divide $n$ by one of its <span class="tex-font-style-bf">proper</span> divisors, or </li>
+   <li> subtract $1$ from $n$ if $n$ is greater than $1$. </li>
+  </ul>
+  <p>A proper divisor is a divisor of a number, excluding itself. For example, $1$, $2$, $4$, $5$, and $10$ are proper divisors of $20$, but $20$ itself is not.</p>
+  <p>What is the minimum number of moves Ridbit is required to make to reduce $n$ to $1$?</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains a single integer $t$ ($1 \leq t \leq 1000$)&nbsp;— the number of test cases.</p>
+  <p>The only line of each test case contains a single integer $n$ ($1 \leq n \leq 10^9$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, output the minimum number of moves required to reduce $n$ to $1$.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>6
+1
+2
+3
+4
+6
+9
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>0
+1
+2
+2
+2
+3
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>For the test cases in the example, $n$ may be reduced to $1$ using the following operations in sequence</p>
+  <p>$1$</p>
+  <p>$2 \xrightarrow{} 1$</p>
+  <p>$3 \xrightarrow{} 2 \xrightarrow{} 1$</p>
+  <p>$4 \xrightarrow{} 2 \xrightarrow{} 1$</p>
+  <p>$6 \xrightarrow{} 2 \xrightarrow{} 1$</p>
+  <p>$9 \xrightarrow{} 3 \xrightarrow{} 2\xrightarrow{} 1$</p>
+ </div>
+</div>

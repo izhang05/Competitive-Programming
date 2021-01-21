@@ -1,0 +1,97 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   D. Make a Permutation!
+  </div> 
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>Ivan has an array consisting of <span class="tex-span"> <i>n</i></span> elements. Each of the elements is an integer from <span class="tex-span">1</span> to <span class="tex-span"> <i>n</i></span>.</p> 
+  <p>Recently Ivan learned about permutations and their lexicographical order. Now he wants to change (replace) <span class="tex-font-style-it">minimum</span> number of elements in his array in such a way that his array becomes a <span class="tex-font-style-it">permutation</span> (i.e. each of the integers from <span class="tex-span">1</span> to <span class="tex-span"> <i>n</i></span> was encountered in his array exactly once). If there are multiple ways to do it he wants to find the <span class="tex-font-style-it">lexicographically minimal</span> permutation among them.</p> 
+  <p>Thus minimizing the number of changes has the first priority, lexicographical minimizing has the second priority.</p> 
+  <p>In order to determine which of the two permutations is lexicographically smaller, we compare their first elements. If they are equal — compare the second, and so on. If we have two permutations <span class="tex-span"> <i>x</i></span> and <span class="tex-span"> <i>y</i></span>, then <span class="tex-span"> <i>x</i></span> is lexicographically smaller if <span class="tex-span"> <i>x</i> <sub class="lower-index"> <i>i</i></sub> &lt; <i>y</i> <sub class="lower-index"> <i>i</i></sub></span>, where <span class="tex-span"> <i>i</i></span> is the first index in which the permutations <span class="tex-span"> <i>x</i></span> and <span class="tex-span"> <i>y</i></span> differ.</p> 
+  <p>Determine the array Ivan will obtain after performing all the changes.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains an single integer <span class="tex-span"> <i>n</i></span> (<span class="tex-span">2 ≤ <i>n</i> ≤ 200 000</span>) — the number of elements in Ivan's array.</p> 
+  <p>The second line contains a sequence of integers <span class="tex-span"> <i>a</i> <sub class="lower-index">1</sub>, <i>a</i> <sub class="lower-index">2</sub>, ..., <i>a</i> <sub class="lower-index"> <i>n</i></sub></span> (<span class="tex-span">1 ≤ <i>a</i> <sub class="lower-index"> <i>i</i></sub> ≤ <i>n</i></span>) — the description of Ivan's array.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>In the first line print <span class="tex-span"> <i>q</i></span> — the minimum number of elements that need to be changed in Ivan's array in order to make his array a permutation. In the second line, print the <span class="tex-font-style-it">lexicographically minimal</span> permutation which can be obtained from array with <span class="tex-span"> <i>q</i></span> changes.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>4<br>3 2 2 3<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>2<br>1 2 4 3 <br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>6<br>4 5 6 3 2 1<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>0<br>4 5 6 3 2 1 <br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>10<br>6 8 4 6 7 1 6 3 4 5<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>3<br>2 8 4 6 7 1 9 3 10 5 <br></pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first example Ivan needs to replace number three in position <span class="tex-span">1</span> with number one, and number two in position <span class="tex-span">3</span> with number four. Then he will get a permutation <span class="tex-font-style-tt">[1, 2, 4, 3]</span> with only two changed numbers — this permutation is lexicographically minimal among all suitable. </p> 
+  <p>In the second example Ivan does not need to change anything because his array already is a permutation.</p>
+ </div>
+</div>

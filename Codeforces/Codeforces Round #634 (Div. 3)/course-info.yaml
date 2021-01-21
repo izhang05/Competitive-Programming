@@ -1,0 +1,16 @@
+type: codeforces
+title: 'Codeforces Round #634 (Div. 3)'
+language: English
+summary: |-
+  A. Candies and Two Sisters
+  B. Construct the String
+  C. Two Teams Composing
+  D. Anti-Sudoku
+  E1. Three Blocks Palindrome (easy version)
+  E2. Three Blocks Palindrome (hard version)
+  F. Robots on a Grid
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

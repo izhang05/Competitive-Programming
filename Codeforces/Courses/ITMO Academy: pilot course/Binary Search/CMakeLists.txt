@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.17)
+project(Binary_Search)
+
+set(CMAKE_CXX_STANDARD 17)
+add_executable(1A "Step 1/YA.cpp")
+add_executable(1B "Step 1/YB.cpp")
+add_executable(1C "Step 1/YC.cpp")
+add_executable(1D "Step 1/D.cpp")
+add_executable(2A "Step 2/YA.cpp")
+add_executable(2B "Step 2/XB.cpp")
+add_executable(2C "Step 2/YC.cpp")

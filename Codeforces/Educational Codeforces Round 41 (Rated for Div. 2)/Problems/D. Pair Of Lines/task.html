@@ -1,0 +1,84 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   D. Pair Of Lines
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given <span class="tex-span"> <i>n</i></span> points on Cartesian plane. Every point is a lattice point (i. e. both of its coordinates are integers), and all points are distinct.</p> 
+  <p>You may draw two straight lines (not necessarily distinct). Is it possible to do this in such a way that every point lies on at least one of these lines?</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line contains one integer <span class="tex-span"> <i>n</i></span> <span class="tex-span">(1 ≤ <i>n</i> ≤ 10<sup class="upper-index">5</sup>)</span> — the number of points you are given.</p> 
+  <p>Then <span class="tex-span"> <i>n</i></span> lines follow, each line containing two integers <span class="tex-span"> <i>x</i> <sub class="lower-index"> <i>i</i></sub></span> and <span class="tex-span"> <i>y</i> <sub class="lower-index"> <i>i</i></sub></span> <span class="tex-span">(|<i>x</i> <sub class="lower-index"> <i>i</i></sub>|, |<i>y</i> <sub class="lower-index"> <i>i</i></sub>| ≤ 10<sup class="upper-index">9</sup>)</span>— coordinates of <span class="tex-span"> <i>i</i></span>-th point. All <span class="tex-span"> <i>n</i></span> points are distinct.</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>If it is possible to draw two straight lines in such a way that each of given points belongs to at least one of these lines, print <span class="tex-font-style-tt">YES</span>. Otherwise, print <span class="tex-font-style-tt">NO</span>.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>5<br>0 0<br>0 1<br>1 1<br>1 -1<br>2 2<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>YES<br></pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>5<br>0 0<br>1 0<br>2 1<br>1 1<br>2 3<br></pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>NO<br></pre>
+   </div>
+  </div>
+ </div> 
+ <div class="note"> 
+  <div class="section-title">
+   Note
+  </div> 
+  <p>In the first example it is possible to draw two lines, the one containing the points <span class="tex-span">1</span>, <span class="tex-span">3</span> and <span class="tex-span">5</span>, and another one containing two remaining points.</p> 
+  <center> 
+   <img class="tex-graphics" src="https://espresso.codeforces.com/5871c8696a7656bb7877b55e87ce546f31341188.png" style="max-width: 100.0%;max-height: 100.0%;"> 
+  </center>
+ </div>
+</div>

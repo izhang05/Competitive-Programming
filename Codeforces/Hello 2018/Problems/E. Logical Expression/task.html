@@ -1,0 +1,81 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   E. Logical Expression
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>3 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are given a boolean function of three variables which is defined by its truth table. You need to find an expression of minimum length that equals to this function. The expression may consist of: </p>
+  <ul> 
+   <li> Operation <span class="tex-font-style-tt">AND</span> ('<span class="tex-font-style-tt">&amp;</span>', ASCII code 38) </li>
+   <li> Operation <span class="tex-font-style-tt">OR</span> ('<span class="tex-font-style-tt">|</span>', ASCII code 124) </li>
+   <li> Operation <span class="tex-font-style-tt">NOT</span> ('<span class="tex-font-style-tt">!</span>', ASCII code 33) </li>
+   <li> Variables <span class="tex-font-style-tt">x</span>, <span class="tex-font-style-tt">y</span> and <span class="tex-font-style-tt">z</span> (ASCII codes 120-122) </li>
+   <li> Parentheses ('<span class="tex-font-style-tt">(</span>', ASCII code 40, and '<span class="tex-font-style-tt">)</span>', ASCII code 41) </li>
+  </ul>
+  <p>If more than one expression of minimum length exists, you should find the lexicographically smallest one.</p>
+  <p>Operations have standard priority. <span class="tex-font-style-tt">NOT</span> has the highest priority, then <span class="tex-font-style-tt">AND</span> goes, and <span class="tex-font-style-tt">OR</span> has the lowest priority. The expression should satisfy the following grammar:</p>
+  <p>E ::= E '<span class="tex-font-style-tt">|</span>' T | T</p>
+  <p>T ::= T '<span class="tex-font-style-tt">&amp;</span>' F | F</p>
+  <p>F ::= '<span class="tex-font-style-tt">!</span>' F | '<span class="tex-font-style-tt">(</span>' E '<span class="tex-font-style-tt">)</span>' | '<span class="tex-font-style-tt">x</span>' | '<span class="tex-font-style-tt">y</span>' | '<span class="tex-font-style-tt">z</span>'</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains one integer <span class="tex-span"><i>n</i></span>&nbsp;— the number of functions in the input (<span class="tex-span">1 ≤ <i>n</i> ≤ 10 000</span>).</p>
+  <p>The following <span class="tex-span"><i>n</i></span> lines contain descriptions of functions, the <span class="tex-span"><i>i</i></span>-th of them contains a string of length <span class="tex-span">8</span> that consists of digits <span class="tex-font-style-tt">0</span> and <span class="tex-font-style-tt">1</span>&nbsp;— the truth table of the <span class="tex-span"><i>i</i></span>-th function. The digit on position <span class="tex-span"><i>j</i></span> (<span class="tex-span">0 ≤ <i>j</i> &lt; 8</span>) equals to the value of the function in case of <img align="middle" class="tex-formula" src="https://espresso.codeforces.com/e10c4ab266b6eae2e6a47fccf611068a835af9a0.png" style="max-width: 100.0%;max-height: 100.0%;">, <img align="middle" class="tex-formula" src="https://espresso.codeforces.com/00a620621ed1560fdb085cf78654227295e7b6b0.png" style="max-width: 100.0%;max-height: 100.0%;"> and <img align="middle" class="tex-formula" src="https://espresso.codeforces.com/9d48048e07bde006e80ac2bbcab2d8219b73c2aa.png" style="max-width: 100.0%;max-height: 100.0%;">.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>You should output <span class="tex-span"><i>n</i></span> lines, the <span class="tex-span"><i>i</i></span>-th line should contain the expression of minimum length which equals to the <span class="tex-span"><i>i</i></span>-th function. If there is more than one such expression, output the lexicographically smallest of them. Expressions should satisfy the given grammar and shouldn't contain white spaces.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4<br>00110011<br>00000111<br>11110000<br>00011111<br></pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>y<br>(y|z)&amp;x<br>!x<br>x|y&amp;z<br></pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>The truth table for the second function:</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/2b70451f45cd74ee2be475affd7c407d7ed6d5fd.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+ </div>
+</div>

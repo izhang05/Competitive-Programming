@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(D1__Prefix_Suffix_Palindrome__Easy_version_)
+
+add_executable(D1__Prefix_Suffix_Palindrome__Easy_version_ src/main.cpp)

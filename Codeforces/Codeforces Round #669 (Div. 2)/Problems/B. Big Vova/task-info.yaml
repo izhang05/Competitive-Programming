@@ -1,0 +1,50 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(B__Big_Vova)
+
+    add_executable(B__Big_Vova src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    7
+    2
+    2 5
+    4
+    1 8 2 3
+    3
+    3 8 9
+    5
+    64 25 75 100 50
+    1
+    42
+    6
+    96 128 88 80 52 7
+    5
+    2 4 8 16 17
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: "5 2 \n8 2 1 3 \n9 3 8 \n100 50 25 75 64 \n42 \n128 96 80 88 52 7 \n17 2 4\
+    \ 8 16"
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1407/problem/B?locale=en
+status: Unchecked

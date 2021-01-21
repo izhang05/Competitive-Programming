@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(E1__Three_Blocks_Palindrome__easy_version_)
+
+add_executable(E1__Three_Blocks_Palindrome__easy_version_ src/main.cpp)

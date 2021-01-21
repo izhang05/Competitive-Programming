@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.16)
+project(Project_Euler_C__)
+
+set(CMAKE_CXX_STANDARD 11)
+
+add_executable(Y_1 "Y 1. Multiples of 3 and 5.cpp")
+add_executable(Y_2 "Y 2. Even Fibonacci numbers.cpp")
+add_executable(Y_3 "Y 3. Largest prime factor.cpp")
+add_executable(Y_4 "Y 4. Largest palindrome product.cpp")
+add_executable(Y_5 "Y 5. Smallest multiple.cpp")
+add_executable(Y_6 "Y 6. Sum square difference.cpp")
+add_executable(Y_7 "Y 7. 10001st prime.cpp")
+add_executable(Y_8 "Y 8. Largest product in a series.cpp")
+add_executable(Y_9 "Y 9. Special Pythagorean triple.cpp")
+add_executable(Y_10 "Y 10. Summation of primes.cpp")
+add_executable(Y_81 "Y 81. Path sum - two ways.cpp")

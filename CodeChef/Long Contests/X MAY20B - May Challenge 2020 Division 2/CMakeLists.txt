@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.16)
+project(X_MAY20B___May_Challenge_2020_Division_2)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(COVID19 "Y 1. COVID19 - Coronavirus Spread/COVID19.cpp")
+add_executable(CORUS "Y 2. CORUS - Isolation Centers/CORUS.cpp")
+add_executable(TRPLSRT "X 3. TRPLSRT - Triple Sort/TRPLSRT.cpp")
+add_executable(CHANDF "X 4. CHANDF - Chef and Bitwise Product/CHANDF.cpp")
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    target_compile_definitions("CHANDF" PUBLIC DEBUG=1)
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    target_compile_definitions("CHANDF" PUBLIC DEBUG=0)
+endif()
+add_executable(thing thing.cpp)

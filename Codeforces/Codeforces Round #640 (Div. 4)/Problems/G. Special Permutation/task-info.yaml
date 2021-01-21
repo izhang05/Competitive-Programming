@@ -1,0 +1,42 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.16)
+
+    project(G__Special_Permutation)
+
+    add_executable(G__Special_Permutation src/main.cpp)
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    6
+    10
+    2
+    4
+    6
+    7
+    13
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: "9 6 10 8 4 7 3 1 5 2 \n-1\n3 1 4 2 \n5 3 6 2 4 1 \n5 1 3 6 2 4 7 \n13 9 7\
+    \ 11 8 4 1 3 5 2 6 10 12"
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1352/problem/G?locale=en
+status: Unchecked

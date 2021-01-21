@@ -1,0 +1,16 @@
+type: codeforces
+title: Educational Codeforces Round 26
+language: English
+summary: |-
+  A. Text Volume
+  B. Flag of Berland
+  C. Two Seals
+  D. Round Subset
+  E. Vasya's Function
+  F. Prefix Sums
+  G. Functions On The Segments
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

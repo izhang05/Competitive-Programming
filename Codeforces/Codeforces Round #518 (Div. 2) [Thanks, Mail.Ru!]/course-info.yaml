@@ -1,0 +1,15 @@
+type: codeforces
+title: 'Codeforces Round #518 (Div. 2) [Thanks, Mail.Ru!]'
+language: English
+summary: |-
+  A. Birthday
+  B. LCM
+  C. Colored Rooks
+  D. Array Without Local Maximums
+  E. Multihedgehog
+  F. Knights
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+mode: Study

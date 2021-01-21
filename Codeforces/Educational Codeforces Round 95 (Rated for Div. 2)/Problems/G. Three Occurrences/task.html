@@ -1,0 +1,108 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   G. Three Occurrences
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>5 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are given an array $a$ consisting of $n$ integers. We denote the subarray $a[l..r]$ as the array $[a_l, a_{l + 1}, \dots, a_r]$ ($1 \le l \le r \le n$).</p>
+  <p>A subarray is considered <span class="tex-font-style-it">good</span> if every integer that occurs in this subarray occurs there <span class="tex-font-style-bf">exactly thrice</span>. For example, the array $[1, 2, 2, 2, 1, 1, 2, 2, 2]$ has three good subarrays:</p>
+  <ul> 
+   <li> $a[1..6] = [1, 2, 2, 2, 1, 1]$; </li>
+   <li> $a[2..4] = [2, 2, 2]$; </li>
+   <li> $a[7..9] = [2, 2, 2]$. </li>
+  </ul>
+  <p>Calculate the number of good subarrays of the given array $a$.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains one integer $n$ ($1 \le n \le 5 \cdot 10^5$).</p>
+  <p>The second line contains $n$ integers $a_1$, $a_2$, ..., $a_n$ ($1 \le a_i \le n$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print one integer — the number of good subarrays of the array $a$.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+9
+1 2 2 2 1 1 2 2 2
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+3
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+10
+1 2 3 4 1 2 3 1 2 3
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+0
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>
+12
+1 2 3 4 3 4 2 1 3 4 2 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>
+1
+</pre>
+   </div>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,38 @@
+type: codeforces
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(E__Decryption)
+
+    add_executable(E__Decryption src/main.cpp)
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    3
+    6
+    4
+    30
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: "2 3 6 \n1\n2 4 \n0\n2 30 6 3 15 5 10 \n0"
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1419/problem/E?locale=en
+status: Unchecked

@@ -1,0 +1,88 @@
+<div class="problem-statement"> 
+ <div class="header"> 
+  <div class="title">
+   C. K Integers
+  </div> 
+  <div class="time-limit"> 
+   <div class="property-title">
+    time limit per test
+   </div>3 seconds
+  </div> 
+  <div class="memory-limit"> 
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div> 
+  <div class="input-file"> 
+   <div class="property-title">
+    input
+   </div>standard input
+  </div> 
+  <div class="output-file"> 
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div> 
+ <div> 
+  <p>You are given a permutation $p_1, p_2, \ldots, p_n$.</p> 
+  <p>In one move you can swap two adjacent values.</p> 
+  <p>You want to perform a minimum number of moves, such that in the end there will exist a subsegment $1,2,\ldots, k$, in other words in the end there should be an integer $i$, $1 \leq i \leq n-k+1$ such that $p_i = 1, p_{i+1} = 2, \ldots, p_{i+k-1}=k$.</p> 
+  <p>Let $f(k)$ be the minimum number of moves that you need to make a subsegment with values $1,2,\ldots,k$ appear in the permutation.</p> 
+  <p>You need to find $f(1), f(2), \ldots, f(n)$.</p>
+ </div> 
+ <div class="input-specification"> 
+  <div class="section-title">
+   Input
+  </div> 
+  <p>The first line of input contains one integer $n$ ($1 \leq n \leq 200\,000$): the number of elements in the permutation.</p> 
+  <p>The next line of input contains $n$ integers $p_1, p_2, \ldots, p_n$: given permutation ($1 \leq p_i \leq n$).</p>
+ </div> 
+ <div class="output-specification"> 
+  <div class="section-title">
+   Output
+  </div> 
+  <p>Print $n$ integers, the minimum number of moves that you need to make a subsegment with values $1,2,\ldots,k$ appear in the permutation, for $k=1, 2, \ldots, n$.</p>
+ </div> 
+ <div class="sample-tests"> 
+  <div class="section-title">
+   Examples
+  </div> 
+  <div class="sample-test"> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+5
+5 4 3 2 1
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0 1 3 6 10 
+</pre>
+   </div> 
+   <div class="input"> 
+    <div class="title">
+     Input
+    </div> 
+    <pre>
+3
+1 2 3
+</pre>
+   </div> 
+   <div class="output"> 
+    <div class="title">
+     Output
+    </div> 
+    <pre>
+0 0 0 
+</pre>
+   </div>
+  </div>
+ </div>
+</div>
