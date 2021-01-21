@@ -61,12 +61,12 @@ int main() {
             flip_row[i] = true;
         }
     }
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            cout << state(i, j);
-        }
-        cout << "\n";
-    }
+//    for (int i = 0; i < n; ++i) {
+//        for (int j = 0; j < n; ++j) {
+//            cout << state(i, j);
+//        }
+//        cout << "\n";
+//    }
     if (state(1, 1) && state(1, 2) && state(2, 1) && state(2, 2)) {
         cout << 1 << " " << 1 << "\n";
         return 0;
@@ -80,6 +80,18 @@ int main() {
             cout << i + 1 << " " << 1 << "\n";
             return 0;
         }
+    }
+    int count = 0;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (state(i, j)) {
+                ++count;
+            }
+        }
+    }
+    if (count > 1) {
+        cout << -1 << "\n";
+        return 0;
     }
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
