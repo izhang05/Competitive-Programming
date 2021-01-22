@@ -89,6 +89,7 @@ int main() {
         auto it = cur.lower_bound(a[i]);
         if (it != cur.end()) {
             if (intersect(a[i], *it)) {
+
             }
         }
     }
