@@ -4,7 +4,7 @@ project(USACO)
 set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wshadow -Wall -o -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g")
+#set(GCC_COVERAGE_COMPILE_FLAGS "-Wshadow -Wall -o -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g")
 #set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
@@ -50,7 +50,6 @@ add_executable(typo "Past Contests/2012 - 2013/Bronze/Y 1. 2012 November Bronze/
 add_executable(lazy "Past Contests/2013 - 2014/Bronze/X 5. 2014 March Bronze/Y 2. The Lazy Cow/lazy.cpp")
 add_executable(cowfind "Past Contests/2012 - 2013/Bronze/Y 1. 2012 November Bronze/Y 1. Find the Cow!/cowfind.cpp")
 add_executable(hshoe "Past Contests/2012 - 2013/Bronze/Y 1. 2012 November Bronze/Y 3. Horseshoes/hshoe.cpp")
-add_executable(reduce "Past Contests/2015 - 2016/Silver/Y 4. 2016 US Open Silver/Y 1. Field Reduction/reduce.cpp")
 add_executable(cbarn "Past Contests/2015 - 2016/Silver/Y 3. 2016 February Silver/Y 1. Circular Barn/cbarn.cpp")
 add_executable(lifeguards "Past Contests/2017 - 2018/Silver/X 2. 2018 January Silver/Y 1. Lifeguards/lifeguards.cpp")
 add_executable(mountains "Past Contests/2018 - 2019/Silver/Y 2. 2019 January Silver/Y 3. Mountain View/mountains.cpp")
@@ -344,3 +343,5 @@ add_executable(meetings "Past Contests/2019 - 2020/Silver/Y 1. 2019 December Sil
 set_target_properties(meetings PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2019 - 2020/Silver/Y 1. 2019 December Silver/Y 2. Meetings")
 add_executable(where "Past Contests/2016 - 2017/Silver/Y 4. 2017 US Open Silver/Y 3. Where's Bessie?/where.cpp")
 set_target_properties(where PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2016 - 2017/Silver/Y 4. 2017 US Open Silver/Y 3. Where's Bessie?/")
+add_executable(reduce "Past Contests/2015 - 2016/Silver/Y 4. 2016 US Open Silver/Y 1. Field Reduction/reduce.cpp")
+set_target_properties(reduce PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2015 - 2016/Silver/Y 4. 2016 US Open Silver/Y 1. Field Reduction")
