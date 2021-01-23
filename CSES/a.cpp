@@ -2,48 +2,76 @@
 
 using namespace std;
 
+mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
+const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T>
+using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template<class T>
+using indexed_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template<class T>
+void print(T a) {
+    for (auto i : a) {
+        cout << i << " ";
+    }
+    cout << "\n";
+}
+
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+#ifdef DEBUG
+    //freopen("solution.out", "w", stdout);
     freopen("1.in", "r", stdin);
+#endif
 }
-const int maxn = 1e5 + 1;
-vector<int> adj[maxn];
-double prob[maxn];
-int dist[maxn];
-double sol = 0;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
-void dfs(int n, int d, double p) {
-    dist[n] = d;
-    prob[n] = p;
-    int num_adj = adj[n].size();
-    if (n != 0) {
-        --num_adj;
-    }
-    if (adj[n].size() == 1 && n != 0) {
-        sol += p * d;
-    }
-    for (int i : adj[n]) {
-        if (dist[i] == -1) {
-            dfs(i, d + 1, p / num_adj);
-        }
-    }
-}
+
 
 int main() {
     setIO();
-    int n;
-    cin >> n;
-    int a, b;
-    for (int i = 0; i < n - 1; ++i) {
-        cin >> a >> b;
-        --a, --b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
-        dist[i] = -1;
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> a[i];
+        }
+        int moves = 0;
+        pair<int, int> eaten;
+        int i = 0, j = n - 1, last = 0;
+        bool turn = true;
+        while (i <= j) {
+            ++moves;
+            int cur = 0;
+            if (turn) {
+                while (i <= j) {
+                    cur += a[i++];
+                    if (cur > last) {
+                        break;
+                    }
+                }
+                last = cur;
+                eaten.first += cur;
+            } else {
+                while (j >= i) {
+                    cur += a[j--];
+                    if (cur > last) {
+                        break;
+                    }
+                }
+                last = cur;
+                eaten.second += cur;
+            }
+            turn ^= 1;
+        }
+        cout << moves << " " << eaten.first << " " << eaten.second << "\n";
     }
-    dist[n - 1] = -1;
-    dfs(0, 0, 1);
-    cout << setprecision(18) << sol << "\n";
     return 0;
 }
