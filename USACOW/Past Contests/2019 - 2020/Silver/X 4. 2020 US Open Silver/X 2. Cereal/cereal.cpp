@@ -25,6 +25,10 @@ void reassign(int cow, int cereal) {
         return;
     }
     int next_cow = cur[cereal];
+    if (next_cow < cow) {
+        --sol;
+        return;
+    }
     if (a[next_cow].second == cereal) {
         cur[cereal] = cow;
         --sol;
@@ -45,7 +49,7 @@ int main() {
     for (int i = 0; i < n; ++i) {
         cin >> a[i].first >> a[i].second;
     }
-    for (int i = 0; i < m + 1; ++i) {
+    for (int i = 0; i < m + 2; ++i) {
         cur[i] = -1;
     }
     vector<int> res(n);
