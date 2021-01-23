@@ -15,31 +15,47 @@ void setIO() {
     freopen("cereal.out", "w", stdout);
 }
 const int maxn = 1e5 + 5;
-int state[maxn], cur = 0, taken[maxn];
+int n, m;
+vector<pair<int, int>> a;
+int cur[maxn], sol;
 
-void solve(int x) {
-
+void reassign(int cow, int cereal) {
+    if (cur[cereal] == -1) {
+        cur[cereal] = cow;
+        return;
+    }
+    int next_cow = cur[cereal];
+    if (a[next_cow].second == cereal) {
+        cur[cereal] = cow;
+        --sol;
+        return;
+    }
+    if (a[next_cow].first == cereal) {
+        cur[cereal] = cow;
+        reassign(next_cow, a[next_cow].second);
+        return;
+    }
+    assert(false);
 }
-
 
 int main() {
     setIO();
-    int n, m;
     cin >> n >> m;
-    vector<pair<int, int>> fav(n);
+    a.resize(n);
     for (int i = 0; i < n; ++i) {
-        cin >> fav[i].first >> fav[i].second;
-        --fav[i].first, --fav[i].second;
-        taken[i] = -1;
-        state[i] = -1;
+        cin >> a[i].first >> a[i].second;
     }
-    vector<int> sol(n);
+    for (int i = 0; i < m + 1; ++i) {
+        cur[i] = -1;
+    }
+    vector<int> res(n);
     for (int i = n - 1; i >= 0; --i) {
-        solve(i);
-        sol[i] = cur;
+        ++sol;
+        reassign(i, a[i].first);
+        res[i] = sol;
     }
     for (int i = 0; i < n; ++i) {
-        cout << sol[i] << "\n";
+        cout << res[i] << "\n";
     }
     return 0;
 }
