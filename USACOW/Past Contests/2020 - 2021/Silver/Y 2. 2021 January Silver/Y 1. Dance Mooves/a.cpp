@@ -47,17 +47,11 @@ int main() {
     for (int i = 0; i < n; ++i) {
         int cow = a[i];
         if (visited[i]) {
-            //            for (int j : sol[rep[i]]) {
-            //                sol[cow].insert(j);
-            //            }
             continue;
         }
         int loc = i;
         while (loc != cow) {
             if (visited[loc]) {
-                //                for (int j : sol[rep[loc]]) {
-                //                    sol[cow].insert(j);
-                //                }
                 break;
             }
             visited[loc] = true;
@@ -72,26 +66,11 @@ int main() {
             rep[loc] = loc;
         }
     }
-    //    if (n == 5) {
-    //        cout << "4\n"
-    //                "4\n"
-    //                "3\n"
-    //                "4\n"
-    //                "1"
-    //             << "\n";
-    //        return 0;
-    //    }
     for (int i = 0; i < n; ++i) {
         if (!visited[i] || rep[i] == i) {
             cout << sol[i].size() << "\n";
         } else {
-            //            gp_hash_table<int, null_type> cur = sol[rep[i]];
-            //            for (int j : sol[i]) {
-            //                cur.insert(j);
-            //            }
-            //            cout << cur.size() << "\n";
             cout << sol[rep[i]].size() << "\n";
-            //            cout << sol[i].size() + sol[rep[i]].size() << "\n";
         }
     }
     return 0;
