@@ -10,7 +10,7 @@ void setIO() {
 #endif
 }
 
-const int maxn = 2505;
+const int maxn = 205;
 
 int pre[maxn][maxn]; // 1-indexed 2d prefix sum
 
@@ -22,40 +22,25 @@ int main() {
     setIO();
     int n;
     cin >> n;
-    vector<pair<int, int>> points(n);
+    vector<pair<int, int>> a(n);
     for (int i = 0; i < n; ++i) {
-        cin >> points[i].first >> points[i].second;
+        cin >> a[i].first >> a[i].second;
     }
-
-//    sort(points.begin(), points.end(), [](pair<int, int> left, pair<int, int> right) {
-//        return left.second == right.second ? left.first < right.first : left.second < right.second;
-//    });
-//    for (int i = 0; i < n; ++i) {
-//        points[i].second = i;
-//    }
-//
-//    sort(points.begin(), points.end());
-//    for (int i = 0; i < n; ++i) {
-//        points[i].first = i;
-//    }
-
+    sort(a.begin(), a.end(), [](pair<int, int> left, pair<int, int> right) {
+        return left.second == right.second ? left.first < right.first : left.second < right.second;
+    });
     for (int i = 0; i < n; ++i) {
-        pre[points[i].first + 1][points[i].second + 1] = 1;
+        a[i].second = i;
     }
-
+    sort(a.begin(), a.end());
+    for (int i = 0; i < n; ++i) {
+        a[i].first = i;
+        ++pre[a[i].first + 1][a[i].second + 1];
+    }
     for (int i = 1; i < n + 1; ++i) {
         for (int j = 1; j < n + 1; ++j) {
             pre[i][j] += pre[i - 1][j] + pre[i][j - 1] - pre[i - 1][j - 1];
         }
     }
-    long long sol = 0;
-    for (int l = 0; l < n; ++l) {
-        for (int r = l + 1; r < n; ++r) {
-            int b = area(points[l].first, points[r].first, min(points[l].second, points[r].second), 0);
-            int t = area(points[l].first, points[r].first, n - 1, max(points[l].second, points[r].second));
-            sol += b * t;
-        }
-    }
-    cout << sol + n + 1 << "\n";
     return 0;
 }

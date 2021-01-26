@@ -30,48 +30,12 @@ void setIO() {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
 
-
 int main() {
     setIO();
 
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> a[i];
-        }
-        int moves = 0;
-        pair<int, int> eaten;
-        int i = 0, j = n - 1, last = 0;
-        bool turn = true;
-        while (i <= j) {
-            ++moves;
-            int cur = 0;
-            if (turn) {
-                while (i <= j) {
-                    cur += a[i++];
-                    if (cur > last) {
-                        break;
-                    }
-                }
-                last = cur;
-                eaten.first += cur;
-            } else {
-                while (j >= i) {
-                    cur += a[j--];
-                    if (cur > last) {
-                        break;
-                    }
-                }
-                last = cur;
-                eaten.second += cur;
-            }
-            turn ^= 1;
-        }
-        cout << moves << " " << eaten.first << " " << eaten.second << "\n";
     }
     return 0;
 }
