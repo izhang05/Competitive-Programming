@@ -28,14 +28,35 @@ void setIO() {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+int sol = 0;
 
+pair<pair<string, string>, pair<string, string>> find_lcs(pair<string, string> s) {
+    pair<int, string> best;
+    string a = s.first, b = s.second;
+    int n = a.size(), m = b.size();
+    for (int i = 0; i < min(n, m); ++i) {
+        string cur;
+        for (int j = i; j < min(n, m); ++j) {
+            if (a[j] == b[j]) {
+                cur.push_back(a[j]);
+            } else {
+                best = max(best, {j - i, cur});
+                break;
+            }
+        }
+    }
+    sol += best.first;
+}
 
 int main() {
     setIO();
+    pair<string, string> s;
+    cin >> s.first >> s.second;
+    while (true) {
+        pair<pair<string, string>, pair<string, string>> next = find_lcs(s);
 
-    int t;
-    cin >> t;
-    while (t--) {
+        break;
     }
+    cout << sol << "\n";
     return 0;
 }

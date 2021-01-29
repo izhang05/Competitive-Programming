@@ -27,6 +27,7 @@ int main() {
     for (int i = 0; i < n; ++i) {
         while (!seen.empty() && seen.top() > a[i]) {
             seen.pop();
+
         }
         if (!seen.empty() && seen.top() == a[i]) {
         } else {
