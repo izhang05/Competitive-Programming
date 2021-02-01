@@ -13,6 +13,6 @@ void setIO() {
 
 int main() {
     setIO();
+
     return 0;
 }
-
