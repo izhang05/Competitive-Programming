@@ -7,6 +7,7 @@ void setIO() {
     cin.tie(nullptr);
 #ifdef DEBUG
     freopen("1.in", "r", stdin);
+    freopen("1.out", "w", stdout);
 #endif
 }
 
