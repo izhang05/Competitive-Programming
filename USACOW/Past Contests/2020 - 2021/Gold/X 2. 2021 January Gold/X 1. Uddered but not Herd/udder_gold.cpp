@@ -5,7 +5,7 @@
 //void setIO() {
 //    ios_base::sync_with_stdio(false);
 //    cin.tie(nullptr);
-//#ifdef DEBUG
+//#ifdef LOCAL
 //    freopen("1.in", "r", stdin);
 //#endif
 //}
@@ -49,7 +49,7 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-#ifdef DEBUG
+#ifdef LOCAL
     freopen("1.in", "r", stdin);
 #endif
 }

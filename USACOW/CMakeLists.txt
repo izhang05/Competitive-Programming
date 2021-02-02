@@ -3,10 +3,10 @@ project(USACO)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
-#set(GCC_COVERAGE_COMPILE_FLAGS "-Wshadow -Wall -o -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g")
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -pedantic -std=c++11 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-protector")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 add_executable(test "Training/Chapter 1/Y Section 1.2/Y 1. Test/test.cpp")
 add_executable(ride "Training/Chapter 1/Y Section 1.2/Y 2. Ride/ride.cpp")
@@ -367,5 +367,5 @@ add_executable(udder_gold "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold
 set_target_properties(udder_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/X 1. Uddered but not Herd")
 add_executable(telephone "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 2. Telephone/telephone.cpp")
 set_target_properties(telephone PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 2. Telephone")
-add_executable(mooves_gold "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/X 3. Dance Mooves/mooves_gold.cpp")
-set_target_properties(mooves_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/X 3. Dance Mooves")
+add_executable(mooves_gold "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 3. Dance Mooves/mooves_gold.cpp")
+set_target_properties(mooves_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 3. Dance Mooves")

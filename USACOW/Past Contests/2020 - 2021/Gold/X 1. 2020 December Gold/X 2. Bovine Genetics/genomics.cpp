@@ -170,7 +170,7 @@ void ps(const H &h, const T &...t) {
     ps(t...);
 }
 
-// DEBUG
+// LOCAL
 void DBG() { cerr << "]" << endl; }
 template<class H, class... T>
 void DBG(H h, T... t) {

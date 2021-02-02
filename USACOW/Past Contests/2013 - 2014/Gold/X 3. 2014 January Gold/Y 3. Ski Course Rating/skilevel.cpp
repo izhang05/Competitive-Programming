@@ -12,7 +12,7 @@ void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     freopen("skilevel.in", "r", stdin);
-#ifndef DEBUG
+#ifndef LOCAL
     freopen("skilevel.out", "w", stdout);
 #endif
 }
