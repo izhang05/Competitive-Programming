@@ -11,12 +11,13 @@ void setIO() {
 #endif
 }
 template<class T>
-void print(T a, string sep = " ") {
+void print(T a, string sep = " ", string end = "\n") {
     for (auto i : a) {
         cout << i << sep;
     }
+    cout << end;
 }
-
+//#define DEBUG
 
 const int maxn = 1e5 + 5;
 set<pair<int, int>> s[maxn];
@@ -25,20 +26,21 @@ int adj[maxn];
 bool visited[maxn];
 int main() {
     setIO();
+
     int n, k;
     long long m;
     cin >> n >> k >> m;
     vector<pair<int, int>> swaps(k);
     for (int i = 0; i < k; ++i) {
         cin >> swaps[i].first >> swaps[i].second;
-        --swaps[i].first, --swaps[i].second;
+        --swaps[i].second, --swaps[i].first;
     }
     vector<int> cow(n);
     for (int i = 0; i < n; ++i) {
         cow[i] = i;
         s[i].insert({0, i});
     }
-#ifdef LOCAL
+#ifdef DEBUG
     cout << "Cow: "
          << "\n";
     print(cow);
@@ -47,11 +49,11 @@ int main() {
         s[cow[swaps[i].first]].insert({i + 1, swaps[i].second});
         s[cow[swaps[i].second]].insert({i + 1, swaps[i].first});
         swap(cow[swaps[i].first], cow[swaps[i].second]);
-#ifdef LOCAL
+#ifdef DEBUG
         print(cow);
 #endif
     }
-#ifdef LOCAL
+#ifdef DEBUG
     cout << "\ns:\n";
     for (int i = 0; i < n; ++i) {
         cout << i << ":\n";

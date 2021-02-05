@@ -60,33 +60,6 @@ int main() {
     setIO();
     string s;
     cin >> s;
-    int n = s.size();
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        a[i] = s[i] - 'a';
-        order[a[i]] = -1;
-    }
-    int sol = 1, pre = -1;
-    for (int i = 0; i < n; ++i) {
-        int letter = a[i];
-        if (order[letter] == -1) {
-            for (int &j : order) {
-                if (j >= pre + 1) {
-                    ++j;
-                }
-            }
-            order[letter] = ++pre;
-        } else {
-            if (order[letter] <= pre) {
-                ++sol;
-            }
-        }
-        pre = order[letter];
-        //        cout << sol << " " << (char) (letter + 'a') << " " << order[letter] << "\n";
-    }
-    //    for (int i = 0; i < 5; ++i) {
-    //        cout << order[i] << "\n";
-    //    }
-    cout << sol << "\n";
+
     return 0;
 }
