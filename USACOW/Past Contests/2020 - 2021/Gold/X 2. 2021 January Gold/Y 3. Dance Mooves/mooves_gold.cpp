@@ -33,7 +33,7 @@ int main() {
     vector<pair<int, int>> swaps(k);
     for (int i = 0; i < k; ++i) {
         cin >> swaps[i].first >> swaps[i].second;
-        --swaps[i].second, --swaps[i].first;
+        --swaps[i].first, --swaps[i].second;
     }
     vector<int> cow(n);
     for (int i = 0; i < n; ++i) {
