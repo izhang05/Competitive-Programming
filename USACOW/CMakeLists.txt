@@ -137,7 +137,6 @@ add_executable(word "Past Contests/2019 - 2020/Bronze/Y 2. 2020 January Bronze/Y
 add_executable(photo_bronze "Past Contests/2019 - 2020/Bronze/Y 2. 2020 January Bronze/Y 2. Photoshoot/photo_bronze.cpp")
 add_executable(tttt "Past Contests/2017 - 2018/Bronze/X 4. US Open Bronze/Y 1. Team Tic Tac Toe/tttt.cpp")
 add_executable(pump "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 1. Milk Pumping/pump.cpp")
-add_executable(cbarn2 "Past Contests/2015 - 2016/Gold/X 3. 2016 February Gold/X 2. Circular Barn Revisited/cbarn2.cpp")
 add_executable(auto_silver "Past Contests/2013 - 2014/Silver/X 4. 2014 February Silver/X 1. Auto-Complete/auto_silver.cpp")
 add_executable(milkvisits_gold "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/X 2. Milk Visits/milkvisits_gold.cpp")
 add_executable(paintbarn_gold "Past Contests/2018 - 2019/Gold/X 3. 2019 February Gold/X 3. Painting the Barn/paintbarn_gold.cpp")
@@ -369,3 +368,5 @@ add_executable(telephone "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/
 set_target_properties(telephone PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 2. Telephone")
 add_executable(mooves_gold "Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 3. Dance Mooves/mooves_gold.cpp")
 set_target_properties(mooves_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 2. 2021 January Gold/Y 3. Dance Mooves")
+add_executable(cbarn2 "Past Contests/2015 - 2016/Gold/X 3. 2016 February Gold/Y 2. Circular Barn Revisited/cbarn2.cpp")
+set_target_properties(cbarn2 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2015 - 2016/Gold/X 3. 2016 February Gold/Y 2. Circular Barn Revisited")

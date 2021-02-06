@@ -16,6 +16,8 @@ void setIO() {
 }
 //#define DEBUG
 
+
+
 const int maxn = 5e3 + 5, maxk = 5e3 + 5, mod = 1e9 + 7;
 long long dp[maxk], endings[maxn];
 
