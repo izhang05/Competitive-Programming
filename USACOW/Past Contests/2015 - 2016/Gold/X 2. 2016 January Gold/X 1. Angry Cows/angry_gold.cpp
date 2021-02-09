@@ -14,11 +14,14 @@ void setIO() {
     freopen("angry.in", "r", stdin);
     freopen("angry.out", "w", stdout);
 }
-
+//#define DEBUG
+const int maxn = 5e4 + 5;
+int l[maxn], r[maxn];
 
 int main() {
     setIO();
     int n;
+    int sol = 1e9;
     cin >> n;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
@@ -26,22 +29,36 @@ int main() {
         a[i] *= 2;
     }
     sort(a.begin(), a.end());
-    vector<int> left_dist(n), right_dist(n);
+    a.resize(unique(a.begin(), a.end()) - a.begin());
+
+#ifdef DEBUG
+    for (int i = 0; i < n; ++i) {
+        cout << a[i] << " ";
+    }
+    cout << "\n\n";
+#endif
     for (int i = 1; i < n; ++i) {
-        left_dist[i] = max(a[i] - a[i - 1], left_dist[i - 1] + 1);
+        l[i] = max(l[i - 1] + 2, a[i] - a[i - 1]);
     }
     for (int i = n - 2; i >= 0; --i) {
-        right_dist[i] = max(a[i + 1] - a[i], right_dist[i + 1] + 1);
+        r[i] = max(r[i + 1] + 2, a[i + 1] - a[i]);
     }
-    int sol = 1e9;
+#ifdef DEBUG
+    for (int i = 0; i < n; ++i) {
+        cout << l[i] << " " << r[i] << "\n";
+    }
+    cout << "\n";
+#endif
     int i = 0, j = n - 1;
     while (i < j) {
-        min(sol, max((a[j] - a[i]) / 2, 2 + max(left_dist[i], right_dist[j])));
-        if (left_dist[i + 1] <= right_dist[j - 1]) {
+        sol = min(sol, max((a[j] - a[i]) / 2, 2 + max(l[i], r[j])));
+        if (l[i + 1] <= r[j - 1]) {
             ++i;
         } else {
             --j;
         }
+    }
+    if (a.empty()) {
     }
     cout << fixed << setprecision(1) << double(sol) / 2 << "\n";
     return 0;
