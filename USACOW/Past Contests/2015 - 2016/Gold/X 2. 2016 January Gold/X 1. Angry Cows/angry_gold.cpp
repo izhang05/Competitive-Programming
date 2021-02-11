@@ -20,6 +20,9 @@ int l[maxn], r[maxn];
 
 int main() {
     setIO();
+#ifdef LOCAL
+    auto start_time = std::chrono::high_resolution_clock::now();
+#endif
     int n;
     int sol = 1e9;
     cin >> n;
@@ -61,5 +64,10 @@ int main() {
     if (a.empty()) {
     }
     cout << fixed << setprecision(1) << double(sol) / 2 << "\n";
+#ifdef LOCAL
+    auto end_time = std::chrono::high_resolution_clock::now();
+    cout << setprecision(18) << fixed;
+    cout << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() << " seconds" << endl;
+#endif
     return 0;
 }

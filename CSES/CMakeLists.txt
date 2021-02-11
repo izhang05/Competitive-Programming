@@ -39,7 +39,6 @@ add_executable(Maximum_Subarray_Sum "X 2. Sorting and Searching/Y 8. Maximum Sub
 add_executable(Sum_of_Two_Values "X 2. Sorting and Searching/Y 7. Sum of Two Values.cpp")
 add_executable(Range_Sum_Queries_I "X 5. Range Queries/Y 95. Range Sum Queries I.cpp")
 add_executable(Range_Minimum_Queries_I "X 5. Range Queries/Y 96. Range Minimum Queries I.cpp")
-add_executable(Range_Sum_Queries_II "X 5. Range Queries/Y 97. Range Sum Queries II.cpp")
 add_executable(Range_Minimum_Queries_II "X 5. Range Queries/Y 98. Range Minimum Queries II.cpp")
 add_executable(Range_Xor_Queries "X 5. Range Queries/Y 99. Range Xor Queries.cpp")
 add_executable(Range_Update_Queries "X 5. Range Queries/Y 100. Range Update Queries.cpp")
@@ -131,3 +130,5 @@ add_executable(Line_Segment_Intersection "X 9. Geometry/Y 2. Line Segment Inters
 set_target_properties(Line_Segment_Intersection PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 9. Geometry")
 add_executable(a a.cpp)
 set_target_properties(a PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+add_executable(Dynamic_Range_Sum_Queries "X 5. Range Queries/Y 97. Dynamic Range Sum Queries.cpp")
+set_target_properties(Dynamic_Range_Sum_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 5. Range Queries/")
