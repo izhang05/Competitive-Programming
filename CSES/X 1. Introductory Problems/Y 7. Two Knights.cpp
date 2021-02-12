@@ -22,7 +22,7 @@ void print(T a) {
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-#ifdef DEBUG
+#ifdef LOCAL
     //freopen("solution.out", "w", stdout);
     freopen("X 7.in", "r", stdin);
 #endif

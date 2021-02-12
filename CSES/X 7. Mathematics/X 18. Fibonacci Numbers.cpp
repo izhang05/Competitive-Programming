@@ -22,7 +22,7 @@ void print(T a) {
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-#ifdef DEBUG
+#ifdef LOCAL
     //freopen("solution.out", "w", stdout);
     freopen("X 18.in", "r", stdin);
 #endif
@@ -36,7 +36,7 @@ int main() {
     cin >> n;
     double s5 = sqrt(5);
     double sol = ((pow((1 + s5) / 2, n) - pow((1 - s5) / 2, n)) / s5) % mod;
-#ifdef DEBUG
+#ifdef LOCAL
     cout << sol << "\n";
 #endif
     cout << (long long) sol << "\n";

@@ -1,0 +1,16 @@
+type: codeforces
+title: 'Codeforces Round #701 (Div. 2)'
+language: English
+summary: |-
+  A. Add and Divide
+  B. Replace and Keep Sorted
+  C. Floor and Mod
+  D. Multiples and Power Differences
+  E. Move and Swap
+  F. Copy or Prefix Sum
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1613148600.000000000
+mode: Study

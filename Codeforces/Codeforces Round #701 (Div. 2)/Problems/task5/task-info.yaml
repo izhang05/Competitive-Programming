@@ -1,0 +1,61 @@
+type: codeforces
+custom_name: E. Move and Swap
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task5)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4
+    14
+    1 1 1 2 3 4 4 5 5 6 7 8 8
+    2 3 7 7 6 9 5 9 7 3 6 6 5
+    6
+    1 2 2 3 4
+    32 78 69 5 41
+    15
+    1 15 1 10 4 9 11 2 4 1 8 6 10 11
+    62 13 12 43 39 65 42 86 25 38 19 19 43 62
+    15
+    11 2 7 6 9 8 10 1 1 1 5 3 15 2
+    50 19 30 35 9 45 13 24 8 44 16 26 10 40
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    14
+    45
+    163
+    123
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1485/problem/E?locale=en
+status: Unchecked
