@@ -68,6 +68,7 @@ using indexed_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_ord
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(cin.failbit);
 #ifdef LOCAL
     freopen("2.in", "r", stdin);
     freopen("2.out", "w", stdout);

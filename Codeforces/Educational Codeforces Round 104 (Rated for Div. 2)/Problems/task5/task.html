@@ -1,0 +1,110 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   E. Cheap Dinner
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>4 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Ivan wants to have a good dinner. A good dinner should consist of a first course, a second course, a drink, and a dessert.</p>
+  <p>There are $n_1$ different types of first courses Ivan can buy (the $i$-th of them costs $a_i$ coins), $n_2$ different types of second courses (the $i$-th of them costs $b_i$ coins), $n_3$ different types of drinks (the $i$-th of them costs $c_i$ coins) and $n_4$ different types of desserts (the $i$-th of them costs $d_i$ coins).</p>
+  <p>Some dishes don't go well with each other. There are $m_1$ pairs of first courses and second courses that don't go well with each other, $m_2$ pairs of second courses and drinks, and $m_3$ pairs of drinks and desserts that don't go well with each other.</p>
+  <p>Ivan wants to buy exactly one first course, one second course, one drink, and one dessert so that they go well with each other, and the total cost of the dinner is the minimum possible. Help him to find the cheapest dinner option!</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains four integers $n_1$, $n_2$, $n_3$ and $n_4$ ($1 \le n_i \le 150000$) — the number of types of first courses, second courses, drinks and desserts, respectively.</p>
+  <p>Then four lines follow. The first line contains $n_1$ integers $a_1, a_2, \dots, a_{n_1}$ ($1 \le a_i \le 10^8$), where $a_i$ is the cost of the $i$-th type of first course. Three next lines denote the costs of second courses, drinks, and desserts in the same way ($1 \le b_i, c_i, d_i \le 10^8$).</p>
+  <p>The next line contains one integer $m_1$ ($0 \le m_1 \le 200000$)&nbsp;— the number of pairs of first and second courses that don't go well with each other. Each of the next $m_1$ lines contains two integers $x_i$ and $y_i$ ($1 \le x_i \le n_1$; $1 \le y_i \le n_2$) denoting that the first course number $x_i$ doesn't go well with the second course number $y_i$. All these pairs are different.</p>
+  <p>The block of pairs of second dishes and drinks that don't go well with each other is given in the same format. The same for pairs of drinks and desserts that don't go well with each other ($0 \le m_2, m_3 \le 200000$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>If it's impossible to choose a first course, a second course, a drink, and a dessert so that they go well with each other, print $-1$. Otherwise, print one integer&nbsp;— the minimum total cost of the dinner.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4 3 2 1
+1 2 3 4
+5 6 7
+8 9
+10
+2
+1 2
+1 1
+2
+3 1
+3 2
+1
+1 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>26
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>1 1 1 1
+1
+1
+1
+1
+1
+1 1
+0
+0
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>-1
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>The best option in the first example is to take the first course $2$, the second course $1$, the drink $2$ and the dessert $1$.</p>
+  <p>In the second example, the only pair of the first course and the second course is bad, so it's impossible to have dinner.</p>
+ </div>
+</div>

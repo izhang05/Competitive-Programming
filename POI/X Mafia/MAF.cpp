@@ -22,15 +22,15 @@ void print(T a, string sep = " ", string end = "\n") {
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(cin.failbit);
 #ifdef LOCAL
-    freopen("SZP.in", "r", stdin);
-    freopen("SZP.out", "w", stdout);
+    freopen("MAF.in", "r", stdin);
+    freopen("MAF.out", "w", stdout);
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e6 + 5;
 int out[maxn], deg[maxn];
 vector<int> in[maxn];
-bitset<maxn> used, visited;
 
 int main() {
 #ifdef LOCAL
@@ -39,35 +39,14 @@ int main() {
     setIO();
     int n;
     cin >> n;
-    for (int i = 0; i < n; ++i) {
-        cin >> out[i];
-        --out[i];
-        in[out[i]].push_back(i);
+    int a;
+    for (int i = 1; i < n + 1; ++i) {
+        cin >> a;
+        out[i] = a;
+        in[a].push_back(i);
     }
-    queue<int> nums;
-    for (int i = 0; i < n; ++i) {
-        deg[i] = in[i].size();
-        if (deg[i] <= 1) {
-            nums.push(i);
-        }
-    }
-    int sol = 0;
-    while (!nums.empty()) {
-        int cur = nums.front(), p = out[cur];
-#ifdef DEBUG
-        cout << cur << endl;
-#endif
-        nums.pop();
-        if (!used[cur] && !used[p]) {
-            ++sol;
-            used[cur] = used[p] = true;
-        }
-        visited[cur] = true;
-        if (--deg[p] <= 1 && !visited[p]) {
-            nums.push(p);
-        }
-    }
-    cout << sol << "\n";
+
+
 #ifdef LOCAL
     auto end_time = std::chrono::high_resolution_clock::now();
     cout << setprecision(6) << fixed;
