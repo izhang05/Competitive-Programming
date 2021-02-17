@@ -103,7 +103,6 @@ add_executable(Hamiltonian_Flights "X 4. Graph Algorithms/Y 31. Hamiltonian Flig
 add_executable(Maximum_Subarray_Sum_II "X 2. Sorting and Searching/Y 35. Maximum Subarray Sum II.cpp")
 add_executable(Sliding_Cost "X 2. Sorting and Searching/X 33. Sliding Cost.cpp")
 add_executable(Path_Queries "X 6. Tree Algorithms/Y 11. Path Queries.cpp")
-add_executable(Increasing_Subsequence "X 3. Dynamic Programming/X 15. Increasing Subsequence.cpp")
 add_executable(Gray_Code "X 1. Introductory Problems/X 13. Gray Code.cpp")
 set_target_properties(Gray_Code PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 1. Introductory Problems")
 add_executable(Monsters "X 4. Graph Algorithms/Y 7. Monsters.cpp")
@@ -136,3 +135,5 @@ add_executable(Company_Queries_II "X 6. Tree Algorithms/X 7. Company Queries II.
 set_target_properties(Company_Queries_II PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
 add_executable(Tree_Matching "X 6. Tree Algorithms/Y 2. Tree Matching.cpp")
 set_target_properties(Tree_Matching PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
+add_executable(Increasing_Subsequence "X 3. Dynamic Programming/Y 15. Increasing Subsequence.cpp")
+set_target_properties(Increasing_Subsequence PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 3. Dynamic Programming/")

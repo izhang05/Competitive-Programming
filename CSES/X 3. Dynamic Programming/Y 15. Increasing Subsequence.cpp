@@ -23,30 +23,43 @@ void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 #ifdef LOCAL
-    //freopen("solution.out", "w", stdout);
-    freopen("1.in", "r", stdin);
+    freopen("15.out", "w", stdout);
+    freopen("15.in", "r", stdin);
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
-int dp[maxn];
 
 
 int main() {
     setIO();
     int n;
     cin >> n;
-    memset(dp, 0x3f, sizeof(dp));
+    vector<int> dp(n + 1);
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
-    int sol = 0;
+    for (int i = 0; i < n + 1; ++i) {
+        dp[i] = inf;
+    }
+    dp[0] = -inf;
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < i; ++j) {
-            if (a[i] > a[j]) {
-                dp[i] = min(dp[i], dp[j] + 1);
-            }
+        auto it = lower_bound(dp.begin(), dp.end(), a[i]);
+        if (it != dp.end()) {
+            dp[it - dp.begin()] = a[i];
+        }
+        //        for (int len = 1; len < n + 1; ++len) {
+        //            if (dp[len - 1] < a[i] && a[i] < dp[len]) {
+        //                dp[len] = a[i];
+        //            }
+        //        }
+    }
+    int sol = 0;
+    for (int i = 0; i < n + 1; ++i) {
+        if (dp[i] != inf) {
+            sol = i;
         }
     }
+    cout << sol << "\n";
     return 0;
 }
