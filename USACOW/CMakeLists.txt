@@ -373,5 +373,5 @@ add_executable(hopscotch_gold "Past Contests/2014 - 2015/Gold/X 3. 2015 February
 set_target_properties(hopscotch_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 3. 2015 February Gold/X 1. Cow Hopscotch")
 add_executable(div7 "Past Contests/2015 - 2016/Silver/Y 2. 2016 January Silver/Y 2. Subsequences Summing to Sevens/div7.cpp")
 set_target_properties(div7 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2015 - 2016/Silver/Y 2. 2016 January Silver/Y 2. Subsequences Summing to Sevens")
-add_executable(cowjog_gold "Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/X 3. Cow Jog/cowjog_gold.cpp")
-set_target_properties(cowjog_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/X 3. Cow Jog")
+add_executable(cowjog_gold "Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/Y 3. Cow Jog/cowjog_gold.cpp")
+set_target_properties(cowjog_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/Y 3. Cow Jog")
