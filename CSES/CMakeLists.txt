@@ -4,8 +4,10 @@ project(CSES)
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
-#set(GCC_COVERAGE_COMPILE_FLAGS "-Wshadow -Wall -o -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -g")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+
 add_executable(Weird_Algorithm "X 1. Introductory Problems/Y 1. Weird Algorithm.cpp")
 add_executable(Missing_Number "X 1. Introductory Problems/Y 2. Missing Number.cpp")
 add_executable(Repetitions "X 1. Introductory Problems/Y 3. Repetitions.cpp")
@@ -125,6 +127,8 @@ add_executable(Line_Segment_Intersection "X 9. Geometry/Y 2. Line Segment Inters
 set_target_properties(Line_Segment_Intersection PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 9. Geometry")
 add_executable(a a.cpp)
 set_target_properties(a PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+target_precompile_headers(a PUBLIC "/Library/Developer/CommandLineTools/usr/include/c++/v1/bits/stdc++.h")
+
 add_executable(Dynamic_Range_Sum_Queries "X 5. Range Queries/Y 3. Dynamic Range Sum Queries.cpp")
 set_target_properties(Dynamic_Range_Sum_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 5. Range Queries")
 add_executable(Distinct_Values_Queries "X 5. Range Queries/Y 14. Distinct Values Queries.cpp")
