@@ -139,3 +139,5 @@ add_executable(Increasing_Subsequence "X 3. Dynamic Programming/Y 15. Increasing
 set_target_properties(Increasing_Subsequence PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 3. Dynamic Programming")
 add_executable(Stick_Divisions "X 11. Additional Problems/Y 65. Stick Divisions.cpp")
 set_target_properties(Stick_Divisions PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 11. Additional Problems")
+add_executable(Multiplication_Table "X 11. Additional Problems/Y 8. Multiplication Table.cpp")
+set_target_properties(Multiplication_Table PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 11. Additional Problems/")
