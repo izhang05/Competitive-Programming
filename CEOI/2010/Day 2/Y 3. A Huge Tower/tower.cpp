@@ -27,28 +27,41 @@ void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
+    cout << setprecision(18) << fixed;
 #ifdef LOCAL
-    freopen("1.in", "r", stdin);
-    freopen("1.out", "w", stdout);
+    freopen("2.in", "r", stdin);
+    freopen("2.out", "w", stdout);
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 9;
 
 
 int main() {
 #ifdef LOCAL
-    auto start_time = std::chrono::high_resolution_clock::now();
+    auto start_time = chrono::high_resolution_clock::now();
 #endif
     setIO();
     int n, d;
     cin >> n >> d;
-
-
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    sort(a.begin(), a.end());
+    long long sol = 1;
+    int l = 0;
+    for (int r = 0; r < n; ++r) {
+        while (a[r] - a[l] > d) {
+            ++l;
+        }
+        sol = (sol * (r - l + 1)) % mod;
+    }
+    cout << sol << "\n";
 #ifdef LOCAL
-    auto end_time = std::chrono::high_resolution_clock::now();
-    cout << setprecision(6) << fixed;
-    cout << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() << " seconds" << endl;
+    auto end_time = chrono::high_resolution_clock::now();
+    cout << "Execution time: " << chrono::duration_cast<chrono::duration<double>>(end_time - start_time).count()
+         << " seconds" << endl;
 #endif
     return 0;
 }
