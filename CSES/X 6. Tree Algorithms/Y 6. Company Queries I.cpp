@@ -11,49 +11,68 @@ template<class T>
 using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 template<class T>
 using indexed_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+//#define DEBUG
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
+#ifdef LOCAL
+    freopen("6.in", "r", stdin);
+    freopen("6.out", "w", stdout);
+#endif
 }
-const int maxn = 2e5, maxl = 18;
-int p[maxn][maxl];
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
+const int maxn = 2e5 + 5; // maximum n
+const int MS = 18;        // 18 is calculated by $\log_2 2e5$
+
+int up[MS][maxn];
+
+int jmp(int x, int d) {
+    for (int i = 0; i < MS; i++) {
+        if ((d >> i) & 1) {
+            x = up[i][x];
+        }
+    }
+    return x ?: -1; // modification to return -1 if not found
+}
 
 int main() {
     setIO();
+
     int n, q;
     cin >> n >> q;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < maxl; ++j) {
-            p[i][j] = -1;
+    for (int i = 2; i < n + 1; ++i) {
+        int a;
+        cin >> a;
+        up[0][i] = a;
+    }
+
+    for (int i = 1; i < MS; ++i) {
+        for (int j = 1; j < n + 1; ++j) {
+            up[i][j] = up[i - 1][up[i - 1][j]];
         }
-    }
-    for (int i = 1; i < n; ++i) {
-        cin >> p[i][0];
-        --p[i][0];
-    }
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < maxl - 1; ++j) {
-            if (p[i][j] == -1) {
-                continue;
-            }
-            p[i][j + 1] = p[p[i][j]][j];
-        }
-    }
-    int a, b;
-    for (int i = 0; i < q; ++i) {
+    } // construct our parent array
+
+    // uncomment below if you want to see the parent array
+
+    // F0R(i, MS) {
+    //	 FOR(j, 1, n+1) {
+    //		 cerr << setfill(' ') << setw(2) << up[i][j] << " ";
+    //	 }
+    //	 cerr << "\n";
+    // }
+
+    for (int i = 0; i < q; i++) {
+        int a, b;
         cin >> a >> b;
-        --a;
-        for (int j = 0; j < maxl; ++j) {
-            if (b & (1 << j)) {
-                a = p[a][j];
-            }
-            if (a == -1) {
-                break;
-            }
-        }
-        cout << (a == -1 ? a : a + 1) << "\n";
+        cout << jmp(a, b) << "\n";
     }
-    return 0;
 }

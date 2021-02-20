@@ -78,7 +78,9 @@ int query(int a, int b, int node = 1, int l = 0, int r = timer - 1) {
 
 // Make sure you run `dfs()` and `build()` before you run this
 int lca(int a, int b) {
-    if (tin[a] > tin[b]) swap(a, b);
+    if (tin[a] > tin[b]) {
+        swap(a, b);
+    }
     return query(tin[a], tin[b]);
 }
 
@@ -90,16 +92,23 @@ int main() {
     int q;
     cin >> n >> q;
     int a;
-    for (int i = 2; i < n + 1; ++i) {
+    for (int i = 1; i < n; ++i) {
         cin >> a;
+        --a;
         adj[a].push_back(i);
     }
     dfs();
     build();
+#ifdef DEBUG
+    for (int i = 0; i < n; ++i) {
+        cout << i << " " << tin[i] << "\n";
+    }
+#endif
     int b;
     for (int i = 0; i < q; ++i) {
         cin >> a >> b;
-        cout << lca(a, b) << "\n";
+        --a, --b;
+        cout << lca(a, b) + 1 << "\n";
     }
 #ifdef LOCAL
     auto end_time = std::chrono::high_resolution_clock::now();
