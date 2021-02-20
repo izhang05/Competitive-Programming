@@ -15,18 +15,21 @@ template<class T>
 using indexed_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 template<class T>
-void print(T a) {
+void print(T a, string sep = " ", string end = "\n") {
     for (auto i : a) {
-        cout << i << " ";
+        cout << i << sep;
     }
-    cout << "\n";
+    cout << end;
 }
 
+//#define DEBUG
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-#ifdef DEBUG
+    cin.exceptions(istream::failbit);
+#ifdef LOCAL
     freopen("1.in", "r", stdin);
+    freopen("1.out", "w", stdout);
 #endif
 }
 
@@ -34,36 +37,18 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
 
 int main() {
+#ifdef LOCAL
+    auto start_time = std::chrono::high_resolution_clock::now();
+#endif
     setIO();
     int n, d;
     cin >> n >> d;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
-    sort(a.begin(), a.end());
-    vector<long long> sol(n), ways(n);
-    int j = 0;
-    for (int i = 0; i < n; ++i) {
-        j = max(j, i);
-        while (j + 1 < n && a[j + 1] - a[i] <= d) {
-            ++j;
-            ways[j] = n - j - 1 + j - i;
-        }
-        if (!ways[i]) {
-            ways[i] = 1;
-        }
-    }
-    for (int i = 0; i < n; ++i) {
-        cout << i << " " << ways[i] << "\n";
-    }
-    cout << "\n";
-    sol[0] = 1;
-    for (int i = 1; i < n; ++i) {
-        sol[i] = sol[i - 1] * ways[i];
-        sol[i] %= mod;
-        cout << i << " " << sol[i] << "\n";
-    }
-    cout << sol[n - 1] << "\n";
+
+
+#ifdef LOCAL
+    auto end_time = std::chrono::high_resolution_clock::now();
+    cout << setprecision(6) << fixed;
+    cout << "Execution time: " << std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count() << " seconds" << endl;
+#endif
     return 0;
 }
