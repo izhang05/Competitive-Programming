@@ -376,3 +376,5 @@ add_executable(cowjog_gold "Past Contests/2014 - 2015/Gold/X 1. 2014 December Go
 set_target_properties(cowjog_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/Y 3. Cow Jog")
 add_executable(milkvisits_gold "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 2. Milk Visits/milkvisits_gold.cpp")
 set_target_properties(milkvisits_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 2. Milk Visits")
+add_executable(promote "Past Contests/2016 - 2017/Platinum/X 2. 2017 January Platinum/Y 1. Promotion Counting/promote.cpp")
+set_target_properties(promote PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2016 - 2017/Platinum/X 2. 2017 January Platinum/Y 1. Promotion Counting")
