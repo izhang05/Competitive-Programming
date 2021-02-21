@@ -61,17 +61,11 @@ int main() {
             }
             loc = edge[loc];
         }
-        if (loc == cow) {
-            visited[loc] = true;
-            rep[loc] = loc;
-        }
+        visited[cow] = true;
+        rep[cow] = cow;
     }
     for (int i = 0; i < n; ++i) {
-        if (!visited[i] || rep[i] == i) {
-            cout << sol[i].size() << "\n";
-        } else {
-            cout << sol[rep[i]].size() << "\n";
-        }
+        cout << sol[rep[i]].size() << "\n";
     }
     return 0;
 }
