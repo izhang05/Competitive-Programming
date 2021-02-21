@@ -10,9 +10,7 @@ void setIO() {
 #endif
 }
 const int maxn = 1e5 + 5;
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds;
-gp_hash_table<int, null_type> sol[maxn], visit[maxn];
+set<int> sol[maxn], visit[maxn];
 int edge[maxn], rep[maxn];
 
 bool visited[maxn];
