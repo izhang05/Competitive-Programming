@@ -144,3 +144,5 @@ add_executable(Even_Outdegree_Edges "X 11. Additional Problems/X 7. Even Outdegr
 set_target_properties(Even_Outdegree_Edges PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 11. Additional Problems")
 add_executable(Company_Queries_I "X 6. Tree Algorithms/Y 6. Company Queries I.cpp")
 set_target_properties(Company_Queries_I PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
+add_executable(Distance_Queries "X 6. Tree Algorithms/Y 8. Distance Queries.cpp")
+set_target_properties(Distance_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
