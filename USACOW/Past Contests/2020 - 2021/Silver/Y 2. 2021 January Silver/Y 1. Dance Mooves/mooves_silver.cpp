@@ -49,9 +49,6 @@ int main() {
         }
         int loc = i;
         while (loc != cow) {
-            if (visited[loc]) {
-                break;
-            }
             visited[loc] = true;
             rep[loc] = cow;
             for (int j : visit[loc]) {
