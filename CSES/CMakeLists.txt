@@ -130,7 +130,7 @@ add_executable(Distinct_Values_Queries "X 5. Range Queries/Y 14. Distinct Values
 set_target_properties(Distinct_Values_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 5. Range Queries")
 add_executable(Subtree_Queries "X 6. Tree Algorithms/Y 10. Subtree Queries.cpp")
 set_target_properties(Subtree_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
-add_executable(Company_Queries_II "X 6. Tree Algorithms/X 7. Company Queries II.cpp")
+add_executable(Company_Queries_II "X 6. Tree Algorithms/Y 7. Company Queries II.cpp")
 set_target_properties(Company_Queries_II PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
 add_executable(Tree_Matching "X 6. Tree Algorithms/Y 2. Tree Matching.cpp")
 set_target_properties(Tree_Matching PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
