@@ -137,7 +137,6 @@ add_executable(photo_bronze "Past Contests/2019 - 2020/Bronze/Y 2. 2020 January 
 add_executable(tttt "Past Contests/2017 - 2018/Bronze/X 4. US Open Bronze/Y 1. Team Tic Tac Toe/tttt.cpp")
 add_executable(pump "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 1. Milk Pumping/pump.cpp")
 add_executable(auto_silver "Past Contests/2013 - 2014/Silver/X 4. 2014 February Silver/X 1. Auto-Complete/auto_silver.cpp")
-add_executable(milkvisits_gold "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/X 2. Milk Visits/milkvisits_gold.cpp")
 add_executable(paintbarn_gold "Past Contests/2018 - 2019/Gold/X 3. 2019 February Gold/X 3. Painting the Barn/paintbarn_gold.cpp")
 add_executable(snowboots_gold "Past Contests/2017 - 2018/Gold/Y 3. 2018 February Gold/Y 1. Snow Boots/snowboots_gold.cpp")
 add_executable(new_snowboots_gold "Past Contests/2017 - 2018/Gold/Y 3. 2018 February Gold/Y 1. Snow Boots/new_snowboots_gold.cpp")
@@ -375,3 +374,5 @@ add_executable(div7 "Past Contests/2015 - 2016/Silver/Y 2. 2016 January Silver/Y
 set_target_properties(div7 PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2015 - 2016/Silver/Y 2. 2016 January Silver/Y 2. Subsequences Summing to Sevens")
 add_executable(cowjog_gold "Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/Y 3. Cow Jog/cowjog_gold.cpp")
 set_target_properties(cowjog_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/Y 3. Cow Jog")
+add_executable(milkvisits_gold "Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 2. Milk Visits/milkvisits_gold.cpp")
+set_target_properties(milkvisits_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2019 - 2020/Gold/X 1. 2019 December Gold/Y 2. Milk Visits")
