@@ -380,3 +380,5 @@ add_executable(promote "Past Contests/2016 - 2017/Platinum/X 2. 2017 January Pla
 set_target_properties(promote PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2016 - 2017/Platinum/X 2. 2017 January Platinum/Y 1. Promotion Counting")
 add_executable(lamps "Training/Chapter 2/X Section 2.2/Y 4. Party Lamps/lamps.cpp")
 set_target_properties(lamps PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Training/Chapter 2/X Section 2.2/Y 4. Party Lamps")
+add_executable(sort_gold "Past Contests/2017 - 2018/Gold/X 4. 2018 US Open Gold/X 1. Out of Sorts/sort_gold.cpp")
+set_target_properties(sort_gold PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2017 - 2018/Gold/X 4. 2018 US Open Gold/X 1. Out of Sorts")
