@@ -22,6 +22,7 @@ using namespace __gnu_pbds;
 template<class T>
 using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
+const int maxn=2e5;
 int main() {
     setIO();
 #ifdef LOCAL
@@ -40,6 +41,10 @@ int main() {
             ++sol;
         }
         nums.insert(a[i]);
+    }
+    if (true) {
+
+    } else {
     }
 
     //    bool sorted =false;
