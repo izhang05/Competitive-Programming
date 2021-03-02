@@ -11,29 +11,23 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
     freopen("boards.in", "r", stdin);
     freopen("boards.out", "w", stdout);
 }
-const int maxp = 1e5 + 1;
-int dp[maxp];
-
-struct point {
-    int x, y;
-    bool operator<(const point &rhs) const {
-        x == rhs.x ? y < rhs.y : x < rhs.x;
-    }
-};
-
+//#define DEBUG
 
 int main() {
     setIO();
-    int n, p;
-    cin >> n >> p;
+#ifdef LOCAL
+    auto start_time = chrono::high_resolution_clock::now();
+#endif
 
-    vector<pair<point, point>> a;
-    for (int i = 0; i < p; ++i) {
-        cin >> a[i].first.x >> a[i].first.y >> a[i].second.x >> a[i].second.y;
-    }
-    sort(a.begin(), a.end());
+
+#ifdef LOCAL
+    auto end_time = chrono::high_resolution_clock::now();
+    cout << setprecision(6) << fixed;
+    cout << "Execution time: " << chrono::duration_cast<chrono::duration<double>>(end_time - start_time).count() << " seconds" << endl;
+#endif
     return 0;
 }
