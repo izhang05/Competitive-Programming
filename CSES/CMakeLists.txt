@@ -146,3 +146,7 @@ add_executable(Company_Queries_I "X 6. Tree Algorithms/Y 6. Company Queries I.cp
 set_target_properties(Company_Queries_I PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
 add_executable(Distance_Queries "X 6. Tree Algorithms/Y 8. Distance Queries.cpp")
 set_target_properties(Distance_Queries PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")
+add_executable(Planets_Queries_II "X 4. Graph Algorithms/X 20. Planets Queries II.cpp")
+set_target_properties(Planets_Queries_II PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 4. Graph Algorithms")
+add_executable(Distinct_Colors "X 6. Tree Algorithms/Y 13. Distinct Colors.cpp")
+set_target_properties(Distinct_Colors PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/X 6. Tree Algorithms")

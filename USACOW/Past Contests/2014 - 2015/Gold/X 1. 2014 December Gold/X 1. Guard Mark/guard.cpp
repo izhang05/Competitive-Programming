@@ -21,8 +21,8 @@ struct cow {
     long long h, w, s;
 };
 
-int maxn= 20;
-long long height[1 << maxn], ;
+const int maxn = 20;
+long long height[1 << maxn];
 
 int main() {
     setIO();
