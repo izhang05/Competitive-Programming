@@ -1,9 +1,6 @@
-5 0
-0
-1
-2
-3
-5
-5
-6 1 8
-Execution time: 0.001400 seconds
+players: 2 0 1 
+564 232323 1 -1 
+564 232823 567 232326 
+564 422896 567 422899 
+sol: 422899
+Execution time: 0.104105 seconds
