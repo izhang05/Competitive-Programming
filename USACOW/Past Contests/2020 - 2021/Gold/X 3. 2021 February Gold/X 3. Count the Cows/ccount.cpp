@@ -56,7 +56,7 @@ int main() {
     for (int i = 0; i < q; ++i) {
         cin >> d >> x >> y;
         int sol = 0;
-
     }
+
     return 0;
 }
