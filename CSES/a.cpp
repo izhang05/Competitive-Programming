@@ -28,22 +28,66 @@ void setIO() {
     freopen("1.out", "w", stdout);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e3 + 5;
+char grid[maxn][maxn];
+int a[maxn][maxn], comp[maxn][maxn], sol[maxn * maxn], cnt = 1;
+
+void dfs(int x, int y) {
+    comp[x][y] = cnt;
+    sol[cnt] += a[x][y];
+    for (int i = 0; i < 4; ++i) {
+        if (grid[x + dx[i]][y + dy[i]] == '.' && !comp[x + dx[i]][y + dy[i]]) {
+            dfs(x + dx[i], y + dy[i]);
+        }
+    }
+}
 
 int main() {
 #ifdef LOCAL
     auto start_time = chrono::high_resolution_clock::now();
 #endif
     setIO();
-
-    long long n, m;
-    cin >> n >> m;
-    cout << max(0ll, n - 2 * m) << " ";
-    for (long long i = 0; i < n + 1; ++i) {
-        if ((i * (i - 1)) / 2 >= m) {
-            cout << n - i << "\n";
-            return 0;
+    int n, m, k;
+    cin >> n >> m >> k;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cin >> grid[i][j];
         }
+    }
+    for (int i = 1; i < n - 1; ++i) {
+        for (int j = 1; j < m - 1; ++j) {
+            if (grid[i][j] == '*') {
+                continue;
+            }
+            for (int l = 0; l < 4; ++l) {
+                if (grid[i + dx[l]][j + dy[l]] == '*') {
+                    ++a[i][j];
+                }
+            }
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (grid[i][j] == '*' || comp[i][j]) {
+                continue;
+            }
+            dfs(i, j);
+            ++cnt;
+        }
+    }
+#ifdef DEBUG
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cout << a[i][j] << " ";
+        }
+        cout << "\n";
+    }
+#endif
+    for (int i = 0; i < k; ++i) {
+        int b, c;
+        cin >> b >> c;
+        --b, --c;
+        cout << sol[comp[b][c]] << "\n";
     }
 #ifdef LOCAL
     auto end_time = chrono::high_resolution_clock::now();
