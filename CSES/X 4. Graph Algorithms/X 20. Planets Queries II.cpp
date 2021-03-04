@@ -24,8 +24,8 @@ void setIO() {
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
 #ifdef LOCAL
-    freopen("1.in", "r", stdin);
-    freopen("1.out", "w", stdout);
+    freopen("20.in", "r", stdin);
+    freopen("20.out", "w", stdout);
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
@@ -35,16 +35,8 @@ int main() {
     auto start_time = chrono::high_resolution_clock::now();
 #endif
     setIO();
+    
 
-    long long n, m;
-    cin >> n >> m;
-    cout << max(0ll, n - 2 * m) << " ";
-    for (long long i = 0; i < n + 1; ++i) {
-        if ((i * (i - 1)) / 2 >= m) {
-            cout << n - i << "\n";
-            return 0;
-        }
-    }
 #ifdef LOCAL
     auto end_time = chrono::high_resolution_clock::now();
     cout << setprecision(6) << fixed;
