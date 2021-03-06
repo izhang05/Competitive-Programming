@@ -1,0 +1,62 @@
+type: codeforces
+custom_name: B. Planet Lapituletti
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task2)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    5
+    24 60
+    12:21
+    24 60
+    23:59
+    90 80
+    52:26
+    1 100
+    00:01
+    10 10
+    04:04
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    12:21
+    00:00
+    52:28
+    00:00
+    00:00
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1493/problem/B?locale=en
+status: Unchecked
+feedback:
+  time: Sat, 06 Mar 2021 14:46:14 UTC
