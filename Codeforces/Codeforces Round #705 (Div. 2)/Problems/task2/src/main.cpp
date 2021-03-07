@@ -48,9 +48,6 @@ int main() {
         string s;
         cin >> s;
         int a = 10 * (s[0] - '0') + s[1] - '0', b = 10 * (s[3] - '0') + s[4] - '0';
-#ifdef DEBUG
-        cout << a << " " << b << "\n";
-#endif
         while (true) {
             vector<int> cur = digits(b);
             bool found = true;
@@ -60,41 +57,34 @@ int main() {
                     break;
                 }
             }
+            bool sol = false;
             if (found) {
                 int next = 10 * reflection[cur[1]] + reflection[cur[0]];
-#ifdef DEBUG
-                cout << b << " " << next << "\n";
-#endif
                 if (next < h) {
-                    break;
+                    bool found2 = true;
+                    vector<int> cur2 = digits(a);
+                    for (int i = 0; i < 2; ++i) {
+                        if (good.find(cur2[i]) == good.end()) {
+                            found2 = false;
+                            break;
+                        }
+                    }
+                    if (found2) {
+                        int next2 = 10 * reflection[cur2[1]] + reflection[cur2[0]];
+                        if (next2 < m) {
+                            sol = true;
+                        }
+                    }
                 } else {
                     add_minute(b, a);
                 }
             } else {
                 add_minute(b, a);
             }
-        }
-        while (true) {
-            vector<int> cur = digits(a);
-            bool found = true;
-            for (int i = 0; i < 2; ++i) {
-                if (good.find(cur[i]) == good.end()) {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
-                int next = 10 * reflection[cur[1]] + reflection[cur[0]];
-#ifdef DEBUG
-                cout << a << " " << next << "\n";
-#endif
-                if (next < m) {
-                    break;
-                } else {
-                    add_hour(a);
-                }
+            if (sol) {
+                break;
             } else {
-                add_hour(a);
+                add_minute(b, a);
             }
         }
         cout << a / 10 << a % 10 << ":" << b / 10 << b % 10 << "\n";

@@ -57,6 +57,14 @@ files:
     }
   learner_created: false
 feedback_link: https://codeforces.com/contest/1493/problem/B?locale=en
-status: Unchecked
+status: Failed
 feedback:
-  time: Sat, 06 Mar 2021 14:46:14 UTC
+  message: Test №1 is failed
+  time: Sat, 06 Mar 2021 17:43:19 UTC
+  expected: |-
+    12:21
+    00:00
+    52:28
+    00:00
+    00:00
+  actual: <no output>
