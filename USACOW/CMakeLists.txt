@@ -394,3 +394,5 @@ add_executable(ccount "Past Contests/2020 - 2021/Gold/X 3. 2021 February Gold/X 
 set_target_properties(ccount PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Gold/X 3. 2021 February Gold/X 3. Count the Cows")
 add_executable(guard "Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/X 1. Guard Mark/guard.cpp")
 set_target_properties(guard PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2014 - 2015/Gold/X 1. 2014 December Gold/X 1. Guard Mark")
+add_executable(comfortable "Past Contests/2020 - 2021/Silver/X 3. 2021 February Silver/X 1. Comfortable Cows/comfortable.cpp")
+set_target_properties(comfortable PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Past Contests/2020 - 2021/Silver/X 3. 2021 February Silver/X 1. Comfortable Cows")
