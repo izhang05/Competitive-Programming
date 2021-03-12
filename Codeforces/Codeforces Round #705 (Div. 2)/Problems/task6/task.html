@@ -32,7 +32,6 @@
   <ul> 
    <li> <span class="tex-font-style-tt">?</span> $h$ $w$ $i_1$ $j_1$ $i_2$ $j_2$ ($1 \le h \le n$, $1 \le w \le m$, $1 \le i_1, i_2 \le n$, $1 \le j_1, j_2 \le m$) — to check if <span class="tex-font-style-bf">non-overlapping</span> subrectangles of height $h$ rows and of width $w$ columns of matrix $a$ are equal or not. The upper left corner of the first rectangle is $(i_1, j_1)$. The upper left corner of the second rectangle is $(i_2, j_2)$. Subrectangles overlap, if they have at least one mutual cell. If the subrectangles in your query have incorrect coordinates (for example, they go beyond the boundaries of the matrix) or overlap, your solution will be considered incorrect. </li>
   </ul>
-  <p></p>
   <p>You can use at most $ 3 \cdot \left \lfloor{ \log_2{(n+m)} } \right \rfloor$ queries. All elements of the matrix $a$ are fixed before the start of your program and do not depend on your queries.</p>
  </div>
  <div class="input-specification">
@@ -55,24 +54,13 @@
   <p>After each query read a single integer $t$ ($t$ is $0$ or $1$): if the subrectangles are equal, $t=1$, otherwise $t=0$.</p>
   <p>In case your query is of incorrect format or you asked more than $3 \cdot \left \lfloor{ \log_2{(n+m)} } \right \rfloor$ queries, you will receive the <span class="tex-font-style-tt">Wrong Answer</span> verdict.</p>
   <p>After printing a query do not forget to output end of line and flush the output. Otherwise, you will get <span class="tex-font-style-tt">Idleness limit exceeded</span>. To do this, use:</p>
-  <p></p>
-  <ul></ul>
-  <p></p>
-  <p></p>
-  <li> <span class="tex-font-style-tt">fflush(stdout)</span> or <span class="tex-font-style-tt">cout.flush()</span> in C++;</li>
-  <p></p>
-  <p></p>
-  <li> <span class="tex-font-style-tt">System.out.flush()</span> in Java;</li>
-  <p></p>
-  <p></p>
-  <li> <span class="tex-font-style-tt">flush(output)</span> in Pascal;</li>
-  <p></p>
-  <p></p>
-  <li> <span class="tex-font-style-tt">stdout.flush()</span> in Python;</li>
-  <p></p>
-  <p></p>
-  <li> see documentation for other languages.</li>
-  <p></p>
+  <ul>
+   <li> <span class="tex-font-style-tt">fflush(stdout)</span> or <span class="tex-font-style-tt">cout.flush()</span> in C++;</li>
+   <li> <span class="tex-font-style-tt">System.out.flush()</span> in Java;</li>
+   <li> <span class="tex-font-style-tt">flush(output)</span> in Pascal;</li>
+   <li> <span class="tex-font-style-tt">stdout.flush()</span> in Python;</li>
+   <li> see documentation for other languages.</li>
+  </ul>
   <p>It is guaranteed that the matrix $a$ is fixed and won't change during the interaction process.</p>
   <p><span class="tex-font-style-bf">Hacks format</span></p>
   <p>For hacks use the following format.</p>
@@ -112,6 +100,5 @@
   </div>
   <p>In the example test the matrix $a$ of size $3 \times 4$ is equal to: </p>
   <pre class="verbatim"><br>1 2 1 2<br>3 3 3 3<br>2 1 2 1<br></pre>
-  <p></p>
  </div>
 </div>
