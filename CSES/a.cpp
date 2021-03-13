@@ -16,34 +16,63 @@ void setIO() {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e3 + 5;
-int adj[maxn];
-bool visited[maxn];
-
-void sol(int c) {
-    visited[c] = true;
-    if (visited[adj[c]]) {
-        cout << adj[c] + 1 << "\n";
-        return;
-    }
-    sol(adj[c]);
-}
-
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+int dp[10][10];
 
 int main() {
     setIO();
 
-    int n;
-    cin >> n;
+    int n = 10;
     for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        --a;
-        adj[i] = a;
+        for (int j = 0; j < n; ++j) {
+#ifdef DEBUG
+            cout << i << " " << j << "\n";
+            cout << dp[i][j] << "\n\n";
+#endif
+        }
     }
-    for (int i = 0; i < n; ++i) {
-        memset(visited, false, sizeof(visited));
-        sol(i);
+
+
+    int t;
+    cin >> t;
+    while (t--) {
+        int p, f;
+        cin >> p >> f;
+        pair<int, int> num;
+        cin >> num.first >> num.second;
+        int s, w;
+        cin >> s >> w;
+        if (s > w) {
+            swap(s, w);
+            swap(num.first, num.second);
+        }
+        int sol = 0;
+        for (int i = 0; i < num.first + 1; ++i) {
+#ifdef DEBUG
+            cout << i << ":\n";
+#endif
+            if (i * s > p) {
+                break;
+            }
+            int cur = i, take = min(num.second, (f - (num.first - i) * s) / w);
+#ifdef DEBUG
+            cout << cur << "\n";
+#endif
+            cur += take;
+#ifdef DEBUG
+            cout << cur << "\n";
+#endif
+            cur += min(f / s, num.first - i);
+#ifdef DEBUG
+            cout << cur << "\n";
+#endif
+            cur += min(num.second - take, (f - s * (min(f / s, num.first - i))) / w);
+#ifdef DEBUG
+            cout << cur << "\n\n\n";
+#endif
+            sol = max(sol, cur);
+        }
+        cout << sol << "\n";
     }
     return 0;
 }

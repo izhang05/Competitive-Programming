@@ -1,0 +1,115 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   F. BFS Trees
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2.5 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>We define a spanning tree of a graph to be a BFS tree <span class="tex-font-style-it">rooted at</span> vertex $s$ if and only if for every node $t$ the shortest distance between $s$ and $t$ in the graph is equal to the shortest distance between $s$ and $t$ in the spanning tree. </p>
+  <p>Given a graph, we define $f(x,y)$ to be the number of spanning trees of that graph that are BFS trees rooted at vertices $x$ and $y$ at the same time.</p>
+  <p>You are given an undirected connected graph with $n$ vertices and $m$ edges. Calculate $f(i,j)$ for all $i$, $j$ by modulo $998\,244\,353$.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains two integers $n$, $m$ ($1 \le n \le 400$, $0 \le m \le 600$)&nbsp;— the number of vertices and the number of edges in the graph.</p>
+  <p>The $i$-th of the next $m$ lines contains two integers $a_i$, $b_i$ ($1 \leq a_i, b_i \leq n$, $a_i &lt; b_i$), representing an edge connecting $a_i$ and $b_i$.</p>
+  <p>It is guaranteed that all edges are distinct and the graph is connected.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print $n$ lines, each consisting of $n$ integers.</p>
+  <p>The integer printed in the row $i$ and the column $j$ should be $f(i,j) \bmod 998\,244\,353$.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4 4
+1 2
+2 3
+3 4
+1 4
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>2 1 0 1
+1 2 1 0
+0 1 2 1
+1 0 1 2
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>8 9
+1 2
+1 3
+1 4
+2 7
+3 5
+3 6
+4 8
+2 3
+3 4
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>1 0 0 0 0 0 0 0
+0 2 0 0 0 0 2 0
+0 0 1 0 1 1 0 0
+0 0 0 2 0 0 0 2
+0 0 1 0 1 1 0 0
+0 0 1 0 1 1 0 0
+0 2 0 0 0 0 2 0
+0 0 0 2 0 0 0 2
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>The following picture describes the first example.</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/d5a75c2c824c537e7cfec3ca7848d3d490161bad.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>The tree with red edges is a BFS tree rooted at both $1$ and $2$.</p>
+  <p><img class="tex-graphics" src="https://espresso.codeforces.com/e011f7f31bd132009286cd3793dd022b28acab2c.png" style="max-width: 100.0%;max-height: 100.0%;"></p>
+  <p>Similarly, the BFS tree for other adjacent pairs of vertices can be generated in this way.</p>
+ </div>
+</div>
