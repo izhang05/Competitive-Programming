@@ -1,0 +1,53 @@
+type: codeforces
+custom_name: E. Cheese Board
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task5)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: 9 brie soft camembert soft feta soft goat soft muenster soft asiago hard cheddar
+    hard gouda hard swiss hard
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: 3
+  learner_created: false
+- name: testData/2/input.txt
+  visible: true
+  text: 6 parmesan hard emmental hard edam hard colby hard gruyere hard asiago hard
+  learner_created: false
+- name: testData/2/output.txt
+  visible: true
+  text: 4
+  learner_created: false
+feedback_link: https://codeforces.com/contest/952/problem/E?locale=en
+status: Unchecked
