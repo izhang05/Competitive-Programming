@@ -16,63 +16,54 @@ void setIO() {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
-int dp[10][10];
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
+
+pair<int, int> dp[maxn];
 
 int main() {
     setIO();
 
-    int n = 10;
+    long long n, d;
+    cin >> n >> d;
+    vector<long long> h(n);
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-#ifdef DEBUG
-            cout << i << " " << j << "\n";
-            cout << dp[i][j] << "\n\n";
-#endif
-        }
+        cin >> h[i];
+        dp[i].second = -1;
     }
-
-
-    int t;
-    cin >> t;
-    while (t--) {
-        int p, f;
-        cin >> p >> f;
-        pair<int, int> num;
-        cin >> num.first >> num.second;
-        int s, w;
-        cin >> s >> w;
-        if (s > w) {
-            swap(s, w);
-            swap(num.first, num.second);
-        }
-        int sol = 0;
-        for (int i = 0; i < num.first + 1; ++i) {
-#ifdef DEBUG
-            cout << i << ":\n";
-#endif
-            if (i * s > p) {
+    for (int i = 1; i < n; ++i) {
+        for (int j = i - 1; j >= 0; --j) {
+            if (abs(h[i] - h[j]) >= d) {
+                dp[i] = max(dp[i], {dp[j].first + 1, j});
                 break;
             }
-            int cur = i, take = min(num.second, (f - (num.first - i) * s) / w);
-#ifdef DEBUG
-            cout << cur << "\n";
-#endif
-            cur += take;
-#ifdef DEBUG
-            cout << cur << "\n";
-#endif
-            cur += min(f / s, num.first - i);
-#ifdef DEBUG
-            cout << cur << "\n";
-#endif
-            cur += min(num.second - take, (f - s * (min(f / s, num.first - i))) / w);
-#ifdef DEBUG
-            cout << cur << "\n\n\n";
-#endif
-            sol = max(sol, cur);
         }
-        cout << sol << "\n";
     }
+#ifdef DEBUG
+    for (int i = 0; i < n; ++i) {
+        cout << dp[i].first << " ";
+    }
+    cout << "\n";
+#endif
+    pair<int, int> sol;
+    for (int i = 0; i < n; ++i) {
+        sol = max(sol, {dp[n - 1].first, i});
+    }
+    cout << sol.first + 1 << "\n";
+    int cur = sol.second;
+    vector<int> path;
+    while (cur != -1) {
+        path.push_back(cur + 1);
+        cur = dp[cur].second;
+    }
+    reverse(path.begin(), path.end());
+    print(path);
     return 0;
 }
