@@ -1,0 +1,79 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   D. The Number of Pairs
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>512 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are given three positive (greater than zero) integers $c$, $d$ and $x$. </p>
+  <p>You have to find the number of pairs of positive integers $(a, b)$ such that equality $c \cdot lcm(a, b) - d \cdot gcd(a, b) = x$ holds. Where $lcm(a, b)$ is the least common multiple of $a$ and $b$ and $gcd(a, b)$ is the greatest common divisor of $a$ and $b$.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains one integer $t$ ($1 \le t \le 10^4$) — the number of test cases.</p>
+  <p>Each test case consists of one line containing three integer $c$, $d$ and $x$ ($1 \le c, d, x \le 10^7$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, print one integer — the number of pairs ($a, b$) such that the above equality holds.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4
+1 1 3
+4 2 6
+3 3 7
+2 7 25
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>4
+3
+0
+8
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first example, the correct pairs are: ($1, 4$), ($4,1$), ($3, 6$), ($6, 3$).</p>
+  <p>In the second example, the correct pairs are: ($1, 2$), ($2, 1$), ($3, 3$).</p>
+ </div>
+</div>
