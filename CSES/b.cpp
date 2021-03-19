@@ -14,53 +14,53 @@ void setIO() {
     freopen("b.out", "w", stderr);
 #endif
 }
-const int mod = 1e9 + 7, maxn = 19;
-long long dp[1 << maxn][maxn];
-const long long inf = 1e18;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 205, maxk = 1e3 + 5;
+
+long long dp[2][maxn / 2][maxk];
 
 int main() {
     setIO();
-    int n, m, k;
-    cin >> n >> m >> k;
+
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
-    for (auto &i : dp) {
-        for (long long &j : i) {
-            j = -inf;
-        }
-    }
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
-        dp[1 << i][i] = a[i];
     }
-    map<int, map<int, int>> rules;
-    for (int i = 0; i < k; ++i) {
-        int b, c, d;
-        cin >> b >> c >> d;
-        --b, --c;
-        rules[b][c] = d;
-    }
-    long long sol = 0;
-    for (int mask = 1; mask < (1 << n); ++mask) {
-        for (int i = 0; i < n; ++i) {
+    sort(a.begin(), a.end());
+    dp[0][0][0] = 1;
+    dp[0][1][0] = 1;
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j <= n / 2; ++j) {
+            for (int l = 0; l <= k; ++l) {
+                dp[i % 2][j][l] %= mod;
+                long long cur = dp[i % 2][j][l];
 #ifdef DEBUG
-            cout << __builtin_popcount(mask) << "\n";
-            cout << mask << " " << i << "\n";
-            cout << dp[mask][i] << "\n";
-            cout << "\n";
+                cout << i << " " << j << " " << l << " " << cur << "\n";
 #endif
-            if (dp[mask][i] == -inf) {
-                continue;
-            }
-            if (__builtin_popcount(mask) == m) {
-                sol = max(sol, dp[mask][i]);
-            }
-            for (int j = 0; j < n; ++j) {
-                if (mask & (1 << j)) {
+                if (cur == 0) {
                     continue;
                 }
-                dp[mask | (1 << j)][j] = max(dp[mask | (1 << j)][j], dp[mask][i] + a[j] + rules[i][j]);
+                int val = l + j * (a[i + 1] - a[i]);
+                if (val >= maxk) {
+                    continue;
+                }
+                dp[(i + 1) % 2][j][val] += (j + 1) * cur;
+                dp[(i + 1) % 2][j][val] %= mod;
+                dp[(i + 1) % 2][j + 1][val] += cur;
+                dp[(i + 1) % 2][j + 1][val] %= mod;
+                if (j - 1 >= 0) {
+                    dp[(i + 1) % 2][j - 1][val] += j * cur;
+                    dp[(i + 1) % 2][j - 1][val] %= mod;
+                }
             }
         }
+        memset(dp[i % 2], 0, sizeof(dp[i % 2]));
+    }
+    long long sol = 0;
+    for (int i = 0; i <= k; ++i) {
+        sol += dp[(n - 1) % 2][0][i];
+        sol %= mod;
     }
     cout << sol << "\n";
     return 0;
