@@ -17,7 +17,7 @@ void setIO(string name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 
 vector<vector<pair<int, int>>> adj;
-vector<long long> pass, sub, weight;
+vector<long long> pass, sub, weight, cost;
 
 void dfs(int c, int p) {
     if (p != -1 && adj[c].size() == 1) {
@@ -31,9 +31,6 @@ void dfs(int c, int p) {
             dfs(i.first, c);
             pass[i.second] = sub[i.first];
             sub[c] += sub[i.first];
-#ifdef DEBUG
-            cout << c << " " << i.node << " " << i.ind << " " << sub[i.node] << "\n";
-#endif
         }
     }
 }
@@ -52,38 +49,76 @@ int main() {
         cin >> n;
         long long s;
         cin >> s;
-        long long sol = 0;
         adj = vector<vector<pair<int, int>>>(n);
-        pass = sub = weight = vector<long long>(n);
+        pass = sub = weight = cost = vector<long long>(n);
         for (int i = 0; i < n - 1; ++i) {
             int a, b;
-            cin >> a >> b >> weight[i];
+            cin >> a >> b >> weight[i] >> cost[i];
             --a, --b;
             adj[a].push_back({b, i});
             adj[b].push_back({a, i});
         }
         dfs(0, -1);
-        long long total = 0;
-        priority_queue<pair<long long, int>> q;
+        pair<long long, long long> total;
+        priority_queue<pair<long long, int>> one, two;
         for (int i = 0; i < n - 1; ++i) {
 #ifdef DEBUG
             cout << pass[i] << " " << weight[i] << "\n";
 #endif
-            total += pass[i] * weight[i];
-            q.push({pass[i] * (weight[i] - weight[i] / 2), i});
+            if (cost[i] == 1) {
+                total.first += pass[i] * weight[i];
+                one.push({pass[i] * (weight[i] - weight[i] / 2), i});
+            } else {
+                total.second += pass[i] * weight[i];
+                two.push({pass[i] * (weight[i] - weight[i] / 2), i});
+            }
         }
-#ifdef DEBUG
-        cout << total << "\n";
-#endif
-        while (total > s) {
-            ++sol;
-            pair<long long, int> cur = q.top();
-            q.pop();
-            total -= cur.first;
+        vector<long long> costs;
+        while (total.first) {
+            costs.push_back(total.first);
+            pair<long long, int> cur = one.top();
+            one.pop();
+            total.first -= cur.first;
             weight[cur.second] /= 2;
-            q.push({pass[cur.second] * (weight[cur.second] - weight[cur.second] / 2), cur.second});
+            one.push({pass[cur.second] * (weight[cur.second] - weight[cur.second] / 2), cur.second});
         }
-        cout << sol << "\n";
+        costs.push_back(0);
+        long long sol = 1e18, cnt = 0;
+        while (total.second) {
+            long long lo = 0, hi = (int) costs.size() - 1, mid, res = -1;
+            while (lo <= hi) {
+                mid = (lo + hi) / 2;
+                if (costs[mid] + total.second <= s) {
+                    res = mid;
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 1;
+                }
+            }
+            if (res != -1) {
+                sol = min(sol, res + 2 * cnt);
+            }
+            pair<long long, int> cur = two.top();
+            two.pop();
+            total.second -= cur.first;
+            weight[cur.second] /= 2;
+            two.push({pass[cur.second] * (weight[cur.second] - weight[cur.second] / 2), cur.second});
+            ++cnt;
+        }
+        long long lo = 0, hi = costs.size(), mid, res = -1;
+        while (lo <= hi) {
+            mid = (lo + hi) / 2;
+            if (costs[mid] <= s) {
+                res = mid;
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        if (res != -1) {
+            sol = min(sol, res + 2 * cnt);
+        }
+        cout << min(sol, res + 2 * cnt) << endl;
     }
 
     return 0;
