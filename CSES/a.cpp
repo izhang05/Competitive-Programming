@@ -3,67 +3,88 @@
 using namespace std;
 
 mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
-
 //#define DEBUG
-void setIO() {
+void setIO(string name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
 #ifdef LOCAL
-    freopen("1.in", "r", stdin);
-    freopen("1.out", "w", stdout);
-    freopen("1.out", "w", stderr);
+    freopen((name + ".in").c_str(), "r", stdin);
+    freopen((name + ".out").c_str(), "w", stdout);
+    freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
-    }
-    cout << end;
-}
-
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 
-pair<int, int> dp[maxn];
+vector<vector<pair<int, int>>> adj;
+vector<long long> pass, sub, weight;
 
-int main() {
-    setIO();
-
-    long long n, d;
-    cin >> n >> d;
-    vector<long long> h(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> h[i];
-        dp[i].second = -1;
+void dfs(int c, int p) {
+    if (p != -1 && adj[c].size() == 1) {
+#ifdef DEBUG
+        cout << "leaf: " << c << "\n";
+#endif
+        sub[c] = 1;
     }
-    for (int i = 1; i < n; ++i) {
-        for (int j = i - 1; j >= 0; --j) {
-            if (abs(h[i] - h[j]) >= d) {
-                dp[i] = max(dp[i], {dp[j].first + 1, j});
-                break;
-            }
+    for (auto i : adj[c]) {
+        if (i.first != p) {
+            dfs(i.first, c);
+            pass[i.second] = sub[i.first];
+            sub[c] += sub[i.first];
+#ifdef DEBUG
+            cout << c << " " << i.node << " " << i.ind << " " << sub[i.node] << "\n";
+#endif
         }
     }
+}
+
+int main() {
+    setIO("1");
+    int t;
+    cin >> t;
+    while (t--) {
 #ifdef DEBUG
-    for (int i = 0; i < n; ++i) {
-        cout << dp[i].first << " ";
-    }
-    cout << "\n";
+        cout << "\n"
+             << t << ":"
+             << "\n";
 #endif
-    pair<int, int> sol;
-    for (int i = 0; i < n; ++i) {
-        sol = max(sol, {dp[n - 1].first, i});
+        int n;
+        cin >> n;
+        long long s;
+        cin >> s;
+        long long sol = 0;
+        adj = vector<vector<pair<int, int>>>(n);
+        pass = sub = weight = vector<long long>(n);
+        for (int i = 0; i < n - 1; ++i) {
+            int a, b;
+            cin >> a >> b >> weight[i];
+            --a, --b;
+            adj[a].push_back({b, i});
+            adj[b].push_back({a, i});
+        }
+        dfs(0, -1);
+        long long total = 0;
+        priority_queue<pair<long long, int>> q;
+        for (int i = 0; i < n - 1; ++i) {
+#ifdef DEBUG
+            cout << pass[i] << " " << weight[i] << "\n";
+#endif
+            total += pass[i] * weight[i];
+            q.push({pass[i] * (weight[i] - weight[i] / 2), i});
+        }
+#ifdef DEBUG
+        cout << total << "\n";
+#endif
+        while (total > s) {
+            ++sol;
+            pair<long long, int> cur = q.top();
+            q.pop();
+            total -= cur.first;
+            weight[cur.second] /= 2;
+            q.push({pass[cur.second] * (weight[cur.second] - weight[cur.second] / 2), cur.second});
+        }
+        cout << sol << "\n";
     }
-    cout << sol.first + 1 << "\n";
-    int cur = sol.second;
-    vector<int> path;
-    while (cur != -1) {
-        path.push_back(cur + 1);
-        cur = dp[cur].second;
-    }
-    reverse(path.begin(), path.end());
-    print(path);
+
     return 0;
 }
