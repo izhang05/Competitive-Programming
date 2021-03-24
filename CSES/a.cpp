@@ -14,67 +14,114 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e3 + 5;
-int dist[maxn][maxn][4], n, m;
-char grid[maxn][maxn];
-const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
+#define int long long
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
+vector<int> adj[maxn];
+int sub[maxn], n, val[maxn];
+bool visited[maxn];
+long long sol = 0;
+pair<long long, long long> odd, even;
 
-bool valid(int x, int y) {
-    return x >= 0 && y >= 0 && x < n && y < m && grid[x][y] != '*';
+int find_centroid(int c, int p, int s) {
+    for (auto i : adj[c]) {
+        if (!visited[i] && sub[i] > s / 2 && i != p) {
+            return find_centroid(i, c, s);
+        }
+    }
+    return c;
 }
 
-int main() {
-    setIO("1");
-    cin >> n >> m;
-    memset(dist, 0x3f, sizeof(dist));
-    pair<int, int> dest;
-    queue<pair<pair<int, int>, int>> q;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cin >> grid[i][j];
-            if (grid[i][j] == 'S') {
-                dest = {i, j};
-            } else if (grid[i][j] == 'T') {
-                dist[i][j][0] = dist[i][j][1] = dist[i][j][2] = dist[i][j][3] = 0;
-                q.push({{i, j}, 0});
-                q.push({{i, j}, 1});
-                q.push({{i, j}, 2});
-                q.push({{i, j}, 3});
-            }
+int find_size(int v, int p = -1) {
+    sub[v] = 1;
+
+    for (int i : adj[v]) {
+        if (i != p && !visited[i]) {
+            sub[v] += find_size(i, v);
         }
     }
-    while (!q.empty()) {
-        pair<pair<int, int>, int> cur = q.front();
-        q.pop();
-        int cur_dist = dist[cur.first.first][cur.first.second][cur.second];
-        for (int i = 0; i < 4; ++i) {
-            int nx = cur.first.first + dx[i], ny = cur.first.second + dy[i];
-            if (valid(nx, ny)) {
-                if (i == cur.second) {
-                    if (dist[nx][ny][cur.second] > cur_dist) {
-                        dist[nx][ny][cur.second] = cur_dist;
-                        q.push({{nx, ny}, cur.second});
-                    }
-                } else if (dist[nx][ny][i] > cur_dist + 1) {
-                    dist[nx][ny][i] = cur_dist + 1;
-                    q.push({{nx, ny}, i});
-                }
-            }
+
+    return sub[v];
+}
+
+void dfs(int c, int p, int d, int v, bool adding) {
+    v *= -1;
+    v += val[c];
+    v %= mod;
+    if (adding) {
+        if (d % 2 == 0) {
+            sol += even.first + even.second * v;
+        } else {
+            sol += odd.first + odd.second * v;
         }
-    }
-    int sol = inf;
-    for (int i = 0; i < 4; ++i) {
-        sol = min(sol, dist[dest.first][dest.second][i]);
-    }
 #ifdef DEBUG
-    cout << sol << "\n";
+        cout << c << " " << sol << "\n";
 #endif
-    if (sol <= 2) {
-        cout << "YES"
-             << "\n";
+        sol %= mod;
     } else {
-        cout << "NO"
-             << "\n";
+        if (d % 2 == 0) {
+            even.first += v;
+            even.first %= mod;
+            ++even.second;
+        } else {
+            odd.first += v;
+            odd.first %= mod;
+            ++odd.second;
+        }
     }
+
+    for (auto i : adj[c]) {
+        if (i != p && !visited[i]) {
+            dfs(i, c, d + 1, v, adding);
+        }
+    }
+}
+void solve(int v = 0) {
+    find_size(v);
+    int c = find_centroid(v, -1, sub[v]);
+#ifdef DEBUG
+    cout << "centroid: " << c << "\n";
+#endif
+    visited[c] = true;
+    odd = {0, 0};
+    even = {val[c], 1};
+    for (auto i : adj[c]) {
+        if (!visited[i]) {
+            dfs(i, c, 1, 0, true);
+            dfs(i, c, 1, val[c], false);
+        }
+    }
+
+    for (int x : adj[c]) {
+        if (!visited[x]) {
+            solve(x);
+        }
+    }
+}
+
+signed main() {
+    setIO("1");
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+        cin >> val[i];
+    }
+    for (int i = 0; i < n - 1; ++i) {
+        int a, b;
+        cin >> a >> b;
+        --a, --b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    solve();
+    sol *= 2;
+    sol %= mod;
+    for (int i = 0; i < n; ++i) {
+        sol += val[i];
+    }
+    sol %= mod;
+    while (sol < 0) {
+        sol += mod;
+    }
+    cout << sol << "\n";
+    //    cout << (val[0] - val[3] + val[6] + val[0] - val[3] + val[6] - val[5] + val[4] + val[0] - val[3] + val[6] - val[5] + val[4] - val[7] + val[1]) << "\n";
     return 0;
 }
