@@ -36,12 +36,6 @@ int main() {
         string s;
         cin >> s;
         long long sol = 1;
-        int last_ind = 0;
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == '*') {
-                last_ind = i;
-            }
-        }
         int i = 0;
         while (s[i] != '*') {
             ++i;

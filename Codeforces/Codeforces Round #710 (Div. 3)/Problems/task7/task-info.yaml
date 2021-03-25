@@ -54,6 +54,21 @@ files:
     }
   learner_created: false
 feedback_link: https://codeforces.com/contest/1506/problem/G?locale=en
-status: Unchecked
+status: Failed
 feedback:
-  time: Thu, 25 Mar 2021 16:28:13 UTC
+  message: Test №1 is failed
+  time: Thu, 25 Mar 2021 16:52:51 UTC
+  expected: |-
+    odfrces
+    ezakmi
+    cba
+    convexhul
+    wfldjgpaxs
+    myneocktxqjpz
+  actual: |-
+    odfrces
+    ezakmi
+    bcba
+    convexhul
+    wfldjgpaxs
+    myneocktxqjpz

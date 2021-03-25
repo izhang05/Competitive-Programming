@@ -11,57 +11,57 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
     freopen("exercise.in", "r", stdin);
     freopen("exercise.out", "w", stdout);
+    freopen("exercise.out", "w", stderr);
 }
-const int maxn = 1e4 + 5;
-int mod;
-vector<int> primes{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
+//#define DEBUG
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+const int maxp = 1235, maxn = 1e4 + 5;
+long long dp[maxp][maxn];
 
-long long gcd(long long a, long long b) {
-    return b == 0 ? a : gcd(b, a % b) % mod;
-}
-long long lcm(long long a, long long b) {
-    return (a / gcd(a, b) * b) % mod;
-}
-
-long long sum_factors(long long a) {
-    long long res = 0;
-    long long cur = 1;
-    while (a % 2 == 0) {
-        cur *= 2;
-        a /= 2;
-    }
-    if (cur != 1) {
-        res += cur;
-    }
-    for (long long i = 3; i * i <= a; i += 2) {
-        cur = 1;
-        while (a % i == 0) {
-            cur *= i;
-            a /= i;
-        }
-        if (cur != 1) {
-            res += cur;
-        }
-    }
-    if (a == 1) {
-        --a;
-    }
-    return res + a;
-}
-
+int n, m;
 int main() {
     setIO();
-    int n;
-    cin >> n >> mod;
-    int sol = 0;
-    for (int i = 0; i < 1e5; ++i) {
-        if (sum_factors(i) <= n) {
-            //            cout << i << " " << sum_factors(i) << "\n";
-            (sol += i) %= mod;
+    cin >> n >> m;
+    vector<int> primes;
+    primes.push_back(2);
+    for (int i = 3; i <= n; i += 2) {
+        bool prime = true;
+        for (int j = 3; j * j <= i; j += 2) {
+            if (i % j == 0) {
+                prime = false;
+                break;
+            }
+        }
+        if (prime) {
+            primes.push_back(i);
         }
     }
-    cout << sol << "\n";
+    for (int i = 0; i <= n; ++i) {
+        dp[0][i] = 1;
+    }
+    for (int i = 1; i <= (int) primes.size(); ++i) {
+        for (int j = 0; j <= n; ++j) {
+            dp[i][j] = dp[i - 1][j];
+            int p = primes[i - 1];
+            while (p <= j) {
+                dp[i][j] += (p * dp[i - 1][j - p]) % m;
+                dp[i][j] %= m;
+                p *= primes[i - 1];
+            }
+#ifdef DEBUG
+            cout << i << " " << j << " " << dp[i][j] << "\n";
+#endif
+        }
+    }
+    cout << dp[(int) primes.size()][n] << "\n";
     return 0;
 }

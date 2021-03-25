@@ -18,42 +18,34 @@ int main() {
             ++occ[i];
             kept[i] = false;
         }
-        stack<char> sol;
+        string sol;
         for (int i = 0; i < n; ++i) {
             if (i == n - 1) {
                 if (occ[s[i]] == 1) {
-                    sol.push(s[i]);
+                    sol += s[i];
                 }
                 break;
             }
             if (occ[s[i]] == 1) {
-                sol.push(s[i]);
+                sol += s[i];
             } else {
-//                cout << i << " " << s[i] << " " << s[i + 1] << "\n";
                 if (s[i] <= s[i + 1] || kept[s[i]]) {
                     --occ[s[i]];
-                    while (!sol.empty() && sol.top() <= s[i + 1] && occ[sol.top()] > 1) {
-                        --occ[sol.top()];
-                        assert(kept[sol.top()]);
-                        kept[sol.top()] = false;
-                        sol.pop();
+                    while (!sol.empty() && sol.back() <= s[i + 1] && occ[sol.back()] > 1) {
+                        --occ[sol.back()];
+                        kept[sol.back()] = false;
+                        sol.back();
                     }
                 } else {
-                    sol.push(s[i]);
+                    sol += s[i];
                     kept[s[i]] = true;
                 }
             }
         }
-        string so;
-        while (!sol.empty()) {
-            so += sol.top();
-            sol.pop();
-        }
-        reverse(so.begin(), so.end());
-        if (so.size() != occ.size()) {
-            throw;
-        }
-        cout << so << "\n";
+//        if (sol.size() != occ.size()) {
+//            throw;
+//        }
+        cout << sol << "\n";
     }
     return 0;
 }
