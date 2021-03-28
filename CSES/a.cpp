@@ -14,42 +14,44 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, maxn = 5e2 + 5;
-long long dp[maxn][maxn][maxn]; // dp[ind][lines][bugs]
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 205;
+vector<int> adj[maxn];
+int sol;
+
+void dfs(int c, int p, int d) {
+    sol = max(sol, d);
+    for (auto i : adj[c]) {
+        if (i != p) {
+            dfs(i, c, d + 1);
+        }
+    }
+}
 
 int main() {
     setIO("1");
-    int n, m, b, mod;
-    cin >> n >> m >> b >> mod;
-    vector<int> a(n);
+
+    int n;
+    cin >> n;
+    map<string, int> m;
+    int ind = 0;
     for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
-    dp[0][0][0] = 1;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j <= m; ++j) {
-            for (int k = 0; k <= b; ++k) {
-                long long cur = dp[i][j][k];
-#ifdef DEBUG
-                cout << i << " " << j << " " << k << " " << cur << "\n";
-#endif
-                if (cur == 0) {
-                    continue;
-                }
-                if (k + a[i] <= b) {
-                    dp[i][j + 1][k + 1] += cur;
-                    dp[i][j + 1][k + 1] %= mod;
-                }
-                dp[i + 1][j][k] += cur;
-                dp[i + 1][j][k] %= mod;
-            }
+        string a, b;
+        cin >> a >> b >> b;
+        for (auto &j : a) {
+            j = tolower(j);
         }
+        for (auto &j : b) {
+            j = tolower(j);
+        }
+        if (m.find(b) == m.end()) {
+            m[b] = ind++;
+        }
+        if (m.find(a) == m.end()) {
+            m[a] = ind++;
+        }
+        adj[m[b]].push_back(m[a]);
     }
-    long long sol = 0;
-    for (int j = 0; j <= b; ++j) {
-        sol += dp[n - 1][m][j];
-        sol %= mod;
-    }
+    dfs(0, -1, 1);
     cout << sol << "\n";
     return 0;
 }
