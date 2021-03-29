@@ -14,39 +14,33 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
-    }
-    cout << end;
-}
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
-vector<pair<int, int>> adj[maxn];
-int down[maxn], up[maxn];
+vector<int> adj[maxn];
+int a[maxn], down[maxn], up[maxn];
 
 void dfs1(int c, int p) {
+    down[c] = a[c];
     for (auto i : adj[c]) {
-        if (i.first != p) {
-            down[c] += i.second;
-            dfs1(i.first, c);
-            down[c] += down[i.first];
+        if (i != p) {
+            dfs1(i, c);
+            if (down[i] > 0) {
+                down[c] += down[i];
+            }
         }
     }
 }
 
-void dfs2(int c, int p, int cost) {
+void dfs2(int c, int p) {
     if (c != 0) {
-        up[c] = up[p] + down[p] - down[c];
-        if (cost == 1) {
-            --up[c];
-        } else {
-            ++up[c];
+        up[c] = up[p] + down[p];
+        if (down[c] > 0) {
+            up[c] -= down[c];
         }
+        up[c] = max(0, up[c]);
     }
     for (auto i : adj[c]) {
-        if (i.first != p) {
-            dfs2(i.first, c, i.second);
+        if (i != p) {
+            dfs2(i, c);
         }
     }
 }
@@ -55,15 +49,21 @@ int main() {
     setIO("b");
     int n;
     cin >> n;
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (a[i] == 0) {
+            --a[i];
+        }
+    }
     for (int i = 0; i < n - 1; ++i) {
-        int a, b;
-        cin >> a >> b;
-        --a, --b;
-        adj[a].emplace_back(b, 0);
-        adj[b].emplace_back(a, 1);
+        int b, c;
+        cin >> b >> c;
+        --b, --c;
+        adj[b].push_back(c);
+        adj[c].push_back(b);
     }
     dfs1(0, -1);
-    dfs2(0, -1, 0);
+    dfs2(0, -1);
 #ifdef DEBUG
     cout << "down:"
          << "\n";
@@ -78,18 +78,9 @@ int main() {
     }
     cout << "\n";
 #endif
-    pair<int, set<int>> sol;
-    sol.first = inf;
     for (int i = 0; i < n; ++i) {
-        int cur = down[i] + up[i];
-        if (cur == sol.first) {
-            sol.second.insert(i + 1);
-        } else if (cur < sol.first) {
-            sol.first = cur;
-            sol.second = set<int>{i + 1};
-        }
+        cout << down[i] + up[i] << " ";
     }
-    cout << sol.first << "\n";
-    print(sol.second);
+    cout << "\n";
     return 0;
 }
