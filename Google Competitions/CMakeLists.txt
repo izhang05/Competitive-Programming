@@ -2,11 +2,26 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Google_Code_Jam)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Allocation "Kick Start/2020/Round A/Y 1. Allocation/Allocation.cpp")
-add_executable(Vestigium "Code Jam/2020/Qualification Round/Y 1. Vestigium/Vestigium.cpp")
-add_executable(Nesting_Depth "Code Jam/2020/Qualification Round/Y 2. Nesting Depth/Nesting Depth.cpp")
-add_executable(Parenting_Partnering_Returns "Code Jam/2020/Qualification Round/Y 3. Parenting Partnering Returns/Parenting Partnering Returns.cpp")
-add_executable(Number_Guessing "Code Jam/2018/Practice Session/Y 1. Number Guessing/Number Guessing.cpp")
-add_executable(Pattern_Matching "Code Jam/2020/Round 1A/X 1. Pattern Matching/Pattern Matching.cpp")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+file(GLOB_RECURSE FILES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS "*.cpp")
+
+foreach (FILE ${FILES})
+    if (NOT ${FILE} MATCHES "cmake-build*")
+        get_filename_component(FILE_NAME ${FILE} NAME)
+        string(REPLACE ".cpp" "" TARGET_NAME "${FILE_NAME}")
+        string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
+        string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
+        string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
+        add_executable(${TARGET_NAME} "${FILE}")
+        get_filename_component(PARENT_DIR ${FILE}/.. ABSOLUTE)
+        message(${TARGET_NAME} " = " ${FILE})
+        message(${PARENT_DIR})
+        set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PARENT_DIR}")
+    endif ()
+endforeach ()
