@@ -1,0 +1,65 @@
+type: codeforces
+custom_name: B. Restore Modulo
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.17)
+
+    project(task2)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    6
+    6
+    1 9 17 6 14 3
+    3
+    4 2 2
+    3
+    7 3 4
+    3
+    2 2 4
+    5
+    0 1000000000 0 1000000000 0
+    2
+    1 1
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    19 8
+    -1
+    -1
+    -1
+    2000000000 1000000000
+    0
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1484/problem/B?locale=en
+status: Unchecked
+feedback:
+  time: Sun, 21 Mar 2021 15:25:34 UTC
