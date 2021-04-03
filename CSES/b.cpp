@@ -14,44 +14,58 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e3 + 5;
-
-int dp[maxn][maxn];
+const int mod = 1e9 + 7, maxn = 1e5 + 5;
+const long long inf = 1e18;
+vector<pair<int, int>> adj[maxn];
+long long dist[maxn];
 
 int main() {
     setIO("b");
-
-    int n, h, l, r;
-    cin >> n >> h >> l >> r;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+    int n, m, k;
+    cin >> n >> m >> k;
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        --a, --b;
+        adj[a].emplace_back(b, c);
+        adj[b].emplace_back(a, c);
     }
-    memset(dp, -1, sizeof(dp));
-    dp[0][0] = 0;
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < h; ++j) {
-            int cur = dp[i][j];
-            if (cur == -1) {
+        dist[i] = inf;
+    }
+    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> q;
+    for (int i = 0; i < k; ++i) {
+        int a, b;
+        cin >> a >> b;
+        --a;
+        q.push({b, a});
+    }
+    int sol = 0;
+    dist[0] = 0;
+    q.push({0, 0});
+    while (!q.empty()) {
+        int node = q.top().second;
+        long long d = q.top().first;
+        q.pop();
+        if (dist[abs(node)] < d) {
+            continue;
+        }
+        if (node > 0) {
+            if (dist[node] == d) {
                 continue;
             }
-            int b = (j + a[i] - 1) % h, c = (j + a[i]) % h;
-            if (b >= l && b <= r) {
-                dp[i + 1][b] = max(dp[i + 1][b], cur + 1);
-            } else {
-                dp[i + 1][b] = max(dp[i + 1][b], cur);
-            }
-            if (c >= l && c <= r) {
-                dp[i + 1][c] = max(dp[i + 1][c], cur + 1);
-            } else {
-                dp[i + 1][c] = max(dp[i + 1][c], cur);
+            dist[node] = d;
+            ++sol;
+        } else {
+            node *= -1;
+        }
+        for (auto i : adj[node]) {
+            long long nd = d + i.second;
+            if (dist[i.first] > nd) {
+                q.push({dist[i.first] = nd, -i.first});
             }
         }
     }
-    int sol = 0;
-    for (int i = 0; i < h; ++i) {
-        sol = max(sol, dp[n][i]);
-    }
-    cout << sol << "\n";
+    cout << k - sol << "\n";
     return 0;
 }
