@@ -1,0 +1,111 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   F. Flip the Cards
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>There is a deck of $n$ cards. The $i$-th card has a number $a_i$ on the front and a number $b_i$ on the back. Every integer between $1$ and $2n$ appears exactly once on the cards.</p>
+  <p>A deck is called sorted if the front values are in <span class="tex-font-style-bf">increasing</span> order and the back values are in <span class="tex-font-style-bf">decreasing</span> order. That is, if $a_i&lt; a_{i+1}$ and $b_i&gt; b_{i+1}$ for all $1\le i&lt;n$.</p>
+  <p>To flip a card $i$ means swapping the values of $a_i$ and $b_i$. You must flip some subset of cards (possibly, none), then put all the cards in any order you like. What is the minimum number of cards you must flip in order to sort the deck?</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains a single integer $n$ ($1\le n\le 2\cdot 10^5$) — the number of cards.</p>
+  <p>The next $n$ lines describe the cards. The $i$-th of these lines contains two integers $a_i, b_i$ ($1\le a_i, b_i\le 2n$). Every integer between $1$ and $2n$ appears exactly once.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>If it is impossible to sort the deck, output "<span class="tex-font-style-tt">-1</span>". Otherwise, output the minimum number of flips required to sort the deck.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>5
+3 10
+6 4
+1 9
+5 8
+2 7
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>2
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2
+1 2
+3 4
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>-1
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>3
+1 2
+3 6
+4 5
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>-1
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first test case, we flip the cards $(1, 9)$ and $(2, 7)$. The deck is then ordered $(3,10), (5,8), (6,4), (7,2), (9,1)$. It is sorted because $3&lt;5&lt;6&lt;7&lt;9$ and $10&gt;8&gt;4&gt;2&gt;1$.</p>
+  <p>In the second test case, it is impossible to sort the deck.</p>
+ </div>
+</div>
