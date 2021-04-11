@@ -14,59 +14,81 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 998244353, maxn = 205, maxs = 30;
+#define int long long
+const int inf = 0x3f3f3f3f, mod = 998244353ll, maxn = 1e3 + 5;
 
-int dp[2][maxn][maxn * maxs];
+long long sol = 0, dp[maxn][maxn], last[maxn], pre[maxn][maxn], n, k;
+vector<long long> a;
 
-pair<int, int> fact(long long b) {
-    pair<int, int> res;
-    while (b % 2 == 0) {
-        ++res.first;
-        b /= 2;
+void solve(int x) {
+    for (int i = 0; i < n; ++i) {
+        last[i] = -1;
+        for (int j = 0; j <= k; ++j) {
+            dp[i][j] = 0;
+            pre[i][j] = 0;
+        }
     }
-    while (b % 5 == 0) {
-        ++res.second;
-        b /= 5;
+
+    int i = -1;
+    for (int j = 0; j < n; ++j) {
+        while (i + 1 < j && a[i + 1] + x <= a[j]) {
+            ++i;
+        }
+        last[j] = i;
     }
-    return res;
+#ifdef DEBUG
+    cout << "last:"
+         << "\n";
+    for (int i = 0; i < n; ++i) {
+        cout << last[i] << " ";
+    }
+    cout << "\n";
+#endif
+    for (int i = 0; i < n; ++i) {
+        dp[i][1] = 1;
+        pre[i][1] = i + 1;
+    }
+    for (int i = 2; i <= k; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (last[j] == -1) {
+                continue;
+            }
+            dp[j][i] = pre[last[j]][i - 1];
+            dp[j][i] %= mod;
+            pre[j][i] = pre[j - 1][i] + dp[j][i];
+            pre[j][i] %= mod;
+        }
+    }
+#ifdef DEBUG
+    for (int i = 0; i <= k; ++i) {
+        for (int l = 0; l < n; ++l) {
+            cout << dp[l][i] << " ";
+        }
+        cout << "\n";
+    }
+#endif
+    sol += pre[n - 1][k];
+    sol %= mod;
+#ifdef DEBUG
+    cout << sol << "\n";
+#endif
 }
 
-int main() {
+signed main() {
     setIO("b");
-
-    int n, k;
     cin >> n >> k;
-    vector<pair<int, int>> a(n);
-
+    a.resize(n);
+    long long mx = 0;
     for (int i = 0; i < n; ++i) {
-        long long b;
-        cin >> b;
-        a[i] = fact(b);
-#ifdef DEBUG
-        cout << b << " " << a[i].first << " " << a[i].second << "\n";
-#endif
+        cin >> a[i];
+        mx = max(mx, a[i]);
     }
-    memset(dp, -1, sizeof(dp));
-    dp[0][0][0] = 0;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j <= k; ++j) {
-            for (int l = 0; l < maxn * maxs; ++l) {
-                int cur = dp[i % 2][j][l];
-                if (cur == -1) {
-                    continue;
-                }
+    sort(a.begin(), a.end());
+    for (long long i = 1; i * (k - 1) <= mx; ++i) {
 #ifdef DEBUG
-                cout << i << " " << j << " " << l << " " << cur << "\n";
+        cout << "solve: " << i << "\n";
 #endif
-                dp[(i + 1) % 2][j][l] = max(cur, dp[(i + 1) % 2][j][l]);
-                dp[(i + 1) % 2][j + 1][l + a[i].second] = max(dp[(i + 1) % 2][j + 1][l + a[i].second], cur + a[i].first);
-            }
-        }
-        memset(dp[i % 2], -1, sizeof(dp[i % 2]));
-    }
-    int sol = 0;
-    for (int i = 0; i < maxn * maxs; ++i) {
-        sol = max(sol, min(i, dp[n % 2][k][i]));
+        solve(i);
     }
     cout << sol << "\n";
     return 0;
