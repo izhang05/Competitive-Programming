@@ -14,82 +14,61 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-#define int long long
-const int inf = 0x3f3f3f3f, mod = 998244353ll, maxn = 1e3 + 5;
-
-long long sol = 0, dp[maxn][maxn], last[maxn], pre[maxn][maxn], n, k;
-vector<long long> a;
-
-void solve(int x) {
-    for (int i = 0; i < n; ++i) {
-        last[i] = -1;
-        for (int j = 0; j <= k; ++j) {
-            dp[i][j] = 0;
-            pre[i][j] = 0;
-        }
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
     }
-
-    int i = -1;
-    for (int j = 0; j < n; ++j) {
-        while (i + 1 < j && a[i + 1] + x <= a[j]) {
-            ++i;
-        }
-        last[j] = i;
-    }
-#ifdef DEBUG
-    cout << "last:"
-         << "\n";
-    for (int i = 0; i < n; ++i) {
-        cout << last[i] << " ";
-    }
-    cout << "\n";
-#endif
-    for (int i = 0; i < n; ++i) {
-        dp[i][1] = 1;
-        pre[i][1] = i + 1;
-    }
-    for (int i = 2; i <= k; ++i) {
-        for (int j = 0; j < n; ++j) {
-            if (last[j] == -1) {
-                continue;
-            }
-            dp[j][i] = pre[last[j]][i - 1];
-            dp[j][i] %= mod;
-            pre[j][i] = pre[j - 1][i] + dp[j][i];
-            pre[j][i] %= mod;
-        }
-    }
-#ifdef DEBUG
-    for (int i = 0; i <= k; ++i) {
-        for (int l = 0; l < n; ++l) {
-            cout << dp[l][i] << " ";
-        }
-        cout << "\n";
-    }
-#endif
-    sol += pre[n - 1][k];
-    sol %= mod;
-#ifdef DEBUG
-    cout << sol << "\n";
-#endif
+    cout << end;
 }
 
-signed main() {
+int main() {
     setIO("b");
-    cin >> n >> k;
-    a.resize(n);
-    long long mx = 0;
-    for (int i = 0; i < n; ++i) {
+
+    int n;
+    cin >> n;
+    vector<int> a(n - 1);
+    for (int i = 0; i < n - 1; ++i) {
         cin >> a[i];
-        mx = max(mx, a[i]);
     }
-    sort(a.begin(), a.end());
-    for (long long i = 1; i * (k - 1) <= mx; ++i) {
+    vector<int> b(n - 1);
+    for (int i = 0; i < n - 1; ++i) {
+        cin >> b[i];
+    }
+    vector<int> sol;
+    for (int i = 0; i <= 3; ++i) {
+        sol.clear();
+        sol.push_back(i);
+        bool pos = true;
+        int last = i;
+        for (int j = 0; j < n - 1; ++j) {
+            vector<int> ne;
+            for (int k = 0; k <= 3; ++k) {
+                if (((last | k) == a[j]) && ((last & k) == b[j])) {
+                    ne.push_back(k);
+                }
+            }
+            assert(ne.size() <= 1);
+            if (ne.empty()) {
 #ifdef DEBUG
-        cout << "solve: " << i << "\n";
+                cout << "Bad: " << i << "\n";
+                print(sol);
 #endif
-        solve(i);
+                pos = false;
+                break;
+            }
+            sol.push_back(ne[0]);
+            last = ne[0];
+        }
+        if (pos) {
+            cout << "YES"
+                 << "\n";
+            print(sol);
+            return 0;
+        }
     }
-    cout << sol << "\n";
+    cout << "NO"
+         << "\n";
     return 0;
 }
