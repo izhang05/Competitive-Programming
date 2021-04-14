@@ -2,125 +2,70 @@
 
 using namespace std;
 
+mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
+
 //#define DEBUG
 void setIO(string name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
-    //#ifdef LOCAL
-    //    freopen((name + ".in").c_str(), "r", stdin);
-    //    freopen((name + ".out").c_str(), "w", stdout);
-    //    freopen((name + ".out").c_str(), "w", stderr);
-    //#endif
+#ifdef LOCAL
+    freopen((name + ".in").c_str(), "r", stdin);
+    freopen((name + ".out").c_str(), "w", stdout);
+    freopen((name + ".out").c_str(), "w", stderr);
+#endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 3e5 + 5;
-array<pair<int, int>, 2> dp[maxn];
-vector<int> adj[maxn];
-int a[maxn], n, cycle_ind[maxn], visited[maxn];
-long long k;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
-void dfs1(int c, int p) {
-    dp[c][0] = dp[c][1] = {-inf, -inf};
-    for (auto i : adj[c]) {
-        if (i != p) {
-            dfs1(i, c);
-            vector<pair<int, int>> pos;
-            pos.emplace_back(dp[i][0].first - 1, dp[i][0].second);
-            pos.emplace_back(a[i] - 1, -i);
-            pos.emplace_back(dp[i][1].first - 1, dp[i][1].second);
-            pos.push_back(dp[c][0]), pos.push_back(dp[c][1]);
-            sort(pos.begin(), pos.end());
-            reverse(pos.begin(), pos.end());
-            int used = 0, num = -1;
-            for (auto j : pos) {
-                if (j.second != num) {
-                    dp[c][used++] = j;
-                    num = j.second;
-                    if (used == 2) {
-                        break;
-                    }
-                }
-            }
-        }
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
     }
+    cout << end;
 }
 
-void dfs2(int c, int p) {
-    if (p != 0) {
-        vector<pair<int, int>> pos;
-        pos.emplace_back(dp[p][0].first - 1, dp[p][0].second);
-        pos.emplace_back(a[p] - 1, -p);
-        pos.emplace_back(dp[p][1].first - 1, dp[p][1].second);
-        pos.push_back(dp[c][0]), pos.push_back(dp[c][1]);
-        sort(pos.begin(), pos.end());
-        reverse(pos.begin(), pos.end());
-        int used = 0, num = 1;
-        for (auto i : pos) {
-            if (i.second != num) {
-                dp[c][used++] = i;
-                num = i.second;
-                if (used == 2) {
-                    break;
-                }
-            }
-        }
-    }
-    for (auto i : adj[c]) {
-        if (i != p) {
-            dfs2(i, c);
-        }
-    }
-}
-
-signed main() {
+int main() {
     setIO("1");
-    cin >> n >> k;
-    if (n == 1) {
-        cout << 0 << "\n";
-        return 0;
+
+    int n;
+    cin >> n;
+    vector<pair<pair<int, int>, int>> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i].first.first >> a[i].first.second;
+        a[i].second = i + 1;
     }
-    for (int i = 1; i < n + 1; ++i) {
-        cin >> a[i];
-    }
-    for (int i = 0; i < n - 1; ++i) {
-        int b, c;
-        cin >> b >> c;
-        adj[b].push_back(c);
-        adj[c].push_back(b);
-    }
-    dfs1(1, 0);
-    dfs2(1, 0);
-    for (int i = 1; i < n; ++i) {
-        adj[i].clear();
-    }
+    sort(a.begin(), a.end());
+    int s = 1000;
+    vector<int> sol;
+    int en = s;
 #ifdef DEBUG
-    for (int i = 1; i < n + 1; ++i) {
-        cout << dp[i][0].first << " " << dp[i][0].second << " " << dp[i][1].first << " " << dp[i][1].second << "\n";
+    for (auto i : a) {
+        cout << i.first.first << " " << i.first.second << " " << i.second << "\n";
     }
     cout << "\n";
 #endif
-    for (int i = 1; i < n + 1; ++i) {
-        visited[i] = -1;
-    }
-    int cur = 1, cnt = 0;
-    visited[1] = 0;
-    bool flag = false;
-    while (k) {
-        int nex = -dp[cur][0].second;
-        if (nex == cur) {
-            nex = -dp[cur][1].second;
+    for (int i = 0; i < n; en += s) {
+        vector<pair<pair<int, int>, int>> cur;
+        while (i < n && a[i].first.first <= en) {
+#ifdef DEBUG
+            cout << i << " " << a[i].first.first << " " << a[i].first.second << " " << a[i].second << "\n";
+#endif
+            cur.push_back(a[i]);
+            ++i;
         }
-        cur = nex;
-        ++cnt;
-        --k;
-        if (!flag && visited[cur] != -1) {
-            int cycLen = cnt - visited[cur];
-            k %= cycLen;
-            flag = true;
+        sort(cur.begin(), cur.end(), [](pair<pair<int, int>, int> left, pair<pair<int, int>, int> right) {
+            return left.first.second == right.first.second ? left.first.first < right.first.first : left.first.second <
+                                                                                                    right.first.second;
+        });
+        for (auto j : cur) {
+//#ifdef DEBUG
+//            cout << j.first.first << " " << j.first.second << " " << j.second << "\n";
+//#endif
+            sol.push_back(j.second);
         }
-        visited[cur] = cnt;
     }
-    cout << cur << "\n";
+    print(sol);
     return 0;
 }
