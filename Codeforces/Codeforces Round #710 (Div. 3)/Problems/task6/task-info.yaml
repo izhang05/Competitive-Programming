@@ -58,4 +58,6 @@ files:
     }
   learner_created: false
 feedback_link: https://codeforces.com/contest/1506/problem/F?locale=en
-status: Unchecked
+status: Solved
+feedback:
+  time: Fri, 16 Apr 2021 18:21:52 UTC

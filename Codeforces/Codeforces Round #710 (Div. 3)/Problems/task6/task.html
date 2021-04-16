@@ -26,19 +26,16 @@
  </div>
  <div>
   <p>Consider an infinite triangle made up of layers. Let's number the layers, starting from one, from the top of the triangle (from top to bottom). The $k$-th layer of the triangle contains $k$ points, numbered from left to right. Each point of an infinite triangle is described by a pair of numbers $(r, c)$ ($1 \le c \le r$), where $r$ is the number of the layer, and $c$ is the number of the point in the layer. From each point $(r, c)$ there are two <span class="tex-font-style-bf">directed</span> edges to the points $(r+1, c)$ and $(r+1, c+1)$, but only one of the edges is activated. If $r + c$ is even, then the edge to the point $(r+1, c)$ is activated, otherwise the edge to the point $(r+1, c+1)$ is activated. Look at the picture for a better understanding.</p>
-  <p></p>
   <center> 
    <img class="tex-graphics" src="https://espresso.codeforces.com/1e03b2417de2a47038c84ffb48e68beb31a22907.png" style="max-width: 100.0%;max-height: 100.0%;"> 
    <span class="tex-font-size-small">Activated edges are colored in black. Non-activated edges are colored in gray.</span> 
   </center>
-  <p></p>
   <p>From the point $(r_1, c_1)$ it is possible to reach the point $(r_2, c_2)$, if there is a path between them only from <span class="tex-font-style-bf">activated</span> edges. For example, in the picture above, there is a path from $(1, 1)$ to $(3, 2)$, but there is no path from $(2, 1)$ to $(1, 1)$.</p>
   <p>Initially, you are at the point $(1, 1)$. For each turn, you can: </p>
   <ul> 
    <li> Replace activated edge for point $(r, c)$. That is if the edge to the point $(r+1, c)$ is activated, then <span class="tex-font-style-bf">instead of it</span>, the edge to the point $(r+1, c+1)$ becomes activated, otherwise if the edge to the point $(r+1, c+1)$, then <span class="tex-font-style-bf">instead if it</span>, the edge to the point $(r+1, c)$ becomes activated. This action increases the cost of the path by $1$; </li>
    <li> Move from the current point to another by following the activated edge. This action <span class="tex-font-style-bf">does not increase</span> the cost of the path. </li>
   </ul>
-  <p></p>
   <p>You are given a sequence of $n$ points of an infinite triangle $(r_1, c_1), (r_2, c_2), \ldots, (r_n, c_n)$. Find the minimum cost path from $(1, 1)$, passing through all $n$ points in <span class="tex-font-style-bf">arbitrary</span> order.</p>
  </div>
  <div class="input-specification">
