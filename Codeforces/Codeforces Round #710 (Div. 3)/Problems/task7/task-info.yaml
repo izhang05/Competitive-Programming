@@ -57,7 +57,7 @@ feedback_link: https://codeforces.com/contest/1506/problem/G?locale=en
 status: Failed
 feedback:
   message: Test №1 is failed
-  time: Thu, 25 Mar 2021 16:52:51 UTC
+  time: Fri, 16 Apr 2021 19:02:05 UTC
   expected: |-
     odfrces
     ezakmi
@@ -65,10 +65,4 @@ feedback:
     convexhul
     wfldjgpaxs
     myneocktxqjpz
-  actual: |-
-    odfrces
-    ezakmi
-    bcba
-    convexhul
-    wfldjgpaxs
-    myneocktxqjpz
+  actual: <no output>
