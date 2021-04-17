@@ -1,0 +1,59 @@
+type: codeforces
+custom_name: D. GCD and MST
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.19)
+
+    project(task4)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    4
+    2 5
+    10 10
+    2 5
+    3 3
+    4 5
+    5 2 4 9
+    8 8
+    5 3 3 6 10 100 9 15
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    5
+    3
+    12
+    46
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1513/problem/D?locale=en
+status: Solved
+feedback:
+  time: Sat, 17 Apr 2021 18:21:27 UTC
