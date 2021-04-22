@@ -16,34 +16,50 @@ void setIO(string name) {
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
 
 int main() {
     setIO("1");
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        string s;
-        cin >> s;
-        vector<int> a(n);
-        int pre = 0;
-        map<int, long long> vals;
-        for (int i = 0; i < n; ++i) {
-            a[i] = s[i] - '0';
-            pre += a[i];
-            ++vals[pre - (i + 1)];
+    int n, q;
+    cin >> n >> q;
+    int odd = 0, even = 1;
+    for (int i = 0; i < q; ++i) {
+        int t;
+        cin >> t;
+        if (t == 1) {
+            int a;
+            cin >> a;
+            odd += a;
+            even += a;
+        } else {
+            if (even % 2 == 1) {
+                ++odd;
+                --even;
+            } else {
+                --odd;
+                ++even;
+            }
         }
-        ++vals[0];
-        long long sol = 0;
-        for (auto i : vals) {
-#ifdef DEBUG
-            cout << i.first << " " << i.second << "\n";
-#endif
-            sol += (i.second * (i.second - 1)) / 2;
-        }
-        cout << sol << "\n";
+        odd %= n, even %= n;
+        odd = (odd + n) % n;
+        even = (even + n) % n;
     }
+    vector<int> sol(n);
+    for (int i = 1; i < n; i += 2) {
+        sol[odd] = i;
+        odd = (odd + 2) % n;
+    }
+    for (int i = 2; i <= n; i += 2) {
+        sol[even] = i;
+        even = (even + 2) % n;
+    }
+    print(sol);
     return 0;
 }
