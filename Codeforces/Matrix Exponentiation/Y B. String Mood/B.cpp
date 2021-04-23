@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define DEBUG
+//#define DEBUG
 
 void setIO(string name) {
     ios_base::sync_with_stdio(false);
@@ -25,7 +25,6 @@ void eval(bool sol = false) {
             for (int k = 0; k < 2; ++k) {
                 if (sol) {
                     tmp[i][k] += b[i][j] * a[j][k];
-
                 } else {
                     tmp[i][k] += a[i][j] * a[j][k];
                 }
@@ -56,11 +55,6 @@ int main() {
     a[1][1] = 20;
 
     b[0][0] = 1;
-//    for (auto &i : b) {
-//        for (int &j : i) {
-//            j = 1;
-//        }
-//    }
     while (n) {
         if (n % 2) {
             eval(true);
