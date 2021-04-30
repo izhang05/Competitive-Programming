@@ -14,52 +14,49 @@ void setIO(string name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int mod = 1e9 + 7, maxn = 1e5 + 5;
+const long long inf = 1e18;
 
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
-    }
-    cout << end;
-}
+long long dp[maxn][2];
 
 int main() {
     setIO("1");
 
-    int n, q;
-    cin >> n >> q;
-    int odd = 0, even = 1;
-    for (int i = 0; i < q; ++i) {
-        int t;
-        cin >> t;
-        if (t == 1) {
-            int a;
-            cin >> a;
-            odd += a;
-            even += a;
-        } else {
-            if (even % 2 == 1) {
-                ++odd;
-                --even;
-            } else {
-                --odd;
-                ++even;
-            }
+    int n;
+    cin >> n;
+    vector<int> c(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> c[i];
+    }
+    vector<vector<string>> s(n, vector<string>(2));
+    for (int i = 0; i < n; ++i) {
+        cin >> s[i][0];
+        s[i][1] = s[i][0];
+        reverse(s[i][1].begin(), s[i][1].end());
+    }
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            dp[i][j] = inf;
         }
-        odd %= n, even %= n;
-        odd = (odd + n) % n;
-        even = (even + n) % n;
     }
-    vector<int> sol(n);
-    for (int i = 1; i < n; i += 2) {
-        sol[odd] = i;
-        odd = (odd + 2) % n;
+    dp[0][0] = 0;
+    dp[0][1] = c[0];
+    for (int i = 1; i < n; ++i) {
+        if (s[i][0] >= s[i - 1][0]) {
+            dp[i][0] = min(dp[i][0], dp[i - 1][0]);
+        }
+        if (s[i][0] >= s[i - 1][1]) {
+            dp[i][0] = min(dp[i][0], dp[i - 1][1]);
+        }
+        if (s[i][1] >= s[i - 1][0]) {
+            dp[i][1] = min(dp[i][1], dp[i - 1][0] + c[i]);
+        }
+        if (s[i][1] >= s[i - 1][1]) {
+            dp[i][1] = min(dp[i][1], dp[i - 1][1] + c[i]);
+        }
     }
-    for (int i = 2; i <= n; i += 2) {
-        sol[even] = i;
-        even = (even + 2) % n;
-    }
-    print(sol);
+    long long sol = min(dp[n - 1][0], dp[n - 1][1]);
+    cout << (sol == inf ? -1 : sol) << "\n";
     return 0;
 }
+
