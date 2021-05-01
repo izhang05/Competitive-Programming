@@ -14,97 +14,134 @@ void setIO(string name) {
 #endif
 }
 
-const int mod = 1e9 + 7, maxn = 2e5 + 5, maxs = 19;
-const long long inf = 1e18;
+#define int long long
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5, maxs = 20;
+vector<pair<int, int>> tree[maxn];
 
-int up[maxn][maxs], depth[maxn], n, m;
+pair<int, int> up[maxn][maxs];
+int depth[maxn], n;
 
 int jmp(int x, int d) {
-    for (int i = 0; i < maxs && x != -1; ++i) {
-        if ((1 << i) & d) {
-            x = up[x][i];
+    for (int i = 0; i < maxs; i++) {
+        if ((d >> i) & 1) {
+            x = up[x][i].first;
         }
     }
     return x;
 }
 
+int get_cost(int x, int d) {
+    int cost = 0;
+    for (int i = 0; i < maxs; i++) {
+        if ((d >> i) & 1) {
+            cost = max(cost, up[x][i].second);
+            x = up[x][i].first;
+        }
+    }
+    return cost;
+}
+
+
+int lca(int x, int y) {
+    if (depth[x] < depth[y]) {
+        swap(x, y);
+    }
+    x = jmp(x, depth[x] - depth[y]);
+    if (x == y) {
+        return x;
+    }
+    for (int i = maxs - 1; i >= 0; --i) {
+        int new_x = up[x][i].first, new_y = up[y][i].first;
+        if (new_x != new_y) {
+            x = new_x, y = new_y;
+        }
+    }
+    return up[x][0].first;
+}
+
+int dist(int x, int y) {
+    int l = lca(x, y);
+    return depth[x] - depth[l] + depth[y] - depth[l];
+}
+
+void dfs(int c = 0, int p = -1, int d = 0, int cost = 0) {
+    up[c][0].first = p;
+    up[c][0].second = cost;
+    depth[c] = d;
+    for (pair<int, int> i : tree[c]) {
+        if (i.first != p) {
+            dfs(i.first, c, d + 1, i.second);
+        }
+    }
+}
 
 void build() {
     for (int i = 1; i < maxs; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if (up[j][i - 1] == -1) {
-                up[j][i] = -1;
+        for (int j = 0; j < n; ++j) {
+            if (up[j][i - 1].first == -1) {
+                up[j][i].first = -1;
             } else {
-                up[j][i] = up[up[j][i - 1]][i - 1];
+                up[j][i].first = up[up[j][i - 1].first][i - 1].first;
+                up[j][i].second = max(up[j][i - 1].second, up[up[j][i - 1].first][i - 1].second);
             }
         }
     }
 }
 
-long long t[2 * maxn];
+int parent[maxn];
 
-long long calc(long long a, long long b) {
-    return max(a, b);
+int get(int x) {
+    return parent[x] == x ? x : parent[x] = get(parent[x]);
 }
 
-
-void update(int p, long long val) {
-    for (t[p += m] = val; p > 1; p /= 2) {
-        t[p / 2] = calc(t[p], t[p ^ 1]); // p ^ 1 is the other child for mode p / 2
+bool merge(int x, int y) {
+    int xroot = get(x), yroot = get(y);
+    if (xroot != yroot) {
+        parent[xroot] = yroot;
+        return true;
     }
+    return false;
 }
 
-long long query(int l, int r) {
-    long long res = -1;
-    for (l += m, r += m; l < r; l /= 2, r /= 2) {
-        if (l & 1) {
-            res = calc(res, t[l++]);
-        }
-        if (r & 1) {
-            res = calc(res, t[--r]);
-        }
-    }
-    return res;
-}
+vector<pair<int, int>> adj[maxn];
 
-int main() {
+signed main() {
     setIO("1");
-    int q;
-    cin >> n >> m >> q;
-    vector<int> p(n), ind(n);
+
+    int m;
+    cin >> n >> m;
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<>> pq;
+    vector<pair<pair<int, int>, int>> q(m);
+    for (int i = 0; i < m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        --a, --b;
+        adj[a].emplace_back(b, c);
+        adj[b].emplace_back(a, c);
+        q[i] = {{a, b}, c};
+        pq.push({c, {a, b}});
+    }
     for (int i = 0; i < n; ++i) {
-        cin >> p[i];
-        --p[i];
-        ind[p[i]] = i;
+        parent[i] = i;
     }
-    vector<int> a(m);
-    for (int i = 0; i < m; ++i) {
-        cin >> a[i];
-        --a[i];
+    int comp = n, cost = 0;
+    while (comp > 1) {
+        pair<int, pair<int, int>> cur = pq.top();
+        pq.pop();
+        if (merge(cur.second.first, cur.second.second)) {
+            --comp;
+            tree[cur.second.first].emplace_back(cur.second.second, cur.first);
+            tree[cur.second.second].emplace_back(cur.second.first, cur.first);
+            cost += cur.first;
+        }
     }
-    vector<int> last(n, -1);
-    for (int i = 0; i < m; ++i) {
-        up[i][0] = last[p[(ind[a[i]] - 1 + n) % n]];
-#ifdef DEBUG
-        cout << i << " " << up[i][0] << "\n";
-#endif
-        last[a[i]] = i;
-    }
+    dfs();
     build();
-    memset(t, -1, sizeof(t));
     for (int i = 0; i < m; ++i) {
-        update(i, jmp(i, n - 1));
-#ifdef DEBUG
-        cout << jmp(i, n - 1) << "\n";
-#endif
+        int l = lca(q[i].first.first, q[i].first.second);
+        int sub = max(get_cost(q[i].first.first, depth[q[i].first.first] - depth[l]),
+                      get_cost(q[i].first.second, depth[q[i].first.second] - depth[l]));
+        cout << cost + q[i].second - sub << "\n";
     }
-    for (int i = 0; i < q; ++i) {
-        int l, r;
-        cin >> l >> r;
-        --l, --r;
-        cout << (query(l, r + 1) >= l);
-    }
-    cout << "\n";
     return 0;
 }
-
