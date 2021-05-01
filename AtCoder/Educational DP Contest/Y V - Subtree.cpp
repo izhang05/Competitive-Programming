@@ -86,7 +86,7 @@ int main() {
 #ifdef LOCAL
     auto start_time = std::chrono::high_resolution_clock::now();
 #endif
-    setIO("V2");
+    setIO("V");
     int n;
     cin >> n >> mod;
     int a, b;
