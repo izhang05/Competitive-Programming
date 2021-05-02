@@ -1,0 +1,19 @@
+type: codeforces
+title: Codeforces Global Round 14
+language: English
+summary: |-
+  A. Phoenix and Gold
+  B. Phoenix and Puzzle
+  C. Phoenix and Towers
+  D. Phoenix and Socks
+  E. Phoenix and Computers
+  F. Phoenix and Earthquake
+  G. Phoenix and Odometers
+  H. Phoenix and Bits
+  I. Phoenix and Diamonds
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1619976900.000000000
+mode: Study

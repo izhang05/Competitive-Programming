@@ -1,0 +1,118 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   G. Phoenix and Odometers
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>In Fire City, there are $n$ intersections and $m$ one-way roads. The $i$-th road goes from intersection $a_i$ to $b_i$ and has length $l_i$ miles. </p>
+  <p>There are $q$ cars that may only drive along those roads. The $i$-th car starts at intersection $v_i$ and has an odometer that begins at $s_i$, increments for each mile driven, and resets to $0$ whenever it reaches $t_i$. Phoenix has been tasked to drive cars along some roads (possibly none) and <span class="tex-font-style-bf">return them to their initial intersection</span> with the odometer showing $0$.</p>
+  <p>For each car, please find if this is possible. </p>
+  <p>A car may visit the same road or intersection an arbitrary number of times. The odometers don't stop counting the distance after resetting, so odometers may also be reset an arbitrary number of times.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line of the input contains two integers $n$ and $m$ ($2 \le n \le 2 \cdot 10^5$; $1 \le m \le 2 \cdot 10^5$)&nbsp;— the number of intersections and the number of roads, respectively.</p>
+  <p>Each of the next $m$ lines contain three integers $a_i$, $b_i$, and $l_i$ ($1 \le a_i, b_i \le n$; $a_i \neq b_i$; $1 \le l_i \le 10^9$)&nbsp;— the information about the $i$-th road. The graph is not necessarily connected. It is guaranteed that between any two intersections, there is at most one road for each direction.</p>
+  <p>The next line contains an integer $q$ ($1 \le q \le 2 \cdot 10^5$)&nbsp;— the number of cars.</p>
+  <p>Each of the next $q$ lines contains three integers $v_i$, $s_i$, and $t_i$ ($1 \le v_i \le n$; $0 \le s_i &lt; t_i \le 10^9$)&nbsp;— the initial intersection of the $i$-th car, the initial number on the $i$-th odometer, and the number at which the $i$-th odometer resets, respectively.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print $q$ answers. If the $i$-th car's odometer may be reset to $0$ by driving through some roads (possibly none) and returning to its starting intersection $v_i$, print <span class="tex-font-style-tt">YES</span>. Otherwise, print <span class="tex-font-style-tt">NO</span>.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4 4
+1 2 1
+2 3 1
+3 1 2
+1 4 3
+3
+1 1 3
+1 2 4
+4 0 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>YES
+NO
+YES
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4 5
+1 2 1
+2 3 1
+3 1 2
+1 4 1
+4 3 2
+2
+1 2 4
+4 3 5
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>YES
+YES
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>The illustration for the first example is below:</p>
+  <center> 
+   <img class="tex-graphics" height="264px" src="https://espresso.codeforces.com/a771093c818590ed50aa5cd82e5b6aef21af6204.png" style="max-width: 100.0%;max-height: 100.0%;" width="415px"> 
+  </center>
+  <p>In the first query, Phoenix can drive through the following cities: $1$ $\rightarrow$ $2$ $\rightarrow$ $3$ $\rightarrow$ $1$ $\rightarrow$ $2$ $\rightarrow$ $3$ $\rightarrow$ $1$. The odometer will have reset $3$ times, but it displays $0$ at the end.</p>
+  <p>In the second query, we can show that there is no way to reset the odometer to $0$ and return to intersection $1$.</p>
+  <p>In the third query, the odometer already displays $0$, so there is no need to drive through any roads.</p>
+  <p>Below is the illustration for the second example: </p>
+  <center> 
+   <img class="tex-graphics" height="264px" src="https://espresso.codeforces.com/868b11588eca9b8372284ef81848a2527088e02c.png" style="max-width: 100.0%;max-height: 100.0%;" width="378px"> 
+  </center>
+ </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   B. Phoenix and Puzzle
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Phoenix is playing with a new puzzle, which consists of $n$ identical puzzle pieces. Each puzzle piece is a right isosceles triangle as shown below.</p>
+  <center> 
+   <img class="tex-graphics" height="113px" src="https://espresso.codeforces.com/16604e63f083af79e8cd890c36ce29e7caaafdbe.png" style="max-width: 100.0%;max-height: 100.0%;" width="113px"> 
+   <span class="tex-font-size-small">A puzzle piece</span> 
+  </center>
+  <p>The goal of the puzzle is to create a <span class="tex-font-style-bf">square</span> using the $n$ pieces. He is allowed to rotate and move the pieces around, but none of them can overlap and all $n$ pieces must be used (of course, the square shouldn't contain any holes as well). Can he do it?</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The input consists of multiple test cases. The first line contains an integer $t$ ($1 \le t \le 10^4$)&nbsp;— the number of test cases.</p>
+  <p>The first line of each test case contains an integer $n$ ($1 \le n \le 10^9$)&nbsp;— the number of puzzle pieces.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, if Phoenix can create a square with the $n$ puzzle pieces, print <span class="tex-font-style-tt">YES</span>. Otherwise, print <span class="tex-font-style-tt">NO</span>.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>3
+2
+4
+6
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>YES
+YES
+NO
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>For $n=2$, Phoenix can create a square like this:</p>
+  <center> 
+   <img class="tex-graphics" height="113px" src="https://espresso.codeforces.com/7290a1f401f34d7f447c35b8fd4207ab893588dd.png" style="max-width: 100.0%;max-height: 100.0%;" width="113px"> 
+  </center>
+  <p>For $n=4$, Phoenix can create a square like this:</p>
+  <center> 
+   <img class="tex-graphics" height="158px" src="https://espresso.codeforces.com/3ac1d0a80035f34a0c527affb21dfbf2e2c0b1e5.png" style="max-width: 100.0%;max-height: 100.0%;" width="158px"> 
+  </center>
+  <p>For $n=6$, it is impossible for Phoenix to create a square.</p>
+ </div>
+</div>
