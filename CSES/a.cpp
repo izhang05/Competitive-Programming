@@ -8,55 +8,56 @@ void setIO(const string &name) {
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
 #ifdef LOCAL
-    freopen((name + ".in").c_str(), "r", stdin);
-    freopen((name + ".out").c_str(), "w", stdout);
-    freopen((name + ".out").c_str(), "w", stderr);
+//    freopen((name + ".in").c_str(), "r", stdin);
+//    freopen((name + ".out").c_str(), "w", stdout);
+//    freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 20;
 
+void ask(int b, int c) {
+    cout << "? " << b << " " << c << endl;
+}
+
+void answer(int b, int c) {
+    cout << "! " << b << " " << c << endl;
+}
 
 int main() {
     setIO("1");
 
-    int n;
-    cin >> n;
-    map<int, int> cnt;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        for (int j = 0; j < maxn; ++j) {
-            if (a & (1 << j)) {
-                ++cnt[j];
+    bool greater = false;
+    ask(0, 0);
+    int ret;
+    cin >> ret;
+    if (ret == 1) {
+        greater = true;
+    }
+    int a = 0, b = 0;
+    for (int i = 29; i >= 0; --i) {
+        ask(a ^ (1 << i), b);
+        ask(a, b ^ (1 << i));
+        int fa, fb;
+        cin >> fa >> fb;
+        if (fa != fb) {
+            if (fa == -1) {
+                a ^= 1 << i;
+                b ^= 1 << i;
+            }
+        } else {
+            if (greater) {
+                a ^= 1 << i;
+            } else {
+                b ^= 1 << i;
+            }
+            if (fa == 1) {
+                greater = true;
+            } else {
+                greater = false;
             }
         }
     }
-#ifdef DEBUG
-    for (auto &i : cnt) {
-        cout << i.first << " " << i.second << "\n";
-    }
-#endif
-    long long sol = 0;
-    while (!cnt.empty()) {
-        long long cur = 0;
-        vector<int> er;
-        for (auto &i : cnt) {
-            cur += (1 << i.first);
-            --i.second;
-            if (!i.second) {
-                er.push_back(i.first);
-            }
-        }
-        for (auto &i : er) {
-            cnt.erase(i);
-        }
-
-        sol += cur * cur;
-#ifdef DEBUG
-        cout << cur << "\n";
-#endif
-    }
-    cout << sol << "\n";
+    answer(a, b);
     return 0;
 }
