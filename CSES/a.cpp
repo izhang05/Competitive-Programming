@@ -14,30 +14,49 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 20;
 
 
 int main() {
     setIO("1");
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> a[i];
-        }
-        int sol = 0;
-        for (int i = 1; i < n; ++i) {
-            int add = max(0, a[i - 1] - a[i]);
-            a[i] += add;
-            if (add) {
-                sol = max(sol, 32 - __builtin_clz(add));
+    int n;
+    cin >> n;
+    map<int, int> cnt;
+    for (int i = 0; i < n; ++i) {
+        int a;
+        cin >> a;
+        for (int j = 0; j < maxn; ++j) {
+            if (a & (1 << j)) {
+                ++cnt[j];
             }
         }
-        cout << sol << "\n";
     }
+#ifdef DEBUG
+    for (auto &i : cnt) {
+        cout << i.first << " " << i.second << "\n";
+    }
+#endif
+    long long sol = 0;
+    while (!cnt.empty()) {
+        long long cur = 0;
+        vector<int> er;
+        for (auto &i : cnt) {
+            cur += (1 << i.first);
+            --i.second;
+            if (!i.second) {
+                er.push_back(i.first);
+            }
+        }
+        for (auto &i : er) {
+            cnt.erase(i);
+        }
+
+        sol += cur * cur;
+#ifdef DEBUG
+        cout << cur << "\n";
+#endif
+    }
+    cout << sol << "\n";
     return 0;
 }
