@@ -8,56 +8,54 @@ void setIO(const string &name) {
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
 #ifdef LOCAL
-//    freopen((name + ".in").c_str(), "r", stdin);
-//    freopen((name + ".out").c_str(), "w", stdout);
-//    freopen((name + ".out").c_str(), "w", stderr);
+    freopen((name + ".in").c_str(), "r", stdin);
+    freopen((name + ".out").c_str(), "w", stdout);
+    freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 20;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
-void ask(int b, int c) {
-    cout << "? " << b << " " << c << endl;
-}
-
-void answer(int b, int c) {
-    cout << "! " << b << " " << c << endl;
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
 }
 
 int main() {
     setIO("1");
 
-    bool greater = false;
-    ask(0, 0);
-    int ret;
-    cin >> ret;
-    if (ret == 1) {
-        greater = true;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        long long b;
+        cin >> b;
+        a[i] = __builtin_popcountll(b);
     }
-    int a = 0, b = 0;
-    for (int i = 29; i >= 0; --i) {
-        ask(a ^ (1 << i), b);
-        ask(a, b ^ (1 << i));
-        int fa, fb;
-        cin >> fa >> fb;
-        if (fa != fb) {
-            if (fa == -1) {
-                a ^= 1 << i;
-                b ^= 1 << i;
-            }
+    int sum = 0, even = 1, odd = 0;
+    long long sol = 0;
+    for (int i = n - 1; i >= 0; --i) {
+        sum += a[i];
+        if (sum % 2 == 0) {
+            sol += even++;
         } else {
-            if (greater) {
-                a ^= 1 << i;
-            } else {
-                b ^= 1 << i;
-            }
-            if (fa == 1) {
-                greater = true;
-            } else {
-                greater = false;
+            sol += odd++;
+        }
+        int cur_sum = 0, mx = 0;
+        for (int j = i; j - i < 65 && j < n; ++j) {
+            cur_sum += a[j];
+            mx = max(mx, a[j]);
+            if (cur_sum - mx < mx && cur_sum % 2 == 0) {
+                --sol;
             }
         }
     }
-    answer(a, b);
+#ifdef DEBUG
+    print(a);
+#endif
+    cout << sol << "\n";
     return 0;
 }
