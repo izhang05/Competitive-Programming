@@ -17,7 +17,7 @@ void setIO(const string &name) {
 //#define DEBUG
 
 struct item {
-    int mx;
+    int sum;
 };
 
 struct segtree {
@@ -34,7 +34,7 @@ struct segtree {
     }
 
     static item merge(item a, item b) {
-        return {a.mx + b.mx};
+        return {a.sum + b.sum};
     }
 
     static item single(int v) {
@@ -65,10 +65,10 @@ struct segtree {
         }
         int m = (lx + rx) / 2;
         item lv = t[2 * x + 1];
-        if (cur + lv.mx >= k) {
+        if (cur + lv.sum >= k) {
             return query(2 * x + 1, lx, m, k, cur);
         } else {
-            return query(2 * x + 2, m, rx, k, cur + lv.mx);
+            return query(2 * x + 2, m, rx, k, cur + lv.sum);
         }
     }
 
