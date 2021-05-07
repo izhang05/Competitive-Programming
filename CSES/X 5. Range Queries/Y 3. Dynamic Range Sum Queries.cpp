@@ -12,96 +12,78 @@ void setIO() {
 }
 
 //#define DEBUG
-int n, q;
-vector<int> a;
-long long block[450];
-int bls;
 
-long long sum(int x) {
-    long long ans = 0;
-    for (int i = 0; i < x / bls; ++i) {
-        ans += block[i];
-    }
-    for (int i = (x / bls) * bls; i < x; ++i) {
-        ans += a[i];
-    }
-    return ans;
-}
+struct segtree {
+    int size{};
+    vector<long long> t;
 
-void upd(int x, int y) {
-    block[x / bls] -= a[x];
-    a[x] = y;
-    block[x / bls] += y;
-}
+    void init(int n) {
+        size = 1;
+        while (size < n) {
+            size *= 2;
+        }
+        t.resize(2 * size);
+    }
+
+    void upd(int p, int v, int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            t[x] = v;
+            return;
+        }
+        int m = (lx + rx) / 2;
+        if (p < m) {
+            upd(p, v, 2 * x + 1, lx, m);
+        } else {
+            upd(p, v, 2 * x + 2, m, rx);
+        }
+        t[x] = t[2 * x + 1] + t[2 * x + 2];
+    }
+
+    void upd(int p, int v) {
+        upd(p, v, 0, 0, size);
+    }
+
+    long long query(int l, int r, int x, int lx, int rx) {
+        if (lx >= r || rx <= l) {
+            return 0;
+        }
+        if (lx >= l && rx <= r) {
+            return t[x];
+        }
+        int m = (lx + rx) / 2;
+        return query(l, r, 2 * x + 1, lx, m) + query(l, r, 2 * x + 2, m, rx);
+    }
+
+    long long query(int l, int r) {
+        return query(l, r, 0, 0, size);
+    }
+};
 
 int main() {
     setIO();
+    int n, q;
     cin >> n >> q;
-    a.resize(n);
-    bls = int(sqrt(n));
+    segtree seg;
+    seg.init(n);
     for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        block[i / bls] += a[i];
+        int a;
+        cin >> a;
+        seg.upd(i, a);
     }
-    for (int i = 0; i < q; ++i) {
-        int t, x, y;
-        cin >> t >> x >> y;
+    while (q--) {
+        int t;
+        cin >> t;
         if (t == 1) {
-            upd(x - 1, y);
-        } else {
-            cout << sum(y) - sum(x - 1) << "\n";
+            int p, v;
+            cin >> p >> v;
+            --p;
+            seg.upd(p, v);
+        } else if (t == 2) {
+            int l, r;
+            cin >> l >> r;
+            --l;
+            cout << seg.query(l, r) << "\n";
         }
     }
     return 0;
 }
-
-
-//#include <bits/stdc++.h>
-//
-//using namespace std;
-//
-//void setIO() {
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(nullptr);
-//#ifdef LOCAL
-//    freopen("Y 97.in", "r", stdin);
-//#endif
-//}
-//
-//const int maxn = 2e5;
-//long long bit[2 * maxn];
-//int n;
-//void update(int p, int val) {
-//    for (; p <= n; p += p & (-p)) {
-//        bit[p] += val;
-//    }
-//}
-//long long query(int p) {
-//    long long res = 0;
-//    for (; p > 0; p -= p & (-p)) {
-//        res += bit[p];
-//    }
-//    return res;
-//}
-//
-//int main() {
-//    setIO();
-//    int m;
-//    cin >> n >> m;
-//    vector<int> nums(n);
-//    for (int i = 0; i < n; ++i) {
-//        cin >> nums[i];
-//        update(i + 1, nums[i]);
-//    }
-//    int a, b, c;
-//    for (int i = 0; i < m; ++i) {
-//        cin >> a >> b >> c;
-//        if (a == 1) {
-//            update(b, c - nums[b - 1]);
-//            nums[b - 1] = c;
-//        } else {
-//            cout << query(c) - query(b - 1) << "\n";
-//        }
-//    }
-//    return 0;
-//}
