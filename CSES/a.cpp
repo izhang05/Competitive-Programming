@@ -14,48 +14,97 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 998244353;
 
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
+struct item {
+    pair<long long, long long> func;
+
+    long long eval(long long x) {
+        return (func.first * x + func.second) % mod;
     }
-    cout << end;
-}
+};
+
+struct segtree {
+    int size{};
+    vector<item> t;
+    item neutral = {{1, 0}};
+
+    void init(int n) {
+        size = 1;
+        while (size < n) {
+            size *= 2;
+        }
+        t.resize(2 * size);
+    }
+
+    static item merge(item a, item b) {
+        return {{(b.func.first * a.func.first) % mod, (b.func.first * a.func.second + b.func.second) % mod}};
+    }
+
+    static item single(item v) {
+        return v;
+    }
+
+    void upd(int p, item v, int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            t[x] = single(v);
+            return;
+        }
+        int m = (lx + rx) / 2;
+        if (p < m) {
+            upd(p, v, 2 * x + 1, lx, m);
+        } else {
+            upd(p, v, 2 * x + 2, m, rx);
+        }
+        t[x] = merge(t[2 * x + 1], t[2 * x + 2]);
+    }
+
+    void upd(int p, pair<long long, long long> v) {
+        upd(p, item{v}, 0, 0, size);
+    }
+
+    item query(int l, int r, int x, int lx, int rx) {
+        if (lx >= r || rx <= l) {
+            return neutral;
+        }
+        if (lx >= l && rx <= r) {
+            return t[x];
+        }
+        int m = (lx + rx) / 2;
+
+        return merge(query(l, r, 2 * x + 1, lx, m), query(l, r, 2 * x + 2, m, rx));
+    }
+
+    item query(int l, int r) {
+        return query(l, r, 0, 0, size);
+    }
+};
+
 
 int main() {
     setIO("1");
 
-    int n;
-    cin >> n;
-    vector<int> a(n);
+    int n, q;
+    cin >> n >> q;
+    segtree seg;
+    seg.init(n);
     for (int i = 0; i < n; ++i) {
-        long long b;
-        cin >> b;
-        a[i] = __builtin_popcountll(b);
+        int a, b;
+        cin >> a >> b;
+        seg.upd(i, {a, b});
     }
-    int sum = 0, even = 1, odd = 0;
-    long long sol = 0;
-    for (int i = n - 1; i >= 0; --i) {
-        sum += a[i];
-        if (sum % 2 == 0) {
-            sol += even++;
+    while (q--) {
+        int t;
+        cin >> t;
+        if (t == 0) {
+            int p, c, d;
+            cin >> p >> c >> d;
+            seg.upd(p, {c, d});
         } else {
-            sol += odd++;
-        }
-        int cur_sum = 0, mx = 0;
-        for (int j = i; j - i < 65 && j < n; ++j) {
-            cur_sum += a[j];
-            mx = max(mx, a[j]);
-            if (cur_sum - mx < mx && cur_sum % 2 == 0) {
-                --sol;
-            }
+            int l, r, x;
+            cin >> l >> r >> x;
+            cout << seg.query(l, r).eval(x) << "\n";
         }
     }
-#ifdef DEBUG
-    print(a);
-#endif
-    cout << sol << "\n";
     return 0;
 }
