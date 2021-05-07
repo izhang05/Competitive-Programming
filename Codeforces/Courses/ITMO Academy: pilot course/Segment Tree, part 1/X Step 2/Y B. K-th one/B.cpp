@@ -17,13 +17,13 @@ void setIO(const string &name) {
 //#define DEBUG
 
 struct item {
-    long long sum, seg, pre, suf;
+    int sum;
 };
 
 struct segtree {
     int size{};
     vector<item> t;
-    item neutral = {0, 0, 0, 0};
+    item neutral = {0};
 
     void init(int n) {
         size = 1;
@@ -34,16 +34,11 @@ struct segtree {
     }
 
     static item merge(item a, item b) {
-        return {
-                a.sum + b.sum,
-                max({a.seg, b.seg, a.suf + b.pre}),
-                max(a.pre, a.sum + b.pre),
-                max(b.suf, b.sum + a.suf)
-        };
+        return {a.sum + b.sum};
     }
 
     static item single(int v) {
-        return {v, max(0, v), max(0, v), max(0, v)};
+        return {v};
     }
 
     void upd(int p, int v, int x, int lx, int rx) {
@@ -64,40 +59,48 @@ struct segtree {
         upd(p, v, 0, 0, size);
     }
 
-    item query(int l, int r, int x, int lx, int rx) {
-        if (lx >= r || rx <= l) {
-            return neutral;
-        }
-        if (lx >= l && rx <= r) {
-            return t[x];
+    int query(int x, int lx, int rx, int k, int cur) {
+        if (rx - lx == 1) {
+            return lx;
         }
         int m = (lx + rx) / 2;
-
-        return merge(query(l, r, 2 * x + 1, lx, m), query(l, r, 2 * x + 2, m, rx));
+        item lv = t[2 * x + 1];
+        if (cur + lv.sum >= k) {
+            return query(2 * x + 1, lx, m, k, cur);
+        } else {
+            return query(2 * x + 2, m, rx, k, cur + lv.sum);
+        }
     }
 
-    item query(int l, int r) {
-        return query(l, r, 0, 0, size);
+    int query(int k) {
+        return query(0, 0, size, k, 0);
     }
 };
 
 int main() {
-    setIO("A");
+    setIO("B");
     int n, q;
     cin >> n >> q;
     segtree seg;
     seg.init(n);
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        seg.upd(i, a);
+        cin >> a[i];
+        seg.upd(i, a[i]);
     }
-    cout << seg.query(0, n).seg << "\n";
     while (q--) {
-        int p, v;
-        cin >> p >> v;
-        seg.upd(p, v);
-        cout << seg.query(0, n).seg << "\n";
+        int t;
+        cin >> t;
+        if (t == 1) {
+            int p;
+            cin >> p;
+            seg.upd(p, a[p] ^ 1);
+            a[p] ^= 1;
+        } else if (t == 2) {
+            int k;
+            cin >> k;
+            cout << seg.query(k + 1) << "\n";
+        }
     }
     return 0;
 }
