@@ -16,6 +16,7 @@ void setIO(const string &name) {
 
 //#define DEBUG
 
+int n;
 struct item {
     int mx;
 };
@@ -23,18 +24,17 @@ struct item {
 struct segtree {
     int size{};
     vector<item> t;
-    item neutral = {0};
 
-    void init(int n) {
+    void init(int s) {
         size = 1;
-        while (size < n) {
+        while (size < s) {
             size *= 2;
         }
         t.resize(2 * size);
     }
 
     static item merge(item a, item b) {
-        return {a.mx + b.mx};
+        return {max(a.mx, b.mx)};
     }
 
     static item single(int v) {
@@ -59,27 +59,27 @@ struct segtree {
         upd(p, v, 0, 0, size);
     }
 
-    int query(int x, int lx, int rx, int k, int cur) {
+    int query(int x, int lx, int rx, int k) {
         if (rx - lx == 1) {
-            return lx;
+            return t[x].mx >= k ? lx : -1;
         }
         int m = (lx + rx) / 2;
         item lv = t[2 * x + 1];
-        if (cur + lv.mx >= k) {
-            return query(2 * x + 1, lx, m, k, cur);
+        if (lv.mx >= k) {
+            return query(2 * x + 1, lx, m, k);
         } else {
-            return query(2 * x + 2, m, rx, k, cur + lv.mx);
+            return query(2 * x + 2, m, rx, k);
         }
     }
 
     int query(int k) {
-        return query(0, 0, size, k, 0);
+        return query(0, 0, size, k);
     }
 };
 
 int main() {
-    setIO("B");
-    int n, q;
+    setIO("C");
+    int q;
     cin >> n >> q;
     segtree seg;
     seg.init(n);
@@ -92,14 +92,13 @@ int main() {
         int t;
         cin >> t;
         if (t == 1) {
-            int p;
-            cin >> p;
-            seg.upd(p, a[p] ^ 1);
-            a[p] ^= 1;
+            int p, v;
+            cin >> p >> v;
+            seg.upd(p, v);
         } else if (t == 2) {
             int k;
             cin >> k;
-            cout << seg.query(k + 1) << "\n";
+            cout << seg.query(k) << "\n";
         }
     }
     return 0;

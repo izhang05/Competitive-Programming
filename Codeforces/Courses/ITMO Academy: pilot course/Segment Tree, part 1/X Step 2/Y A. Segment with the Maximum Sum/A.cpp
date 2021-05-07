@@ -17,7 +17,7 @@ void setIO(const string &name) {
 //#define DEBUG
 
 struct item {
-    long long sum, seg, pre, suf;
+    long long mx, seg, pre, suf;
 };
 
 struct segtree {
@@ -35,10 +35,10 @@ struct segtree {
 
     static item merge(item a, item b) {
         return {
-                a.sum + b.sum,
+                a.mx + b.mx,
                 max({a.seg, b.seg, a.suf + b.pre}),
-                max(a.pre, a.sum + b.pre),
-                max(b.suf, b.sum + a.suf)
+                max(a.pre, a.mx + b.pre),
+                max(b.suf, b.mx + a.suf)
         };
     }
 
