@@ -16,60 +16,37 @@ void setIO(const string &name) {
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
 
-pair<long long, long long> down[maxn], up[maxn];
-int a[maxn];
-vector<int> adj[maxn];
-
-void dfs1(int c, int p) {
-    for (auto &i : adj[c]) {
-        if (i != p) {
-            dfs1(i, c);
-            down[c].first += down[i].first + down[i].second;
-            down[c].second += down[i].second;
-        }
-    }
-    down[c].second += a[c];
-}
-
-void dfs2(int c, int p) {
-    if (p != -1) {
-        up[c].first += up[p].first + down[p].first - down[c].first - down[c].second;
-        up[c].first += up[p].second + down[p].second - down[c].second;
-        up[c].second += up[p].second + down[p].second - down[c].second;
-    }
-    for (auto &i : adj[c]) {
-        if (i != p) {
-            dfs2(i, c);
-        }
-    }
-
-}
+int dp[maxn];
 
 int main() {
     setIO("1");
 
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
-    for (int i = 0; i < n - 1; ++i) {
-        int b, c;
-        cin >> b >> c;
-        --b, --c;
-        adj[b].push_back(c);
-        adj[c].push_back(b);
-    }
-    dfs1(0, -1);
-    dfs2(0, -1);
-    long long sol = 0;
-    for (int i = 0; i < n; ++i) {
+    int t;
+    cin >> t;
+    while (t--) {
+        memset(dp, 0, sizeof(dp));
+        int n;
+        cin >> n;
+        map<int, int> cnt;
+        for (int i = 0; i < n; ++i) {
+            int a;
+            cin >> a;
+            ++cnt[a];
+        }
+        int sol = inf;
+        for (auto &i : cnt) {
+            for (int j = 1; j * j <= i.first; ++j) {
+                if (i.first % j == 0) {
+                    dp[i.first] = max({dp[i.first], dp[j], dp[i.first / j]});
+                }
+            }
+            dp[i.first] += i.second;
+            sol = min(sol, n - dp[i.first]);
 #ifdef DEBUG
-        cout << i << " " << down[i].first + up[i].first << " " << down[i].first << " " <<  up[i].first << "\n";
+            cout << i.first << " " << dp[i.first] << "\n";
 #endif
-        sol = max(sol, down[i].first + up[i].first);
+        }
+        cout << sol << "\n";
     }
-
-    cout << sol << "\n";
     return 0;
 }
