@@ -9,77 +9,67 @@ void setIO(const string &name) {
     cin.exceptions(istream::failbit);
 #ifdef LOCAL
     freopen((name + ".in").c_str(), "r", stdin);
-//    freopen((name + ".out").c_str(), "w", stdout);
-//    freopen((name + ".out").c_str(), "w", stderr);
+    freopen((name + ".out").c_str(), "w", stdout);
+    freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
 
+pair<long long, long long> down[maxn], up[maxn];
+int a[maxn];
+vector<int> adj[maxn];
+
+void dfs1(int c, int p) {
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            dfs1(i, c);
+            down[c].first += down[i].first + down[i].second;
+            down[c].second += down[i].second;
+        }
+    }
+    down[c].second += a[c];
+}
+
+void dfs2(int c, int p) {
+    if (p != -1) {
+        up[c].first += up[p].first + down[p].first - down[c].first - down[c].second;
+        up[c].first += up[p].second + down[p].second - down[c].second;
+        up[c].second += up[p].second + down[p].second - down[c].second;
+    }
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            dfs2(i, c);
+        }
+    }
+
+}
 
 int main() {
     setIO("1");
 
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    if (n % 2 != 0) {
-        cout << 0 << "\n";
-        return 0;
-    }
-    int l = 0, r = 0;
     for (int i = 0; i < n; ++i) {
-        if (s[i] == '(') {
-            ++l;
-        } else {
-            ++r;
-        }
+        cin >> a[i];
     }
-    if (abs(l - r) != 2) {
-        cout << 0 << "\n";
-        return 0;
+    for (int i = 0; i < n - 1; ++i) {
+        int b, c;
+        cin >> b >> c;
+        --b, --c;
+        adj[b].push_back(c);
+        adj[c].push_back(b);
     }
-    if (l > r) {
-        int cur = 0, sol = 0;
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == '(') {
-                if (cur > 0) {
-                    ++sol;
-                }
-                ++cur;
-            } else {
-                --cur;
-                if (cur < 0) {
-                    sol = 0;
-                    break;
-                }
-                if (cur == 1) {
-                    sol = 0;
-                }
-            }
-        }
-        cout << sol << "\n";
-    } else {
-        int cur = 0, sol = 0;
-        for (int i = n - 1; i >= 0; --i) {
-            if (s[i] == '(') {
-                ++cur;
-                if (cur > 0) {
-                    sol = 0;
-                    break;
-                }
-                if (cur == -1) {
-                    sol = 0;
-                }
-            } else {
-                if (cur < 0) {
-                    ++sol;
-                }
-                --cur;
-            }
-        }
-        cout << sol << "\n";
+    dfs1(0, -1);
+    dfs2(0, -1);
+    long long sol = 0;
+    for (int i = 0; i < n; ++i) {
+#ifdef DEBUG
+        cout << i << " " << down[i].first + up[i].first << " " << down[i].first << " " <<  up[i].first << "\n";
+#endif
+        sol = max(sol, down[i].first + up[i].first);
     }
+
+    cout << sol << "\n";
     return 0;
 }
