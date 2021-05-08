@@ -1,0 +1,18 @@
+type: codeforces
+title: 'Codeforces Round #719 (Div. 3)'
+language: English
+summary: |-
+  A. Do Not Be Distracted!
+  B. Ordinary Numbers
+  C. Not Adjacent Matrix
+  D. Same Differences
+  E. Arranging The Sheep
+  F1. Guess the K-th Zero (Easy version)
+  F2. Guess the K-th Zero (Hard version)
+  G. To Go Or Not To Go?
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1620232500.000000000
+mode: Study
