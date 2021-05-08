@@ -1,141 +1,82 @@
-///*
-//ID: izhang01
-//TASK: cowrun
-//LANG: C++11
-//*/
-//
-//#include <bits/stdc++.h>
-//
-//using namespace std;
-//
-//void setIO() {
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(nullptr);
-//    freopen("cowrun.in", "r", stdin);
-//    freopen("cowrun.out", "w", stdout);
-//}
-//const int maxn = 1001;
-//const long long inf = 1e18;
-//long long dp[maxn][maxn][2], t[maxn][maxn][2];
-//vector<int> a;
-//int n;
-//
-//void check(int expected, int i, int j, int k) {
-//    if (expected != dp[i][j][k]) {
-//        cout << i << " " << j << " " << k << ": Expected: " << expected << ". Actual: " << dp[i][j][k] << "\n";
-//    } else {
-//        cout << "Good: " << i << " " << j << " " << k << "\n";
-//    }
-//}
-//
-//
-//long long sol(int l, int r, int d) {
-//    if (dp[l][r][d]) {
-//        return dp[l][r][d];
-//    }
-//    if (l == r) {
-//        return dp[l][r][d] = abs(a[l]);
-//    }
-//    long long &res = dp[l][r][d];
-//    res = inf;
-//    if (d == 0) {
-//        res = min(res, 2 * sol(l + 1, r, 0) + abs(a[l + 1] - a[l]));
-//        res = min(res, 2 * sol(l + 1, r, 1) + abs(a[r] - a[l]));
-//    } else {
-//        res = min(res, 2 * sol(l, r - 1, 0) + abs(a[r] - a[l]));
-//        res = min(res, 2 * sol(l, r - 1, 1) + abs(a[r] - a[r - 1]));
-//    }
-//    return res;
-//}
-//
-//int main() {
-//    setIO();
-//    cin >> n;
-//    a.resize(n);
-//    for (int i = 0; i < n; ++i) {
-//        cin >> a[i];
-//    }
-//    sort(a.begin(), a.end());
-//    sol(0, 3, 0);
-//    sol(0, 3, 1);
-//    check(12, 0, 0, 0);
-//    check(12, 0, 0, 1);
-//    check(2, 1, 1, 0);
-//    check(2, 1, 1, 1);
-//    check(14, 0, 1, 0);
-//    check(34, 0, 1, 1);
-//    check(9, 1, 2, 1);
-//    check(11, 1, 2, 0);
-//    check(20, 1, 3, 1);
-//    check(50, 0, 3, 0);
-//
-//    for (int i = 0; i < n; ++i) {
-//        for (int j = i; j < n; ++j) {
-//            for (int k = 0; k < 2; ++k) {
-//                cout << i << " " << j << " " << k << " " << dp[i][j][k] << "\n";
-//            }
-//        }
-//    }
-//    return 0;
-//}
-
+/*
+ID: izhang01
+TASK: cowrun
+LANG: C++11
+*/
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
-FILE *fin = fopen("cowrun.in", "r");
-FILE *fout = fopen("cowrun.out", "w");
-
-const int MAXN = 1005;
-
-int N;
-
-int cows[MAXN];
-int best[MAXN][MAXN][2];
-void check(int expected, int i, int j, int k) {
-    if (expected != best[i][j][k]) {
-        cout << i << " " << j << " " << k << ": Expected: " << expected << ". Actual: " << best[i][j][k] << "\n";
-    } else {
-        cout << "Good: " << i << " " << j << " " << k << "\n";
-    }
+void setIO() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
+    freopen("cowrun.in", "r", stdin);
+//    freopen("cowrun.out", "w", stdout);
+//    freopen("cowrun.out", "w", stderr);
 }
+//#define DEBUG
+const int maxn = 1e3 + 5;
+const long long inf = 1e18;
+pair<long long, long long> dp[maxn][maxn][2];
+
 
 int main() {
-    memset(best, 63, sizeof(best));
-
-    fscanf(fin, "%d", &N);
-
-    for (int i = 1; i <= N; i++)
-        fscanf(fin, "%d", cows + i);
-
-    cows[++N] = 0;
-    sort(cows + 1, cows + N + 1);
-    for (int i = 1; i <= N; i++)
-        if (cows[i] == 0)
-            best[i][1][0] = 0;
-
-    for (int len = 1; len < N; len++) {
-        int ccount = N - len;
-        for (int i = 1; i + len <= N + 1; i++) {
-            best[i - 1][len + 1][0] = min(best[i - 1][len + 1][0], best[i][len][0] + ccount * (cows[i] - cows[i - 1]));
-            best[i - 1][len + 1][0] = min(best[i - 1][len + 1][0], best[i][len][1] + ccount * (cows[i + len - 1] - cows[i - 1]));
-            best[i][len + 1][1] = min(best[i][len + 1][1], best[i][len][0] + ccount * (cows[i + len] - cows[i]));
-            best[i][len + 1][1] = min(best[i][len + 1][1], best[i][len][1] + ccount * (cows[i + len] - cows[i + len - 1]));
+    setIO();
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    a.push_back(0);
+    sort(a.begin(), a.end());
+    int ind = 0;
+    ++n;
+    for (int i = 0; i < n; ++i) {
+        if (a[i] == 0) {
+            ind = i;
+            break;
         }
     }
-    fprintf(fout, "%d\n", min(best[1][N][0], best[1][N][1]));
-    cout << best[3][1][0] << "\n";
-    cout << best[3][2][0] << "\n";
-//    check(12, 1, 1, 0);
-//    check(12, 1, 1, 1);
-//    check(2, 2, 1, 0);
-//    check(2, 2, 1, 1);
-//    check(14, 1, 2, 0);
-//    check(34, 1, 2, 1);
-//    check(9, 1, 2, 1);
-//    check(11, 1, 2, 0);
-//    check(20, 1, 3, 1);
-//    check(50, 0, 3, 0);
-
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            for (int k = 0; k < 2; ++k) {
+                dp[i][j][k] = {inf, inf};
+            }
+        }
+    }
+    dp[ind][ind][0] = make_pair(0, 0);
+    for (int d = 0; d < n; ++d) {
+        for (int i = 0; i + d < n; ++i) {
+            int j = i + d;
+            for (int k = 0; k < 2; ++k) {
+                pair<long long, long long> cur = dp[i][j][k];
+                if (cur.first == inf) {
+                    continue;
+                }
+                if (i > 0) {
+                    long long add;
+                    if (k == 0) {
+                        add = a[i] - a[i - 1];
+                    } else {
+                        add = a[j] - a[i - 1];
+                    }
+                    dp[i - 1][j][0] = min(dp[i - 1][j][0], {cur.first + cur.second + add, cur.second + add});
+                }
+                if (j + 1 < n) {
+                    long long add;
+                    if (k == 0) {
+                        add = a[j + 1] - a[i];
+                    } else {
+                        add = a[j + 1] - a[j];
+                    }
+                    dp[i][j + 1][1] = min(dp[i][j + 1][1], {cur.first + cur.second + add, cur.second + add});
+                }
+            }
+        }
+    }
+    cout << min(dp[0][n - 1][0], dp[0][n - 1][1]).first << "\n";
     return 0;
 }

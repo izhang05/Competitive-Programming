@@ -16,33 +16,28 @@ void setIO(string name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
-int a[maxn];
-vector<int> adj[maxn];
-bool visited[maxn];
-long long sol=
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e3 + 5;
 
-void dfs(int c, int p) {
-
-}
-
-
+long long dp[maxn][maxn];
 
 int main() {
     setIO("1");
 
     int n;
     cin >> n;
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
-    for (int i = 0; i < n - 1; ++i) {
-        int b, c;
-        cin >> b >> c;
-        --b, --c;
-        adj[b].push_back(c);
-        adj[c].push_back(b);
+    sort(a.begin(), a.end());
+    for (int i = 0; i < n; ++i) {
+        dp[i][i] = a[i];
     }
-    dfs(0, -1);
+    for (int d = 1; d < n; ++d) {
+        for (int i = 0; i < n; ++i) {
+
+        }
+    }
+    cout << dp[0][n - 1] << "\n";
     return 0;
 }
