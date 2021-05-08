@@ -22,5 +22,8 @@ foreach (FILE ${FILES})
         message(${TARGET_NAME} " = " ${FILE})
         message(${PARENT_DIR})
         set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PARENT_DIR}")
+#        target_precompile_headers(${TARGET_NAME}
+#                PUBLIC
+#                /usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0/x86_64-apple-darwin19/bits/stdc++.h)
     endif ()
 endforeach ()
