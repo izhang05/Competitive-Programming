@@ -14,20 +14,18 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 998244353;
+const int mod = 1e9 + 7;
+const long long inf = 1e18;
 
 struct item {
-    pair<long long, long long> func;
-
-    long long eval(long long x) {
-        return (func.first * x + func.second) % mod;
-    }
+    long long gcd, mn, cnt;
 };
+
 
 struct segtree {
     int size{};
     vector<item> t;
-    item neutral = {{1, 0}};
+    item neutral = {-1, inf, 0};
 
     void init(int n) {
         size = 1;
@@ -38,14 +36,29 @@ struct segtree {
     }
 
     static item merge(item a, item b) {
-        return {{(b.func.first * a.func.first) % mod, (b.func.first * a.func.second + b.func.second) % mod}};
+        item res{};
+
+        if (a.gcd == -1 || b.gcd == -1) {
+            res.gcd = max(a.gcd, b.gcd);
+        } else {
+            res.gcd = __gcd(a.gcd, b.gcd);
+        }
+        res.mn = min(a.mn, b.mn);
+        if (a.mn == b.mn) {
+            res.cnt = a.cnt + b.cnt;
+        } else if (a.mn < b.mn) {
+            res.cnt = a.cnt;
+        } else {
+            res.cnt = b.cnt;
+        }
+        return res;
+    };
+
+    static item single(int v) {
+        return {v, v, 1};
     }
 
-    static item single(item v) {
-        return v;
-    }
-
-    void upd(int p, item v, int x, int lx, int rx) {
+    void upd(int p, int v, int x, int lx, int rx) {
         if (rx - lx == 1) {
             t[x] = single(v);
             return;
@@ -59,8 +72,8 @@ struct segtree {
         t[x] = merge(t[2 * x + 1], t[2 * x + 2]);
     }
 
-    void upd(int p, pair<long long, long long> v) {
-        upd(p, item{v}, 0, 0, size);
+    void upd(int p, int v) {
+        upd(p, v, 0, 0, size);
     }
 
     item query(int l, int r, int x, int lx, int rx) {
@@ -78,33 +91,34 @@ struct segtree {
     item query(int l, int r) {
         return query(l, r, 0, 0, size);
     }
+
 };
 
 
 int main() {
     setIO("1");
 
-    int n, q;
-    cin >> n >> q;
+    int n;
+    cin >> n;
     segtree seg;
     seg.init(n);
     for (int i = 0; i < n; ++i) {
-        int a, b;
-        cin >> a >> b;
-        seg.upd(i, {a, b});
+        int a;
+        cin >> a;
+        seg.upd(i, a);
     }
+    int q;
+    cin >> q;
     while (q--) {
-        int t;
-        cin >> t;
-        if (t == 0) {
-            int p, c, d;
-            cin >> p >> c >> d;
-            seg.upd(p, {c, d});
-        } else {
-            int l, r, x;
-            cin >> l >> r >> x;
-            cout << seg.query(l, r).eval(x) << "\n";
+        int l, r;
+        cin >> l >> r;
+        --l, --r;
+        item cur = seg.query(l, r + 1);
+        long long sub = 0;
+        if (cur.mn == cur.gcd) {
+            sub = cur.cnt;
         }
+        cout << r - l + 1 - sub << "\n";
     }
     return 0;
 }
