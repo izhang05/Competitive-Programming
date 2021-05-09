@@ -4,8 +4,13 @@ project(Segment_Tree__part_2)
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+file(TOUCH ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
+add_library(PCH OBJECT ${CMAKE_BINARY_DIR}/pch.cpp)
+target_precompile_headers(PCH PRIVATE /usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0/x86_64-apple-darwin19/bits/stdc++.h)
 
 file(GLOB_RECURSE FILES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS "*.cpp")
 
@@ -21,8 +26,6 @@ foreach (FILE ${FILES})
         message(${TARGET_NAME} " = " ${FILE})
         message(${PARENT_DIR})
         set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PARENT_DIR}")
-        target_precompile_headers(${TARGET_NAME}
-                PUBLIC
-                /usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0/x86_64-apple-darwin19/bits/stdc++.h)
+        target_precompile_headers(${TARGET_NAME} REUSE_FROM PCH)
     endif ()
 endforeach ()
