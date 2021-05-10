@@ -14,153 +14,90 @@ void setIO(const string &name) {
 #endif
 }
 
-const int mod = 1e9 + 7;
-const long long inf = 1e18;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 20000;
 
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
-    }
-    cout << end;
+int parent[2 * maxn], grid[2][maxn], ind[2 * maxn];
+
+int get(int x) {
+    return parent[x] == x ? x : parent[x] = get(parent[x]);
 }
 
-int lim(int a) {
-    return (a + 1) / 2 - 1;
+bool merge(int x, int y) {
+    int xroot = get(x), yroot = get(y);
+    if (xroot != yroot) {
+        parent[xroot] = yroot;
+        return true;
+    }
+    return false;
 }
 
-struct item {
-    long long mn, mx;
-};
-
-struct segtree {
-    int size{};
-    vector<item> t;
-    item neutral = {inf, 0};
-
-    void init(int n) {
-        size = 1;
-        while (size < n) {
-            size *= 2;
-        }
-        t.resize(2 * size);
-    }
-
-    static item merge(item a, item b) {
-        return {min(a.mn, b.mn),
-                max(a.mx, b.mx)};
-    }
-
-    static item single(int v) {
-        return {v, v};
-    }
-
-    void upd(int p, int v, int x, int lx, int rx) {
-        if (rx - lx == 1) {
-            t[x] = single(v);
-            return;
-        }
-        int m = (lx + rx) / 2;
-        if (p < m) {
-            upd(p, v, 2 * x + 1, lx, m);
-        } else {
-            upd(p, v, 2 * x + 2, m, rx);
-        }
-        t[x] = merge(t[2 * x + 1], t[2 * x + 2]);
-    }
-
-    void upd(int p, int v) {
-        upd(p, v, 0, 0, size);
-    }
-
-    item query(int l, int r, int x, int lx, int rx) {
-        if (lx >= r || rx <= l) {
-            return neutral;
-        }
-        if (lx >= l && rx <= r) {
-            return t[x];
-        }
-        int m = (lx + rx) / 2;
-
-        return merge(query(l, r, 2 * x + 1, lx, m), query(l, r, 2 * x + 2, m, rx));
-    }
-
-    item query(int l, int r) {
-        return query(l, r, 0, 0, size);
-    }
-};
-
-vector<int> sol, a;
-int n;
-segtree seg;
-
-int solve(int x) {
-    if (sol[x]) {
-        return sol[x];
-    }
-    int lo = x + 1, hi = 3 * n, mid, res = -1;
-    pair<int, int> last = {0, 0}, cur = {lo, hi};
-    while (last != cur) {
-        mid = (lo + hi + 1) / 2;
-        if (seg.query(x, mid).mn <= lim(a[x])) {
-            res = mid - 1;
-            hi = mid;
-        } else {
-            lo = mid;
-        }
-        last = cur;
-        cur = {lo, hi};
-    }
-#ifdef DEBUG
-    cout << x << " " << res << "\n";
-#endif
-    if (res == -1) {
-        res = 3 * n;
-    }
-    if (seg.query(x, res).mx > a[x]) {
-        lo = x, hi = res, res = -1;
-        last = {0, 0}, cur = {lo, hi};
-        while (last != cur) {
-            mid = (lo + hi + 1) / 2;
-            if (seg.query(x, mid).mx > a[x]) {
-                res = mid - 1;
-                hi = mid;
-            } else {
-                lo = mid;
-            }
-            last = cur;
-            cur = {lo, hi};
-        }
-        return sol[x] = solve(res);
-    }
-    return sol[x] = res;
+bool same(int x, int y) {
+    return get(x) == get(y);
 }
 
 int main() {
     setIO("1");
 
-    cin >> n;
-    a.resize(3 * n);
-    seg.init(3 * n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        a[i + n] = a[i + 2 * n] = a[i];
-        seg.upd(i, a[i]);
-        seg.upd(i + n, a[i]);
-        seg.upd(i + 2 * n, a[i]);
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < 2 * m; ++i) {
+        parent[i] = i;
     }
-    sol.resize(3 * n);
+    int sol = 0;
     for (int i = 0; i < n; ++i) {
-        solve(i);
-    }
-    for (int i = 0; i < n; ++i) {
-        int cur = sol[i] - i;
-        if (cur >= 2 * n) {
-            cout << -1 << " ";
-        } else {
-            cout << cur << " ";
+#ifdef DEBUG
+        for (int j = 0; j < m; ++j) {
+          cout << parent[j] << " ";
+        }
+        cout << "\n";
+#endif
+        for (int j = 0; j < m / 4; ++j) {
+            char c;
+            cin >> c;
+            int a = (c >= 'A') ? (c - 'A' + 10) : (c - '0');
+            for (int k = 0; k < 4; ++k) {
+                bool cur = a & (1 << k);
+                int col = 4 * j + 4 - k - 1;
+                grid[i % 2][col] = cur;
+            }
+            for (int k = j * 4; k < j * 4 + 4; ++k) {
+                bool cur = grid[i % 2][k];
+                if (cur) {
+                    ++sol;
+                    if (grid[(i + 1) % 2][k]) {
+                        if (merge(k, k + m)) {
+                            --sol;
+                        }
+                    }
+                    if (k > 0 && grid[i % 2][k - 1]) {
+                        if (merge(k + m - 1, k + m)) {
+                            --sol;
+                        }
+                    }
+                }
+#ifdef DEBUG
+                cout << i << " " << k << " " << sol << "\n";
+#endif
+            }
+        }
+        for (int j = 0; j < 2 * m; ++j) {
+            get(j);
+            ind[j] = -1;
+        }
+#ifdef DEBUG
+        for (int j = m; j < 2*m; ++j) {
+          cout << parent[j] << " ";
+        }
+        cout << "\n";
+#endif
+        for (int j = m; j < 2 * m; ++j) {
+            if (ind[parent[j]] == -1) {
+                ind[parent[j]] = j - m;
+            }
+            parent[j - m] = ind[parent[j]];
+            parent[j] = j;
         }
     }
-    cout << "\n";
+    cout << sol << "\n";
     return 0;
 }
