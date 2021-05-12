@@ -15,49 +15,33 @@ void setIO(const string &name) {
 }
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+#define int long long
 
-
-int main() {
+signed main() {
     setIO("1");
 
     int n;
     cin >> n;
-    string s;
-    cin >> s;
-    vector<int> a(n);
+    priority_queue<int, vector<int>, greater<>> q;
     for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+        int a;
+        cin >> a;
+        q.push(a);
+    }
+    if (n % 2 == 0) {
+        ++n;
+        q.push(0);
     }
     int sol = 0;
-    map<char, int> occ;
-    for (int i = 0; i < n / 2; ++i) {
-        if (s[i] != s[n - i - 1]) {
-            sol += a[i] + a[n - i - 1];
-        } else {
-            sol += max(a[i], a[n - i - 1]);
-            ++occ[s[i]];
+    while (q.size() > 1) {
+        int cur = 0;
+        for (int i = 0; i < 3; ++i) {
+            int t = q.top();
+            q.pop();
+            cur += t;
         }
-    }
-    int total = 0;
-    pair<int, char> mx;
-    for (auto &i : occ) {
-        total += i.second;
-        mx = max(mx, {i.second, i.first});
-    }
-    mx.first *= 2;
-    mx.first -= total;
-    priority_queue<int, vector<int>, greater<>> unused;
-    for (int i = 0; i < n / 2; ++i) {
-        if (s[i] != s[n - i - 1] && s[i] != mx.second && s[n - i - 1] != mx.second) {
-#ifdef DEBUG
-            cout << s[i] << " " << min(a[i], a[n - i - 1]) << "\n";
-#endif
-            unused.push(min(a[i], a[n - i - 1]));
-        }
-    }
-    for (int i = 0; i < mx.first; ++i) {
-        sol -= unused.top();
-        unused.pop();
+        sol += cur;
+        q.push(cur);
     }
     cout << sol << "\n";
     return 0;
