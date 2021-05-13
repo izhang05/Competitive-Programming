@@ -20,18 +20,17 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 int main() {
     setIO("1");
 
-    int n, x;
-    cin >> n >> x;
-    long long sum = 0;
+    int n, t;
+    cin >> n >> t;
+    int sum = 0;
     for (int i = 0; i < n; ++i) {
         int a;
         cin >> a;
-        sum += a;
-    }
-    if (sum + n - 1 == x) {
-        cout << "YES" << "\n";
-    } else {
-        cout << "NO" << "\n";
+        sum += 86400 - a;
+        if (sum >= t) {
+            cout << i + 1 << "\n";
+            return 0;
+        }
     }
     return 0;
 }
