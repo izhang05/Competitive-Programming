@@ -14,35 +14,61 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
-#define int long long
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 105;
 
-signed main() {
+int dp[maxn][maxn][maxn][2]; // dp[pos][even][odd][last]
+
+int main() {
     setIO("1");
 
     int n;
     cin >> n;
-    priority_queue<int, vector<int>, greater<>> q;
+    if (n == 1) {
+        cout << 0 << "\n";
+        return 0;
+    }
+    vector<int> a(n);
+    int even = n / 2, odd = (n + 1) / 2;
     for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        q.push(a);
-    }
-    if (n % 2 == 0) {
-        ++n;
-        q.push(0);
-    }
-    int sol = 0;
-    while (q.size() > 1) {
-        int cur = 0;
-        for (int i = 0; i < 3; ++i) {
-            int t = q.top();
-            q.pop();
-            cur += t;
+        cin >> a[i];
+        if (a[i] != 0) {
+            if (a[i] % 2 == 0) {
+                --even;
+            } else {
+                --odd;
+            }
         }
-        sol += cur;
-        q.push(cur);
     }
-    cout << sol << "\n";
+#ifdef DEBUG
+    cout << even << " " << odd << "\n";
+#endif
+    memset(dp, 0x3f, sizeof(dp));
+    dp[0][even][odd][0] = dp[0][even][odd][1] = 0;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            for (int k = 0; k < n; ++k) {
+                for (int l = 0; l < 2; ++l) {
+                    int cur = dp[i][j][k][l];
+                    if (cur == inf) {
+                        continue;
+                    }
+#ifdef DEBUG
+                    cout << i << " " << j << " " << k << " " << l << " " << cur << "\n";
+#endif
+                    if (a[i] != 0) {
+                        dp[i + 1][j][k][a[i] % 2] = min(dp[i + 1][j][k][a[i] % 2], cur + (l != a[i] % 2));
+                    } else {
+                        if (j > 0) {
+                            dp[i + 1][j - 1][k][0] = min(dp[i + 1][j - 1][k][0], cur + (l != 0));
+                        }
+                        if (k > 0) {
+                            dp[i + 1][j][k - 1][1] = min(dp[i + 1][j][k - 1][1], cur + (l != 1));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    cout << min(dp[n][0][0][0], dp[n][0][0][1]) << "\n";
     return 0;
 }
