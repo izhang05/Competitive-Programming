@@ -14,8 +14,6 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
-
 template<class T>
 void print(T a, string sep = " ", string end = "\n") {
     for (auto i : a) {
@@ -24,69 +22,45 @@ void print(T a, string sep = " ", string end = "\n") {
     cout << end;
 }
 
-int n;
-const int maxn = 2e5 + 5;
-vector<pair<long long, int>> a;
-vector<long long> pre;
+const long long inf = 1e18;
 
-bool pos(int x) {
-#ifdef DEBUG
-    cout << x << ":\n";
-#endif
-    long long cur = pre[x];
-    while (x + 1 < n) {
-#ifdef DEBUG
-        cout << x << " " << cur << "\n";
-#endif
-        auto it = lower_bound(a.begin(), a.end(), make_pair(cur, inf));
-        --it;
-        int ind = (int) (it - a.begin());
-        if (ind == x) {
-            return false;
-        }
-        assert(ind > x);
-        x = ind;
-        cur = pre[x];
-    }
-    return true;
-}
-
-signed main() {
+int main() {
     setIO("1");
 
     int t;
     cin >> t;
     while (t--) {
+        int n;
         cin >> n;
-        a.resize(n);
-        pre.resize(n);
+        vector<int> a(n);
+        map<int, int> cnt;
         for (int i = 0; i < n; ++i) {
-            cin >> a[i].first;
-            a[i].second = i + 1;
+            cin >> a[i];
+            ++cnt[a[i]];
         }
-        sort(a.begin(), a.end());
-        pre[0] = 0;
-        for (int i = 0; i < n; ++i) {
-            pre[i] = pre[max(0, i - 1)] + a[i].first;
+        vector<int> b;
+        long long sum = 0;
+        for (auto &i : cnt) {
+            b.push_back(i.second);
+            sum += i.second;
         }
-        vector<int> sol;
-        int lo = 0, hi = n - 1, mid, res = -1;
-        while (lo <= hi) {
-            mid = (lo + hi) / 2;
-            if (pos(mid)) {
-                hi = mid - 1;
-                res = mid;
-            } else {
-                lo = mid + 1;
+        long long sol = sum;
+        sort(b.begin(), b.end());
+#ifdef DEBUG
+        print(b);
+#endif
+        long long cur = 0;
+        for (int i = 0; i < (int) b.size(); ++i) {
+            if (i > 0) {
+                cur += b[i - 1];
             }
+#ifdef DEBUG
+            cout << i << " " << sum << " " <<  cur << "\n";
+#endif
+            sol = min(sol, cur + sum - (int(b.size()) - i) * (b[i]));
+            sum -= b[i];
         }
-        assert(res != -1);
-        for (int i = res; i < n; ++i) {
-            sol.push_back(a[i].second);
-        }
-        sort(sol.begin(), sol.end());
-        cout << sol.size() << "\n";
-        print(sol);
+        cout << sol << "\n";
     }
     return 0;
 }
