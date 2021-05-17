@@ -13,59 +13,27 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
-const int mod = 1e9 + 7, maxn = 1e5 + 5;
-const long long inf = 1e18;
-
-vector<pair<int, long long>> adj[maxn];
-long long dist[maxn];
+long long md(long long a, long long p) {
+    return (a % p + p) % p;
+}
 
 int main() {
     setIO("1");
 
-    int n;
-    cin >> n;
-    vector<pair<long long, long long>> a(n);
-    long long sum = 0;
+    long long n, p, k;
+    cin >> n >> p >> k;
+    map<long long, long long> cnt;
     for (int i = 0; i < n; ++i) {
-        cin >> a[i].first >> a[i].second;
-        sum += a[i].second;
-        dist[i] = inf;
+        long long a;
+        cin >> a;
+        ++cnt[md(((a * a) % p) * ((a * a) % p) - a * k, p)];
     }
-    sort(a.begin(), a.end());
-    for (int i = 0; i < n - 1; ++i) {
-        adj[i + 1].emplace_back(i, 0ll);
+    long long sol = 0;
+    for (auto &i : cnt) {
+        sol += ((i.second) * (i.second - 1)) / 2;
     }
-    for (int i = 0; i < n; ++i) {
-        auto it = lower_bound(a.begin(), a.end(), make_pair(a[i].first + a[i].second, inf));
-        if (it != a.begin()) {
-            --it;
-        }
-        if (it - a.begin() != i) {
-            adj[i].emplace_back(it - a.begin(), 0);
-        }
-        if (next(it) != a.end()) {
-            ++it;
-            adj[i].emplace_back(it - a.begin(), it->first - a[i].first - a[i].second);
-        }
-    }
-    priority_queue<pair<long long, int>, vector<pair<long long, int>>, greater<>> q;
-    q.push({0, 0});
-    dist[0] = 0;
-    while (!q.empty()) {
-        pair<long long, int> cur = q.top();
-        q.pop();
-#ifdef DEBUG
-        cout << cur.first << " " << cur.second << endl;
-#endif
-        if (dist[cur.second] != cur.first) {
-            continue;
-        }
-        for (auto &i : adj[cur.second]) {
-            if (dist[i.first] > cur.first + i.second) {
-                q.push({dist[i.first] = cur.first + i.second, i.first});
-            }
-        }
-    }
-    cout << dist[n - 1] + sum << "\n";
+    cout << sol << "\n";
+    return 0;
 }
