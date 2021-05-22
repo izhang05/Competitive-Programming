@@ -13,60 +13,42 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 16, maxg = 3;
-
-long long dp[1 << maxn][maxg], ti[1 << maxn];
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
 
 int main() {
     setIO("1");
 
-    int n, t;
-    cin >> n >> t;
-    vector<pair<int, int>> a(n);
+    int n;
+    cin >> n;
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
-        cin >> a[i].first >> a[i].second;
-        --a[i].second;
-        dp[1 << i][a[i].second] = 1;
+        cin >> a[i];
     }
-    for (int mask = 1; mask < (1 << n); ++mask) {
-        for (int i = 0; i < n; ++i) {
-            if (mask & (1 << i)) {
-                ti[mask] = ti[mask ^ (1 << i)] + a[i].first;
-#ifdef DEBUG
-                cout << mask << " " << ti[mask] << "\n";
-#endif
-                break;
-            }
+    sort(a.begin(), a.end());
+    reverse(a.begin(), a.end());
+    if (a[0] >= a[1] + a[2]) {
+        cout << "NO\n";
+        return 0;
+    }
+    cout << "YES\n";
+    vector<int> sol(n);
+    sol[0] = a[0];
+    int l = 1, r = n - 1, side = true;
+    for (int i = 1; i < n; ++i) {
+        if (side) {
+            sol[l++] = a[i];
+        } else {
+            sol[r--] = a[i];
         }
+        side ^= 1;
     }
-    for (int mask = 1; mask < (1 << n); ++mask) {
-        for (int i = 0; i < maxg; ++i) {
-            long long cur = dp[mask][i];
-            if (!cur) {
-                continue;
-            }
-#ifdef DEBUG
-            cout << mask << " " << i << " " << cur << "\n";
-#endif
-            for (int k = 0; k < n; ++k) {
-                if (!(mask & (1 << k)) && a[k].second != i) {
-                    int ne = mask | (1 << k);
-                    dp[ne][a[k].second] += cur;
-                    dp[ne][a[k].second] %= mod;
-                }
-            }
-        }
-    }
-
-    long long sol = 0;
-    for (int i = 0; i < (1 << n); ++i) {
-        for (int j = 0; j < maxg; ++j) {
-            if (ti[i] == t) {
-                sol += dp[i][j];
-                sol %= mod;
-            }
-        }
-    }
-    cout << sol << "\n";
+    print(sol);
     return 0;
 }
