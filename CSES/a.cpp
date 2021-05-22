@@ -13,13 +13,16 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5, maxs = 20;
+
+pair<int, int> sol[maxn][maxs];
+
+pair<int, int> merge(pair<int, int> a, pair<int, int> b) {
+    pair<int, int> res{a.first + b.first, (a.second + b.second) % 10};
+    if (a.second + b.second >= 10) {
+        ++res.first;
     }
-    cout << end;
+    return res;
 }
 
 int main() {
@@ -30,25 +33,22 @@ int main() {
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
+        sol[i][0] = {0, a[i]};
     }
-    sort(a.begin(), a.end());
-    reverse(a.begin(), a.end());
-    if (a[0] >= a[1] + a[2]) {
-        cout << "NO\n";
-        return 0;
-    }
-    cout << "YES\n";
-    vector<int> sol(n);
-    sol[0] = a[0];
-    int l = 1, r = n - 1, side = true;
-    for (int i = 1; i < n; ++i) {
-        if (side) {
-            sol[l++] = a[i];
-        } else {
-            sol[r--] = a[i];
+    for (int j = 1; j < maxs; ++j) {
+        for (int i = 0; i < n; ++i) {
+            if (i + (1 << j) <= n) {
+                sol[i][j] = merge(sol[i][j - 1], sol[i + (1 << (j - 1))][j - 1]);
+            }
         }
-        side ^= 1;
     }
-    print(sol);
+    int q;
+    cin >> q;
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+        --l, --r;
+        cout << sol[l][__builtin_ctz(r - l + 1)].first << "\n";
+    }
     return 0;
 }
