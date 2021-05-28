@@ -1,0 +1,16 @@
+type: codeforces
+title: 'Codeforces Round #722 (Div. 2)'
+language: English
+summary: |-
+  A. Eshag Loves Big Arrays
+  B. Sifid and Strange Subsequences
+  C. Parsa's Humongous Tree
+  D. Kavi on Pairing Duty
+  E. Trees of Tranquillity
+  F. It's a bird! No, it's a plane! No, it's AaParsa!
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1621875000.000000000
+mode: Study
