@@ -1,0 +1,18 @@
+type: codeforces
+title: Deltix Round, Spring 2021 (open for everyone, rated, Div. 1 + Div. 2)
+language: English
+summary: |-
+  A. Game of Life
+  B. Lord of the Values
+  C. Compression and Expansion
+  D. Love-Hate
+  E. Crypto Lights
+  F. Favorite Game
+  G. Try Booking
+  H. Hopping Around the Array
+programming_language: C/C++
+programming_language_version: 17
+content:
+- Problems
+end_date_time: 1622393400.000000000
+mode: Study

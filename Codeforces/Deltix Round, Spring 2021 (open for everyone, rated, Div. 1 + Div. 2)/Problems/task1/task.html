@@ -1,0 +1,105 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   A. Game of Life
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>1 second
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <center> 
+   <img class="tex-graphics" height="378px" src="https://espresso.codeforces.com/9cbb0971d1fb7ede892276cac83500a3c7afe02a.png" style="max-width: 100.0%;max-height: 100.0%;" width="567px"> 
+  </center>
+  <p>William really likes the cellular automaton called "Game of Life" so he decided to make his own version. For simplicity, William decided to define his cellular automaton on an array containing $n$ cells, with each cell either being alive or dead.</p>
+  <p>Evolution of the array in William's cellular automaton occurs iteratively in the following way:</p>
+  <ul> 
+   <li> If the element is dead and it has <span class="tex-font-style-bf">exactly</span> $1$ alive neighbor <span class="tex-font-style-bf">in the current state of the array</span>, then on the next iteration it will become alive. For an element at index $i$ the neighbors would be elements with indices $i - 1$ and $i + 1$. If there is no element at that index, it is considered to be a dead neighbor. </li>
+   <li> William is a humane person so all alive elements stay alive. </li>
+  </ul>
+  <p>Check the note section for examples of the evolution.</p>
+  <p>You are given some initial state of all elements and you need to help William find the state of the array after $m$ iterations of evolution.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>Each test contains multiple test cases. The first line contains the number of test cases $t$ ($1 \le t \le 10^3$). Description of the test cases follows.</p>
+  <p>The first line of each test case contains two integers $n$ and $m$ ($2 \le n \le 10^3, 1 \le m \le 10^9$), which are the total number of cells in the array and the number of iterations.</p>
+  <p>The second line of each test case contains a string of length $n$ made up of characters "<span class="tex-font-style-tt">0</span>" and "<span class="tex-font-style-tt">1</span>" and defines the initial state of the array. "<span class="tex-font-style-tt">1</span>" means a cell is alive and "<span class="tex-font-style-tt">0</span>" means it is dead.</p>
+  <p>It is guaranteed that the sum of $n$ over all test cases does not exceed $10^4$.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>In each test case output a string of length $n$, made up of characters "<span class="tex-font-style-tt">0</span>" and "<span class="tex-font-style-tt">1</span>" &nbsp;— the state of the array after $m$ iterations of evolution.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>4
+11 3
+01000000001
+10 2
+0110100101
+5 2
+10101
+3 100
+000
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>11111001111
+1110111101
+10101
+000
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>Sequence of iterations of evolution for the first test case </p>
+  <ul> 
+   <li> <span class="tex-font-style-tt">01000000001</span> &nbsp;— initial state </li>
+   <li> <span class="tex-font-style-tt">11100000011</span> &nbsp;— first iteration of evolution </li>
+   <li> <span class="tex-font-style-tt">11110000111</span> &nbsp;— second iteration of evolution </li>
+   <li> <span class="tex-font-style-tt">11111001111</span> &nbsp;— third iteration of evolution </li>
+  </ul>
+  <p>Sequence of iterations of evolution for the second test case </p>
+  <ul> 
+   <li> <span class="tex-font-style-tt">0110100101</span> &nbsp;— initial state </li>
+   <li> <span class="tex-font-style-tt">1110111101</span> &nbsp;— first iteration of evolution </li>
+   <li> <span class="tex-font-style-tt">1110111101</span> &nbsp;— second iteration of evolution </li>
+  </ul>
+ </div>
+</div>
