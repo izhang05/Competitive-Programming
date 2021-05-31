@@ -16,19 +16,16 @@ void setIO(const string &name) {
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5, maxs = 20;
 vector<int> adj[maxn];
-int tin[maxn], tout[maxn], t, diff[maxn];
-int up[maxn][maxs], depth[maxn], n;
+int up[maxn][maxs], depth[maxn], n, pre[maxn];
 
 void dfs(int c, int p, int d = 0) {
     up[c][0] = p;
     depth[c] = d;
-    tin[c] = t++;
     for (auto &i : adj[c]) {
         if (i != p) {
-            dfs(i, c);
+            dfs(i, c, d + 1);
         }
     }
-    tout[c] = t;
 }
 
 int jmp(int x, int d) {
@@ -74,6 +71,15 @@ void build() {
     }
 }
 
+void dfs_pre(int c, int p) {
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            dfs_pre(i, c);
+            pre[c] += pre[i];
+        }
+    }
+}
+
 int main() {
     setIO("9");
     int m;
@@ -90,6 +96,19 @@ int main() {
     for (int i = 0; i < m; ++i) {
         int a, b;
         cin >> a >> b;
+        --a, --b;
+        ++pre[a];
+        ++pre[b];
+        int l = lca(a, b);
+        --pre[l];
+        if (l) {
+            --pre[up[l][0]];
+        }
     }
+    dfs_pre(0, -1);
+    for (int i = 0; i < n; ++i) {
+        cout << pre[i] << " ";
+    }
+    cout << "\n";
     return 0;
 }
