@@ -35,10 +35,16 @@ int main() {
         mxdp[a[i]] = max(mxdp[a[i]], dp[i]);
         sol = max(sol, dp[i]);
     }
-    cout << sol << "\n";
-    for (int i = 0; i < n; ++i) {
-        cout << dp[i] << " ";
+    if (sol <= 2) {
+        cout << "YES"
+             << "\n";
+        for (int i = 0; i < n; ++i) {
+            cout << dp[i] - 1;
+        }
+        cout << "\n";
+    } else {
+        cout << "NO"
+             << "\n";
     }
-    cout << "\n";
     return 0;
 }
