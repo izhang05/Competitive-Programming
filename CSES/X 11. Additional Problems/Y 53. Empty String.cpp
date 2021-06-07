@@ -24,8 +24,9 @@ int main() {
     choose[0][0] = 1;
     for (int i = 1; i <= maxn / 2; ++i) {
         choose[i][0] = 1;
-        for (int j = 1; j <= i; ++j)
+        for (int j = 1; j <= i; ++j) {
             choose[i][j] = (choose[i - 1][j] + choose[i - 1][j - 1]) % mod;
+        }
     }
     int n = (int) s.size();
     for (int i = 0; i < n; ++i) {
@@ -40,9 +41,6 @@ int main() {
                     dp[i][j] = (dp[i][j] + tmp) % mod;
                 }
             }
-#ifdef DEBUG
-            cout << i << " " << j << " " << dp[i][j] << "\n";
-#endif
         }
     }
     cout << dp[0][n - 1] << "\n";
