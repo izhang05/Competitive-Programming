@@ -13,39 +13,61 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 505;
-int dp[maxn][maxn];
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+
+map<int, int> factor(int x) {
+    map<int, int> cur;
+    while (x % 2 == 0) {
+        ++cur[2];
+        x /= 2;
+    }
+    for (int i = 3; i * i <= x; i += 2) {
+        while (x % i == 0) {
+            ++cur[i];
+            x /= i;
+        }
+    }
+    if (x > 1) {
+        ++cur[x];
+    }
+    return cur;
+}
 
 int main() {
     setIO("c");
-    int n;
-    cin >> n;
-    vector<int> a(n);
+    int n, k;
+    cin >> n >> k;
+    map<map<int, int>, int> occ;
+    long long sol = 0;
     for (int i = 0; i < n; ++i) {
-        for (int j = i; j < n; ++j) {
-            dp[i][j] = inf;
-        }
-    }
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        dp[i][i] = 1;
-    }
-    for (int i = n - 1; i >= 0; --i) {
-        for (int j = i + 1; j < n; ++j) {
-            dp[i][j] = min(dp[i][j], dp[i + 1][j] + 1);
-            for (int k = i + 2; k <= j; ++k) {
-                if (a[i] == a[k]) {
-                    dp[i][j] = min(dp[i][j], dp[i + 1][max(0, k - 1)] + dp[k + 1][j]);
-                }
+        int a;
+        cin >> a;
+        map<int, int> cur = factor(a);
+        map<int, int> comp;
+        vector<int> to_erase;
+        for (auto &j : cur) {
+            j.second %= k;
+            if (j.second == 0) {
+                to_erase.push_back(j.first);
+            } else {
+                comp[j.first] = k - j.second;
             }
-            if (a[i] == a[i + 1]) {
-                dp[i][j] = min(dp[i][j], dp[i + 2][j] + 1);
-            }
-#ifdef DEBUG
-            cout << i << " " << j << " " << dp[i][j] << "\n";
-#endif
         }
+        for (auto &j : to_erase) {
+            cur.erase(j);
+        }
+        if (occ.find(comp) != occ.end()) {
+            sol += occ[comp];
+        }
+        ++occ[cur];
     }
-    cout << dp[0][n - 1] << "\n";
+    cout << sol << "\n";
     return 0;
 }
