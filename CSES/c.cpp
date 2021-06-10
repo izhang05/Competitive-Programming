@@ -14,59 +14,61 @@ void setIO(const string &name) {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
+
+long long binpow(long long x, long long n, long long m) {
+    assert(n >= 0);
+    x %= m;
+    long long res = 1;
+    while (n > 0) {
+        if (n % 2 == 1) {
+            res = res * x % m;
+        }
+        x = x * x % m;
+        n /= 2;
     }
-    cout << end;
+    return res;
 }
 
 map<int, int> factor(int x) {
-    map<int, int> cur;
+    map<int, int> res;
     while (x % 2 == 0) {
-        ++cur[2];
+        ++res[2];
         x /= 2;
     }
     for (int i = 3; i * i <= x; i += 2) {
         while (x % i == 0) {
-            ++cur[i];
+            ++res[i];
             x /= i;
         }
     }
     if (x > 1) {
-        ++cur[x];
+        ++res[x];
     }
-    return cur;
+    return res;
 }
 
 int main() {
     setIO("c");
-    int n, k;
-    cin >> n >> k;
-    map<map<int, int>, int> occ;
-    long long sol = 0;
+
+    int n;
+    cin >> n;
+    map<int, multiset<int>> occ;
     for (int i = 0; i < n; ++i) {
         int a;
         cin >> a;
         map<int, int> cur = factor(a);
-        map<int, int> comp;
-        vector<int> to_erase;
         for (auto &j : cur) {
-            j.second %= k;
-            if (j.second == 0) {
-                to_erase.push_back(j.first);
-            } else {
-                comp[j.first] = k - j.second;
-            }
+            occ[j.first].insert(j.second);
         }
-        for (auto &j : to_erase) {
-            cur.erase(j);
+    }
+    for (auto &i : occ) {
+        for (int j = 0; j < 2 && (int) i.second.size() < n; ++j) {
+            i.second.insert(0);
         }
-        if (occ.find(comp) != occ.end()) {
-            sol += occ[comp];
-        }
-        ++occ[cur];
+    }
+    long long sol = 1;
+    for (auto &i : occ) {
+        sol *= binpow(i.first, *next(i.second.begin()), mod);
     }
     cout << sol << "\n";
     return 0;
