@@ -1,0 +1,156 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   G. A New Beginning
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>5 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Annie has gotten bored of winning every coding contest and farming unlimited rating. Today, she is going to farm potatoes instead.</p>
+  <p>Annie's garden is an infinite 2D plane. She has $n$ potatoes to plant, and the $i$-th potato must be planted at $(x_i,y_i)$. Starting at the point $(0, 0)$, Annie begins walking, in one step she can travel one unit <span class="tex-font-style-bf">right</span> or <span class="tex-font-style-bf">up</span> (increasing her $x$ or $y$ coordinate by $1$ respectively). At any point $(X,Y)$ during her walk she can plant some potatoes at arbitrary points using her potato gun, consuming $\max(|X-x|,|Y-y|)$ units of energy in order to plant a potato at $(x,y)$. Find the minimum total energy required to plant every potato.</p>
+  <p>Note that Annie may plant any number of potatoes from any point.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains the integer $n$ ($1 \le n \le 800\,000$).</p>
+  <p>The next $n$ lines contain two integers $x_i$ and $y_i$ ($0 \le x_i,y_i \le 10^9$), representing the location of the $i$-th potato. It is possible that some potatoes should be planted in the same location.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>Print the minimum total energy to plant all potatoes.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Examples
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2
+1 1
+2 2
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>0
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2
+1 1
+2 0
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>1
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>3
+5 5
+7 7
+4 9
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>2
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>10
+5 1
+4 0
+9 6
+0 2
+10 1
+9 10
+3 10
+0 10
+8 9
+1 5
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>19
+</pre>
+   </div>
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>10
+1 1
+2 2
+2 0
+4 2
+4 0
+2 0
+0 2
+4 0
+4 2
+5 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>6
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In example $1$, Annie can travel to each spot directly and plant a potato with no energy required.</p>
+  <p>In example $2$, moving to $(1,0)$, Annie plants the second potato using $1$ energy. Next, she travels to $(1,1)$ and plants the first potato with $0$ energy.</p>
+ </div>
+</div>
