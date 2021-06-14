@@ -13,74 +13,123 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int mod = 1e9 + 7, maxn = 2e5 + 5;
-const long long inf = 1e18;
-long long a[maxn], b[maxn], c[maxn], bt[maxn], ct[maxn], min_anc[maxn], w0[maxn], w1[maxn], sub0[maxn], sub1[maxn];
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5, maxs = 20;
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+
+vector<int> val[maxn][maxs];
+int up[maxn][maxs], depth[maxn], n;
 vector<int> adj[maxn];
 
-void dfs(int cur, int p) {
-    min_anc[cur] = a[cur];
-    if (p != -1) {
-        min_anc[cur] = min(min_anc[cur], min_anc[p]);
+vector<int> merge(vector<int> a, const vector<int> &b) {
+    for (auto &i : b) {
+        a.push_back(i);
     }
-    bt[cur] = b[cur], ct[cur] = c[cur];
-    if (b[cur] == 1 && c[cur] == 0) {
-        w0[cur] = 1;
-    } else if (b[cur] == 0 && c[cur] == 1) {
-        w1[cur] = 1;
+    sort(a.begin(), a.end());
+    while (a.size() > 10) {
+        a.erase(prev(a.end()));
     }
-    for (auto &i : adj[cur]) {
+    return a;
+}
+
+vector<int> jmp_val(int x, int d) {
+    vector<int> res;
+    for (int i = 0; i < maxs; i++) {
+        if ((d >> i) & 1) {
+            res = merge(res, val[x][i]);
+            x = up[x][i];
+        }
+    }
+    return res;
+}
+
+int jmp(int x, int d) {
+    for (int i = 0; i < maxs; i++) {
+        if ((d >> i) & 1) {
+            x = up[x][i];
+        }
+    }
+    return x;
+}
+
+int lca(int x, int y) {
+    if (depth[x] < depth[y]) {
+        swap(x, y);
+    }
+    x = jmp(x, depth[x] - depth[y]);
+    if (x == y) {
+        return x;
+    }
+    for (int i = maxs - 1; i >= 0; --i) {
+        int new_x = up[x][i], new_y = up[y][i];
+        if (new_x != new_y) {
+            x = new_x, y = new_y;
+        }
+    }
+    return up[x][0];
+}
+
+void dfs(int c = 0, int p = -1, int d = 0) {
+    up[c][0] = p;
+    depth[c] = d;
+    for (int i : adj[c]) {
         if (i != p) {
-            dfs(i, cur);
-            bt[cur] += bt[i];
-            ct[cur] += ct[i];
-            w0[cur] += w0[i];
-            w1[cur] += w1[i];
+            dfs(i, c, d + 1);
         }
     }
 }
-long long sol = 0;
-void dfs2(int cur, int p) {
-    for (auto &i : adj[cur]) {
-        if (i != p) {
-            dfs2(i, cur);
-            w0[cur] -= sub0[i];
-            w1[cur] -= sub1[i];
-            sub0[cur] += sub0[i];
-            sub1[cur] += sub1[i];
-        }
-    }
-    if (min_anc[cur] == a[cur]) {
-        long long swap = min(w0[cur], w1[cur]);
-        sol += 2 * a[cur] * swap;
-        if (p != -1) {
-            sub0[cur] += swap;
-            sub1[cur] += swap;
+
+void build() {
+    for (int i = 1; i < maxs; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (up[j][i - 1] == -1) {
+                up[j][i] = -1;
+            } else {
+                val[j][i] = merge(val[j][i - 1], val[up[j][i - 1]][i - 1]);
+                up[j][i] = up[up[j][i - 1]][i - 1];
+            }
         }
     }
 }
 
 int main() {
     setIO("1");
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i] >> b[i] >> c[i];
-        min_anc[i] = inf;
-    }
+
+    int m, q;
+    cin >> n >> m >> q;
     for (int i = 0; i < n - 1; ++i) {
-        int d, e;
-        cin >> d >> e;
-        --d, --e;
-        adj[d].push_back(e);
-        adj[e].push_back(d);
+        int a, b;
+        cin >> a >> b;
+        --a, --b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-    dfs(0, -1);
-    if (bt[0] != ct[0]) {
-        cout << -1 << "\n";
-        return 0;
+    for (int i = 0; i < m; ++i) {
+        int c;
+        cin >> c;
+        --c;
+        val[c][0] = merge(val[c][0], vector<int>{i + 1});
     }
-    dfs2(0, -1);
-    cout << sol << "\n";
+    dfs();
+    build();
+    while (q--) {
+        int x, y, a;
+        cin >> x >> y >> a;
+        --x, --y;
+        int l = lca(x, y);
+        vector<int> res;
+        res = merge(res, jmp_val(x, depth[x] - depth[l]));
+        res = merge(res, jmp_val(y, depth[y] - depth[l] + 1));
+        while ((int) res.size() > a) {
+            res.erase(prev(res.end()));
+        }
+        cout << res.size() << " ";
+        print(res);
+    }
     return 0;
 }
