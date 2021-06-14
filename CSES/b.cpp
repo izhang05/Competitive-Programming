@@ -14,62 +14,83 @@ void setIO(const string &name) {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
-int p[maxn], h[maxn], tot[maxn], happy[maxn];
 vector<int> adj[maxn];
-bool pos;
+pair<int, int> down[maxn];
+int up[maxn];
+bool affected[maxn];
 
-void dfs(int c, int par) {
-    tot[c] = p[c];
-    int sum_happy = 0;
+void dfs(int c, int p) {
+    if (affected[c]) {
+        down[c].first = 0;
+    }
     for (auto &i : adj[c]) {
-        if (i != par) {
+        if (i != p) {
             dfs(i, c);
-            tot[c] += tot[i];
-            if (!pos) {
-                return;
+            int cur = down[i].first;
+            if (cur != -1) {
+                ++cur;
+                if (cur > down[c].first) {
+                    swap(down[c].first, down[c].second);
+                    down[c].first = cur;
+                } else if (cur > down[c].second) {
+                    down[c].second = cur;
+                }
             }
-            sum_happy += happy[i];
         }
-    }
-    if (abs(tot[c] % 2) != abs(h[c] % 2) || h[c] > tot[c]) {
-        pos = false;
-        return;
-    }
-    happy[c] = (tot[c] + h[c]) / 2;
-    if (sum_happy > happy[c]) {
-        pos = false;
     }
 }
-
-int main() {
-    setIO("b");
-
-    int t;
-    cin >> t;
-    while (t--) {
-        int n, m;
-        cin >> n >> m;
-        for (int i = 0; i < n; ++i) {
-            cin >> p[i];
-            adj[i].clear();
+void dfs2(int c, int p) {
+    if (p != -1) {
+        if (up[p] != -1) {
+            up[c] = max(up[c], up[p] + 1);
         }
-        for (int i = 0; i < n; ++i) {
-            cin >> h[i];
-        }
-        for (int i = 0; i < n - 1; ++i) {
-            int a, b;
-            cin >> a >> b;
-            --a, --b;
-            adj[a].push_back(b);
-            adj[b].push_back(a);
-        }
-        pos = true;
-        dfs(0, -1);
-        if (!pos) {
-            cout << "NO\n";
+        int cur;
+        if (down[c].first == -1 || down[c].first + 1 != down[p].first) {
+            cur = down[p].first;
         } else {
-            cout << "YES\n";
+            cur = down[p].second;
+        }
+        if (cur != -1) {
+            up[c] = max(up[c], cur + 1);
         }
     }
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            dfs2(i, c);
+        }
+    }
+}
+int main() {
+    setIO("b");
+    memset(up, -1, sizeof(up));
+    int n, m, d;
+    cin >> n >> m >> d;
+    for (int i = 0; i < n; ++i) {
+        down[i] = {-1, -1};
+    }
+    for (int i = 0; i < m; ++i) {
+        int a;
+        cin >> a;
+        affected[a - 1] = true;
+    }
+    for (int i = 0; i < n - 1; ++i) {
+        int a, b;
+        cin >> a >> b;
+        --a, --b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    dfs(0, -1);
+    dfs2(0, -1);
+    int sol = 0;
+    for (int i = 0; i < n; ++i) {
+        if (max(down[i].first, up[i]) <= d) {
+            ++sol;
+#ifdef DEBUG
+            cout << i << "\n";
+#endif
+        }
+    }
+    cout << sol << "\n";
     return 0;
 }
