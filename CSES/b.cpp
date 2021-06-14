@@ -15,63 +15,47 @@ void setIO(const string &name) {
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 vector<int> adj[maxn];
-pair<int, int> down[maxn];
-int up[maxn];
-bool affected[maxn];
+int v[maxn];
+long long sum[maxn], min_sub[maxn], sol = 0;
 
 void dfs(int c, int p) {
-    if (affected[c]) {
-        down[c].first = 0;
-    }
+    sum[c] = v[c];
+    priority_queue<pair<long long, long long>> q;
+    long long mn = 1e18, cur_min_sub = 1;
     for (auto &i : adj[c]) {
         if (i != p) {
             dfs(i, c);
-            int cur = down[i].first;
-            if (cur != -1) {
-                ++cur;
-                if (cur > down[c].first) {
-                    swap(down[c].first, down[c].second);
-                    down[c].first = cur;
-                } else if (cur > down[c].second) {
-                    down[c].second = cur;
-                }
-            }
+            cur_min_sub = lcm(cur_min_sub, min_sub[i]);
+            q.push({sum[i], min_sub[i]});
+            mn = min(mn, sum[i]);
         }
     }
+    if (!q.empty()) {
+        min_sub[c] = cur_min_sub * (long long) q.size();
+        while (q.top().first != mn) {
+            pair<long long, long long> cur = q.top();
+            q.pop();
+            long long sub = ((cur.first - mn + cur.second - 1) / cur.second) * cur.second;
+            sol += sub;
+            mn = min(mn, cur.first - sub);
+            q.push({cur.first - sub, cur.second});
+        }
+        sum[c] = mn * (long long) q.size();
+    } else {
+        min_sub[c] = 1;
+    }
+#ifdef DEBUG
+    cout << c + 1 << " " << min_sub[c] << " " << sum[c] << " " << sol << "\n";
+#endif
 }
-void dfs2(int c, int p) {
-    if (p != -1) {
-        if (up[p] != -1) {
-            up[c] = max(up[c], up[p] + 1);
-        }
-        int cur;
-        if (down[c].first == -1 || down[c].first + 1 != down[p].first) {
-            cur = down[p].first;
-        } else {
-            cur = down[p].second;
-        }
-        if (cur != -1) {
-            up[c] = max(up[c], cur + 1);
-        }
-    }
-    for (auto &i : adj[c]) {
-        if (i != p) {
-            dfs2(i, c);
-        }
-    }
-}
+
 int main() {
     setIO("b");
-    memset(up, -1, sizeof(up));
-    int n, m, d;
-    cin >> n >> m >> d;
+
+    int n;
+    cin >> n;
     for (int i = 0; i < n; ++i) {
-        down[i] = {-1, -1};
-    }
-    for (int i = 0; i < m; ++i) {
-        int a;
-        cin >> a;
-        affected[a - 1] = true;
+        cin >> v[i];
     }
     for (int i = 0; i < n - 1; ++i) {
         int a, b;
@@ -81,16 +65,6 @@ int main() {
         adj[b].push_back(a);
     }
     dfs(0, -1);
-    dfs2(0, -1);
-    int sol = 0;
-    for (int i = 0; i < n; ++i) {
-        if (max(down[i].first, up[i]) <= d) {
-            ++sol;
-#ifdef DEBUG
-            cout << i << "\n";
-#endif
-        }
-    }
     cout << sol << "\n";
     return 0;
 }
