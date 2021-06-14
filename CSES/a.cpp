@@ -13,40 +13,10 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5, maxs = 20;
-template<class T>
-void print(T a, string sep = " ", string end = "\n") {
-    for (auto i : a) {
-        cout << i << sep;
-    }
-    cout << end;
-}
-
-vector<int> val[maxn][maxs];
-int up[maxn][maxs], depth[maxn], n;
-vector<int> adj[maxn];
-
-vector<int> merge(vector<int> a, const vector<int> &b) {
-    for (auto &i : b) {
-        a.push_back(i);
-    }
-    sort(a.begin(), a.end());
-    while (a.size() > 10) {
-        a.erase(prev(a.end()));
-    }
-    return a;
-}
-
-vector<int> jmp_val(int x, int d) {
-    vector<int> res;
-    for (int i = 0; i < maxs; i++) {
-        if ((d >> i) & 1) {
-            res = merge(res, val[x][i]);
-            x = up[x][i];
-        }
-    }
-    return res;
-}
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 4e5 + 5, maxs = 20;
+int a[maxn], up[maxn][maxs], depth[maxn], n;
+vector<pair<int, int>> adj[maxn];
+long long down[maxn], up_dp[maxn], dp[maxn];
 
 int jmp(int x, int d) {
     for (int i = 0; i < maxs; i++) {
@@ -74,62 +44,67 @@ int lca(int x, int y) {
     return up[x][0];
 }
 
-void dfs(int c = 0, int p = -1, int d = 0) {
-    up[c][0] = p;
-    depth[c] = d;
-    for (int i : adj[c]) {
-        if (i != p) {
-            dfs(i, c, d + 1);
-        }
-    }
-}
-
 void build() {
     for (int i = 1; i < maxs; ++i) {
         for (int j = 0; j < n; ++j) {
             if (up[j][i - 1] == -1) {
                 up[j][i] = -1;
             } else {
-                val[j][i] = merge(val[j][i - 1], val[up[j][i - 1]][i - 1]);
                 up[j][i] = up[up[j][i - 1]][i - 1];
             }
         }
     }
 }
 
+void dfs(int c, int p, int d) {
+    up[c][0] = p;
+    depth[c] = d;
+    down[c] = a[c];
+    for (auto &i : adj[c]) {
+        if (i.first != p) {
+            dfs(i.first, c, d + 1);
+            down[c] += max(0ll, down[i.first] - 2 * i.second);
+        }
+    }
+}
+void dfs2(int c, int p, int v) {
+    if (p != -1) {
+        up_dp[c] = max(0ll, up_dp[p] - 2 * v) + max(0ll, down[p] - max(0ll, down[c] - 2 * v) - 2 * v);
+    }
+    for (auto &i : adj[c]) {
+        if (i.first != p) {
+            dfs2(i.first, c, i.second);
+        }
+    }
+}
+
 int main() {
     setIO("1");
-
-    int m, q;
-    cin >> n >> m >> q;
+    int q;
+    cin >> n >> q;
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
     for (int i = 0; i < n - 1; ++i) {
-        int a, b;
-        cin >> a >> b;
-        --a, --b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+        int b, c, d;
+        cin >> b >> c >> d;
+        --b, --c;
+        adj[b].emplace_back(c, d);
+        adj[c].emplace_back(b, d);
     }
-    for (int i = 0; i < m; ++i) {
-        int c;
-        cin >> c;
-        --c;
-        val[c][0] = merge(val[c][0], vector<int>{i + 1});
-    }
-    dfs();
+    dfs(0, -1, 0);
     build();
+    dfs2(0, -1, 0);
+    for (int i = 0; i < n; ++i) {
+        dp[i] = down[i] + up_dp[i];
+#ifdef DEBUG
+        cout << i + 1 << " " << dp[i] << " " << down[i] << " " << up_dp[i] << "\n";
+#endif
+    }
     while (q--) {
-        int x, y, a;
-        cin >> x >> y >> a;
-        --x, --y;
-        int l = lca(x, y);
-        vector<int> res;
-        res = merge(res, jmp_val(x, depth[x] - depth[l]));
-        res = merge(res, jmp_val(y, depth[y] - depth[l] + 1));
-        while ((int) res.size() > a) {
-            res.erase(prev(res.end()));
-        }
-        cout << res.size() << " ";
-        print(res);
+        int b, c;
+        cin >> b >> c;
+        --b, --c;
     }
     return 0;
 }

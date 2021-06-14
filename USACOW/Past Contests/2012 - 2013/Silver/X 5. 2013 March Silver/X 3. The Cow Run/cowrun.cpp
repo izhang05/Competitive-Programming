@@ -13,8 +13,8 @@ void setIO() {
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
     freopen("cowrun.in", "r", stdin);
-//    freopen("cowrun.out", "w", stdout);
-//    freopen("cowrun.out", "w", stderr);
+    //    freopen("cowrun.out", "w", stdout);
+    //    freopen("cowrun.out", "w", stderr);
 }
 //#define DEBUG
 const int maxn = 1e3 + 5;
