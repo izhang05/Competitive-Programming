@@ -13,55 +13,44 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const long long p = 9973, m1 = 1e9 + 9, m2 = 1e9 + 7;
-
-int freq_s[26], freq_cur[26];
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 5e3 + 5;
+long long dp[maxn][maxn], n;
 
 int main() {
     setIO("b");
-
-    string s, t;
-    cin >> s >> t;
-    int n = (int) s.size(), m = (int) t.size();
-    if (m < n) {
-        cout << 0 << "\n";
-        return 0;
-    }
-    long long poly1 = 0, poly2 = 0, p_pow1 = 1, p_pow2 = 1;
-    set<pair<long long, long long>> sol;
+    string s;
+    cin >> s;
+    n = int(s.size());
     for (int i = 0; i < n; ++i) {
-        ++freq_s[s[i] - 'a'], ++freq_cur[t[i] - 'a'];
-        poly1 = (poly1 * p + t[i] - 'a') % m1;
-        poly2 = (poly2 * p + t[i] - 'a') % m2;
-        p_pow1 = p_pow1 * p % m1;
-        p_pow2 = p_pow2 * p % m2;
-    }
-    bool good = true;
-    for (int j = 0; j < 26; ++j) {
-        if (freq_s[j] != freq_cur[j]) {
-            good = false;
-            break;
+        dp[i][i] = 1;
+        if (i + 1 < n && s[i] == s[i + 1]) {
+            dp[i][i + 1] = 2;
         }
     }
-    if (good) {
-        sol.insert({poly1, poly2});
-    }
-
-    for (int i = 0; i + n < m; ++i) {
-        --freq_cur[t[i] - 'a'], ++freq_cur[t[i + n] - 'a'];
-        poly1 = (poly1 * p - p_pow1 * (t[i] - 'a') % m1 + t[i + n] - 'a' + m1) % m1;
-        poly2 = (poly2 * p - p_pow2 * (t[i] - 'a') % m2 + t[i + n] - 'a' + m2) % m2;
-        good = true;
-        for (int j = 0; j < 26; ++j) {
-            if (freq_s[j] != freq_cur[j]) {
-                good = false;
-                break;
+    for (int len = 3; len <= n; ++len) {
+        for (int i = 0; i + len - 1 < n; ++i) {
+            int j = i + len - 1;
+            if (s[i] == s[j]) {
+                if (dp[i + 1][j - 1]) {
+                    dp[i][j] = min(dp[i][i + len / 2 - 1], dp[j - len / 2 + 1][j]) + 1;
+                }
             }
         }
-        if (good) {
-            sol.insert({poly1, poly2});
+    }
+    vector<long long> pre(n + 1);
+    for (int i = 0; i < n; ++i) {
+        for (int j = i; j < n; ++j) {
+            ++pre[0], --pre[dp[i][j]];
+#ifdef DEBUG
+            cout << i << " " << j << " " << dp[i][j] << "\n";
+#endif
         }
     }
-    cout << sol.size() << "\n";
+    long long cur = 0;
+    for (int i = 0; i < n; ++i) {
+        cur += pre[i];
+        cout << cur << " ";
+    }
+    cout << "\n";
     return 0;
 }
