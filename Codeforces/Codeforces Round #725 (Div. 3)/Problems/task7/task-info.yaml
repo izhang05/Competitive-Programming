@@ -1,0 +1,65 @@
+type: codeforces
+custom_name: G. Gift Set
+files:
+- name: CMakeLists.txt
+  visible: false
+  text: |-
+    cmake_minimum_required(VERSION 3.19)
+
+    project(task7)
+
+    set(CMAKE_CXX_STANDARD )
+
+    # Files from `./src` directory
+    set(SRC
+            src/main.cpp)
+
+
+    # Running learner side code
+    # Use PROJECT_NAME dependent names of targets for the plugin support to work correctly.
+    add_executable(${PROJECT_NAME}-run ${SRC})
+  learner_created: false
+- name: src/main.cpp
+  visible: true
+  text: |-
+    /**
+      Accomplished using the EduTools plugin by JetBrains https://plugins.jetbrains.com/plugin/10081-edutools
+    */
+
+    int main()
+    {
+        // Write your solution here
+        return 0;
+    }
+  learner_created: false
+- name: testData/1/input.txt
+  visible: true
+  text: |-
+    9
+    10 12 2 5
+    1 1 2 2
+    52 311 13 27
+    1000000000 1000000000 1 1
+    1000000000 1 1 1000000000
+    1 1000000000 1000000000 1
+    1 2 1 1
+    7 8 1 2
+    4 1 2 3
+  learner_created: false
+- name: testData/1/output.txt
+  visible: true
+  text: |-
+    3
+    0
+    4
+    1000000000
+    1
+    1
+    1
+    5
+    0
+  learner_created: false
+feedback_link: https://codeforces.com/contest/1538/problem/G?locale=en
+status: Solved
+feedback:
+  time: Tue, 15 Jun 2021 02:43:00 UTC

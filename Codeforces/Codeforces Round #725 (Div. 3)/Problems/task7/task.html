@@ -1,0 +1,89 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   G. Gift Set
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>Polycarp has $x$ of red and $y$ of blue candies. Using them, he wants to make gift sets. Each gift set contains either $a$ red candies and $b$ blue candies, or $a$ blue candies and $b$ red candies. Any candy can belong to at most one gift set.</p>
+  <p>Help Polycarp to find the largest number of gift sets he can create.</p>
+  <p>For example, if $x = 10$, $y = 12$, $a = 5$, and $b = 2$, then Polycarp can make three gift sets: </p>
+  <ul> 
+   <li> In the first set there will be $5$ red candies and $2$ blue candies; </li>
+   <li> In the second set there will be $5$ blue candies and $2$ red candies; </li>
+   <li> In the third set will be $5$ blue candies and $2$ red candies. </li>
+  </ul>
+  <p>Note that in this example there is one red candy that Polycarp does not use in any gift set.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line contains an integer $t$ ($1 \le t \le 10^4$). Then $t$ test cases follow.</p>
+  <p>Each test case consists of a single string containing four integers $x$, $y$, $a$, and $b$ ($1 \le x, y, a, b \le 10^9$).</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, output one number&nbsp;— the maximum number of gift sets that Polycarp can make.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>9
+10 12 2 5
+1 1 2 2
+52 311 13 27
+1000000000 1000000000 1 1
+1000000000 1 1 1000000000
+1 1000000000 1000000000 1
+1 2 1 1
+7 8 1 2
+4 1 2 3
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>3
+0
+4
+1000000000
+1
+1
+1
+5
+0
+</pre>
+   </div>
+  </div>
+ </div>
+</div>
