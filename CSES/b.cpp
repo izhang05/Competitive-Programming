@@ -13,56 +13,48 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 3e5 + 5;
-vector<int> adj[maxn];
-int in_deg[maxn];
-int dp[maxn][26];
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
+    }
+    cout << end;
+}
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
+int pre[maxn];
 
 int main() {
     setIO("b");
 
-    int n, m;
-    cin >> n >> m;
-    string s;
-    cin >> s;
-    for (int i = 0; i < m; ++i) {
-        int a, b;
-        cin >> a >> b;
-        --a, --b;
-        adj[a].push_back(b);
-        ++in_deg[b];
-    }
-    queue<int> q;
+    int n;
+    cin >> n;
+    vector<int> a(n);
     for (int i = 0; i < n; ++i) {
-        if (!in_deg[i]) {
-            q.push(i);
-        }
+        cin >> a[i];
     }
-    int cnt = 0;
-    while (!q.empty()) {
-        int cur = q.front();
-        q.pop();
-        ++dp[cur][s[cur] - 'a'];
-        for (auto &i : adj[cur]) {
-            if (--in_deg[i] == 0) {
-                q.push(i);
-            }
-            for (int j = 0; j < 26; ++j) {
-                dp[i][j] = max(dp[i][j], dp[cur][j]);
-            }
-        }
-        ++cnt;
-    }
-    if (cnt != n) {
-        cout << -1 << "\n";
-        return 0;
-    }
-    int sol = 0;
+    map<int, pair<int, int>> best;
+    pair<int, int> sol;
     for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < 26; ++j) {
-            sol = max(sol, dp[i][j]);
+        int v = a[i], cur;
+        if (best.find(v - 1) == best.end()) {
+            cur = 1;
+            pre[i] = i;
+        } else {
+            cur = best[v - 1].first + 1;
+            pre[i] = best[v - 1].second;
         }
+        best[v] = max(best[v], {cur, i});
+        sol = max(sol, {cur, i});
     }
-    cout << sol << "\n";
+    cout << sol.first << "\n";
+    vector<int> ind{sol.second + 1};
+    int cur = sol.second;
+    while (pre[cur] != cur) {
+        cur = pre[cur];
+        ind.push_back(cur + 1);
+    }
+    reverse(ind.begin(), ind.end());
+    print(ind);
+
     return 0;
 }
