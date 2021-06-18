@@ -1,0 +1,83 @@
+<div class="problem-statement">
+ <div class="header">
+  <div class="title">
+   C. Challenging Cliffs
+  </div>
+  <div class="time-limit">
+   <div class="property-title">
+    time limit per test
+   </div>2 seconds
+  </div>
+  <div class="memory-limit">
+   <div class="property-title">
+    memory limit per test
+   </div>256 megabytes
+  </div>
+  <div class="input-file">
+   <div class="property-title">
+    input
+   </div>standard input
+  </div>
+  <div class="output-file">
+   <div class="property-title">
+    output
+   </div>standard output
+  </div>
+ </div>
+ <div>
+  <p>You are a game designer and want to make an obstacle course. The player will walk from left to right. You have $n$ heights of mountains already selected and want to arrange them so that the absolute difference of the heights of the first and last mountains is as small as possible. </p>
+  <p>In addition, you want to make the game difficult, and since walking uphill or flat is harder than walking downhill, the difficulty of the level will be the number of mountains $i$ ($1 \leq i &lt; n$) such that $h_i \leq h_{i+1}$ where $h_i$ is the height of the $i$-th mountain. You don't want to waste any of the mountains you modelled, so you have to use all of them. </p>
+  <p>From all the arrangements that minimize $|h_1-h_n|$, find one that is the most difficult. If there are multiple orders that satisfy these requirements, you may find any.</p>
+ </div>
+ <div class="input-specification">
+  <div class="section-title">
+   Input
+  </div>
+  <p>The first line will contain a single integer $t$ ($1 \leq t \leq 100$) — the number of test cases. Then $t$ test cases follow.</p>
+  <p>The first line of each test case contains a single integer $n$ ($2 \leq n \leq 2 \cdot 10^5$) — the number of mountains.</p>
+  <p>The second line of each test case contains $n$ integers $h_1,\ldots,h_n$ ($1 \leq h_i \leq 10^9$), where $h_i$ is the height of the $i$-th mountain.</p>
+  <p>It is guaranteed that the sum of $n$ over all test cases does not exceed $2 \cdot 10^5$.</p>
+ </div>
+ <div class="output-specification">
+  <div class="section-title">
+   Output
+  </div>
+  <p>For each test case, output $n$ integers — the given heights in an order that maximizes the difficulty score among all orders that minimize $|h_1-h_n|$.</p>
+  <p>If there are multiple orders that satisfy these requirements, you may output any.</p>
+ </div>
+ <div class="sample-tests">
+  <div class="section-title">
+   Example
+  </div>
+  <div class="sample-test">
+   <div class="input">
+    <div class="title">
+     Input
+    </div>
+    <pre>2
+4
+4 2 1 2
+2
+3 1
+</pre>
+   </div>
+   <div class="output">
+    <div class="title">
+     Output
+    </div>
+    <pre>2 4 1 2 
+1 3
+</pre>
+   </div>
+  </div>
+ </div>
+ <div class="note">
+  <div class="section-title">
+   Note
+  </div>
+  <p>In the first test case:</p>
+  <p>The player begins at height $2$, next going up to height $4$ increasing the difficulty by $1$. After that he will go down to height $1$ and the difficulty doesn't change because he is going downhill. Finally the player will go up to height $2$ and the difficulty will increase by $1$. The absolute difference between the starting height and the end height is equal to $0$ and it's minimal. The difficulty is maximal.</p>
+  <p>In the second test case:</p>
+  <p>The player begins at height $1$, next going up to height $3$ increasing the difficulty by $1$. The absolute difference between the starting height and the end height is equal to $2$ and it's minimal as they are the only heights. The difficulty is maximal.</p>
+ </div>
+</div>
