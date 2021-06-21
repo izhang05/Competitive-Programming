@@ -1,4 +1,0 @@
-WIN
-WIN
-DRAW
-WIN

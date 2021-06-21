@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(A__Suborrays)
-
-add_executable(A__Suborrays src/main.cpp)

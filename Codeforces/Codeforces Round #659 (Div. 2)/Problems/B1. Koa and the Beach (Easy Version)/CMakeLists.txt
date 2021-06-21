@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(B1__Koa_and_the_Beach__Easy_Version_)
-
-add_executable(B1__Koa_and_the_Beach__Easy_Version_ src/main.cpp)

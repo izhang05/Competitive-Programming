@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(D2__Prefix_Suffix_Palindrome__Hard_version_)
-
-add_executable(D2__Prefix_Suffix_Palindrome__Hard_version_ src/main.cpp)

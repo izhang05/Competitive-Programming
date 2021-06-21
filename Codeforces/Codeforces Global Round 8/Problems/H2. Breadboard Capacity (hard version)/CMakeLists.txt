@@ -1,5 +1,0 @@
-cmake_minimum_required(VERSION 3.16)
-
-project(H2__Breadboard_Capacity__hard_version_)
-
-add_executable(H2__Breadboard_Capacity__hard_version_ src/main.cpp)
