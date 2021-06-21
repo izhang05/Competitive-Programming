@@ -3,6 +3,7 @@ project(cf)
 
 set(CMAKE_CXX_STANDARD 17)
 
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
@@ -15,11 +16,16 @@ file(GLOB_RECURSE FILES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS "*.cpp"
 
 foreach (FILE ${FILES})
     if (NOT ${FILE} MATCHES "cmake-build*")
+        get_filename_component(second_dir "${FILE}/../.." ABSOLUTE)
+        get_filename_component(second_last_dir "${second_dir}" NAME)
         get_filename_component(FILE_NAME ${FILE} NAME)
+
         string(REPLACE ".cpp" "" TARGET_NAME "${FILE_NAME}")
         string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
         string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
         string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
+        set(TARGET_NAME ${second_last_dir}${TARGET_NAME})
+
         add_executable(${TARGET_NAME} "${FILE}")
         get_filename_component(PARENT_DIR ${FILE}/.. ABSOLUTE)
         message(${TARGET_NAME} " = " ${FILE})
