@@ -2,109 +2,80 @@
 
 using namespace std;
 
-//#define DEBUG
-void setIO(const string &name) {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cin.exceptions(istream::failbit);
-#ifdef LOCAL
-    freopen((name + ".in").c_str(), "r", stdin);
-    freopen((name + ".out").c_str(), "w", stdout);
-    freopen((name + ".out").c_str(), "w", stderr);
-#endif
-}
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 4e5 + 5, maxs = 20;
-int a[maxn], up[maxn][maxs], depth[maxn], n;
-vector<pair<int, int>> adj[maxn];
-long long down[maxn], up_dp[maxn], dp[maxn];
+const int maxn = 15;
+const long double eps = 1e-3, inf = 1e18;
+long double dp[1 << maxn][maxn], p[maxn]; // p[i] = pow(m,i)
 
-int jmp(int x, int d) {
-    for (int i = 0; i < maxs; i++) {
-        if ((d >> i) & 1) {
-            x = up[x][i];
+struct mouse {
+    long double x, y, s;
+};
+
+long double dist(mouse a, mouse b) {
+    return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+int n;
+long double m;
+vector<mouse> a;
+mouse orig = {0, 0, 0};
+bool check(long double v) {
+    for (auto &i : dp) {
+        for (long double &j : i) {
+            j = inf;
         }
     }
-    return x;
-}
-
-int lca(int x, int y) {
-    if (depth[x] < depth[y]) {
-        swap(x, y);
-    }
-    x = jmp(x, depth[x] - depth[y]);
-    if (x == y) {
-        return x;
-    }
-    for (int i = maxs - 1; i >= 0; --i) {
-        int new_x = up[x][i], new_y = up[y][i];
-        if (new_x != new_y) {
-            x = new_x, y = new_y;
+    for (int i = 0; i < n; ++i) {
+        long double time = dist(orig, a[i]) / v;
+        if (time <= a[i].s) {
+            dp[1 << i][i] = time;
         }
     }
-    return up[x][0];
-}
-
-void build() {
-    for (int i = 1; i < maxs; ++i) {
-        for (int j = 0; j < n; ++j) {
-            if (up[j][i - 1] == -1) {
-                up[j][i] = -1;
-            } else {
-                up[j][i] = up[up[j][i - 1]][i - 1];
+    for (int mask = 1; mask < (1 << n); ++mask) {
+        int num_mice = __builtin_popcount(mask) - 1;
+        for (int i = 0; i < n; ++i) {
+            if (mask & (1 << i)) {
+                int pre = mask ^ (1 << i);
+                for (int j = 0; j < n; ++j) {
+                    if (pre & (1 << j)) {
+                        long double cur_v = v * p[num_mice], time = dp[pre][j] + dist(a[j], a[i]) / cur_v;
+                        if (dp[pre][j] != inf && time <= a[i].s) {
+                            dp[mask][i] = min(dp[mask][i], time);
+                        }
+                    }
+                }
             }
         }
     }
-}
-
-void dfs(int c, int p, int d) {
-    up[c][0] = p;
-    depth[c] = d;
-    down[c] = a[c];
-    for (auto &i : adj[c]) {
-        if (i.first != p) {
-            dfs(i.first, c, d + 1);
-            down[c] += max(0ll, down[i.first] - 2 * i.second);
+    for (int i = 0; i < n; ++i) {
+        if (dp[(1 << n) - 1][i] != inf) {
+            return true;
         }
     }
-}
-void dfs2(int c, int p, int v) {
-    if (p != -1) {
-        up_dp[c] = max(0ll, up_dp[p] - 2 * v) + max(0ll, down[p] - max(0ll, down[c] - 2 * v) - 2 * v);
-    }
-    for (auto &i : adj[c]) {
-        if (i.first != p) {
-            dfs2(i.first, c, i.second);
-        }
-    }
+    return false;
 }
 
 int main() {
-    setIO("1");
-    int q;
-    cin >> n >> q;
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
+    cin >> n;
+    a.resize(n);
     for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+        cin >> a[i].x >> a[i].y >> a[i].s;
     }
-    for (int i = 0; i < n - 1; ++i) {
-        int b, c, d;
-        cin >> b >> c >> d;
-        --b, --c;
-        adj[b].emplace_back(c, d);
-        adj[c].emplace_back(b, d);
+    cin >> m;
+    p[0] = 1;
+    for (int i = 1; i < maxn; ++i) {
+        p[i] = p[i - 1] * m;
     }
-    dfs(0, -1, 0);
-    build();
-    dfs2(0, -1, 0);
-    for (int i = 0; i < n; ++i) {
-        dp[i] = down[i] + up_dp[i];
-#ifdef DEBUG
-        cout << i + 1 << " " << dp[i] << " " << down[i] << " " << up_dp[i] << "\n";
-#endif
+    long double l = 0, r = 1e9;
+    while (r - l > eps) {
+        long double mid = (l + r) / 2;
+        if (check(mid)) {
+            r = mid;
+        } else {
+            l = mid;
+        }
     }
-    while (q--) {
-        int b, c;
-        cin >> b >> c;
-        --b, --c;
-    }
+    cout << fixed << setprecision(16) << l << "\n";
     return 0;
 }
