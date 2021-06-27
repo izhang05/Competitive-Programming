@@ -33,6 +33,13 @@ struct segtree {
             size *= 2;
         }
         t.resize(2 * size);
+        reset();
+    }
+
+    void reset() {
+        for (int i = 0; i < 2 * size; ++i) {
+            t[i] = neutral;
+        }
     }
 
     static item merge(item a, item b) {
@@ -79,11 +86,11 @@ struct segtree {
 };
 
 struct sling {
-    int x, y, t;
+    int x, y, t, cx, cy;
 };
 
 struct query {
-    int a, b, ind;
+    int a, b, ind, ca, cb;
 };
 
 int main() {
@@ -93,6 +100,7 @@ int main() {
     vector<long long> sol(m);
     vector<vector<sling>> s(2);
     vector<vector<query>> q(2);
+    set<int> points;
     for (int i = 0; i < 2; ++i) {
         s[i].reserve(n);
         q[i].reserve(n);
@@ -100,6 +108,8 @@ int main() {
     for (int i = 0; i < n; ++i) {
         sling cur{};
         cin >> cur.x >> cur.y >> cur.t;
+        points.insert(cur.x);
+        points.insert(cur.y);
         if (cur.x <= cur.y) {
             s[0].push_back(cur);
         } else {
@@ -111,6 +121,8 @@ int main() {
     for (int i = 0; i < m; ++i) {
         query cur{};
         cin >> cur.a >> cur.b;
+        points.insert(cur.a);
+        points.insert(cur.b);
         cur.ind = i;
         if (cur.a <= cur.b) {
             q[0].push_back(cur);
@@ -120,15 +132,32 @@ int main() {
         }
         sol[i] = cur.b - cur.a;
     }
+    unordered_map<int, int> ind;
+    int cur_i = 0;
+    for (auto &i : points) {
+        ind[i] = cur_i++;
+    }
     for (int i = 0; i < 2; ++i) {
+        for (auto &j : s[i]) {
+            j.cx = ind[j.x];
+            j.cy = ind[j.y];
+        }
+        for (auto &j : q[i]) {
+            j.ca = ind[j.a];
+            j.cb = ind[j.b];
+        }
+    }
+    for (int i = 0; i < 2; ++i) {
+#ifdef DEBUG
+        cout << "first"
+             << "\n";
+#endif
         sort(q[i].begin(), q[i].end(), [](auto left, auto right) {
             return left.b == right.b ? left.a < right.a : left.b < right.b;
         });
         sort(s[i].begin(), s[i].end(), [](auto left, auto right) {
             return left.y == right.y ? left.x < right.x : left.y < right.y;
         });
-        segtree less, greater; // x<a and x>=a
-        less.init(100000), greater.init(100000);
 #ifdef DEBUG
         cout << "q"
              << "\n";
@@ -142,20 +171,69 @@ int main() {
         }
         cout << "\n";
 #endif
+        segtree less, greater;
+        less.init((int) ind.size()), greater.init((int) ind.size());
         int k = 0;
         for (auto &j : q[i]) {
             while (k < int(s[i].size()) && s[i][k].y <= j.b) {
-                less.upd(s[i][k].x, -s[i][k].x - s[i][k].y + s[i][k].t);
-                greater.upd(s[i][k].x, s[i][k].x - s[i][k].y + s[i][k].t);
+                less.upd(s[i][k].cx, -s[i][k].x - s[i][k].y + s[i][k].t);
+                greater.upd(s[i][k].cx, s[i][k].x - s[i][k].y + s[i][k].t);
                 ++k;
             }
 #ifdef DEBUG
-            cout << j.a << " " << j.b << " " << j.ind << " " << greater.query(j.a, j.b + 1).mn + j.b - j.a << " " << less.query(0, j.a).mn + j.b + j.a << "\n";
+            cout << j.a << " " << j.b << " " << j.ind << " " << greater.query(j.ca, j.cb + 1).mn + j.b - j.a << " " << less.query(0, j.ca).mn + j.b + j.a << "\n";
 #endif
-            sol[j.ind] = min({sol[j.ind], greater.query(j.a, j.b + 1).mn + j.b - j.a, less.query(0, j.a).mn + j.b + j.a});
+            sol[j.ind] = min({sol[j.ind], greater.query(j.ca, j.cb + 1).mn + j.b - j.a, less.query(0, j.ca).mn + j.b + j.a});
+        }
+#ifdef DEBUG
+        cout << "second"
+             << "\n";
+#endif
+        sort(q[i].begin(), q[i].end(), [](auto left, auto right) {
+            return left.a == right.a ? left.b < right.b : left.a < right.a;
+        });
+        sort(s[i].begin(), s[i].end(), [](auto left, auto right) {
+            return left.x == right.x ? left.y < right.y : left.x < right.x;
+        });
+        reverse(q[i].begin(), q[i].end());
+        reverse(s[i].begin(), s[i].end());
+
+        greater.reset();
+        k = 0;
+        for (auto &j : q[i]) {
+            while (k < int(s[i].size()) && s[i][k].x >= j.a) {
+                greater.upd(s[i][k].cy, s[i][k].x + s[i][k].y + s[i][k].t);
+                ++k;
+            }
+#ifdef DEBUG
+            cout << j.a << " " << j.b << " " << j.ind << " " << greater.query(j.cb, int(ind.size())).mn - j.a - j.b << "\n";
+#endif
+            sol[j.ind] = min(sol[j.ind], greater.query(j.cb, int(ind.size())).mn - j.a - j.b);
+        }
+#ifdef DEBUG
+        cout << "third"
+             << "\n";
+#endif
+        sort(q[i].begin(), q[i].end(), [](auto left, auto right) {
+            return left.a == right.a ? left.b < right.b : left.a < right.a;
+        });
+        sort(s[i].begin(), s[i].end(), [](auto left, auto right) {
+            return left.x == right.x ? left.y < right.y : left.x < right.x;
+        });
+
+        greater.reset();
+        k = 0;
+        for (auto &j : q[i]) {
+            while (k < int(s[i].size()) && s[i][k].x < j.a) {
+                greater.upd(s[i][k].cy, -s[i][k].x + s[i][k].y + s[i][k].t);
+                ++k;
+            }
+#ifdef DEBUG
+            cout << j.a << " " << j.b << " " << j.ind << " " << greater.query(j.cb, int(ind.size())).mn + j.a - j.b << "\n";
+#endif
+            sol[j.ind] = min(sol[j.ind], greater.query(j.cb, int(ind.size())).mn + j.a - j.b);
         }
     }
-
     for (auto &i : sol) {
         cout << i << "\n";
     }
