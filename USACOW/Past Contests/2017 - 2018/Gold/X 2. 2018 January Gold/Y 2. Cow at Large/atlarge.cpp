@@ -11,45 +11,23 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
     freopen("atlarge.in", "r", stdin);
     freopen("atlarge.out", "w", stdout);
+    freopen("atlarge.out", "w", stderr);
 }
-
-const int maxn = 1e5;
-int n, k, to_start[maxn], to_leaf[maxn], parent[maxn];
-bool visited[maxn];
+//#define DEBUG
+const int maxn = 1e5 + 5, inf = 0x3f3f3f3f;
 vector<int> adj[maxn];
-vector<int> leafs;
-
-void start_dfs(int node, int dist) {
-    visited[node] = true;
-    if (adj[node].size() == 1) {
-        leafs.push_back(node);
-    }
-    to_start[node] = dist;
-    for (int i : adj[node]) {
-        if (!visited[i]) {
-            parent[i] = node;
-            start_dfs(i, dist + 1);
-        }
-    }
-}
-
-void leaf_bfs() {
-    queue<pair<int, int> > q;
-    for (int i : leafs) {
-        q.push(make_pair(i, 0));
-        visited[i] = true;
-    }
-
-    while (!q.empty()) {
-        pair<int, int> cur = q.front();
-        q.pop();
-        to_leaf[cur.first] = cur.second;
-        for (int i : adj[cur.first]) {
-            if (!visited[i]) {
-                q.push(make_pair(i, cur.second + 1));
-                visited[i] = true;
+int deg[maxn], dist[maxn], sol = 0;
+void dfs(int c, int p, int d = 0) {
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            if (dist[i] <= d + 1) {
+                // A farmer can reach node i faster than Bessie. Therefore, we don't need to dfs in subtree i
+                ++sol;
+            } else {
+                dfs(i, c, d + 1);
             }
         }
     }
@@ -57,33 +35,36 @@ void leaf_bfs() {
 
 int main() {
     setIO();
+    int n, k;
     cin >> n >> k;
     --k;
-    int a, b;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n - 1; ++i) {
+        int a, b;
         cin >> a >> b;
         --a, --b;
         adj[a].push_back(b);
         adj[b].push_back(a);
+        ++deg[a], ++deg[b];
     }
-    start_dfs(k, 0);
+    memset(dist, 0x3f, sizeof(dist));
+    queue<int> q;
     for (int i = 0; i < n; ++i) {
-        assert(visited[i]);
-        visited[i] = false;
-    }
-    leaf_bfs();
-    int sol = 0;
-//    parent[k] = k;
-    for (int i = 0; i < n; ++i) {
-        if (to_start[parent[i]] < to_leaf[parent[i]] && to_start[i] >= to_leaf[i]) { // Bessie can always reach parent[i], but not i
-            ++sol;
-//            cout << to_start[i] << " " << to_leaf[i] << " " << to_start[parent[i]] << " " << to_leaf[parent[i]] << "\n";
+        if (deg[i] == 1) {
+            q.push(i);
+            dist[i] = 0;
         }
     }
-    if (find(leafs.begin(), leafs.end(), k) != leafs.end()) {
-        cout << 1 << "\n";
-    } else {
-        cout << sol << "\n";
+    while (!q.empty()) {
+        int cur = q.front();
+        q.pop();
+        for (auto &i : adj[cur]) {
+            if (dist[i] > dist[cur] + 1) {
+                q.push(i);
+                dist[i] = dist[cur] + 1;
+            }
+        }
     }
+    dfs(k, -1);
+    cout << sol << "\n";
     return 0;
 }
