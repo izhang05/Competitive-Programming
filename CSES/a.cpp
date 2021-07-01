@@ -1,6 +1,3 @@
-/* Author: izhang05
- * Time: 06-29-2021 14:33:25
-**/
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -10,106 +7,104 @@ void setIO(const string &name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
+#ifdef LOCAL
+    freopen((name + ".in").c_str(), "r", stdin);
+    freopen((name + ".out").c_str(), "w", stdout);
+    freopen((name + ".out").c_str(), "w", stderr);
+#endif
 }
-const int maxn = 2e5 + 5;
+struct node {
+    int sum, lazy, lx{}, rx{}, lc, rc;
+    node() : sum(0), lazy(0), lc(-1), rc(-1) {}
+};
 
 struct segtree {
-    int size{};
-    long long neutral = 0, no_op = LLONG_MAX - 1;
-    vector<long long> operations, values;
-
-    long long modify_op(long long a, long long b, long long len) {
-        if (b == no_op) {
-            return a;
-        }
-        return b * len;
-    }
-
-    long long calc_op(long long a, long long b) {
-        return a + b;
-    }
-
-    void apply_mod_op(long long &a, long long b, long long len) {
-        a = modify_op(a, b, len);
-    }
+    int size = 1, cnt = 1;
+    vector<node> t;
 
     void init(int n) {
-        size = 1;
         while (size < n) {
             size *= 2;
         }
-        operations.resize(2 * size);
-        values.resize(2 * size);
+        t.resize(64 * size);
     }
 
-    void propagate(int x, int lx, int rx) {
-        if (rx - lx == 1) {
+    void create(int x) {
+        int m = (t[x].lx + t[x].rx) / 2;
+        if (t[x].lc == -1) {
+            t[x].lc = cnt++;
+            t[t[x].lc].lx = t[x].lx;
+            t[t[x].lc].rx = m;
+        }
+        if (t[x].rc == -1) {
+            t[x].rc = cnt++;
+            t[t[x].rc].lx = m;
+            t[t[x].rc].rx = t[x].rx;
+        }
+    }
+
+    void propagate(int x) {
+        if (t[x].rx - t[x].lx == 1) {
             return;
         }
-        int m = (lx + rx) / 2;
-        apply_mod_op(operations[2 * x + 1], operations[x], 1);
-        apply_mod_op(values[2 * x + 1], operations[x], m - lx);
-        apply_mod_op(operations[2 * x + 2], operations[x], 1);
-        apply_mod_op(values[2 * x + 2], operations[x], rx - m);
-        operations[x] = no_op;
+        if (t[x].lazy) {
+            int m = (t[x].lx + t[x].rx) / 2;
+            create(x);
+            t[t[x].lc].sum = m - t[x].lx;
+            t[t[x].rc].sum = t[x].rx - m;
+            t[t[x].lc].lazy = t[t[x].rc].lazy = 1;
+            t[x].lazy = 0;
+        }
     }
 
-    void upd(int l, int r, int v, int x, int lx, int rx) {
-        propagate(x, lx, rx);
-        if (lx >= r || rx <= l) {
+    void upd(int x, int l, int r) {
+        if (t[x].lx >= r || t[x].rx <= l) {
             return;
         }
-        if (lx >= l && rx <= r) {
-            apply_mod_op(operations[x], v, 1);
-            apply_mod_op(values[x], v, rx - lx);
+        if (t[x].lx >= l && t[x].rx <= r) {
+            t[x].lazy = 1;
+            t[x].sum = t[x].rx - t[x].lx;
             return;
         }
-        int m = (lx + rx) / 2;
-
-        upd(l, r, v, 2 * x + 1, lx, m), upd(l, r, v, 2 * x + 2, m, rx);
-        values[x] = calc_op(values[2 * x + 1], values[2 * x + 2]);
+        propagate(x);
+        create(x);
+        upd(t[x].lc, l, r), upd(t[x].rc, l, r);
+        t[x].sum = t[t[x].lc].sum + t[t[x].rc].sum;
     }
 
-    void upd(int l, int r, int v) {
-        upd(l, r, v, 0, 0, size);
-    }
-
-    long long query(int l, int r, int x, int lx, int rx) {
-        propagate(x, lx, rx);
-        if (lx >= r || rx <= l) {
-            return neutral;
+    int query(int x, int l, int r) {
+        if (t[x].lx >= r || t[x].rx <= l) {
+            return 0;
         }
-        if (lx >= l && rx <= r) {
-            return values[x];
+        if (t[x].lx >= l && t[x].rx <= r) {
+            return t[x].sum;
         }
-        int m = (lx + rx) / 2;
-        long long m1 = query(l, r, 2 * x + 1, lx, m), m2 = query(l, r, 2 * x + 2, m, rx);
-        return calc_op(m1, m2);
-    }
-
-    long long query(int l, int r) {
-        return query(l, r, 0, 0, size);
+        propagate(x);
+        create(x);
+        return query(t[x].lc, l, r) + query(t[x].rc, l, r);
     }
 };
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
 int main() {
-    int n, m;
-    cin >> n >> m;
+    setIO("1");
+
+    int m;
+    cin >> m;
     segtree seg;
-    seg.init(n);
+    seg.init(m);
+    seg.t[0].lx = 0, seg.t[0].rx = 1e9;
+    int c = 0;
     while (m--) {
-        int t;
-        cin >> t;
+        int t, x, y;
+        cin >> t >> x >> y;
+        --x, --y;
         if (t == 1) {
-            int l, r, v;
-            cin >> l >> r >> v;
-            seg.upd(l, r, v);
+            c = seg.query(0, x + c, y + c + 1);
+            cout << c << "\n";
         } else {
-            int l, r;
-            cin >> l >> r;
-            cout << seg.query(l, r) << "\n";
+            seg.upd(0, x + c, y + c + 1);
         }
     }
     return 0;
