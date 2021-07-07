@@ -25,33 +25,34 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 int c[maxn], sol[maxn];
 vector<int> adj[maxn];
 vector<pair<int, int>> q[maxn];
+unordered_map<int, int> occ[maxn];
+indexed_set<pair<int, int>> cnt[maxn];
 
-pair<unordered_map<int, int>, indexed_set<pair<int, int>>> dfs(int node, int p) {
-    unordered_map<int, int> occ;
-    indexed_set<pair<int, int>> cnt;
-    occ[c[node]] = 1;
-    cnt.insert({1, c[node]});
+void dfs(int node, int p) {
+    occ[node][c[node]] = 1;
+    cnt[node].insert({1, c[node]});
     for (auto &i : adj[node]) {
         if (i != p) {
-            pair<unordered_map<int, int>, indexed_set<pair<int, int>>> next = dfs(i, node);
-            if (next.first.size() > occ.size()) {
-                next.first.swap(occ);
-                next.second.swap(cnt);
+            dfs(i, node);
+            if (occ[i].size() > occ[node].size()) {
+                occ[i].swap(occ[node]);
+                cnt[i].swap(cnt[node]);
             }
-            for (auto &j : next.first) {
-                int v = occ[j.first];
+            for (auto &j : occ[i]) {
+                int v = occ[node][j.first];
                 if (v) {
-                    cnt.erase({v, j.first});
+                    cnt[node].erase({v, j.first});
                 }
-                occ[j.first] += j.second;
-                cnt.insert({v + j.second, j.first});
+                occ[node][j.first] += j.second;
+                cnt[node].insert({v + j.second, j.first});
             }
+            occ[i].clear();
+            cnt[i].clear();
         }
     }
     for (auto &i : q[node]) {
-        sol[i.second] = int(cnt.size()) - cnt.order_of_key({i.first, -inf});
+        sol[i.second] = int(cnt[node].size()) - cnt[node].order_of_key({i.first, -inf});
     }
-    return {occ, cnt};
 }
 
 int main() {
