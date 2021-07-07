@@ -1,0 +1,15 @@
+6
+valera 0
+valera 1
+valera 1
+gerald 0
+valera 4
+kolya 4
+7
+1 1
+1 2
+2 1
+2 2
+4 1
+5 1
+6 1
