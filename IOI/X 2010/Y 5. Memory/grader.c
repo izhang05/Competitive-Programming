@@ -1,5 +1,5 @@
+#include "grader_race.h"
 #include "memory.h"
-#include "grader.h"
 #include <stdio.h>
 #include <stdlib.h>
 

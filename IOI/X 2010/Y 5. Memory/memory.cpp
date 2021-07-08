@@ -1,4 +1,4 @@
-#include "grader.h"
+#include "grader_race.h"
 #include <memory.h>
 
 #include <bits/stdc++.h>

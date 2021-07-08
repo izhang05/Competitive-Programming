@@ -1,5 +1,5 @@
-#include "grader.h"
 #include "memory.h"
+#include "grader_race.h"
 
 void play() {
    int i;
