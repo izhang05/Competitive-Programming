@@ -21,18 +21,18 @@ vector<int> adj[maxn], adj_t[maxn], S;
 bool vis[maxn];
 int id[maxn];
 
-void dfs(int x, int pass, int num = 0) {
-    vis[x] = true;
-    vector<int> &ad = (pass == 1) ? adj[x] : adj_t[x];
+void dfs(int c, int pass, int num = 0) {
+    vis[c] = true;
+    vector<int> &ad = (pass == 1) ? adj[c] : adj_t[c];
     for (const int &e : ad) {
         if (!vis[e]) {
             dfs(e, pass, num);
         }
     }
 
-    S.push_back(x);
+    S.push_back(c);
     if (pass == 2) {
-        id[x] = num;
+        id[c] = num;
     }
 }
 
