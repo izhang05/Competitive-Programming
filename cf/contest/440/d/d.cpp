@@ -17,7 +17,7 @@ void setIO(const string &name) {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 405;
-int dp[maxn][maxn], edge[maxn];
+int dp[maxn][maxn], up[maxn];
 vector<pair<int, int>> adj[maxn], par[maxn][maxn];
 int n, k;
 
@@ -29,7 +29,7 @@ void dfs(int c, int p) {
     for (auto &i : adj[c]) {
         if (i.first != p) {
             dfs(i.first, c);
-            edge[i.first] = i.second;
+            up[i.first] = i.second;
             for (int j = k; j >= 1; --j) {
                 ++dp[c][j];
                 int from = 0;
@@ -40,7 +40,11 @@ void dfs(int c, int p) {
                     }
                 }
                 par[c][j] = par[c][j - from];
-                par[c][j].emplace_back(i.first, from);
+                if (!from) {
+                    par[c][j].emplace_back(i.first, -i.second);
+                } else {
+                    par[c][j].emplace_back(i.first, from);
+                }
             }
         }
     }
@@ -48,10 +52,10 @@ void dfs(int c, int p) {
 
 void print(int c, int num) {
     for (auto &i : par[c][num]) {
-        if (i.second) {
+        if (i.second > 0) {
             print(i.first, i.second);
         } else {
-            cout << edge[i.first] << " ";
+            cout << -i.second << " ";
         }
     }
 }
@@ -77,7 +81,7 @@ int main() {
     }
     cout << sol << "\n";
     if (ind) {
-        cout << edge[ind] << " ";
+        cout << up[ind] << " ";
     }
     print(ind, k);
     return 0;
