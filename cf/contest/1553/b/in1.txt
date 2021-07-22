@@ -1,0 +1,13 @@
+6
+abcdef
+cdedcb
+aaa
+aaaaa
+aab
+baaa
+ab
+b
+abcdef
+abcdef
+ba
+baa

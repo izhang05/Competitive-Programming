@@ -1,0 +1,9 @@
+4
+ababa
+ba
+ababa
+bb
+aaa
+aaaa
+aababa
+ababa
