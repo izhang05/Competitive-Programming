@@ -13,175 +13,83 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5, maxs = 20;
-vector<int> adj[maxn];
-int v[maxn];
-
-int up[maxn][maxs], depth[maxn], n;
-
-int jmp(int x, int d) {
-    for (int i = 0; i < maxs; i++) {
-        if ((d >> i) & 1) {
-            x = up[x][i];
-        }
+template<class T>
+void print(T a, string sep = " ", string end = "\n") {
+    for (auto i : a) {
+        cout << i << sep;
     }
-    return x;
+    cout << end;
 }
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
+vector<int> adj[maxn], dfs_adj[maxn];
+bool vis[maxn], tree_vis[maxn];
+int dp[maxn], depth[maxn];
+vector<int> cur;
+vector<vector<int>> sol;
 
-int lca(int x, int y) {
-    if (depth[x] < depth[y]) {
-        swap(x, y);
-    }
-    x = jmp(x, depth[x] - depth[y]);
-    if (x == y) {
-        return x;
-    }
-    for (int i = maxs - 1; i >= 0; --i) {
-        int new_x = up[x][i], new_y = up[y][i];
-        if (new_x != new_y) {
-            x = new_x, y = new_y;
-        }
-    }
-    return up[x][0];
-}
-
-void build() {
-    for (int i = 1; i < maxs; ++i) {
-        for (int j = 0; j < n; ++j) {
-            if (up[j][i - 1] == -1) {
-                up[j][i] = -1;
-            } else {
-                up[j][i] = up[up[j][i - 1]][i - 1];
-            }
+void dfs2(int c, int p) {
+    tree_vis[c] = true;
+    cur.push_back(c);
+    for (auto &i : dfs_adj[c]) {
+        if (i != p && !tree_vis[i]) {
+            dfs2(i, c);
         }
     }
 }
 
-int tin[maxn], tout[maxn], euler[2 * maxn], t, sol[100000];
-void dfs(int c = 0, int p = -1, int d = 0) {
-    up[c][0] = p;
+void dfs1(int c, int d, int p) {
+    vis[c] = true;
     depth[c] = d;
-    euler[t] = c;
-    tin[c] = t++;
-    for (int i : adj[c]) {
-        if (i != p) {
-            dfs(i, c, d + 1);
+    int pcount = 0;
+    for (auto &i : adj[c]) {
+        if (i != p || pcount) {
+            if (!vis[i]) {
+                dfs_adj[c].push_back(i);
+                dfs1(i, d + 1, c);
+                dp[c] += dp[i];
+            } else {
+                if (depth[i] < depth[c]) {
+                    ++dp[c];
+                } else if (depth[c] < depth[i]) {
+                    --dp[c];
+                }
+            }
+        } else {
+            ++pcount;
         }
     }
-    euler[t] = c;
-    tout[c] = t++;
+    if (!dp[c]) {
+        cur.clear();
+        dfs2(c, p);
+        sol.push_back(cur);
+    }
 }
-const int k = 200;
-int cnt[maxn], cur, cur_colors[maxn];
-struct query {
-    int l, r, ind;
-    bool operator<(query other) const {
-        if (l / k != other.l / k) {
-            return l < other.l;
-        }
-        return (l / k & 1) ? (r < other.r) : (r > other.r);
-    }
-};
 
-void add(int x) {
-    int cur_cnt = ++cnt[euler[x]];
-    if (cur_cnt == 1) {
-        if (++cur_colors[v[euler[x]]] == 1) {
-            ++cur;
-        }
-    } else if (cur_cnt == 2) {
-        if (--cur_colors[v[euler[x]]] == 0) {
-            --cur;
-        }
-    }
-}
-void rem(int x) {
-    int cur_cnt = --cnt[euler[x]];
-    if (cur_cnt == 1) {
-        if (++cur_colors[v[euler[x]]] == 1) {
-            ++cur;
-        }
-    } else if (cur_cnt == 0) {
-        if (--cur_colors[v[euler[x]]] == 0) {
-            --cur;
-        }
-    }
-}
 int main() {
     setIO("1");
 
-    int m;
+    int n, m;
     cin >> n >> m;
-    set<int> colors;
-    for (int i = 0; i < n; ++i) {
-        cin >> v[i];
-        colors.insert(v[i]);
-    }
-    int in = 0;
-    map<int, int> ind;
-    for (auto &i : colors) {
-        ind[i] = in++;
-    }
-    for (int i = 0; i < n; ++i) {
-        v[i] = ind[v[i]];
-    }
-    for (int i = 0; i < n - 1; ++i) {
+    for (int i = 0; i < m; ++i) {
         int a, b;
         cin >> a >> b;
-        --a, --b;
         adj[a].push_back(b);
         adj[b].push_back(a);
     }
-    dfs();
-    build();
-    vector<query> queries;
-    for (int i = 0; i < m; ++i) {
-        int a, b;
-        cin >> a >> b;
-        --a, --b;
-        if (tin[a] > tin[b]) {
-            swap(a, b);
-        }
-        int l = lca(a, b);
-        if (a == l) {
-            queries.push_back({tin[a], tin[b], i});
-            sol[i] = -1;
-        } else {
-            queries.push_back({tout[a], tin[b], i});
-            sol[i] = v[tin[l]];
-        }
-    }
-    sort(queries.begin(), queries.end());
-    int l = 0, r = -1;
-    for (auto &i : queries) {
-        while (r < i.r) {
-            ++r;
-            add(r);
-        }
-        while (l > i.l) {
-            --l;
-            add(l);
-        }
-        while (r > i.r) {
-            rem(r);
-            --r;
-        }
-        while (l < i.l) {
-            rem(l);
-            ++l;
-        }
-        if (sol[i.ind] == -1) {
-            sol[i.ind] = cur;
-        } else {
-            int color = sol[i.ind];
-            sol[i.ind] = cur;
-            if (!cur_colors[color]) {
-                ++sol[i.ind];
+    for (int i = 0; i < n; ++i) {
+        if (!vis[i]) {
+            dfs1(i, 0, -1);
+            if (!tree_vis[i]) {
+                cur.clear();
+                dfs2(i, -1);
+                sol.push_back(cur);
             }
         }
     }
-    for (int i = 0; i < m; ++i) {
-        cout << sol[i] << "\n";
+    cout << sol.size() << "\n";
+    for (auto &i : sol) {
+        cout << i.size() << " ";
+        print(i);
     }
     return 0;
 }
