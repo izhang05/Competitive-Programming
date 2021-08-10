@@ -13,38 +13,36 @@ int main() {
     while (trials--) {
         cout << "testing: " << trials << endl;
         ofstream out("in.txt");
-        int n = rnd(5, 5), s = rnd(1, n), e = rnd(1, n);
+        int n = rnd(5000, 5000), s = rnd(1, n), e = rnd(1, n);
         while (e == s) {
             e = rnd(1, n);
         }
-        s = 1, e = 2;
-        cout << n << " " << s << " " << e << "\n";
+        cout << n << " " << s << " " << e << endl;
         out << n << " " << s << " " << e << "\n";
         vector<int> nums;
         for (int i = 0; i < n; ++i) {
-            //            int a = rnd(1, 5);
-            //            while (find(nums.begin(), nums.end(), a) != nums.end()) {
-            //                a = rnd(1, 5);
-            //            }
-            int a = i + 1;
+            int a = rnd(1, 1e9);
+            while (find(nums.begin(), nums.end(), a) != nums.end()) {
+                a = rnd(1, 1e9);
+            }
             nums.push_back(a);
         }
         sort(nums.begin(), nums.end());
         for (int i = 0; i < n; ++i) {
-            cout << nums[i] << " \n"[i == n - 1];
+//            cout << nums[i] << " \n"[i == n - 1];
             out << nums[i] << " \n"[i == n - 1];
         }
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < n; ++j) {
-                int a = rnd(1, 3);
-                cout << a << " \n"[j == n - 1];
+                int a = rnd(1, 1e9);
+//                cout << a << " \n"[j == n - 1];
                 out << a << " \n"[j == n - 1];
             }
         }
 
         out.close();
         system("./b < in.txt > out1.txt");
-        system("./brute_b < in.txt > out2.txt");
+        system("./bkpt_b < in.txt > out2.txt");
 
         ifstream in1("out1.txt"), in2("out2.txt");
         bool bad = false;

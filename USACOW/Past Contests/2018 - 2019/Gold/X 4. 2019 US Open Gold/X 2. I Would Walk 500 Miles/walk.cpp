@@ -11,38 +11,75 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
     freopen("walk.in", "r", stdin);
     freopen("walk.out", "w", stdout);
+    freopen("walk.out", "w", stderr);
+}
+//#define DEBUG
+const int a = 2019201913, b = 2019201949, mod = 2019201997, maxn = 7505;
+
+int par[maxn], depth[maxn];
+
+int get(int x) {
+    return par[x] == x ? x : par[x] = get(par[x]);
 }
 
-//const long long mod = 2019201997, x = 2019201913, y = 2019201949;
-//const int maxn = 7505;
-//int parent[maxn], comps;
-//bool visited[maxn];
+bool merge(int x, int y) {
+    int xroot = get(x), yroot = get(y);
+    if (depth[xroot] > depth[yroot]) {
+        swap(xroot, yroot);
+    }
+    if (xroot != yroot) {
+        par[xroot] = yroot;
+        depth[yroot] = max(depth[yroot], depth[xroot] + 1);
+        return true;
+    }
+    return false;
+}
+
+bool same(int x, int y) {
+    return get(x) == get(y);
+}
+int dist(long long x, long long y) {
+    return (a * (x + 1) + b * (y + 1)) % mod;
+}
+
+void jarnik(int source) {
+    for (int i = 1; i <= N; i++) D[i] = 2019201997;
+    for (int iter = 0; iter < N; iter++) {
+        int min_i = 0;
+        for (int i = 1; i <= N; i++)
+            if (!visited[i] && (min_i == 0 || D[i] < D[min_i])) min_i = i;
+        visited[min_i] = 1;
+        for (int j = 1; j <= N; j++)
+            if (!visited[j])
+                D[j] = min(D[j], (2019201913LL * min(min_i, j) + 2019201949LL * max(min_i, j)) % 2019201997LL);
+    }
+}
 
 int main() {
     setIO();
     int n, k;
     cin >> n >> k;
-    cout << 2019201997 - 48 * n - 84 * (k - 1) << "\n";
-    //    vector<long long> weights(n - 1);
-    //    int node = 1;
-    //    visited[1] = true;
-    //    for (int i = 0; i < n - 1; ++i) {
-    //        pair<long long, int> cur = {INT_MAX, 0};
-    //        for (int j = 1; j < n + 1; ++j) {
-    //            if (!visited[j]) {
-    //                cur = min(cur, make_pair((node * x + j * y) % mod, j));
-    //            }
-    //        }
-    //        weights[i] = cur.first;
-    //        node = cur.second;
-    //        visited[node] = true;
-    //    }
-    //    sort(weights.begin(), weights.end());
-    //    for (int i = 0; i < n - 1; ++i) {
-    //        cout << weights[i] << "\n";
-    //    }
-    //    cout << weights[n - 1 - k] << "\n";
+    for (int i = 0; i < n; ++i) {
+        par[i] = i;
+    }
+    vector<pair<int, pair<int, int>>> edges;
+    edges.reserve(n * n);
+    for (int i = 0; i < n; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            edges.emplace_back(dist(i, j), make_pair(i, j));
+        }
+    }
+    sort(edges.begin(), edges.end());
+    int comps = n, sol = 0;
+    for (int i = 0; i < (int) edges.size() && comps >= k; ++i) {
+        if (merge(edges[i].second.first, edges[i].second.second)) {
+            --comps;
+            sol = edges[i].first;
+        }
+    }
+    cout << sol << "\n";
     return 0;
 }
