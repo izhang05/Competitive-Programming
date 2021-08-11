@@ -28,12 +28,13 @@ void solve() {
         cin >> a[i];
         dp[a[i]] = a[i];
     }
-    for (int i = 0; i < maxs; ++i)
+    for (int i = 0; i < maxs; ++i) {
         for (int mask = 0; mask < (1 << maxs); ++mask) {
             if (mask & (1 << i)) {
                 dp[mask] = max(dp[mask], dp[mask ^ (1 << i)]);
             }
         }
+    }
     for (int i = 0; i < n; ++i) {
         int comp = a[i] ^ ((1 << maxs) - 1);
         cout << (dp[comp] ? dp[comp] : -1) << " \n"[i == n - 1];
