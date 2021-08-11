@@ -31,11 +31,11 @@ void solve() {
             cur += j * dp[i - 1][j - 1];
             cur %= mod;
 
-            // add to existing component with 0 space
+            // add to existing component with 0 spaces
             cur += 2 * j * dp[i - 1][j];
             cur %= mod;
 
-            // add to existing component with 1 spaces
+            // add to existing component with 1 space
             cur += 2 * j * dp[i - 2][j];
             cur %= mod;
 
