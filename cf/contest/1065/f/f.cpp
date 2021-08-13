@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 06-27-2021 12:26:50
+ * Time: 08-13-2021 12:26:09
 **/
 #include <bits/stdc++.h>
 
@@ -17,64 +17,56 @@ void setIO(const string &name) {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e6 + 5;
+const long long INFL = 0x3f3f3f3f3f3f3f3f;
 vector<int> adj[maxn];
-int n, k, sol, dp[maxn]; // dp[i] = maximum number of leafs j visited in subtree i with depth[j] - depth[i] >= k
+pair<int, int> ret[maxn];
+int no_ret[maxn];
+int k;
 
-unordered_map<int, int> dfs(int c, int p, int d) {
-    unordered_map<int, int> cur;
+void dfs1(int c, int p, int d) {
+    ret[c] = {inf, 0};
     bool leaf = true;
+    int max_add = 0;
     for (auto &i : adj[c]) {
         if (i != p) {
             leaf = false;
-            unordered_map<int, int> u = dfs(i, c, d + 1);
-            if (u.size() > cur.size()) {
-                swap(u, cur);
+            dfs1(i, c, d + 1);
+            if (ret[i].first - d <= k) {
+                ret[c].second += ret[i].second;
+                ret[c].first = min(ret[c].first, ret[i].first);
+                max_add = max(max_add, no_ret[i] - ret[i].second);
+            } else {
+                max_add = max(max_add, no_ret[i]);
             }
-            for (auto &j : u) {
-                cur[j.first] += j.second;
-            }
-            dp[c] = max(dp[c], dp[i]);
         }
     }
+    no_ret[c] = ret[c].second + max_add;
     if (leaf) {
-        cur[d] = 1;
+        ret[c] = {d, 1};
+        no_ret[c] = 1;
     }
-    if (cur.find(d + k) != cur.end()) {
-        dp[c] += cur[d + k];
+}
+
+void solve() {
+    int n;
+    cin >> n >> k;
+    for (int i = 1; i < n; ++i) {
+        int p;
+        cin >> p;
+        --p;
+        adj[i].push_back(p);
+        adj[p].push_back(i);
     }
-#ifdef DEBUG
-    cout << c << " " << dp[c] << "\n";
-    for (auto &i : cur) {
-        cout << i.first << " " << i.second << "\n";
-    }
-    cout << "\n";
-#endif
-    if (c == 0) {
-        sol = dp[c];
-        for (auto &i : cur) {
-            if (i.first - d < k) {
-                sol += i.second;
-            }
-        }
-    }
-    return cur;
+    dfs1(0, -1, 0);
+    cout << no_ret[0] << "\n";
 }
 
 int main() {
-    setIO("3");
+    setIO("1");
 
-    cin >> n >> k;
-    for (int i = 0; i < n - 1; ++i) {
-        int a;
-        cin >> a;
-        --a;
-        adj[i + 1].push_back(a);
-        adj[a].push_back(i + 1);
-#ifdef DEBUG
-        cout << i + 1 << " " << a << "\n";
-#endif
+    int t = 1;
+    while (t--) {
+        solve();
     }
-    dfs(0, -1, 0);
-    cout << sol << "\n";
     return 0;
 }
