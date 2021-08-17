@@ -82,7 +82,7 @@ struct suf_ar {
                 ++k;
             }
             lcp[pi - 1] = k;
-            k = max(0, k - 1);cf parse
+            k = max(0, k - 1);
         }
     }
 };
