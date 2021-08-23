@@ -16,8 +16,7 @@ void setIO(const string &name) {
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5, maxs = 20;
 vector<pair<int, int>> adj[maxn];
-int up[maxn][maxs], depth[maxn], n, tin[maxn], tout[maxn], t;
-vector<int> order;
+int up[maxn][maxs], depth[maxn], n, tin[maxn];
 
 int jmp(int x, int d) {
     for (int i = 0; i < maxs; i++) {
@@ -45,22 +44,14 @@ int lca(int x, int y) {
     return up[x][0];
 }
 
-int dist(int x, int y) {
-    int l = lca(x, y);
-    return depth[x] - depth[l] + depth[y] - depth[l];
-}
-
 void dfs(int c = 0, int p = -1, int d = 0) {
     up[c][0] = p;
     depth[c] = d;
-    tin[c] = t++;
-    order.push_back(c);
     for (auto &i : adj[c]) {
         if (i.first != p) {
             dfs(i.first, c, d + 1);
         }
     }
-    tout[c] = t;
 }
 
 void build() {
@@ -111,8 +102,6 @@ void dfs2(int c, int p, int path) {
     }
 }
 
-const int batch = 50;
-
 int main() {
     setIO("1");
     int m;
@@ -134,29 +123,12 @@ int main() {
             cin >> a[j];
             --a[j];
         }
-        if (s <= batch) {
-            for (int j = 0; j < s; ++j) {
-                for (int j1 = j + 1; j1 < s; ++j1) {
-                    int l = lca(a[j], a[j1]);
-                    ++diff[a[j]][i];
-                    ++diff[a[j1]][i];
-                    diff[l][i] -= 2;
-                }
-            }
-        } else {
-            int m_tin = n, m_tout = 0;
-            for (int j = 0; j < s; ++j) {
-                m_tin = min(m_tin, tin[a[j]]);
-                m_tout = max(m_tout, tout[a[j]]);
-                ++diff[a[j]][i];
-            }
-            for (int j = n - 1; j >= 0; --j) {
-                if (tin[order[j]] <= m_tin && tout[order[j]] >= m_tout) {
-                    diff[order[j]][i] -= s;
-                    break;
-                }
-            }
+        int l = a[0];
+        for (int j = 0; j < s; ++j) {
+            ++diff[a[j]][i];
+            l = lca(l, a[j]);
         }
+        diff[l][i] -= s;
     }
     dfs2(0, -1, -1);
     sort(sol.begin(), sol.end());
