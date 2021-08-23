@@ -14,21 +14,15 @@ void setIO(const string &name) {
 #endif
 }
 
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
-vector<int> adj[maxn];
-
+void solve() {
+}
 
 int main() {
     setIO("1");
-
-    int n, m, k;
-    cin >> n >> m >> k;
-    for (int i = 0; i < n - 1; ++i) {
-        int a,b;
-        cin >> a>>b;
-        --a,--b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+    int t;
+    cin >> t;
+    for (int i = 1; i <= t; ++i) {
+        cout << "Case #" << i << ": ";
+        solve();
     }
-    return 0;
 }
