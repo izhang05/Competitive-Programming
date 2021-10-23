@@ -16,21 +16,53 @@ void setIO(const string &name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-const int maxn = 7e4 + 5, maxd = 7e3 + 5;
+const int maxn = 7e4 + 5;
 vector<int> adj[maxn];
-int deg[maxn], dist[maxn], sol = 0;
-void dfs(int c, int p, int d = 0) {
+int deg[maxn], depth[maxn], dist[maxn], sol = 0;
+
+int sub[maxn];
+bool visited[maxn];
+
+int find_size(int v, int p) {
+    sub[v] = 1;
+    for (auto &i : adj[v]) {
+        if (i != p && !visited[i]) {
+            sub[v] += find_size(i, v);
+        }
+    }
+    return sub[v];
+}
+
+int centroid(int v, int p, int s) {
+    for (auto &i : adj[v]) {
+        if (i != p && !visited[i] && sub[i] > s / 2) {
+            return centroid(i, v, s);
+        }
+    }
+    return v;
+}
+
+void dfs(int c, int p, int d) {
     for (auto &i : adj[c]) {
-        if (i != p) {
-            if (dist[i] <= d + 1) {
-                ++sol;
-            } else {
-                dfs(i, c, d + 1);
-            }
+        if (!visited[i] && i != p) {
+            dfs(i, c, d + 1);
         }
     }
 }
 
+void solve(int v) {
+    find_size(v, -1);
+    int c = centroid(v, -1, sub[v]);
+    visited[c] = true;
+    depth[c] = 0;
+    dfs(0, -1, 0);
+
+    for (auto &i : adj[c]) {
+        if (!visited[i]) {
+            solve(i);
+        }
+    }
+}
 
 int main() {
     setIO("atlarge");
@@ -62,10 +94,7 @@ int main() {
             }
         }
     }
-    for (int i = 0; i < n; ++i) {
-        sol = 0;
-        dfs(i, -1);
-        cout << sol << "\n";
-    }
+    solve(0);
+    __t
     return 0;
 }

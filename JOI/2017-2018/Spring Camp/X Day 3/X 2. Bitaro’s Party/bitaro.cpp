@@ -2,10 +2,8 @@
 
 using namespace std;
 
-mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
-
 //#define DEBUG
-void setIO(string name) {
+void setIO(const string &name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
@@ -15,21 +13,54 @@ void setIO(string name) {
     freopen((name + ".out").c_str(), "w", stderr);
 #endif
 }
-
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
+
 vector<int> adj[maxn];
+vector<pair<int, int>> sol;
+int depth[maxn], dp[maxn];
+bool pos = true;
+int cnt = 0;
+
+void dfs(int c, int p, int d) {
+    ++cnt;
+    depth[c] = d;
+    for (auto &i : adj[c]) {
+        if (i != p) {
+            if (!depth[i]) {
+                sol.emplace_back(c, i);
+                dfs(i, c, d + 1);
+                dp[c] += dp[i];
+            } else if (depth[i] < depth[c]) {
+                ++dp[c];
+                sol.emplace_back(c, i);
+            } else if (depth[i] > depth[c]) {
+                --dp[c];
+            }
+        }
+    }
+    if (c != 1 && !dp[c]) {
+        pos = false;
+    }
+}
 
 int main() {
-    setIO("1");
+    setIO("b");
 
-    int n, m, q;
-    cin >> n >> m >> q;
-    for (int i = 0; i < n; ++i) {
-        int a,b;
-        cin >> a>>b;
-        --a,--b;
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < m; ++i) {
+        int a, b;
+        cin >> a >> b;
         adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-
+    dfs(1, 0, 1);
+    if (pos && cnt == n) {
+        for (auto &i : sol) {
+            cout << i.first << " " << i.second << "\n";
+        }
+    } else {
+        cout << "IMPOSSIBLE" << "\n";
+    }
     return 0;
 }
