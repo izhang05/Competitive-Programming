@@ -32,10 +32,10 @@ int lis(const vector<int> &a) {
             dp.push_back(i);
         } else {
             dp[pos] = i;
-            if (int(dp.size() - 1) > 0) {
-                pre[int(dp.size()) - 1][i] = *prev(seen[int(dp.size()) - 2].upper_bound(i));
+            if (pos) {
+                pre[pos][i] = *prev(seen[pos - 1].upper_bound(i));
             }
-            seen[int(dp.size()) - 1].insert(i);
+            seen[pos].insert(i);
         }
     }
     return (int) dp.size();
@@ -43,7 +43,8 @@ int lis(const vector<int> &a) {
 
 int main() {
     setIO("itout");
-    int n, k;
+    int n;
+    long long k;
     cin >> n >> k;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
@@ -52,6 +53,7 @@ int main() {
     int cnt = lis(a);
     vector<int> nums;
     int cur = *seen[cnt - 1].rbegin();
+
     for (int i = cnt - 1; i >= 0; --i) {
         nums.push_back(cur);
         cur = pre[i][cur];
