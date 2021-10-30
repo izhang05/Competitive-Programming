@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.19)
 project(cf)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL -std=c++20")
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 file(TOUCH ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
 add_library(PCH OBJECT ${CMAKE_BINARY_DIR}/pch.cpp)
-target_precompile_headers(PCH PRIVATE /usr/local/Cellar/gcc/10.2.0/include/c++/10.2.0/x86_64-apple-darwin19/bits/stdc++.h)
+target_precompile_headers(PCH PRIVATE /usr/local/Cellar/gcc/11.2.0/include/c++/11.2.0/x86_64-apple-darwin19/bits/stdc++.h)
 
 file(GLOB_RECURSE FILES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS "*.cpp" "*.cp")
 
