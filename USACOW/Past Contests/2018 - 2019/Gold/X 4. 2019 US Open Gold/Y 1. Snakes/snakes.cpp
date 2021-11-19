@@ -37,12 +37,12 @@ int solve(int pos, int remain) {
     if (dp[pos][remain] != inf) {
         return dp[pos][remain];
     }
-    int &ref = dp[pos][remain];
+    int &cur = dp[pos][remain];
     for (int i = pos - 1; i >= remain; --i) {
-//        cout << max_val(i, pos) * (pos - i + 1) << " " << pre[pos] - pre[i] << "\n";
-        ref = min(ref, max_val(i, pos) * (pos - i) - (pre[pos] - pre[i]) + solve(i, remain - 1));
+        cur = min(cur, max_val(i, pos) * (pos - i) - (pre[pos] - pre[i]) + solve(i, remain - 1));
     }
-    return ref;
+    //        cout << max_val(i, pos) * (pos - i + 1) << " " << pre[pos] - pre[i] << "\n";
+    return cur;
 }
 
 int main() {
