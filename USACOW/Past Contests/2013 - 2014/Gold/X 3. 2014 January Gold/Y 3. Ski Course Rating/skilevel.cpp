@@ -17,10 +17,9 @@ void setIO() {
 #endif
 }
 const int maxn = 505, inf = 0x3f3f3f3f;
-int grid[maxn][maxn], cost[maxn][maxn], size[maxn][maxn];
+int grid[maxn][maxn], cost[maxn][maxn], sz[maxn][maxn];
 pair<int, int> parent[maxn][maxn];
-vector<pair<int, int>> children[maxn][maxn];
-bool starting[maxn][maxn];
+int num_start[maxn][maxn];
 
 const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
 
@@ -35,14 +34,13 @@ int dist(pair<int, int> x, pair<int, int> y) {
 
 bool merge(pair<int, int> x, pair<int, int> y) {
     pair<int, int> xroot = get(x), yroot = get(y);
-    if (size[xroot.first][xroot.second] > size[yroot.first][yroot.second]) {
+    if (sz[xroot.first][xroot.second] > sz[yroot.first][yroot.second]) {
         swap(xroot, yroot);
     }
     if (xroot != yroot) {
         parent[xroot.first][xroot.second] = yroot;
-        size[yroot.first][yroot.second] += size[xroot.first][xroot.second];
-        children[yroot.first][yroot.second].insert(children[yroot.first][yroot.second].end(), children[xroot.first][xroot.second].begin(), children[xroot.first][xroot.second].end());
-//        cost[yroot.first][yroot.second] = dist(x, y);
+        sz[yroot.first][yroot.second] += sz[xroot.first][xroot.second];
+        num_start[yroot.first][yroot.second] += num_start[xroot.first][xroot.second];
         return true;
     }
     return false;
@@ -67,12 +65,9 @@ int main() {
     }
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
-            cin >> starting[i][j];
+            cin >> num_start[i][j];
             parent[i][j] = {i, j};
-            size[i][j] = 1;
-            if (starting[i][j]) {
-                children[i][j].emplace_back(i, j);
-            }
+            sz[i][j] = 1;
         }
     }
     set<pair<int, pair<pair<int, int>, pair<int, int>>>> edges;
@@ -93,13 +88,13 @@ int main() {
         pair<int, int> x = i.second.first, y = i.second.second;
         if (merge(x, y)) {
             pair<int, int> xroot = get(x);
-            if (size[xroot.first][xroot.second] >= t) {
-//                cout << c << " " << x.first << " " << x.second << "\n";
-                sol += c * (long long) children[xroot.first][xroot.second].size();
-                children[xroot.first][xroot.second].clear();
+            if (sz[xroot.first][xroot.second] >= t) {
+                sol += c * (long long) num_start[xroot.first][xroot.second];
+                num_start[xroot.first][xroot.second] = 0;
             }
         }
     }
+
     cout << sol << "\n";
     return 0;
 }

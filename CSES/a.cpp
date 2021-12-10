@@ -3,81 +3,86 @@
 using namespace std;
 
 //#define DEBUG
-void setIO() {
+void setIO(const string &name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cin.exceptions(istream::failbit);
+#ifdef LOCAL
+    freopen(("in" + name + ".txt").c_str(), "r", stdin);
+#endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, maxn = 4e6 + 5, maxs = 25;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
-int n = 4;
+vector<int> a;
 
-bool valid(vector<int> &nums, int cur) {
-    int l = int(nums.size());
-    for (int i = 0; i < (1 << l); ++i) {
-        for (int j = 0; j < (1 << l); ++j) {
-            if (i & j) {
-                continue;
-            }
-            int v_i = 0, v_j = 0;
-            for (int k = 0; k < l; ++k) {
-                if (i & (1 << k)) {
-                    v_i |= nums[k];
-                }
-                if (j & (1 << k)) {
-                    v_j |= nums[k];
-                }
-            }
-            if ((v_i | cur) == v_j) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-map<int, set<int>> vals;
+long long vals[maxs][maxn], p;
 
-set<vector<int>> occ;
-
-void gen(vector<int> nums) {
-    sort(nums.begin(), nums.end());
-    if (occ.find(nums) != occ.end()) {
+void gen(int l, int r, int depth) {
+    if (r - l <= 1) {
         return;
     }
-    occ.insert(nums);
-    int l = (int) nums.size(), cnt = 0;
-    for (int i = 0; i < (1 << n); ++i) {
-        if (valid(nums, i)) {
-            ++cnt;
-            nums.push_back(i);
-            gen(nums);
-            nums.pop_back();
-        }
+    int m = (l + r) / 2;
+    vals[depth][m - 1] = a[m - 1];
+    for (int i = m - 2; i >= l; --i) {
+        vals[depth][i] = (vals[depth][i + 1] * a[i]) % p;
     }
-    vals[l].insert(cnt);
-    if (l == n) {
-        for (auto &i : nums) {
-            cout << i << " ";
-        }
-        cout << "\n";
+    vals[depth][m] = a[m];
+    for (int i = m + 1; i < r; ++i) {
+        vals[depth][i] = (vals[depth][i - 1] * a[i]) % p;
     }
-    //    if ((1 << n) - (1 << l) != cnt) {
-    //        for (auto &i : nums) {
-    //            cout << i << " ";
-    //        }
-    //        cout << cnt << "\n";
-    //    }
+    gen(l, m, depth + 1);
+    gen(m, r, depth + 1);
+}
+
+void test_case() {
+    int n, q;
+    cin >> n >> p >> q;
+    a.resize(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    int size = 1;
+    while (size < n) {
+        size *= 2;
+    }
+    a.resize(size, 1);
+    vector<int> b(q / 64 + 2);
+    for (int i = 0; i < q / 64 + 2; ++i) {
+        cin >> b[i];
+    }
+    gen(0, size, 0);
+    int bits = __builtin_clz(size);
+    int sol = 0, pre_l, pre_r;
+    for (int i = 0; i < q; ++i) {
+        int l, r;
+        if (i % 64 == 0) {
+            l = (b[i / 64] + sol) % n;
+            r = (b[i / 64 + 1] + sol) % n;
+        } else {
+            l = (pre_l + sol) % n;
+            r = (pre_r + sol) % n;
+        }
+        if (l > r) {
+            swap(l, r);
+        }
+        if (l == r) {
+            sol = (a[l] + 1) % p;
+        } else {
+            int depth = __builtin_clz(l ^ r) - bits - 1;
+            sol = (vals[depth][l] * vals[depth][r] + 1) % p;
+        }
+        pre_l = l, pre_r = r;
+    }
+    cout << sol << "\n";
 }
 
 int main() {
-    gen(vector<int>{});
-    for (auto &i : vals) {
-        cout << i.first << ": ";
-        for (auto &j : i.second) {
-            cout << j << " ";
-        }
-        cout << (1 << n) - (1 << i.first) << "\n";
-    }
+    setIO("3");
 
+    int test_case_number = 1;
+    cin >> test_case_number;
+    while (test_case_number--) {
+        test_case();
+    }
     return 0;
 }
