@@ -1,3 +1,6 @@
+/* Author: izhang05
+ * Time: 12-15-2021 09:04:02
+**/
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -17,13 +20,13 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 struct item {
-    long long mx, lz_add;
+    long long ;
 };
 
 struct segtree {
     int size{};
     vector<item> t;
-    constexpr static item neutral = {-inf, 0};
+    constexpr static item neutral = ;
 
     void init(int n) {
         size = 1;
@@ -34,20 +37,25 @@ struct segtree {
     }
 
     static item merge(item a, item b) {
-        return {max(a.mx, b.mx), 0};
+        if (a == neutral) {
+            return b;
+        }
+        if (b == neutral) {
+            return a;
+        }
+        return ;
     }
 
-    void apply(int x, long long v) {
-        t[x].mx += v;
-        t[x].lz_add += v;
+    void apply(int x, long long v)  {
+
     }
 
     void propagate(int x, int lx, int rx) {
         if (rx - lx == 1) {
             return;
         }
-        apply(2 * x + 1, t[x].lz_add), apply(2 * x + 2, t[x].lz_add);
-        t[x].lz_add = 0;
+        apply(2 * x + 1, ), apply(2 * x + 2, );
+
     }
 
     void upd(int l, int r, long long v, int x, int lx, int rx) {
@@ -93,79 +101,52 @@ struct segtree {
     }
 };
 
+int par[maxn], depth[maxn], st[maxn], en[maxn], t, sz[maxn], top[maxn];
 vector<int> adj[maxn];
-int st[maxn], en[maxn], t, sz[maxn], top[maxn], depth[maxn], par[maxn];
+
 segtree seg;
 
-void dfs1(int c, int p, int d = 0) {
-    sz[c] = 1;
-    depth[c] = d;
-    par[c] = p;
+void dfs1(int c = 0, int p = -1, int d = 0) {
+    seg.upd(t, -1);
     st[c] = t++;
+    depth[c] = d;
+    sz[c] = 1;
     for (auto &i : adj[c]) {
         if (i != p) {
             dfs1(i, c, d + 1);
             sz[c] += sz[i];
             if (sz[i] > sz[adj[c][0]]) {
-                swap(adj[c][0], i);
+                swap(i, adj[c][0]);
             }
         }
     }
     en[c] = t;
 }
-void dfs2(int c, int p) {
+
+void dfs2(int c = 0, int p = -1) {
     for (auto &i : adj[c]) {
         if (i != p) {
-            top[i] = (i == adj[c][0] ? top[c] : i);
+            top[i] = i == adj[c][0] ? top[c] : i;
             dfs2(i, c);
         }
     }
 }
 
-long long path(int u, int v) {
-    long long res = -inf;
-    while (top[u] != top[v]) {
-        if (depth[top[u]] < depth[top[v]]) {
-            swap(u, v);
-        }
-        res = max(res, seg.query(st[top[u]], st[u] + 1).mx);
-        u = par[top[u]];
-    }
-    if (depth[u] > depth[v]) {
-        swap(u, v);
-    }
-    res = max(res, seg.query(st[u], st[v] + 1).mx);
-    return res;
-}
-
 void test_case() {
-    int n;
-    cin >> n;
+    int n, q;
+    cin >> n >> q;
     seg.init(n);
-    for (int i = 0; i < n - 1; ++i) {
-        int a, b;
-        cin >> a >> b;
-        --a, --b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+    for (int i = 1; i < n; ++i) {
+        cin >> par[i];
+        --par[i];
+        adj[i].push_back(par[i]);
+        adj[par[i]].push_back(i);
     }
-    dfs1(0, -1);
-    dfs2(0, -1);
-    int q;
-    cin >> q;
     while (q--) {
-        string s;
-        cin >> s;
-        if (s == "add") {
-            int u, v;
-            cin >> u >> v;
-            --u;
-            seg.upd(st[u], en[u], v);
-        } else {
-            int u, v;
-            cin >> u >> v;
-            --u, --v;
-            cout << path(u, v) << "\n";
+        int t, v;
+        cin >> t >> v;
+        --v;
+        if (t == 1) {
         }
     }
 }
