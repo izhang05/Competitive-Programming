@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 07-15-2021 14:11:07
+ * Time: 12-16-2021 18:08:46
 **/
 #include <bits/stdc++.h>
 
@@ -17,16 +17,21 @@ void setIO(const string &name) {
 #endif
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e6 + 5;
+const long long INFL = 0x3f3f3f3f3f3f3f3f;
+
 int n;
 vector<int> adj[maxn], radj[maxn];
-int comp[maxn], in_deg[maxn], out_deg[maxn], par[maxn];
+bool leaf[maxn];
+int comp[maxn];
 bool vis[maxn];
 vector<int> todo, components;
-void dfs(int c) {
+set<int> adj_comp[maxn];
+
+void dfs1(int c) {
     vis[c] = true;
     for (auto &i : adj[c]) {
         if (!vis[i]) {
-            dfs(i);
+            dfs1(i);
         }
     }
     todo.push_back(c);
@@ -40,23 +45,10 @@ void dfs2(int c, int v) {
     }
 }
 
-void reset() {
-    for (int i = 0; i < n; ++i) {
-        adj[i].clear();
-        radj[i].clear();
-        comp[i] = -1;
-        par[i] = 0;
-        in_deg[i] = 0, out_deg[i] = 0;
-        vis[i] = false;
-    }
-    todo.clear();
-    components.clear();
-}
-
 void gen() {
     for (int i = 0; i < n; ++i) {
         if (!vis[i]) {
-            dfs(i);
+            dfs1(i);
         }
     }
     reverse(todo.begin(), todo.end());
@@ -68,60 +60,84 @@ void gen() {
     }
 }
 
-void solve() {
-    reset();
+void ae(int a, int b) {
+    adj[a].push_back(b);
+    radj[b].push_back(a);
+}
+
+void test_case() {
     int m;
     cin >> n >> m;
-
+    for (int i = 0; i < n; ++i) {
+        adj[i].clear();
+        radj[i].clear();
+        vis[i] = false;
+        comp[i] = -1;
+        todo.clear();
+        components.clear();
+    }
     for (int i = 0; i < m; ++i) {
         int a, b;
         cin >> a >> b;
         --a, --b;
         adj[a].push_back(b);
         radj[b].push_back(a);
-        ++out_deg[a], ++in_deg[b];
-        par[b] = a;
     }
-    if (n == 1) {
+    gen();
+    if (components.size() == 1) {
         cout << "No\n";
         return;
     }
+    for (auto &i : components) {
+        leaf[i] = true;
+    }
     for (int i = 0; i < n; ++i) {
-        if (in_deg[i] <= 1 || out_deg[i] <= 1) {
-            cout << "Yes\n";
-        }
-        if (in_deg[i] <= 1) {
-            cout << n - 1 << " " << 1 << "\n";
-            for (int j = 1; j <= n; ++j) {
-                if (j != par[i] + 1) {
-                    cout << j << " ";
-                }
+        for (auto &j : adj[i]) {
+            if (comp[j] != comp[i]) {
+                leaf[comp[i]] = false;
             }
-            cout << "\n";
-            cout << par[i] + 1 << "\n";
-            return;
-        } else if (out_deg[i] <= 1) {
-            cout << 1 << " " << n - 1 << "\n";
-            cout << i + 1 << "\n";
-            for (int j = 1; j <= n; ++j) {
-                if (j != i + 1) {
-                    cout << j << " ";
-                }
-            }
-            cout << "\n";
-            return;
         }
     }
-    cout << "No\n";
+    vector<int> sol;
+    for (auto &i : components) {
+        if (leaf[i]) {
+            for (int j = 0; j < n; ++j) {
+                if (comp[j] == i) {
+                    sol.push_back(j + 1);
+                }
+            }
+            break;
+        }
+    }
+    cout << "Yes"
+         << "\n";
+    cout << sol.size() << " " << n - sol.size() << "\n";
+    vector<int> cats;
+    int j = 0;
+    for (int i = 1; i <= n; ++i) {
+        if (j == sol.size() || sol[j] != i) {
+            cats.push_back(i);
+        } else {
+            ++j;
+        }
+    }
+    for (auto &i : sol) {
+        cout << i << " ";
+    }
+    cout << "\n";
+    for (auto &i : cats) {
+        cout << i << " ";
+    }
+    cout << "\n";
 }
 
 int main() {
     setIO("1");
 
-    int t;
-    cin >> t;
-    while (t--) {
-        solve();
+    int test_case_number = 1;
+    cin >> test_case_number;
+    while (test_case_number--) {
+        test_case();
     }
     return 0;
 }
