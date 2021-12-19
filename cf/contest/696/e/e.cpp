@@ -17,7 +17,7 @@ void setIO(const string &name) {
     freopen("out.txt", "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e6 + 5;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 vector<int> adj[maxn];
 
@@ -44,7 +44,7 @@ ostream &operator<<(ostream &os, const girl &girl) {
 struct segtree {
     int size{};
     vector<item> t;
-    constexpr static item neutral = {{inf, inf, inf}, 0};
+    constexpr static item neutral = {{INFL, INFL, INFL}, 0};
 
     void init(int n) {
         size = 1;
@@ -182,7 +182,7 @@ void dfs2(int c = 0, int p = 0) {
 }
 
 girl path(int x, int y) {
-    girl res = {inf, inf, inf};
+    girl res = {INFL, INFL, INFL};
     while (top[x] != top[y]) {
         if (depth[top[x]] < depth[top[y]]) {
             swap(x, y);
@@ -215,7 +215,7 @@ void test_case() {
         girls[c].push_back({i + 1, c, i + 1});
     }
     for (int i = 0; i < n; ++i) {
-        girls[i].push_back({inf, inf, inf});
+        girls[i].push_back({INFL, INFL, INFL});
         reverse(girls[i].begin(), girls[i].end());
     }
     seg.init(n);
@@ -232,7 +232,7 @@ void test_case() {
             vector<int> sol;
             for (int i = 0; i < k; ++i) {
                 girl cur = path(u, v);
-                if (cur.ind == inf) {
+                if (cur.ind == INFL) {
                     break;
                 }
                 sol.push_back(cur.ind);
@@ -253,7 +253,7 @@ void test_case() {
 }
 
 int main() {
-    setIO("1");
+    setIO("3");
 
     int test_case_number = 1;
     while (test_case_number--) {

@@ -9,27 +9,36 @@ long long rnd(long long l, long long r) {
 
 int main() {
     srand(time(nullptr));
-    int trials = 200;
+    int trials = 2000;
     while (trials--) {
         cout << "testing: " << trials << endl;
         ofstream out("in.txt");
-        int n = 10, m = rnd(1, 5), q = 1;
-        cout << n << " " << m << " " << q << "\n";
+        int n = 10, m = rnd(1, 100), q = 10;
+        //        cout << n << " " << m << " " << q << "\n";
         out << n << " " << m << " " << q << "\n";
+        int cnt = 0;
         for (int i = 2; i <= n; ++i) {
             int p = rnd(1, i - 1);
-            cout << p << " " << i << "\n";
+            //            cout << p << " " << i << "\n";
             out << p << " " << i << "\n";
         }
         for (int i = 0; i < m; ++i) {
             int c = rnd(1, n);
-            cout << c << " \n"[i == m - 1];
+            //            cout << c << " \n"[i == m - 1];
             out << c << " \n"[i == m - 1];
         }
         for (int i = 0; i < q; ++i) {
-            int u = rnd(1, n), v = rnd(1, n), k = rnd(1, n);
-            cout << 1 << " " << u << " " << v << " " << k << "\n";
-            out << 1 << " " << u << " " << v << " " << k << "\n";
+            int t = rnd(1, 2);
+            if (t == 1) {
+                int u = rnd(1, n), v = rnd(1, n), k = rnd(1, 1);
+                //                cout << 1 << " " << u << " " << v << " " << k << "\n";
+                out << 1 << " " << u << " " << v << " " << k << "\n";
+                ++cnt;
+            } else {
+                int v = rnd(1, n), k = rnd(1, 100);
+                //                cout << 2 << " " << v << " " << k << "\n";
+                out << 2 << " " << v << " " << k << "\n";
+            }
         }
 
         out.close();
@@ -38,14 +47,19 @@ int main() {
 
         ifstream in1("out1.txt"), in2("out2.txt");
         bool bad = false;
-
-        long long a, b;
-        in1 >> a;
-        in2 >> b;
-        cout << a << " " << b << "\n";
-        if (a != b) {
+        if (system("diff out1.txt out2.txt -w")) {
             bad = true;
         }
+        //
+        //        for (int i = 0; i < cnt; ++i) {
+        //            long long a, b;
+        //            in1 >> a;
+        //            in2 >> b;
+        //            cout << a << " " << b << "\n";
+        //            if (a != b) {
+        //                bad = true;
+        //            }
+        //        }
 
         in1.close();
         in2.close();
