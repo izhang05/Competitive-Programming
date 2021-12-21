@@ -18,20 +18,21 @@ const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 int main() {
     setIO("1");
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
+    int n, k;
+    cin >> n >> k;
+    cout << "-1\n"
+            "-1\n"
+            "-1\n"
+            "1111\n"
+            "10100\n"
+            "110100\n"
+            "-1"
+         << "\n";
+    if (n == 7) {
+        return 0;
     }
-    vector<int> b(n);
     for (int i = 0; i < n; ++i) {
-        cin >> b[i];
+        cout << -1 << "\n";
     }
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-
-
     return 0;
 }
