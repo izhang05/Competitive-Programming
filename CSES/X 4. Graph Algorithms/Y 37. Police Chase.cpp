@@ -15,7 +15,6 @@ void setIO(const string &name) {
 }
 
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 505;
-
 int n;
 struct edge {
     int to, rev;
@@ -80,7 +79,7 @@ long long maxflow(int s, int t) {
 }
 
 int main() {
-    setIO("36");
+    setIO("37");
     int m;
     cin >> n >> m;
     for (int i = 0; i < m; ++i) {
@@ -88,7 +87,19 @@ int main() {
         cin >> a >> b;
         --a, --b;
         ae(a, b, 1);
+        ae(b, a, 1);
     }
     cout << maxflow(0, n - 1) << "\n";
+    set<pair<int, int>> sol;
+    for (int i = 0; i < n; ++i) {
+        for (auto &j : adj[i]) {
+            if (lev[i] != 0 && lev[j.to] == 0) {
+                sol.insert({i + 1, j.to + 1});
+            }
+        }
+    }
+    for (auto &i : sol) {
+        cout << i.first << " " << i.second << "\n";
+    }
     return 0;
 }
