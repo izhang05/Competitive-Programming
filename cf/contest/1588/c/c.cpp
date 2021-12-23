@@ -22,13 +22,12 @@ long long sol = 0;
 
 struct item {
     long long mn;
-    unordered_map<int, int> cnt;
 };
 
 struct segtree {
     int size{};
     vector<item> t;
-    item neutral = {INFL, unordered_map<int, int>{}};
+    item neutral = {INFL};
 
     void init(int n) {
         size = 1;
@@ -38,18 +37,12 @@ struct segtree {
         t.resize(2 * size, neutral);
     }
 
-    static item merge(const item& a, const item& b) {
-        item res;
-        res.mn = min(a.mn, b.mn);
-        res.cnt = a.cnt;
-        for (auto &i : b.cnt) {
-            res.cnt[i.first] += i.second;
-        }
-        return res;
+    static item merge(const item &a, const item &b) {
+        return {min(a.mn, b.mn)};
     }
 
     static item single(long long v) {
-        return {v, unordered_map<int, int>{{v, 1}}};
+        return {v};
     }
 
     void upd(int p, long long v, int x, int lx, int rx) {
@@ -88,7 +81,11 @@ struct segtree {
 
     int ind_mn(long long v, int x, int lx, int rx) {
         if (rx - lx == 1) {
-            return lx;
+            if (t[x].mn < v) {
+                return lx;
+            } else {
+                return rx;
+            }
         }
         int m = (lx + rx) / 2;
         if (t[2 * x + 1].mn < v) {
@@ -103,18 +100,26 @@ struct segtree {
     }
 };
 
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T>
+using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
+map<int, indexed_set<int>> occ[2];
 void solve() {
     int n;
     cin >> n;
     vector<int> a(n), p(n);
-    vector<multiset<int>> occ(2);
     vector<segtree> seg(2);
     seg[0].init(n);
     seg[1].init(n);
+    occ[0].clear();
+    occ[1].clear();
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         p[i] = a[i] - p[max(0, i - 1)];
-        occ[i % 2].insert(p[i]);
+        occ[i % 2][p[i]].insert(i);
         seg[i % 2].upd(i, p[i]);
     }
     sol = 0;
@@ -122,8 +127,9 @@ void solve() {
     for (int l = 0; l < n; ++l) {
         int pre = l ? p[l - 1] : 0;
         int ind = min(seg[l % 2].ind_mn(-pre), seg[(l % 2) ^ 1].ind_mn(pre));
-
+        sol += occ[l % 2][-pre].order_of_key(ind) + occ[(l % 2) ^ 1][pre].order_of_key(ind);
         seg[l % 2].upd(l, INFL);
+        occ[l % 2][p[l]].erase(l);
     }
 
     cout << sol << "\n";
