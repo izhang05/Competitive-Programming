@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 10-28-2021 09:52:42
+ * Time: 12-23-2021 20:40:02
 **/
 #include <bits/stdc++.h>
 
@@ -16,23 +16,19 @@ void setIO(const string &name) {
     freopen("out.txt", "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 5e5 + 5;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
+vector<int> adj[maxn];
 
-void solve() {
-    int n, d;
-    cin >> n >> d;
-    vector<pair<int, int>> a;
-    for (int i = 0; i < n; ++i) {
-        pair<int, int> cur;
-        cin >> cur.first >> cur.second;
-        if (cur.first >= d) {
-            a.push_back(cur);
-        }
-    }
-    n = int(a.size());
-    for (int i = 0; i < ; ++i) {
-        
+void test_case() {
+    int n;
+    cin >> n;
+    for (int i = 0; i < n - 1; ++i) {
+        int a, b;
+        cin >> a >> b;
+        --a, --b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
 }
 
@@ -41,7 +37,7 @@ int main() {
 
     int test_case_number = 1;
     while (test_case_number--) {
-        solve();
+        test_case();
     }
     return 0;
 }

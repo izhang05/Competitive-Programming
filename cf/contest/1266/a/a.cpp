@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 10-28-2021 09:52:42
+ * Time: 12-23-2021 20:40:02
 **/
 #include <bits/stdc++.h>
 
@@ -19,29 +19,29 @@ void setIO(const string &name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
-void solve() {
-    int n, d;
-    cin >> n >> d;
-    vector<pair<int, int>> a;
-    for (int i = 0; i < n; ++i) {
-        pair<int, int> cur;
-        cin >> cur.first >> cur.second;
-        if (cur.first >= d) {
-            a.push_back(cur);
+void test_case() {
+    string s;
+    cin >> s;
+    bool zero = false, even = false;
+    int sum = 0;
+    for (auto &i : s) {
+        if (!zero && i == '0') {
+            zero = true;
+        } else if (i == '0' || i == '2' || i == '4' || i == '6' || i == '8') {
+            even = true;
         }
+        sum += i - '0';
     }
-    n = int(a.size());
-    for (int i = 0; i < ; ++i) {
-        
-    }
+    cout << (zero && even && sum % 3 == 0 ? "red" : "cyan") << "\n";
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
+    cin >> test_case_number;
     while (test_case_number--) {
-        solve();
+        test_case();
     }
     return 0;
 }
