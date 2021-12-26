@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 11-15-2021 09:48:31
+ * Time: 12-26-2021 14:48:32
 **/
 #include <bits/stdc++.h>
 
@@ -19,7 +19,15 @@ void setIO(const string &name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
-void solve() {
+
+
+void test_case() {
+    int n;
+    cin >> n;
+    vector<string> s(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> s[i];
+    }
 
 }
 
@@ -29,7 +37,7 @@ int main() {
     int test_case_number = 1;
     cin >> test_case_number;
     while (test_case_number--) {
-        solve();
+        test_case();
     }
     return 0;
 }
