@@ -2,34 +2,28 @@
 
 using namespace std;
 
-mt19937 rng((uint32_t) chrono::steady_clock::now().time_since_epoch().count());
-const int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
-
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-
-using namespace __gnu_pbds;
-template<class T>
-using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-template<class T>
-using indexed_multiset = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
-void setIO() {
+//#define DEBUG
+void setIO(const string &name) {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-#ifdef LOCAL
-    //freopen("solution.out", "w", stdout);
-    freopen("1.in", "r", stdin);
-#endif
+    cin.exceptions(istream::failbit);
+}
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
+const long long INFL = 0x3f3f3f3f3f3f3f3f;
+
+void test_case() {
+    int n;
+    cin >> n;
+    string s;
+
 }
 
-
 int main() {
-    setIO();
+    setIO("T");
 
-    int t;
-    cin >> t;
-    while (t--) {
+    int test_case_number = 1;
+    while (test_case_number--) {
+        test_case();
     }
     return 0;
 }
