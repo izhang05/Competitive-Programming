@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 09-28-2021 16:10:08
+ * Time: 12-26-2021 21:02:02
 **/
 #include <bits/stdc++.h>
 
@@ -19,28 +19,64 @@ void setIO(const string &name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
-void solve() {
-    int n, cnt = 0;
+vector<int> solve(int l, int r) {
+    vector<int> res;
+    for (int i = l; i < r; i += 2) {
+        res.push_back(i);
+    }
+    for (int i = r - 4; i >= l; i -= 2) {
+        res.push_back(i);
+    }
+    return res;
+}
+void test_case() {
+    int n;
     cin >> n;
+    int cnt = 0;
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
         cnt += a[i];
     }
-    if (cnt % 2 == 1) {
+    if (cnt % 2) {
         cout << "NO\n";
         return;
     }
-
+    vector<int> sol;
+    if (n % 2) {
+        sol = solve(1, n);
+    } else {
+        int cur = 0;
+        for (int i = 0; i < n; ++i) {
+            cur += a[i];
+            if (cur % 2 == 0 && i % 2 == 0) {
+                sol = solve(1, i + 1);
+                for (auto &j : solve(i + 2, n)) {
+                    sol.push_back(j);
+                }
+                break;
+            }
+        }
+    }
+    if (sol.empty()) {
+        cout << "NO\n";
+        return;
+    }
+    cout << "YES\n";
+    cout << sol.size() << "\n";
+    for (auto &i : sol) {
+        cout << i << " ";
+    }
+    cout << "\n";
 }
 
 int main() {
-    setIO("1");
+    setIO("2");
 
-    int t = 1;
-    cin >> t;
-    while (t--) {
-        solve();
+    int test_case_number = 1;
+    cin >> test_case_number;
+    while (test_case_number--) {
+        test_case();
     }
     return 0;
 }
