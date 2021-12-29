@@ -17,10 +17,19 @@ void setIO(const string &name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7;
 
 long long x;
-int solve(int d, long long l, long long sol) {
-    for (int i = 2; i < 10; ++i) {
-
+long long solve() {
+    int d = 1;
+    long long cnt = 0;
+    while (x >= cnt + d * 9 * (long long) pow(10, d - 1)) {
+        cnt += d * 9 * (long long) pow(10, d - 1);
+        ++d;
     }
+    x -= cnt;
+    long long num = (long long) pow(10, d - 1) + x / d;
+    for (int i = 0; i < d - (x % d) - 1; ++i) {
+        num /= 10;
+    }
+    return num % 10;
 }
 
 int main() {
@@ -29,13 +38,8 @@ int main() {
     cin >> t;
     while (t--) {
         cin >> x;
-        int d = 1;
-        long long cnt = 0;
-        if (x > cnt + d * 9 * (long long) pow(10, d)) {
-            cnt += d * 9 * (long long) pow(10, d);
-            ++d;
-        }
-        cout << solve(d, cnt, 0) << "\n";
+        --x;
+        cout << solve() << "\n";
     }
     return 0;
 }
