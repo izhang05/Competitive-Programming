@@ -1,0 +1,10 @@
+0 0
+mn: a ind: 1
+mn: a ind: 1
+1 1
+mn: a ind: 3
+mn: a ind: 3
+3 4
+mn: a ind: 4
+mn: a ind: 4
+7

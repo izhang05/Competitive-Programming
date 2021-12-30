@@ -1,5 +1,5 @@
 /* Author: izhang05
- * Time: 12-29-2021 10:35:02
+ * Time: 12-30-2021 15:40:30
 **/
 #include <bits/stdc++.h>
 
@@ -16,130 +16,60 @@ void setIO(const string &name) {
     freopen("out.txt", "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 2e5 + 5;
+const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxn = 1e5 + 5;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
-struct item {
-    char mn;
-    int ind;
-};
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T>
+using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+int n;
+long long bit[maxn];
 
-struct segtree {
-    int size{};
-    vector<item> t;
-    item neutral = {'z' + 1, maxn};
-
-    void init(int n) {
-        size = 1;
-        while (size < n) {
-            size *= 2;
-        }
-        t.resize(2 * size);
+void upd(int ind, long long val) {
+    for (; ind < n; ind = ind | (ind + 1)) {
+        bit[ind] += val;
     }
+}
 
-    static item merge(item a, item b) {
-        if (a.mn <= b.mn) {
-            return {a.mn, a.ind};
-        }
-        return {b.mn, b.ind};
+long long qry(int ind) {
+    long long res = 0;
+    for (; ind >= 0; ind = (ind & (ind + 1)) - 1) {
+        res += bit[ind];
     }
-
-    static item single(char v, int pos) {
-        return {v, pos};
-    }
-
-    void upd(int p, char v, int x, int lx, int rx) {
-        if (rx - lx == 1) {
-            t[x] = single(v, p);
-            return;
-        }
-        int m = (lx + rx) / 2;
-        if (p < m) {
-            upd(p, v, 2 * x + 1, lx, m);
-        } else {
-            upd(p, v, 2 * x + 2, m, rx);
-        }
-        t[x] = merge(t[2 * x + 1], t[2 * x + 2]);
-    }
-
-    void upd(int p, char v) {
-        upd(p, v, 0, 0, size);
-    }
-
-    item query(int l, int r, int x, int lx, int rx) {
-        if (lx >= r || rx <= l) {
-            return neutral;
-        }
-        if (lx >= l && rx <= r) {
-            return t[x];
-        }
-        int m = (lx + rx) / 2;
-
-        return merge(query(l, r, 2 * x + 1, lx, m), query(l, r, 2 * x + 2, m, rx));
-    }
-
-    item query(int l, int r) {
-        return query(l, r, 0, 0, size);
-    }
-};
+    return res;
+}
 
 void test_case() {
-    int n;
     cin >> n;
-    string s, t;
-    cin >> s >> t;
-    if (s < t) {
-        cout << 0 << "\n";
-        return;
+    for (int i = 0; i < n; ++i) {
+        upd(i, 0);
     }
-    if (*min_element(s.begin(), s.end()) >= *max_element(t.begin(), t.end())) {
+    string a, b;
+    cin >> a >> b;
+    string cp(a.begin(), a.end());
+    sort(cp.begin(), cp.end());
+    if (cp <= b) {
         cout << -1 << "\n";
         return;
     }
-    segtree seg;
-    seg.init(n);
+    indexed_set<pair<char, int>> ch;
     for (int i = 0; i < n; ++i) {
-        seg.upd(i, s[i]);
+        ch.insert({a[i], i});
     }
-    int j = 0, sol = 0, offset = 0;
-    vector<int> take(n, 0);
-    while (true) {
-        while (j < n && s[j - offset] == t[j]) {
-            ++j;
-            if (take[j - offset]) {
-                --offset;
-            }
-            if (j == n || t[j] != t[j - 1]) {
-                break;
-            }
+    long long sol = 0, cur = 0;
+    for (int i = 0; i < n; ++i) {
+        auto it = ch.lower_bound({b[i], -inf});
+        if (it != ch.begin()) {
+            sol = min(sol, cur + prev(it)->second - i + qry(n - 1) - qry(it->second - 1) - 1);
         }
-        item cur = seg.query(j - offset, n);
-        int pre = -1;
-        if (cur.mn == t[j]) {
-            pre = cur.ind - (j - offset);
+        if (it == ch.end()) {
+            break;
         }
-        if (cur.mn >= t[j]) {
-            item new_cur = seg.query(j - offset, n);
-            if (new_cur.mn < t[j - 1]) {
-                sol += new_cur.ind - (j - 1 - offset);
-                break;
-            } else if (pre != -1) {
-                sol += pre;
-                ++j;
-            } else {
-                seg.upd(new_cur.ind, 'z' + 1);
-                take[new_cur.ind] = true;
-                sol += new_cur.ind - (j - 1 - offset);
-            }
-        } else {
-            sol += cur.ind - (j - offset);
-            if (cur.mn < t[j]) {
-                break;
-            }
-            seg.upd(cur.ind, 'z' + 1);
-            take[cur.ind] = true;
-            ++j;
-        }
-        ++offset;
+
+
+
+        ch.erase(it);
     }
     cout << sol << "\n";
 }
