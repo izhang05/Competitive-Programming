@@ -1,0 +1,11 @@
+5
+<span class="tex-span"></span>
+black
+<span class="tex-span"></span>
+black
+<span class="tex-span"></span>
+white
+<span class="tex-span"></span>
+white
+<span class="tex-span"></span>
+black
