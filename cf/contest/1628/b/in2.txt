@@ -1,0 +1,11 @@
+2
+4
+bd
+cba
+caa
+dac
+4
+ad
+abc
+bc
+ba
