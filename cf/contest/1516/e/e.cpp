@@ -223,15 +223,49 @@ struct pairnum {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7, maxk = 405;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 modnum<mod> f[maxk];
+modnum<mod> inverse[maxk];
+modnum<mod> big_ncr[maxk];
 
 modnum<mod> nCr(int n, int k) {
-    return f[n] / (f[k] * f[n - k]);
+    return f[n] * inverse[k] * inverse[n - k];
 }
+modnum<mod> dp[maxk][maxk], dp2[maxk][maxk];
 
 void test_case() {
     f[0] = 1;
     for (int i = 1; i < maxk; ++i) {
         f[i] = f[i - 1] * i;
+    }
+    for (int i = 0; i < maxk; ++i) {
+        inverse[i] = f[i].inv();
+    }
+    int n, k;
+    cin >> n >> k;
+    big_ncr[0] = 1;
+    for (int i = 1; i < maxk; ++i) {
+        big_ncr[i] = big_ncr[i - 1] * (n - i + 1) / i;
+    }
+    for (int i = 0; i <= 2 * k; ++i) {
+        dp[i][0] = 1;
+    }
+    for (int i = 1; i <= 2 * k; ++i) {
+        for (int j = 1; j <= k; ++j) {
+            dp[i][j] = dp[i - 1][j] + (i - 1) * dp[i - 1][j - 1];
+        }
+    }
+    for (int i = 1; i <= 2 * k; ++i) {
+        for (int j = 1; j <= k; ++j) {
+            for (int l = 0, mult = 1; l <= i; ++l, mult *= -1) {
+                dp2[i][j] += mult * nCr(i, l) * dp[i - l][j];
+            }
+        }
+    }
+    vector<modnum<mod>> sol{1, 0};
+    for (int i = 1; i <= k; ++i) {
+        for (int j = 1; j <= min(n, 2 * i); ++j) {
+            sol[i % 2] += big_ncr[j] * dp2[j][i];
+        }
+        cout << sol[i % 2] << " \n"[i == k];
     }
 }
 
