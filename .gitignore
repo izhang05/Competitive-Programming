@@ -28,3 +28,5 @@ Temporary Items
 # IDE configuration files
 **/cmake-build-debug
 **/.idea
+
+kactl/
