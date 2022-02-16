@@ -16,11 +16,40 @@ void setIO(const string &name) {
     freopen("out.txt", "w", stderr);
 #endif
 }
-const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
-const long long INFL = 0x3f3f3f3f3f3f3f3f;
+int mod;
+
+void sub(int &a, int b) {
+    a -= b;
+    if (a < 0) {
+        a += mod;
+    }
+}
+
+void add(int &a, int b) {
+    a += b;
+    if (a > mod) {
+        a -= mod;
+    }
+}
 
 void test_case() {
-
+    int n, q;
+    cin >> n >> q >> mod;
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    vector<int> b(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> b[i];
+        a[i] -= b[i];
+    }
+    while (q--) {
+        char t;
+        int l, r;
+        cin >> t >> l >> r;
+        --l;
+    }
 }
 
 int main() {
