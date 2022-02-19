@@ -27,28 +27,73 @@ void sub(int &a, int b) {
 
 void add(int &a, int b) {
     a += b;
-    if (a > mod) {
+    if (a >= mod) {
         a -= mod;
     }
 }
 
+const int maxn = 3e5 + 5;
+int fib[maxn];
 void test_case() {
     int n, q;
     cin >> n >> q >> mod;
+    fib[0] = 0, fib[1] = 1 % mod;
+    for (int i = 2; i < maxn; ++i) {
+        fib[i] = (fib[i - 1] + fib[i - 2]) % mod;
+    }
     vector<int> a(n);
     for (int i = 0; i < n; ++i) {
         cin >> a[i];
     }
-    vector<int> b(n);
     for (int i = 0; i < n; ++i) {
-        cin >> b[i];
-        a[i] -= b[i];
+        int b;
+        cin >> b;
+        sub(a[i], b);
+    }
+    vector<int> c(n);
+    c[0] = a[0], c[1] = (a[1] - a[0] + mod) % mod;
+    for (int i = 2; i < n; ++i) {
+        c[i] = (((a[i] - a[i - 1] - a[i - 2]) % mod + mod) % mod);
+    }
+    set<int> bad;
+    for (int i = 0; i < n; ++i) {
+        if (c[i]) {
+            bad.insert(i);
+        }
     }
     while (q--) {
         char t;
         int l, r;
         cin >> t >> l >> r;
         --l;
+        if (t == 'A') {
+            add(c[l], 1);
+            if (r < n) {
+                sub(c[r], fib[r - l + 1]); // fib[r - l + 1] = fib[r - l] + fib[r - l - 1]
+            }
+            if (r + 1 < n) {
+                sub(c[r + 1], fib[r - l]);
+            }
+        } else {
+            sub(c[l], 1);
+            if (r < n) {
+                add(c[r], fib[r - l + 1]);
+            }
+            if (r + 1 < n) {
+                add(c[r + 1], fib[r - l]);
+            }
+        }
+        for (auto &i : vector<int>{l, r, r + 1}) {
+            if (i >= n) {
+                break;
+            }
+            if (c[i]) {
+                bad.insert(i);
+            } else {
+                bad.erase(i);
+            }
+        }
+        cout << (bad.empty() ? "YES" : "NO") << "\n";
     }
 }
 
@@ -56,7 +101,6 @@ int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }
