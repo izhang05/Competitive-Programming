@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 01-12-2022 13:16:51
+ * Time: 02-25-2022 23:31:49
 **/
 #include <bits/stdc++.h>
 
@@ -20,34 +20,35 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-    int n;
-    cin >> n;
-    vector<int> h(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> h[i];
+    int m, n;
+    cin >> m >> n;
+    vector<vector<int>> p(m, vector<int>(n));
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            cin >> p[i][j];
+        }
     }
     int lo = 0, hi = 1e9, mid, res;
     while (lo <= hi) {
         mid = (lo + hi) / 2;
-        vector<int> a(h.begin(), h.end());
-        vector<int> to_add(n);
-        for (int i = n - 1; i >= 2; --i) {
-            int d = max(0, min(a[i] / 3, (a[i] + to_add[i] - mid) / 3));
-            a[i] -= 3 * d;
-            a[i] += to_add[i];
-            to_add[i - 1] += d;
-            to_add[i - 2] += 2 * d;
-        }
-        a[0] += to_add[0];
-        a[1] += to_add[1];
-        bool good = true;
+        bool two = false;
+        set<int> bad;
         for (int i = 0; i < n; ++i) {
-            if (a[i] < mid) {
-                good = false;
-                break;
+            bad.insert(i);
+        }
+        for (int i = 0; i < m; ++i) {
+            int cnt = 0;
+            for (int j = 0; j < n; ++j) {
+                if (p[i][j] >= mid) {
+                    bad.erase(j);
+                    ++cnt;
+                }
+            }
+            if (cnt >= 2) {
+                two = true;
             }
         }
-        if (good) {
+        if (bad.empty() && two) {
             res = mid;
             lo = mid + 1;
         } else {
