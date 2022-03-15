@@ -75,12 +75,16 @@ struct edge {
 
 int n;
 vector<edge> edges;
-pair<long long, long long> kruskal(int x) {
-    dsu d(n);
+void sort_edges(int x) {
     sort(edges.begin(), edges.end(), [x](auto left, auto right) {
         return abs(left.w - x) == abs(right.w - x) ? tie(left.u, left.v) < tie(right.u, right.v) : abs(left.w - x) < abs(right.w - x);
     });
+}
+pair<long long, long long> kruskal(int x) {
+    dsu d(n);
+    sort_edges(x);
     pair<long long, long long> cur;
+    int cnt = n;
     for (auto &i : edges) {
         if (d.merge(i.u, i.v)) {
             cur.first += abs(i.w - x);
@@ -89,10 +93,24 @@ pair<long long, long long> kruskal(int x) {
             } else {
                 --cur.second;
             }
+            if (--cnt == 1) {
+                break;
+            }
         }
     }
     return cur;
 }
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+const long double PI = acos((long double) -1);
+struct chash {                                       /// use most bits rather than just the lowest ones
+    const uint64_t C = (long long) (2e18 * PI) + 71; // large odd number
+    const int RANDOM = rng();
+    long long operator()(long long x) const { /// https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
+        return __builtin_bswap64((x ^ RANDOM) * C);
+    }
+};
 
 void test_case() {
     int m;
@@ -104,58 +122,70 @@ void test_case() {
         --a, --b;
         edges[i] = {a, b, c};
     }
-
-    map<int, pair<long long, long long>> change;
-    change[0] = kruskal(0);
-    vector<edge> pre(edges.begin(), edges.end());
-    int lo = 0, hi, mid, res;
-    while (lo < 1e8 + 5) {
-        dbg() << lo;
-        ++lo;
-        hi = 1e8 + 5;
-        res = -1;
-        while (lo <= hi) {
-            mid = (lo + hi) / 2;
-            sort(edges.begin(), edges.end(), [mid](auto left, auto right) {
-                return abs(left.w - mid) == abs(right.w - mid) ? tie(left.u, left.v) < tie(right.u, right.v) : abs(left.w - mid) < abs(right.w - mid);
-            });
-            if (pre != edges) {
-                res = mid;
-                hi = mid - 1;
-            } else {
-                lo = mid + 1;
-            }
+    gp_hash_table<int, pair<long long, long long>, chash> change;
+    vector<int> weights{0, (int) 1e8};
+    for (int i = 0; i < m; ++i) {
+        for (int j = 1; j < m; ++j) {
+            weights.push_back((edges[i].w + edges[j].w) / 2);
+            weights.push_back((edges[i].w + edges[j].w + 1) / 2);
         }
-        if (res != -1) {
-            change[res] = kruskal(res);
-            swap(edges, pre);
-        }
+        weights.push_back(edges[i].w);
     }
-    vector<int> weights;
-    for (auto &i : edges) {
-        weights.push_back(i.w);
-    }
+    //    vector<edge> pre(edges.begin(), edges.end());
+    //    int lo = 0, hi, mid, res;
+    //    int cnt = 0;
+    //    while (lo < 1e8 + 5) {
+    //        dbg() << lo;
+    //        ++cnt;
+    //        hi = 1e8 + 5;
+    //        res = -1;
+    //        while (lo <= hi) {
+    //            mid = (lo + hi) / 2;
+    //            sort_edges(mid);
+    //            if (pre != edges) {
+    //                res = mid;
+    //                hi = mid - 1;
+    //            } else {
+    //                lo = mid + 1;
+    //            }
+    //        }
+    //        if (res != -1) {
+    //            change[res] = kruskal(res);
+    //            swap(edges, pre);
+    //            lo = res + 1;
+    //        } else {
+    //            assert(lo >= 1e8 + 5);
+    //            break;
+    //        }
+    //        assert(cnt <= m * m);
+    //    }
+    //    vector<int> weights;
+    //    for (auto &i : edges) {
+    //        weights.push_back(i.w);
+    //    }
     for (auto &i : weights) {
         change[i] = kruskal(i);
     }
-    dbg() << change;
-    dbg() << kruskal(0);
 
-    int p, k, a, b, c;
+    int p, k;
+    long long a, b, c;
     cin >> p >> k >> a >> b >> c;
     vector<int> q(k);
     for (int i = 0; i < p; ++i) {
         cin >> q[i];
     }
     for (int i = p; i < k; ++i) {
-        q[i] = int((q[i - 1] * (long long) a + b) % c);
+        q[i] = int((q[i - 1] * a + b) % c);
     }
     sort(q.begin(), q.end());
     long long sol = 0;
     vector<pair<long long, pair<long long, long long>>> cha(change.begin(), change.end());
-    dbg() << cha;
+    sort(cha.begin(), cha.end());
     int j = 0;
     for (int i = 0; i < k; ++i) {
+        if (k < 15) {
+            dbg() << q[i] << " " << cha[j].second.first + cha[j].second.second * (q[i] - cha[j].first);
+        }
         while (j + 1 < int(cha.size()) && cha[j + 1].first <= q[i]) {
             ++j;
         }
