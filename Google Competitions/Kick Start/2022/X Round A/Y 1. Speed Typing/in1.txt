@@ -1,0 +1,7 @@
+2
+aaaa
+aaaaa
+bbbbb
+bbbbc
+
+You have a set of 2N (N<= 10^5) numbers from 1 to 2N. A pairing is a way of grouping the numbers into N pairs such that each number is part of exactly one pair. The value of a pairing is the sum of the greater number in each pair. Find the expected value of a random pairing mod 10^9 + 7.
