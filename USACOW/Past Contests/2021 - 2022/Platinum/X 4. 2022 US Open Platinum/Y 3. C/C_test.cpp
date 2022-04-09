@@ -9,12 +9,12 @@ long long rnd(long long l, long long r) {
 
 int main() {
     srand(time(nullptr));
-    int trials = 200;
+    int trials = 1000;
     while (trials--) {
         cout << "testing: " << trials << endl;
         ofstream out("in.txt");
         int n;
-        n = rnd(5, 5);
+        n = rnd(1, int(1e5));
         vector<int> nums(n);
         for (int i = 0; i < n; ++i) {
             nums[i] = i + 1;
@@ -23,38 +23,38 @@ int main() {
         out << n << "\n";
         shuffle(nums.begin(), nums.end(), rng);
         for (int i = 0; i < n; ++i) {
-            cout << nums[i] << " \n"[i == n - 1];
+            //            cout << nums[i] << " \n"[i == n - 1];
             out << nums[i] << " \n"[i == n - 1];
         }
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n - 1; ++i) {
             char c = rnd(0, 1) ? 'U' : 'D';
-            cout << c;
+            //            cout << c;
             out << c;
         }
-        cout << "\n";
+        //        cout << "\n";
         out << "\n";
 
         out.close();
         system("./C < in.txt > out1.txt");
-        //        system("./brute < in.txt > out2.txt");
+        system("./C_null_awe < in.txt > out2.txt");
 
-        //        ifstream in1("out1.txt"), in2("out2.txt");
-        //        bool bad = false;
-        //
-        //        long long a, b;
-        //        in1 >> a;
-        //        in2 >> b;
-        //        cout << a << " " << b << "\n";
-        //        if (a != b) {
-        //            bad = true;
-        //        }
-        //
-        //        in1.close();
-        //        in2.close();
-        //        if (bad) {
-        //            cout << "bad\n";
-        //            return 0;
-        //        }
+        ifstream in1("out1.txt"), in2("out2.txt");
+        bool bad = false;
+
+        long long a, b;
+        in1 >> a;
+        in2 >> b;
+        cout << a << " " << b << "\n";
+        if (a != b) {
+            bad = true;
+        }
+
+        in1.close();
+        in2.close();
+        if (bad) {
+            cout << "bad\n";
+            return 0;
+        }
     }
     cout << "Good"
          << "\n";
