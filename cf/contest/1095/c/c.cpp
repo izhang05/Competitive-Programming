@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 05-23-2022 14:44:31
+ * Time: 08-10-2022 18:17:18
 **/
 #include <bits/stdc++.h>
 
@@ -30,28 +30,26 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
-    int n;
-    cin >> n;
-    map<int, int> occ;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
+    int n, k;
+    cin >> n >> k;
+    if (k > n || k < __builtin_popcount(n)) {
+        cout << "NO"
+             << "\n";
+        return;
     }
-
-    int cnt = 0;
-    for (auto &i : occ) {
-        cnt += min(2, i.second);
+    priority_queue<int> q;
+    for (int i = 0; i <= 30; ++i) {
+        if ((1 << i) & n) {
+            q.push(1 << i);
+        }
     }
-    cout << (cnt + 1) / 2 << "\n";
+    while()
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }

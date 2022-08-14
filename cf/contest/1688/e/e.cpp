@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 05-23-2022 14:44:31
+ * Time: 08-01-2022 15:36:02
 **/
 #include <bits/stdc++.h>
 
@@ -29,29 +29,45 @@ void setIO(const string &name) {
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
-void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
-    int n;
-    cin >> n;
-    map<int, int> occ;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
-    }
+int ask(const string &s) {
+    cout << "? " << s << endl;
+    int res;
+    cin >> res;
+    return res;
+}
 
-    int cnt = 0;
-    for (auto &i : occ) {
-        cnt += min(2, i.second);
+void answer(int sol) {
+    cout << "! " << sol << endl;
+}
+
+void test_case() {
+    int n, m;
+    cin >> n >> m;
+    string s(m, '0');
+    vector<pair<int, int>> w(m);
+    for (int i = 0; i < m; ++i) {
+        s[i] = '1';
+        w[i] = {ask(s), i};
+        s[i] = '0';
     }
-    cout << (cnt + 1) / 2 << "\n";
+    sort(w.begin(), w.end());
+    int cur = w[0].first;
+    s[w[0].second] = '1';
+    for (int i = 1; i < m; ++i) {
+        s[w[i].second] = '1';
+        if (ask(s) == cur + w[i].first) {
+            cur += w[i].first;
+        } else {
+            s[w[i].second] = '0';
+        }
+    }
+    answer(cur);
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }

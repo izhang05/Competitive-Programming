@@ -1,50 +1,33 @@
-/*
-ID: izhang01
-TASK: sort
-LANG: C++
-*/
-
 #include <bits/stdc++.h>
 
 using namespace std;
+
+struct element {
+    int ind, value; // ind corresponds to the index of the element in the original array
+    bool operator<(const element &rhs) const {
+        if (value == rhs.value) {
+            return ind < rhs.ind; // if two entries have the same value, sort by the initial index
+        }
+        return value < rhs.value;
+    }
+};
 
 int main() {
     freopen("sort.in", "r", stdin);
     freopen("sort.out", "w", stdout);
     int n;
     cin >> n;
-    vector<int> nums(n);
+    vector<element> nums(n);
     for (int i = 0; i < n; ++i) {
-        cin >> nums[i];
+        nums[i].ind = i;
+        cin >> nums[i].value;
     }
-//    int solution = 0;
-//    bool sorted = false;
-//    while (!sorted) {
-//        sorted = true;
-//        ++solution;
-//        for (int i = 0; i < n - 1; ++i) {
-//            if (nums[i + 1] < nums[i]) {
-//                swap(nums[i + 1], nums[i]);
-//                sorted = false;
-//            }
-//        }
-//        for (int i : nums) {
-//            cout << i << " ";
-//        }
-//        cout << "\n";
-//    }
+    sort(nums.begin(), nums.end());
 
-    vector<int> sorted_nums = nums;
-    sort(sorted_nums.begin(), sorted_nums.end());
-    unordered_map<int, int> index;
+    int sol = 0;
     for (int i = 0; i < n; ++i) {
-        index[sorted_nums[i]] = i;
-
+        sol = max(sol, nums[i].ind - i); // answer is the max of (the index in the original array) - (the index in the sorted array)
     }
-    int solution = 0;
-    for (int i = 0; i < n; ++i) {
-        solution = max(solution, i - index[nums[i]] + 1);
-    }
-    cout << solution << "\n";
+    cout << sol + 1 << "\n"; // +1 because the pseudocode runs for an extra iteration at the end
     return 0;
 }

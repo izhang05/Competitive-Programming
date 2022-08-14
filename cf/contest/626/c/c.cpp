@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 05-23-2022 14:44:31
+ * Time: 08-10-2022 18:00:32
 **/
 #include <bits/stdc++.h>
 
@@ -28,30 +28,26 @@ void setIO(const string &name) {
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
+int n, m;
+
+bool good(int x) {
+    return n <= x / 2 && m <= x / 3 && (n + m) <= x / 3 + x / 2 - x / 6;
+}
 
 void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
-    int n;
-    cin >> n;
-    map<int, int> occ;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
+    cin >> n >> m;
+    for (int i = 0;; ++i) {
+        if (good(i)) {
+            cout << i << "\n";
+            return;
+        }
     }
-
-    int cnt = 0;
-    for (auto &i : occ) {
-        cnt += min(2, i.second);
-    }
-    cout << (cnt + 1) / 2 << "\n";
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }

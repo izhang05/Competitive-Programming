@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 05-23-2022 14:44:31
+ * Time: 08-01-2022 15:36:02
 **/
 #include <bits/stdc++.h>
 
@@ -28,23 +28,37 @@ void setIO(const string &name) {
 }
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
+int cost(int x) {
+    int res = 0;
+    while (x % 2 == 0) {
+        x /= 2;
+        ++res;
+    }
+    return res;
+//    return 2 * res - 1;
+}
 
 void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
     int n;
     cin >> n;
-    map<int, int> occ;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
-    }
+    vector<int> a(n);
+    int odd = 0;
 
-    int cnt = 0;
-    for (auto &i : occ) {
-        cnt += min(2, i.second);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (a[i] % 2 == 1) {
+            ++odd;
+        }
     }
-    cout << (cnt + 1) / 2 << "\n";
+    if (odd >= 1) {
+        cout << n - odd << "\n";
+    } else {
+        int sol = inf;
+        for (auto &i : a) {
+            sol = min(sol, cost(i));
+        }
+        cout << sol + n - 1 << "\n";
+    }
 }
 
 int main() {

@@ -1,12 +1,11 @@
-/* Author: izhang
- * Time: 05-23-2022 14:44:31
-**/
 #include <bits/stdc++.h>
 
 using namespace std;
 
 #if defined LOCAL || defined DEBUG
+
 #include <debug.h>
+
 #else
 struct dbg {
     template<class c>
@@ -26,25 +25,32 @@ void setIO(const string &name) {
     freopen("out.txt", "w", stderr);
 #endif
 }
+
 const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
+const int maxn = 1e3 + 5;
+bool blocked[maxn][maxn];
 
 void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
     int n;
     cin >> n;
-    map<int, int> occ;
+    string s;
+    cin >> s;
     for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
+        for (int j = 0; j < n; ++j) {
+            blocked[i][j] = false;
+        }
     }
-
-    int cnt = 0;
-    for (auto &i : occ) {
-        cnt += min(2, i.second);
+    int last = 0;
+    char c = s.back();
+    for (int i = int(s.size()) - 1; i >= 0; --i) {
+        if (s[i] == c) {
+            ++last;
+        } else {
+            break;
+        }
     }
-    cout << (cnt + 1) / 2 << "\n";
+    cout << int(s.size()) - last << "\n";
 }
 
 int main() {

@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 05-23-2022 14:44:31
+ * Time: 08-01-2022 15:36:02
 **/
 #include <bits/stdc++.h>
 
@@ -30,21 +30,22 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-    pair<map<array<int, 4>, int>, pair<set<int>, int>> a;
     int n;
     cin >> n;
-    map<int, int> occ;
-    for (int i = 0; i < n; ++i) {
-        int a;
-        cin >> a;
-        ++occ[a];
+    map<char, int> occ;
+    for (int i = 0; i < 2 * n + 1; ++i) {
+        string s;
+        cin >> s;
+        for (auto &j : s) {
+            ++occ[j];
+        }
     }
-
-    int cnt = 0;
     for (auto &i : occ) {
-        cnt += min(2, i.second);
+        if (i.second % 2 == 1) {
+            cout << i.first << "\n";
+            return;
+        }
     }
-    cout << (cnt + 1) / 2 << "\n";
 }
 
 int main() {
