@@ -51,7 +51,7 @@ void test_case() {
     int sol = 0;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            if (used[i][j]) {
+            if (used[i][j] || used[j][i]) {
                 continue;
             }
             used[i][j] = true;
@@ -63,7 +63,7 @@ void test_case() {
                 pos.first += dx, pos.second += dy;
                 used[pre][ind[pos.first][pos.second]] = true;
             }
-            if (good({pos.first + dx, pos.second + dy})) {
+            if (good({pos.first + dx, pos.second + dy}) || ind[pos.first][pos.second] == -1) {
                 continue;
             }
             pos = a[i];
@@ -73,7 +73,7 @@ void test_case() {
                 pos.first -= dx, pos.second -= dy;
                 used[pre][ind[pos.first][pos.second]] = true;
             }
-            if (good({pos.first - dx, pos.second - dy})) {
+            if (good({pos.first - dx, pos.second - dy}) || ind[pos.first][pos.second] == -1) {
                 continue;
             }
             sol = max(sol, cur);
