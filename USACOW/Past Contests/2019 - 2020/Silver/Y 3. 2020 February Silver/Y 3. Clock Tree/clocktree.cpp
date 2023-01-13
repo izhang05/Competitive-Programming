@@ -11,64 +11,63 @@ using namespace std;
 void setIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
+    cin.exceptions(istream::failbit);
     freopen("clocktree.in", "r", stdin);
     freopen("clocktree.out", "w", stdout);
+    freopen("clocktree.out", "w", stderr);
 }
-
-const int maxn = 2500;
-int n, clocks[maxn], clocks_copy[maxn];
+//#define DEBUG
+const int maxn = 2505;
+int c[maxn], cur_c[maxn], n;
 vector<int> adj[maxn];
-bool visited[maxn];
 
-void start_dfs(int node, int parent) {
-    visited[node] = true;
-    for (int i : adj[node]) {
-        if (!visited[i]) {
-            start_dfs(i, node);
+void dfs(int cur, int p) {
+//    cout << cur << " " << p << " " << cur_c[cur] << "\n";
+    if (p != -1) {
+        ++cur_c[cur];
+        cur_c[cur] %= 12;
+    }
+    for (auto &i : adj[cur]) {
+        if (i != p) {
+            dfs(i, cur);
         }
     }
-    if (parent != -1) {
-        clocks[parent] += 12 - clocks[node];
-        clocks[parent] %= 12;
-        clocks[node] = 0;
+    if (p != -1) {
+        int diff = 12 - cur_c[cur];
+        cur_c[cur] += diff;
+        cur_c[cur] %= 12;
+        cur_c[p] += diff + 1;
+        cur_c[p] %= 12;
     }
+//    cout << cur << " " << p << " " << cur_c[cur] << "\n";
+}
+
+bool solve(int root) {
+    for (int i = 0; i < n; ++i) {
+        cur_c[i] = c[i];
+    }
+    dfs(root, -1);
+    return cur_c[root] == 0 || cur_c[root] == 1;
 }
 
 int main() {
     setIO();
     cin >> n;
     for (int i = 0; i < n; ++i) {
-        cin >> clocks_copy[i];
-        clocks_copy[i] %= 12;
+        cin >> c[i];
+        c[i] %= 12;
     }
-    int a, b;
     for (int i = 0; i < n - 1; ++i) {
-        cin >> a >> b;
-        --a, --b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+        int node1, node2;
+        cin >> node1 >> node2;
+        --node1, --node2;
+        adj[node1].push_back(node2);
+        adj[node2].push_back(node1);
     }
     int sol = 0;
     for (int i = 0; i < n; ++i) {
-        copy(begin(clocks_copy), end(clocks_copy), begin(clocks));
-        for (int j = 0; j < n; ++j) {
-            visited[j] = false;
-        }
-        start_dfs(i, -1);
-        ++sol;
-        if (!(clocks[i] == 0 || clocks[i] == 1)) {
-            --sol;
-        } else {
-            for (int j = 0; j < n; ++j) {
-                if (j != i) {
-//                    cout << j << " " << clocks[j] << "\n";
-                    if (clocks[j] != 0) {
-                        --sol;
-                        break;
-                    }
-                }
-            }
-        }
+        sol += solve(i);
+        //        cout << i << " " << solve(i) << " " << cur_c[i] << "\n";
     }
     cout << sol << "\n";
     return 0;

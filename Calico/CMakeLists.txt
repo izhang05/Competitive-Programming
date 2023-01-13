@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.23)
+project(Calico)
+
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+file(TOUCH ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
+add_library(PCH OBJECT ${CMAKE_BINARY_DIR}/pch.cpp)
+target_precompile_headers(PCH PRIVATE /usr/local/Cellar/gcc/11.2.0/include/c++/11.2.0/x86_64-apple-darwin19/bits/stdc++.h)
+
+file(GLOB_RECURSE FILES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS "*.cpp")
+
+foreach (FILE ${FILES})
+    if (NOT ${FILE} MATCHES "cmake-build*")
+        get_filename_component(FILE_NAME ${FILE} NAME)
+        string(REPLACE ".cpp" "" TARGET_NAME "${FILE_NAME}")
+        string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
+        string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
+        string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
+        add_executable(${TARGET_NAME} "${FILE}")
+        get_filename_component(PARENT_DIR ${FILE}/.. ABSOLUTE)
+        message(${TARGET_NAME} " = " ${FILE})
+        message(${PARENT_DIR})
+        set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PARENT_DIR}")
+        target_precompile_headers(${TARGET_NAME} REUSE_FROM PCH)
+    endif ()
+endforeach ()

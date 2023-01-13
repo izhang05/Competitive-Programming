@@ -1,9 +1,3 @@
-/*
-ID: izhang01
-TASK: planting
-LANG: C++11
-*/
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,10 +9,13 @@ int main() {
     freopen("planting.out", "w", stdout);
     int n;
     cin >> n;
-    int a, b, sol = 0;
+    int sol = 0;
     for (int i = 0; i < n - 1; ++i) {
+        int a, b;
         cin >> a >> b;
-        sol = max({sol, ++deg[a], ++deg[b]});
+        --a, --b; // 0 index
+        ++deg[a], ++deg[b];
+        sol = max({sol, deg[a], deg[b]});
     }
     cout << sol + 1 << "\n";
     return 0;
