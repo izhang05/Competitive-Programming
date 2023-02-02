@@ -30,7 +30,15 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
+    int n, k, m;
+    cin >> n >> k >> m;
+    vector<int> x(k);
+    for (int i = 0; i < k; ++i) {
+        cin >> x[i];
+    }
+    for (int i = 0; i < m; ++i) {
 
+    }
 }
 
 int main() {
