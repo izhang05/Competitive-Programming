@@ -26,7 +26,7 @@ int main() {
     for (int i = 0; i + i + 1 < n; ++i) {
         cur.push_back(s[i]);
         string a;
-        for (int j = i + 1; j < i + i + 1; ++j) {
+        for (int j = i + 1; j <= i + i + 1; ++j) {
             a.push_back(s[j]);
         }
         if (cur == a) {
