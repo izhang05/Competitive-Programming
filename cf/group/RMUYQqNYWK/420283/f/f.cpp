@@ -30,14 +30,22 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-
+    int n, k;
+    cin >> n >> k;
+    vector<pair<long long, long long>> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i].first >> a[i].second;
+    }
+    sort(a.begin(), a.end(), [](auto left, auto right) {
+        return left.first * left.first + left.second * left.second < right.first * right.first + right.second * right.second;
+    });
+    dbg() << a;
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }

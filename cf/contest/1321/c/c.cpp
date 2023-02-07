@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 01-30-2023 14:03:07
+ * Time: 02-06-2023 22:48:21
 **/
 #include <bits/stdc++.h>
 
@@ -32,24 +32,37 @@ const long long INFL = 0x3f3f3f3f3f3f3f3f;
 void test_case() {
     int n;
     cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-        --a[i];
+    string s;
+    cin >> s;
+    int sol = 0;
+    bool found = true;
+    while (found) {
+        found = false;
+        pair<char, int> mx;
+        for (int i = 0; i < n; ++i) {
+            if ((i > 0 && s[i - 1] + 1 == s[i]) || (i < n && s[i + 1] + 1 == s[i])) {
+                mx = max(mx, {s[i], i});
+                found = true;
+            }
+        }
+        if (found) {
+            string tmp;
+            for (int i = 0; i < n; ++i) {
+                if (i != mx.second) {
+                    tmp += s[i];
+                }
+            }
+            swap(s, tmp);
+            ++sol;
+        }
     }
-    vector<int> b(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> b[i];
-        --b[i];
-    }
-
+    cout << sol << "\n";
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }

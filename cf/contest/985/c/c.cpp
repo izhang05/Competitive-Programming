@@ -1,5 +1,5 @@
 /* Author: izhang
- * Time: 01-30-2023 14:03:07
+ * Time: 02-06-2023 22:35:49
 **/
 #include <bits/stdc++.h>
 
@@ -30,26 +30,44 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) {
+    int n, k, l;
+    cin >> n >> k >> l;
+    int m = n * k;
+    vector<int> a(m);
+    for (int i = 0; i < m; ++i) {
         cin >> a[i];
-        --a[i];
     }
-    vector<int> b(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> b[i];
-        --b[i];
+    sort(a.begin(), a.end());
+    int mx = a[0] + l;
+    int ind = upper_bound(a.begin(), a.end(), mx) - a.begin();
+    multiset<int> nums;
+    if (ind < n) {
+        cout << 0 << "\n";
+        return;
     }
-
+    for (auto &i : a) {
+        nums.insert(i);
+    }
+    long long orig = a[0], sol = orig;
+    nums.erase(nums.begin());
+    for (int i = 0; i < k - 1; ++i) {
+        nums.erase(prev(nums.end()));
+    }
+    for (int i = 0; i < n - 1; ++i) {
+        auto it = prev(nums.upper_bound(orig + l));
+        sol += *it;
+        nums.erase(it);
+        for (int j = 0; j < k - 1; ++j) {
+            nums.erase(prev(nums.end()));
+        }
+    }
+    cout << sol << "\n";
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
-    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }
