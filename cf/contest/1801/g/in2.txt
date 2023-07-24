@@ -1,0 +1,10 @@
+4 4
+abcdca
+ab
+ca
+bcd
+openolympiad
+1 5
+2 2
+2 6
+1 6
