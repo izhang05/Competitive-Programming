@@ -10,18 +10,24 @@ void setIO() {
     freopen("1.in", "r", stdin);
 #endif
 }
-
+const int mxn = 1e5;
+long long p[mxn];
 
 int main() {
     setIO();
-    int n;
-    cin >> n;
-    int x;
-    set<int> sol;
-    for (int i = 0; i < n; ++i) {
-        cin >> x;
-        sol.insert(x);
+
+    for (int i = 2; i < mxn; ++i) {
+        if (p[i] == 0) {
+            for (int j = i; j < mxn; j += i) {
+                p[j] = i;
+            }
+        }
     }
-    cout << sol.size() << "\n";
+
+    for (int i = 2; i < mxn; ++i) {
+        if (p[i] < p[i + 1] && p[i + 1] < p[i + 2]) {
+            cout << i << "\n";
+        }
+    }
     return 0;
 }
