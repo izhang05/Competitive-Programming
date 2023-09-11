@@ -147,6 +147,7 @@ void test_case() {
                 flow.addEdge(ind[s], cur_t, 1);
             } else {
                 flow.addEdge(cur_t + 1, ind[s], 1);
+//                flow.addEdge(ind[s], cur_t, 1);
             }
         }
     }
