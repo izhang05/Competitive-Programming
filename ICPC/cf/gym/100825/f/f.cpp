@@ -108,6 +108,7 @@ void test_case() {
     int n, r, f, t;
     cin >> n >> r >> f >> t;
     map<string, int> ind;
+    // 0 = source, 1 = sink
     // [2, r + 2) in U, [r + 2, r + f + 2) in V
     kactl::Dinic flow(n + 2 * t + 2);
     dbg() << n + 2 * t + 2;
@@ -147,7 +148,7 @@ void test_case() {
                 flow.addEdge(ind[s], cur_t, 1);
             } else {
                 flow.addEdge(cur_t + 1, ind[s], 1);
-//                flow.addEdge(ind[s], cur_t, 1);
+                flow.addEdge(ind[s], cur_t, 1);
             }
         }
     }
