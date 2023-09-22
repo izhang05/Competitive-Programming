@@ -33,13 +33,42 @@ void test_case() {
     string s;
     cin >> s;
     int n = int(s.size());
-
+    int so = -1, unso = inf;
+    int cur = 0;
+    for (auto &i : s) {
+        if (i == '+') {
+            ++cur;
+        } else if (i == '-') {
+            --cur;
+            so = min(so, cur);
+            if (unso > cur) {
+                unso = inf;
+            }
+        } else if (i == '0') {
+            if (so == cur || cur < 2) {
+                cout << "NO"
+                     << "\n";
+                return;
+            }
+            unso = min(unso, cur);
+        } else if (i == '1') {
+            if (unso != inf) {
+                cout << "NO"
+                     << "\n";
+                return;
+            }
+            so = cur;
+        }
+    }
+    cout << "YES"
+         << "\n";
 }
 
 int main() {
     setIO("1");
 
     int test_case_number = 1;
+    cin >> test_case_number;
     while (test_case_number--) {
         test_case();
     }
