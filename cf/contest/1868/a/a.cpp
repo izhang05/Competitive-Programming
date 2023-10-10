@@ -30,7 +30,28 @@ const int inf = 0x3f3f3f3f, mod = 1e9 + 7; //998244353;
 const long long INFL = 0x3f3f3f3f3f3f3f3f;
 
 void test_case() {
-
+    int n, m;
+    cin >> n >> m;
+    vector<int> cur(m);
+    for (int i = 0; i < m; ++i) {
+        cur[i] = i;
+    }
+    rotate(cur.begin(), prev(cur.end()), cur.end());
+    if (m == 1) {
+        cout << 0 << "\n";
+    } else {
+        cout << min(n + 1, m) << "\n";
+    }
+    for (int i = 0; i < n; ++i) {
+        for (auto &j : cur) {
+            cout << j << " ";
+        }
+        cout << "\n";
+        rotate(cur.begin(), prev(cur.end()), cur.end());
+        if (cur[0] == 0) {
+            rotate(cur.begin(), prev(cur.end()), cur.end());
+        }
+    }
 }
 
 int main() {
