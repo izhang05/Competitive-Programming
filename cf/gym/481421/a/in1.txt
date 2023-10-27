@@ -1,0 +1,3 @@
+6 10
+code*s
+codeforces
