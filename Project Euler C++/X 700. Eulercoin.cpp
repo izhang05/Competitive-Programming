@@ -3,11 +3,11 @@
 using namespace std;
 
 int main() {
-    __int128 mod = 4503599627370517, a = 1504170715041707, three = 3 * a % mod;
-    __int128 sol = a + 2 * a + three, mn = three;
-    array<__int128, 3> nums{a, 2 * a, three};
+    long long mod = 4503599627370517, a = 1504170715041707, three = 3 * a % mod;
+    long long sol = a + three, mn = three;
+    array<long long, 3> nums{a, 2 * a, three};
     while (true) {
-        __int128 mult = (mod - nums[0] + three - 1) / three;
+        long long mult = (mod - nums[0] + three - 1) / three;
         for (auto &i: nums) {
             i += (mult - 1) * three;
             i %= mod;
@@ -17,9 +17,9 @@ int main() {
         if (nums[0] < mn) {
             sol += nums[0];
             mn = nums[0];
-            cout << (long long) nums[0] << " " << (long long) sol << endl;
+            cout << nums[0] << " " << sol << endl;
         }
-        __int128 mx = *max(nums.begin(), nums.end());
+        long long mx = *max(nums.begin(), nums.end());
         if (nums[1] == mx) {
             rotate(nums.begin(), nums.begin() + 1, nums.end());
         } else if (nums[2] == mx) {
@@ -29,7 +29,7 @@ int main() {
                 if (nums[1] < mn) {
                     sol += nums[1];
                     mn = nums[1];
-                    cout << (long long) nums[1] << " " << (long long) sol << endl;
+                    cout << nums[1] << " " << sol << endl;
                 }
             }
             rotate(nums.begin(), nums.begin() + 2, nums.end());
@@ -40,8 +40,35 @@ int main() {
             break;
         }
     }
-    cout << (long long) sol << "\n";
+    cout << sol << "\n";
     return 0;
 }
 
 // 77 4527127597205114
+
+
+//#include <bits/stdc++.h>
+//
+//using namespace std;
+//
+//int main() {
+//    long long mod = 4503599627370517, a = 1504170715041707;
+//    long long sol = a, cur = a, mn = a, n = 1;
+//    while (mn > 1) {
+//        cur += a;
+//        cur %= mod;
+//        ++n;
+//        if (cur < mn) {
+//            sol += cur;
+//            cout << n << " " << cur << " " << sol << endl;
+//            mn = cur;
+//        }
+//        if (mn == 1) {
+//            break;
+//        }
+//    }
+//    cout << sol << "\n";
+//    return 0;
+//}
+//
+//// 77 4527127597205114

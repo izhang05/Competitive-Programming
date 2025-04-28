@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 project(ICPC)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL -O2")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL -std=c++20")
-set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined -fpermissive")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -DLOCAL -std=c++20 -O2")
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow")
+#set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Wextra -O2 -Wshadow -fsanitize=address -fsanitize=undefined -fpermissive")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 
 #file(TOUCH ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
@@ -31,7 +32,8 @@ foreach (FILE ${FILES})
         string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
         set(TARGET_NAME ${third_last_dir}${second_last_dir}${TARGET_NAME})
 
-        add_executable(${TARGET_NAME} "${FILE}")
+        add_executable(${TARGET_NAME} "${FILE}"
+                BAPC/2024/H/input.cpp)
         get_filename_component(PARENT_DIR ${FILE}/.. ABSOLUTE)
         message(${TARGET_NAME} " = " ${FILE})
         message(${PARENT_DIR})
