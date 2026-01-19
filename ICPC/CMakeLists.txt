@@ -27,10 +27,20 @@ foreach (FILE ${FILES})
         string(REPLACE ".cpp" "" TARGET_NAME "${FILE_NAME}")
         string(REPLACE ".cp" "" TARGET_NAME "${TARGET_NAME}")
 
+        set(TARGET_NAME ${third_last_dir}${second_last_dir}${TARGET_NAME})
+
         string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
         string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
         string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
-        set(TARGET_NAME ${third_last_dir}${second_last_dir}${TARGET_NAME})
+
+#        string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
+#        string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
+#        string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
+#
+#        string(REPLACE "/" "-" TARGET_NAME "${TARGET_NAME}")
+#        string(REPLACE " " "_" TARGET_NAME "${TARGET_NAME}")
+#        string(REPLACE "." "" TARGET_NAME "${TARGET_NAME}")
+
 
         add_executable(${TARGET_NAME} "${FILE}"
                 BAPC/2024/H/input.cpp)

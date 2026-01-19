@@ -1,0 +1,5 @@
+5 A
+4
+5 2 3 3
+3 F T 4 T F F F T F T T F
+T T F F F T T
